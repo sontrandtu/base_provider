@@ -31,6 +31,7 @@ dependencies:
 
   pull_to_refresh: ^2.0.0
   pretty_dio_logger: ^1.1.1
+  provider: ^6.0.0
 
   retrofit: 3.0.1
 
@@ -55,15 +56,15 @@ flutter:
     - assets/fonts/
     - assets/translations/
 
-  fonts:
-    - family: Babylon
-      fonts:
-        - asset: assets/fonts/baloo_bhai2_bold.ttf
-          weight: 900
-        - asset: assets/fonts/baloo_bhai2_medium.ttf
-          weight: 600
-        - asset: assets/fonts/baloo_bhai2_regular.ttf
-          weight: 400
+#  fonts:
+#    - family: Babylon
+#      fonts:
+#        - asset: assets/fonts/baloo_bhai2_bold.ttf
+#          weight: 900
+#        - asset: assets/fonts/baloo_bhai2_medium.ttf
+#          weight: 600
+#        - asset: assets/fonts/baloo_bhai2_regular.ttf
+#          weight: 400
 #  flutter_icons:
 #    android: true
 #    ios: true

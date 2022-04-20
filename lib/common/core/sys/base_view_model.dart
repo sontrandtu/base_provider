@@ -12,21 +12,17 @@ class BaseViewModel extends ChangeNotifier {
 
   Status get status => _status;
 
-  BaseViewModel() {
-    initialData();
-  }
+  Future<bool> get isConnecting async => await getConnection();
 
-  Future<void> initialData() async {
-    await fetchData();
-  }
+  Future<void> initialData() async => await fetchData();
 
   Future<void> fetchData() async {}
 
-  Future<void> delay(int millis) async {
-    await Future.delayed(Duration(milliseconds: millis));
-  }
+  void onViewCreated() {}
 
-  Future<bool> get isConnecting async => await getConnection();
+  void onDispose() {}
+
+  Future<void> delay(int millis) async => await Future.delayed(Duration(milliseconds: millis));
 
   Future<bool> getConnection() async {
     try {
@@ -40,13 +36,14 @@ class BaseViewModel extends ChangeNotifier {
 
   void setStatus(Status s) {
     _status = s;
-    notifyListeners();
+    update();
   }
 
-  bool checkNull(dynamic value){
-    if(value != null) return false;
+  bool checkNull(dynamic value) {
+    if (value != null) return false;
     setStatus(Status.error);
     return true;
   }
 
+  void update() => notifyListeners();
 }

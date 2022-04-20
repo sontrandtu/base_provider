@@ -1,17 +1,15 @@
-
-import 'package:achitech_weup/common/app_common.dart';
+import 'package:achitech_weup/common/core/app_core.dart';
+import 'package:achitech_weup/common/core/sys/base_view_model.dart';
 import 'package:achitech_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
-import 'base_indicator.dart';
-
 class DropKeyboard extends StatelessWidget {
+  const DropKeyboard({this.value, this.status, required this.child, this.onClick, Key? key})
+      : super(key: key);
   final Widget child;
   final Status? status;
+  final BaseViewModel? value;
   final Function? onClick;
-
-  const DropKeyboard({this.status, required this.child, this.onClick, Key? key})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +21,13 @@ class DropKeyboard extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Stack(
-            children: [
-              child,
-              Positioned(
-                top: 0,
-                child: Visibility(
-                  visible: status == Status.waiting,
-                  child: const BaseIndicator(),
-                ),
-              ),
-            ],
-          ),
+          child: Stack(children: [
+            child,
+            Visibility(
+              visible: status == Status.loading,
+              child: const BaseIndicator(),
+            ),
+          ]),
         ),
       ),
     );

@@ -5,8 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Client {
-  static String _BASE_URL = 'https://hidelink.vn';
-
+  static String _BASE_URL = 'https://jsonplaceholder.typicode.com';
   static const int _CONNECT_TIMEOUT = 20000;
   static const int _RECEIVE_TIMEOUT = 20000;
   static const String _CONTENT_TYPE = 'application/json';

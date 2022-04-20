@@ -1,23 +1,26 @@
 import 'dart:developer';
 
-import 'package:achitech_weup/common/core/page_manager/key_page.dart';
+import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/widget/undefined_layout.dart';
+import 'package:achitech_weup/screen/login/login_page.dart';
+import 'package:achitech_weup/screen/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  log('-->generateRoute: ${settings.name} | ${settings.arguments}', name: 'WEUP-APP');
   Widget page;
 
   switch (settings.name) {
-    case KeyPage.initial:
-      page = Container();
+    case RoutePath.initial:
+      page = const SplashPage();
+      break;
+    case RoutePath.login:
+      page = const LoginPage();
       break;
     default:
       page = UndefinedLayout(name: settings.name);
       break;
   }
-
-  log('-->> push page: $page', name: 'WEUP-APP');
+  log('Page: $page | RoutePath: ${settings.name} |Args: ${settings.arguments}', name: 'WEUP-APP');
   return PageRouteBuilder(
       settings: settings,
       pageBuilder: (context, animation, secondaryAnimation) => page,

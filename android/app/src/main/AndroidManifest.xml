@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.weupgroup.achitech_weup.achitech_weup">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="achitech_weup"
         android:name="${applicationName}"

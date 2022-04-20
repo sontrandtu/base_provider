@@ -19,7 +19,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
         builder: (_, provider, __) => DropKeyboard(
             status: provider.status,
             child: BaseTextButton(
-              title: 'Update Home',
+              title: provider.args,
               onTab: updateSplash,
             )));
   }

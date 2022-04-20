@@ -26,7 +26,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                BaseTextButton(title: 'Click me',onTab: ()=> Navigator.pushNamed(context, RoutePath.login),),
+                BaseTextButton(title: 'Click me',onTab: ()=> Navigator.pushNamed(context, RoutePath.login,arguments: 'manh tai'),),
                 Text(
                   provider.data,
                 ),

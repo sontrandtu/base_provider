@@ -22,6 +22,7 @@ class ApiResponse<T> {
   }
 
   bool get isOk => code == 200;
+  bool get isDataNull => data == null;
   bool get isOnWebsite => code == 302;
 }
 

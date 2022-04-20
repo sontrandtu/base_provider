@@ -1,5 +1,5 @@
 class Constant {
-  static const String app_name = 'Architecture';
+  static const String app_name = 'Flutter WEUP';
   static const String notConnectError = 'Không có kết nối. Vui lòng thử lại sau';
   static const String unknown = 'Đã có lỗi xảy ra. Vui lòng thử lại sau';
   static const String retrieveTimeOut = 'Hết hạn yêu cầu. Vui lòng thử lại sau';

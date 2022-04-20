@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BaseTextButton extends StatelessWidget {
   final String? title;
   final Widget? child;
-  final Function()? onTab;
+  final Function()? onPressed;
   final Color? titleColor;
   final TextStyle? style;
   final double? titleSize;
@@ -18,7 +18,7 @@ class BaseTextButton extends StatelessWidget {
     Key? key,
     this.title,
     this.child,
-    this.onTab,
+    this.onPressed,
     this.titleColor,
     this.style,
     this.titleSize,
@@ -36,7 +36,7 @@ class BaseTextButton extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: TextButton(
-        onPressed: onTab,
+        onPressed: onPressed,
         child: child ??
             Text(
               title ?? '',

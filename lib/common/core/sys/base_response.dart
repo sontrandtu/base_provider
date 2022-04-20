@@ -17,18 +17,15 @@ class BaseResponse {
       errorMsg = 'Success';
       errorMsg = json['error_msg'];
     }
-
     error = json['error'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['version'] = this.version;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['error_msg'] = this.errorMsg;
-    data['error'] = this.error;
+    final data = <String, dynamic>{};
+    data['version'] = version;
+    data['data'] = data;
+    data['error_msg'] = errorMsg;
+    data['error'] = error;
     return data;
   }
 }

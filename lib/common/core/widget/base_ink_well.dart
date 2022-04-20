@@ -1,4 +1,4 @@
-
+import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 
 class BaseInkWell extends StatelessWidget {
@@ -9,23 +9,21 @@ class BaseInkWell extends StatelessWidget {
   final Color? titleColor;
   final double? titleSize;
   final FontWeight? titleFontWeight;
-
-  // Thay thế kiểu padding
   final EdgeInsetsGeometry? padding;
-
-  // Thay thế giá trị padding All
-  final double? paddingValue;
+  final double? paddingAll;
 
   // BorderRadius.circular(10)
-  final double? borderRadiusValue;
+  final double? borderRadiusAll;
   final TextStyle? style;
 
-  //DottedDecoration(
-  // shape: Shape.box,
-  // dash: <int>[1, 4],
-  // borderRadius: BorderRadius.circular(10),
-  // );
+  final bool? isDotted;
+  final Decoration? decorationDotted;
 
+/*  DottedDecoration(
+  shape: Shape.box,
+  dash: <int>[1, 4],
+  borderRadius: BorderRadius.circular(10),
+  );*/
   final Border? border;
 
   const BaseInkWell({
@@ -36,12 +34,14 @@ class BaseInkWell extends StatelessWidget {
     this.backgroundColor,
     this.titleColor,
     this.padding,
-    this.borderRadiusValue,
+    this.borderRadiusAll,
     this.style,
-    this.paddingValue,
+    this.paddingAll,
     this.border,
     this.titleFontWeight,
     this.titleSize,
+    this.isDotted,
+    this.decorationDotted,
   }) : super(key: key);
 
   @override
@@ -49,14 +49,20 @@ class BaseInkWell extends StatelessWidget {
     return Material(
       color: backgroundColor,
       shape: border,
-      borderRadius: BorderRadius.circular(borderRadiusValue ?? 0),
+      borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
       child: Container(
-
+        decoration: isDotted ?? false
+            ? DottedDecoration(
+                shape: Shape.box,
+                dash: const <int>[1, 4],
+                borderRadius: BorderRadius.circular(10),
+              )
+            : null,
         child: InkWell(
           onTap: onTab,
-          borderRadius: BorderRadius.circular(borderRadiusValue ?? 0),
+          borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
           child: Container(
-            padding: padding ?? EdgeInsets.all(paddingValue ?? 8),
+            padding: padding ?? EdgeInsets.all(paddingAll ?? 8),
             child: child ??
                 Text(
                   title ?? '',

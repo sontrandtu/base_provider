@@ -19,7 +19,8 @@ class ThemeManager {
     indicatorColor: ColorResource.primary,
     //canvasColor: Colors.yellow,
     dividerColor: Colors.blueGrey,
-    toggleableActiveColor: Colors.red,
+    toggleableActiveColor: ColorResource.primary,
+
     fontFamily: 'Babylon',
     textTheme: const TextTheme(
       headline6: TextStyle(fontWeight: FontWeight.w600, color: ColorResource.textBody, fontSize: 14),

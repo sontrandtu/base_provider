@@ -14,9 +14,14 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  #c
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.0
 
+  #d
+  dotted_decoration: ^2.0.0
+
+  #f
   flutter_svg: ^1.0.0
   flutter_local_notifications: ^9.1.5
   flutter_launcher_icons: ^0.9.2
@@ -24,16 +29,20 @@ dependencies:
   firebase_messaging: ^11.2.4
   firebase_core: ^1.10.6
 
-
+  #h
   hive: ^2.1.0
 
+  #i
   intl: ^0.17.0
 
+  #p
   pull_to_refresh: ^2.0.0
   pretty_dio_logger: ^1.1.1
 
+  #r
   retrofit: 3.0.1
 
+  #u
   url_launcher: ^6.0.20
 
 dev_dependencies:
@@ -49,21 +58,21 @@ flutter:
 
   uses-material-design: true
 
-  assets:
-    - assets/icons/
-    - assets/images/
-    - assets/fonts/
-    - assets/translations/
+#  assets:
+#    - assets/icons/
+#    - assets/images/
+#    - assets/fonts/
+#    - assets/translations/
 
-  fonts:
-    - family: Babylon
-      fonts:
-        - asset: assets/fonts/baloo_bhai2_bold.ttf
-          weight: 900
-        - asset: assets/fonts/baloo_bhai2_medium.ttf
-          weight: 600
-        - asset: assets/fonts/baloo_bhai2_regular.ttf
-          weight: 400
+#  fonts:
+#    - family: Babylon
+#      fonts:
+#        - asset: assets/fonts/baloo_bhai2_bold.ttf
+#          weight: 900
+#        - asset: assets/fonts/baloo_bhai2_medium.ttf
+#          weight: 600
+#        - asset: assets/fonts/baloo_bhai2_regular.ttf
+#          weight: 400
 #  flutter_icons:
 #    android: true
 #    ios: true

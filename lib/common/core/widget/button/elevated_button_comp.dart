@@ -1,9 +1,8 @@
-import 'package:achitech_weup/common/app_common.dart';
 import 'package:achitech_weup/common/core/theme_manager.dart';
 import 'package:achitech_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
-class BaseElevatedButton extends StatelessWidget {
+class ElevatedButtonComp extends StatelessWidget {
   final String? title;
   final Widget? child;
   final Function()? onTab;
@@ -19,7 +18,7 @@ class BaseElevatedButton extends StatelessWidget {
   final Color? primaryColor;
   final Color? titleColor;
 
-  const BaseElevatedButton({
+  const ElevatedButtonComp({
     Key? key,
     this.title,
     this.child,

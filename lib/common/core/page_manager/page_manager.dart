@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:achitech_weup/common/core/page_manager/key_page.dart';
 import 'package:achitech_weup/common/core/widget/undefined_layout.dart';
+import 'package:achitech_weup/view/home_page.dart';
 import 'package:flutter/cupertino.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,6 +12,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case KeyPage.initial:
       page = Container();
+      break;
+      case KeyPage.home:
+      page = HomePage();
       break;
     default:
       page = UndefinedLayout(name: settings.name);

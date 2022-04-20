@@ -4,7 +4,7 @@ export 'sys/api_response.dart';
 export 'sys/base_option_dropdown.dart';
 export 'sys/base_refresh_controller.dart';
 export 'sys/base_repository.dart';
-export 'widget/button/base_elevate_button.dart';
+export 'widget/button/elevated_button_comp.dart';
 export 'widget/button/base_outlined_button.dart';
 export 'widget/button/base_text_button.dart';
 export 'widget/button/button_icon.dart';

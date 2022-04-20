@@ -7,4 +7,6 @@ class ColorResource {
   static const Color divider = Color(0xFFEFEFEF);
   static const Color background = Color(0x7EEFEFEF);
   static const Color error = Color(0xFFFF0000);
+
+
 }

@@ -20,7 +20,7 @@ class Application extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      initialRoute: KeyPage.initial,
+      initialRoute: KeyPage.home,
       theme: appStyle,
       onGenerateRoute: generateRoute,
       debugShowMaterialGrid: false);

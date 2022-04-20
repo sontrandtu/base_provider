@@ -1,37 +1,38 @@
-import 'package:achitech_weup/common/resource/color_resource.dart';
-
+import 'package:achitech_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
-class BaseOutlinedButton extends StatelessWidget {
+class TextButtonComp extends StatelessWidget {
   final String? title;
   final Widget? child;
-  final Function()? onTab;
-  final Color? titleColor;
+  final Function()? onPressed;
+  final EdgeInsetsGeometry? padding;
   final TextStyle? style;
-  final double? titleSize;
+  final Status? status;
   final FontWeight? titleFontWeight;
-  final double? borderRadiusValue;
-  final ButtonStyle? buttonStyleValue;
-  final Color? primaryColorValue;
+  final double? titleSize;
+  final double? borderRadius;
   final double? widthValue;
   final double? heightValue;
-  final Color? colorBorderValue;
+  final ButtonStyle? buttonStyle;
+  final Color? primaryColor;
+  final Color? titleColor;
 
-  const BaseOutlinedButton({
+  const TextButtonComp({
     Key? key,
     this.title,
     this.child,
-    this.onTab,
     this.titleColor,
     this.style,
     this.titleSize,
     this.titleFontWeight,
-    this.borderRadiusValue,
-    this.buttonStyleValue,
-    this.primaryColorValue,
     this.widthValue,
     this.heightValue,
-    this.colorBorderValue,
+    this.onPressed,
+    this.padding,
+    this.status,
+    this.borderRadius,
+    this.buttonStyle,
+    this.primaryColor,
   }) : super(key: key);
 
   @override
@@ -39,8 +40,8 @@ class BaseOutlinedButton extends StatelessWidget {
     return SizedBox(
       width: widthValue,
       height: heightValue,
-      child: OutlinedButton(
-        onPressed: onTab,
+      child: TextButton(
+        onPressed: status != Status.waiting ? onPressed : null,
         child: child ??
             Text(
               title ?? '',
@@ -51,13 +52,12 @@ class BaseOutlinedButton extends StatelessWidget {
                     fontWeight: titleFontWeight,
                   ),
             ),
-        style: buttonStyleValue ??
-            OutlinedButton.styleFrom(
-              side: BorderSide(
-                  color: colorBorderValue ?? ColorResource.primary),
-              primary: primaryColorValue,
+        style: buttonStyle ??
+            TextButton.styleFrom(
+              padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
+              primary: primaryColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusValue ?? 0),
+                borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),
             ),
       ),

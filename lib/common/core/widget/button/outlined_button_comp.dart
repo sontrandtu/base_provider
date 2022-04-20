@@ -1,8 +1,9 @@
-import 'package:achitech_weup/common/core/theme_manager.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitech_weup/common/resource/color_resource.dart';
+import 'package:achitech_weup/common/resource/enum_resource.dart';
+
 import 'package:flutter/material.dart';
 
-class ElevatedButtonComp extends StatelessWidget {
+class OutlinedButtonComp extends StatelessWidget {
   final String? title;
   final Widget? child;
   final Function()? onPressed;
@@ -17,23 +18,24 @@ class ElevatedButtonComp extends StatelessWidget {
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
   final Color? titleColor;
+  final Color? colorBorder;
 
-  const ElevatedButtonComp({
+  const OutlinedButtonComp({
     Key? key,
     this.title,
     this.child,
-    this.onPressed,
-    this.status,
-    this.padding,
     this.titleColor,
     this.style,
     this.titleSize,
     this.titleFontWeight,
-    this.borderRadius,
-    this.buttonStyle,
-    this.primaryColor,
     this.widthValue,
     this.heightValue,
+    this.onPressed,
+    this.padding,
+    this.status,
+    this.borderRadius,
+    this.buttonStyle,
+    this.primaryColor, this.colorBorder,
   }) : super(key: key);
 
   @override
@@ -41,17 +43,23 @@ class ElevatedButtonComp extends StatelessWidget {
     return SizedBox(
       width: widthValue,
       height: heightValue,
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: status != Status.waiting ? onPressed : null,
         child: child ??
-            Text(title ?? '',
-                style: style ??
-                    appStyle.textTheme.headline4?.apply(color: Colors.white)),
+            Text(
+              title ?? '',
+              style: style ??
+                  TextStyle(
+                    color: titleColor,
+                    fontSize: titleSize,
+                    fontWeight: titleFontWeight,
+                  ),
+            ),
         style: buttonStyle ??
-            ElevatedButton.styleFrom(
-              padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
-              primary: (primaryColor ?? ColorResource.primarySwatch)
-                  .withOpacity(status == Status.waiting ? 0.5 : 1),
+            OutlinedButton.styleFrom(
+              side:
+                  BorderSide(color: colorBorder?? ColorResource.primarySwatch),
+              primary: primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

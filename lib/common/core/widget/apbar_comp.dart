@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class BaseAppBar extends PreferredSize {
+import 'button/icon_button_comp.dart';
+
+class AppBarComp extends PreferredSize {
   final String? title;
   final TextStyle? style;
   final List<Widget>? action;
@@ -15,7 +17,7 @@ class BaseAppBar extends PreferredSize {
   final Function? onLeading;
   final SystemUiOverlayStyle? systemOverlayStyle;
 
-  BaseAppBar({
+  AppBarComp({
     Key? key,
     this.systemOverlayStyle,
     this.title,
@@ -42,7 +44,8 @@ class BaseAppBar extends PreferredSize {
       systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle.light,
       title: Text(
         title ?? '',
-        style: style ?? const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+        style:
+            style ?? const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
         overflow: TextOverflow.ellipsis,
       ),
       flexibleSpace: flexibleSpace ?? Container(),
@@ -53,10 +56,13 @@ class BaseAppBar extends PreferredSize {
       automaticallyImplyLeading: false,
       leading: onLeading != null
           ? iconLeading ??
-              IconButton(
-                  splashRadius: 26,
-                  onPressed: () => onLeading?.call() ?? Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back_rounded, size: 26, color: Colors.white))
+              IconButtonComp(
+                icon: Icons.arrow_back_rounded,
+                size: 26,
+                color: Colors.white,
+                onPress: () => onLeading?.call() ?? Navigator.pop(context),
+                splashRadius: 26,
+              )
           : const SizedBox(),
       iconTheme: IconThemeData(color: colorIcon),
       actions: action);

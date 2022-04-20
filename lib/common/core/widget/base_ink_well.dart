@@ -40,7 +40,7 @@ class BaseInkWell extends StatelessWidget {
     this.border,
     this.titleFontWeight,
     this.titleSize,
-    this.isDotted,
+    this.isDotted = false,
     this.decorationDotted,
   }) : super(key: key);
 
@@ -51,7 +51,7 @@ class BaseInkWell extends StatelessWidget {
       shape: border,
       borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
       child: Container(
-        decoration: isDotted ?? false
+        decoration: isDotted!
             ? DottedDecoration(
                 shape: Shape.box,
                 dash: const <int>[1, 4],

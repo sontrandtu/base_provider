@@ -1,3 +1,4 @@
+import 'package:achitech_weup/common/helper/custom_material_color.dart';
 import 'package:flutter/material.dart';
 
 class ColorResource {
@@ -5,8 +6,7 @@ class ColorResource {
   static const Color secondPrimary = Color(0xFFFF6700);
   static const Color textBody = Color(0xFF0A1F72);
   static const Color divider = Color(0xFFEFEFEF);
-  static const Color background = Color(0x7EEFEFEF);
-  static const Color error = Color(0xFFFF0000);
-
-
+  static MaterialColor primarySwatch= customMaterialColor(const Color(0xFFFAFF46));
+  static  Color colorSplash = primarySwatch.withAlpha(100);
+  static  Color colorHighLight= primarySwatch.withAlpha(50);
 }

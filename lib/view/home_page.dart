@@ -1,4 +1,5 @@
-import 'package:achitech_weup/common/core/widget/base_text_field.dart';
+import 'package:achitech_weup/common/core/app_core.dart';
+import 'package:achitech_weup/common/core/widget/text_field_comp.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,20 +10,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  var ted1=TextEditingController();
-  var ted2=TextEditingController();
+  var ted1 = TextEditingController();
+  var ted2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return DropKeyboard(
+      child: Column(
         children: [
-          BaseTextField(
+          TextFieldComp(
             hint: 'Test1',
             editingController: ted1,
+            isUnderLine: true,
+            isBorder:true,
           ),
-
+          TextButtonComp(title: 'ABC', onPressed: () {}),
+          IconButton(onPressed: (){}, icon: Icon(Icons.add),splashRadius: 10),
+          DropdownComp(
+            listItems: [
+              BaseOptionDropdown(id: '1', name: '1adfgdfsgdasfdasfdsfdasfsdfasfdasfsfdsfdsfdasfdsfdsfdsfdsffaadsfdsfdsfdsfsdfasdfdasfdssdfdasf'),
+              BaseOptionDropdown(id: '2', name: '2adfgdfsgdasfdasfdsfdasfsdfasfdasfsfdsfdsfdasfdsfdsfdsfdsffaadsfdsfdsfdsfsdfasdfdasfdssdfdasf'),
+              BaseOptionDropdown(id: '3', name: '3adfgdfsgdasfdasfdsfdasfsdfasfdasfsfdsfdsfdasfdsfdsfdsfdsffaadsfdsfdsfdsfsdfasdfdasfdssdfdasf')
+            ],
+            isBorder: true,
+            label: 'Chọn',
+            onTapCallBack:(value, index){
+              print('${value.name} $index');
+            } ,
+          )
         ],
       ),
     );

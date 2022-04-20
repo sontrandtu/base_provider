@@ -18,10 +18,10 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     return Consumer<LoginViewModel>(
         builder: (_, provider, __) => DropKeyboard(
             status: provider.status,
-            child: BaseTextButton(
+            child: TextButtonComp(
               title: provider.args,
-              onTab: updateSplash,
-            )));
+              onPressed: updateSplash,
+            ),),);
   }
 
   @override

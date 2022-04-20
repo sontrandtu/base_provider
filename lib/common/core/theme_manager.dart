@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/app_common.dart';
+import 'package:achitech_weup/common/helper/app_common.dart';
 import 'package:achitech_weup/common/resource/color_resource.dart';
 import 'package:flutter/material.dart';
 
@@ -11,16 +11,16 @@ class ThemeManager {
 
   ThemeData themeData = ThemeData(
     brightness: Brightness.light,
-    // màu chữ mặc định
     primaryColor: ColorResource.primary,
     primaryColorDark: ColorResource.primary,
     primaryColorLight: ColorResource.primary,
     cardColor: Colors.white,
     indicatorColor: ColorResource.primary,
-    //canvasColor: Colors.yellow,
     dividerColor: Colors.blueGrey,
     toggleableActiveColor: ColorResource.primary,
-
+    splashColor: ColorResource.colorSplash,
+    highlightColor: ColorResource.colorHighLight,
+    primarySwatch: ColorResource.primarySwatch,
     fontFamily: 'Babylon',
     textTheme: const TextTheme(
       headline6: TextStyle(fontWeight: FontWeight.w600, color: ColorResource.textBody, fontSize: 14),

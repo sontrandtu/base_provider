@@ -11,6 +11,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: BaseTextButton(title: 'Back',onTab: ()=>Navigator.pop(context),),);
+    return Container(child: TextButtonComp(title: 'Back',onPressed: ()=>Navigator.pop(context),),);
   }
 }

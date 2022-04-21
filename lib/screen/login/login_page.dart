@@ -20,17 +20,17 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
             status: provider.status,
             child: Column(
               children: [
-                BaseTextButton(
+                TextButtonComp(
                   title: provider.post?.title,
-                  onTab: updateSplash,
+                  onPressed: updateSplash,
                 ),
-                BaseTextButton(
+                TextButtonComp(
                   title: 'Next',
-                  onTab: toNewPage,
+                  onPressed: toNewPage,
                 ),
-                BaseTextButton(
+                TextButtonComp(
                   title: 'Next',
-                  onTab: logAll,
+                  onPressed: logAll,
                 ),
               ],
             )));

@@ -22,7 +22,7 @@ class _Service implements Service {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<Post>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/posts',
+                .compose(_dio.options, '/accounts',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!

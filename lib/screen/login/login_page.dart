@@ -40,8 +40,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   void setViewModel() => viewModel = loginViewModel;
 
   void updateSplash() {
-    splashViewModel.data = '123123123';
-    splashViewModel.update();
+
     Navigator.pop(context);
   }
 

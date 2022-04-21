@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Client {
-  static String _BASE_URL = 'https://jsonplaceholder.typicode.com';
+  static String _BASE_URL = 'https://dominhduong.weuptech.vn/cms/api/v1';
   static const int _CONNECT_TIMEOUT = 20000;
   static const int _RECEIVE_TIMEOUT = 20000;
   static const String _CONTENT_TYPE = 'application/json';
@@ -21,7 +21,7 @@ class Client {
         baseUrl: _BASE_URL,
         connectTimeout: _CONNECT_TIMEOUT,
         receiveTimeout: _RECEIVE_TIMEOUT,
-        headers: {},
+        headers: {'id' : '-1'},
         contentType: _CONTENT_TYPE));
 
     if (kDebugMode) {

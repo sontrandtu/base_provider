@@ -9,6 +9,6 @@ part 'service.g.dart';
 abstract class Service {
   factory Service(Dio dio) = _Service;
 
-  @GET('/posts')
+  @GET('/accounts')
   Future<HttpResponse<List<Post>>> getAllPost();
 }

@@ -10,9 +10,17 @@ typedef OnLoadedCallback = Function();
 class BaseViewModel extends ChangeNotifier {
   Status _status = Status.loading;
 
+  RouteSettings? _settings;
+
   Status get status => _status;
 
+
+
+  String? get currentRoute => _settings?.name;
+
   Future<bool> get isConnecting async => await getConnection();
+
+  dynamic getArguments() => _settings?.arguments;
 
   Future<void> initialData() async => await fetchData();
 
@@ -37,6 +45,10 @@ class BaseViewModel extends ChangeNotifier {
   void setStatus(Status s) {
     _status = s;
     update();
+  }
+
+  void setRouteSetting(RouteSettings? rs){
+    _settings = rs;
   }
 
   bool checkNull(dynamic value) {

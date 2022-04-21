@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:achitech_weup/application.dart';
+import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/server_error.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:retrofit/retrofit.dart';
 
 class ApiResponse<T> {
@@ -22,25 +25,46 @@ class ApiResponse<T> {
   }
 
   bool get isOk => code == 200;
+
   bool get isDataNull => data == null;
+
   bool get isOnWebsite => code == 302;
 }
 
 extension FutureExtensions<T> on Future<HttpResponse<T>> {
   Future<ApiResponse<T>> wrap() async {
+    showDialog(
+        context: navigator.currentContext!,
+        barrierDismissible: false,
+        builder: (context) => BaseErrorDialog(
+              content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
+              showCancel: false,
+              mConfirm: () =>
+                  navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false),
+            ));
+    return Future.value(ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
     try {
       final httpResponse = await this;
       return Future.value(ApiResponse<T>(data: httpResponse.data, code: httpResponse.response.statusCode));
     } catch (error) {
-      log('FutureExtensions ===================================${error.toString()}');
+      log('FutureExtensions ===============${error.toString()}', name: 'WEUP-APP');
       if (error is DioError) {
-        if(error.response == null){
-          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error));
-        }else{
-          final String? message = error.response?.data['message'];
-          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error,message: message));
+        if (error.response?.statusCode == 403) {
+          navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false);
+          showDialog(
+              context: navigator.currentContext!,
+              builder: (context) => const BaseErrorDialog(
+                    content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
+                  ));
+          return Future.value(
+              ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
         }
-
+        if (error.response == null) {
+          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error));
+        }
+        final String? message = error.response?.data['message'];
+        return Future.value(
+            ApiResponse(code: error.response?.statusCode ?? 0, error: error, message: message));
       } else {
         return Future.value(ApiResponse(error: error));
       }

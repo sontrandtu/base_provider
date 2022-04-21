@@ -18,18 +18,37 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     return Consumer<LoginViewModel>(
         builder: (_, provider, __) => DropKeyboard(
             status: provider.status,
-            child: TextButtonComp(
-              title: provider.args,
-              onPressed: updateSplash,
-            ),),);
+            child: Column(
+              children: [
+                TextButtonComp(
+                  title: provider.post?.title,
+                  onPressed: updateSplash,
+                ),
+                TextButtonComp(
+                  title: 'Next',
+                  onPressed: toNewPage,
+                ),
+                TextButtonComp(
+                  title: 'Next',
+                  onPressed: logAll,
+                ),
+              ],
+            )));
   }
 
   @override
   void setViewModel() => viewModel = loginViewModel;
 
   void updateSplash() {
-    splashViewModel.data = '123123123';
-    splashViewModel.update();
+
     Navigator.pop(context);
+  }
+
+  toNewPage() {
+   Navigator.pushNamed(context, RoutePath.home,arguments: runtimeType.toString());
+  }
+
+  logAll() {
+    viewModel.initialData();
   }
 }

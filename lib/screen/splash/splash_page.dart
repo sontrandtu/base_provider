@@ -2,6 +2,7 @@ import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/base_state.dart';
 import 'package:achitech_weup/main.dart';
 import 'package:achitech_weup/screen/splash/splash_view_model.dart';
+import 'package:achitech_weup/system/model/post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,19 +24,19 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
       child: Consumer<SplashViewModel>(
         builder: (_, provider, __) => DropKeyboard(
           status: provider.status,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                TextButtonComp(title: 'Click me',onPressed: ()=> Navigator.pushNamed(context, RoutePath.login,arguments: 'manh tai'),),
-                Text(
-                  provider.data,
-                ),
-
-              ],
-            ),
+          child: Column(
+            children: [
+              TextButtonComp(title: 'Click me',onPressed: ()=> Navigator.pushNamed(context,RoutePath.login,arguments: Post(title: '123123',id: 1)),),
+              Expanded(child: ListView.builder(itemBuilder: _buildItem,itemCount: provider.posts.length,))
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildItem(BuildContext context, int index) {
+    Post post = viewModel.posts[index];
+    return InkWell(onTap: ()=> null,child: Container(padding: EdgeInsets.all(8),child: Text(post.title ?? ''),));
   }
 }

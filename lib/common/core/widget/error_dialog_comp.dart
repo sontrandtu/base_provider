@@ -25,39 +25,39 @@ class BaseErrorDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(title ?? 'Thông báo'.toUpperCase(),
-          style: appStyle.textTheme.headline3),
-      content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
-      insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      actions: [
-        showConfirm ?? true
-            ? TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  mConfirm?.call();
-                },
-                child: Text(
-                  textButtonConfirm ?? 'Đồng ý',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 16),
-                ),
-              )
-            : const SizedBox(),
-        showCancel ?? true
-            ? TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  mCancel?.call();
-                },
-                child: Text(
-                  textButtonCancel ?? 'Hủy',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 16),
-                ),
-              )
-            : const SizedBox(),
-      ],
+    return WillPopScope(
+      onWillPop: ()async=>false,
+      child: AlertDialog(
+        title: Text(title ?? 'Thông báo'.toUpperCase(), style: appStyle.textTheme.headline3),
+        content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
+        insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        actions: [
+          showConfirm ?? true
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    mConfirm?.call();
+                  },
+                  child: Text(
+                    textButtonConfirm ?? 'Đồng ý',
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  ),
+                )
+              : const SizedBox(),
+          showCancel ?? true
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    mCancel?.call();
+                  },
+                  child: Text(
+                    textButtonCancel ?? 'Hủy',
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  ),
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }

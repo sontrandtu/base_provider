@@ -43,6 +43,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   pretty_dio_logger: ^1.1.1
   provider: ^6.0.0
+  path_provider: ^2.0.9
 
   #r
   retrofit: 3.0.1

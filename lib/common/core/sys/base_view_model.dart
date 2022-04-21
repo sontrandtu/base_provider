@@ -2,11 +2,6 @@ import 'dart:io';
 
 import 'package:achitech_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-typedef ErrorCallback = Function(String?);
-typedef SuccessCallback = Function(dynamic);
-typedef OnLoadedCallback = Function();
 
 class BaseViewModel extends ChangeNotifier {
   Status _status = Status.loading;
@@ -33,7 +28,8 @@ class BaseViewModel extends ChangeNotifier {
 
   void onDispose() {}
 
-  Future<void> delay(int millis) async => await Future.delayed(Duration(milliseconds: millis));
+  Future<void> delay(int millis) async =>
+      await Future.delayed(Duration(milliseconds: millis));
 
   Future<bool> getConnection() async {
     try {
@@ -54,20 +50,25 @@ class BaseViewModel extends ChangeNotifier {
 
   void setBuildContext(BuildContext? ctx) => _context = ctx;
 
-  Future<dynamic> dialog(Widget dialog, {dynamic arguments}) async => await showDialog(
-      context: context,
-      builder: (context) => dialog,
-      barrierDismissible: false,
-      routeSettings: RouteSettings(arguments: arguments));
+  Future<dynamic> dialog(Widget dialog, {dynamic arguments}) async =>
+      await showDialog(
+          context: context,
+          builder: (context) => dialog,
+          barrierDismissible: false,
+          routeSettings: RouteSettings(arguments: arguments));
 
   Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async =>
       await Navigator.pushNamed(context, routeName, arguments: arguments);
 
-  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
+  Future<dynamic> pushReplacementNamed(String routeName,
+          {dynamic arguments}) async =>
+      await Navigator.pushReplacementNamed(context, routeName,
+          arguments: arguments);
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushNamedAndRemoveUntil(context, routeName, (Route<dynamic> route) => false,
+  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
+          {dynamic arguments}) async =>
+      await Navigator.pushNamedAndRemoveUntil(
+          context, routeName, (Route<dynamic> route) => false,
           arguments: arguments);
 
   bool checkNull(dynamic value) {

@@ -58,7 +58,7 @@ class OutlinedButtonComp extends StatelessWidget {
         style: buttonStyle ??
             OutlinedButton.styleFrom(
               side:
-                  BorderSide(color: colorBorder?? ColorResource.primarySwatch),
+                  BorderSide(color: colorBorder?? ColorResource.primarySwatchMaterial),
               primary: primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),

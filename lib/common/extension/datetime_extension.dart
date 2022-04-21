@@ -1,12 +1,23 @@
+import 'package:achitech_weup/common/core/base_function.dart';
 import 'package:intl/intl.dart';
 
-extension DateTimextention on DateTime {
-  Duration get minutesFromMidNight {
-    return Duration(minutes: minute + hour * 60);
-  }
+const String ddMMyyyyHms = 'dd/MM/yyyy HH:mm:ss';
+const String YYYYMMDDHMS = 'yyyy/MM/dd HH:mm:ss';
+const String HHmm = 'HH:mm';
+const String HHmma = 'HH:mm a';
+const String ddMM = 'dd/MM';
+const String ddMMyyyy = 'dd/MM/yyyy';
+const String yyyyMMdd = 'yyyy-MM-dd';
+const String ddMMyyyy_ = 'dd-MM-yyyy';
+const String yyyyMMddTHHmmssSSS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+const String MMyyyy = 'MM/yyyy';
+const String dd = 'dd';
 
-  String? get dateTimeToDayOfWeek {
-    String? dayOfWeek;
+extension DateTimextention on DateTime {
+  Duration get minutesFromMidNight => Duration(minutes: minute + hour * 60);
+
+  String get dayOfWeekNumber {
+    String dayOfWeek = '';
     switch (weekday) {
       case DateTime.monday:
         dayOfWeek = "Thứ 2";
@@ -33,8 +44,8 @@ extension DateTimextention on DateTime {
     return dayOfWeek;
   }
 
-  String? get dateTimeToDayOfWeekVN {
-    String? dayOfWeek;
+  String get dayOfWeekString {
+    String dayOfWeek = '';
     switch (weekday) {
       case DateTime.monday:
         dayOfWeek = "Thứ Hai";
@@ -61,96 +72,65 @@ extension DateTimextention on DateTime {
     return dayOfWeek;
   }
 
+  /// thứ(chữ), ngày tháng năm
+  String get dayOfWeekAndDate =>
+      '$dayOfWeekString, ${convertToString(pattern: ddMMyyyy)}';
 
-  String get dayOfWeekAndDate{
-    return '$dateTimeToDayOfWeekVN, $dateTimeToDDMMYYYY';
-  }
-  String get dayOfWeekAndDateAndTime{
-    return '$dateTimeToDayOfWeekVN, $dateTimeToDDMMYYYY, $dateTimeToVnHour24h';
+  /// thứ (chữ), ngày tháng năm, giờ
+  String get dayOfWeekAndDateAndTime =>
+      '$dayOfWeekString, ${convertToString(pattern: ddMMyyyy)}, ${convertToString(pattern: HHmm)}';
+
+  /// giờ, ngày
+  String get hourAndDateTime =>
+      '${convertToString(pattern: HHmm)}, ${convertToString(pattern: ddMMyyyy)}';
+
+  /// ngày, sáng - chiều
+  String get dateTimeInTable =>
+      '${convertToString(pattern: ddMMyyyy)} - $dateTimeToVnHour';
+
+  /// thứ(số), ngày tháng năm, giờ
+  String get dateTimeInWeather =>
+      '$dayOfWeekNumber, ${convertToString(pattern: ddMMyyyy)}';
+
+  /// thứ(số), ngày tháng năm - giờ
+  String get dayOfWeekDateTimeVN =>
+      '$dayOfWeekString ${convertToString(pattern: ddMMyyyy)} - ${convertToString(pattern: HHmm)}';
+
+  /// ngày - giờ
+  String get dateTimeString =>
+      '${convertToString(pattern: ddMMyyyy)} - ${convertToString(pattern: HHmm)}';
+
+  /// thứ(số), ngày tháng
+  String get dateTimeToWeekdayAndDayMonth =>
+      '$dayOfWeekNumber, ${convertToString(pattern: ddMM)}';
+
+  /// convert to String
+  String convertToString({required String pattern}) {
+    try {
+      return DateFormat(pattern).format(this);
+    } catch (exception) {
+      showError(exception.toString());
+      return '';
+    }
   }
 
-  String get hourAndDateTime{
-    return '$dateTimeToVnHour24h, $dateTimeToDDMMYYYY';
-  }
-
-  String get dateTimeInTable{
-    return '$dateTimeToDDMMYYYY - $dateTimeToVnHour';
-  }
-
-  String get dateTimeInWeather{
-    return '$dateTimeToDayOfWeek, $dateTimeToDDMMYYYY';
-  }
-
-  String get dayOfWeekDateTimeVN {
-    return '$dateTimeToDayOfWeekVN $dateTimeToDDMMYYYY - $dateTimeToVnHour24h';
-  }
-
-  String get dateTimeString {
-    return '$dateTimeToDDMMYYYY - $dateTimeToVnHour24h';
-  }
-
-  String get dateString => dateTimeToDDMMYYYY;
-
-  String get dateTimeToDayAndMonth {
-    var formatter = DateFormat("dd/MM");
-    return formatter.format(this);
-  }
-
-  String get dateTimeToDay {
-    var formatter = DateFormat("dd");
-    return formatter.format(this);
-  }
+  /// convert to new formatDate
+  DateTime convertNewFormatDate(
+          {required String newPattern, required String currentPattern}) =>
+      DateFormat(newPattern).parse(convertToString(pattern: currentPattern));
 
   DateTime addTimeToDate(DateTime hour) {
     return DateTime(year, month, day, hour.hour, hour.minute);
   }
 
-  String get dateTimeToDDMMYYYY {
-    var formatter = DateFormat("dd/MM/yyyy");
-    return formatter.format(this);
-  }
+  String get dateTimeToVnHour => convertToString(pattern: HHmma)
+      .replaceAll("PM", "chiều")
+      .replaceAll("AM", "sáng");
 
-  String get dateTimeToYYYYMMDD {
-    var formatter = DateFormat("yyyy-MM-dd");
-    return formatter.format(this);
-  }
+  String get toUtcString => toUtc().toIso8601String();
 
-  String get exportName {
-    var formatter = DateFormat("dd-MM-yyyy");
-    return formatter.format(this);
-  }
-
-  String get monthAndYear {
-    return 'T${month}/${year}';
-  }
-
-  String get dateTimeToVnHour {
-    String hour = DateFormat("hh:mm a").format(this);
-    return hour.replaceAll("PM", "chiều").replaceAll("AM", "sáng");
-  }
-
-  String get dateTimeToVnHour24h {
-    String hour = DateFormat("HH:mm").format(this);
-    return hour;
-  }
-
-  String get dateTimeToWeekdayAndDayMonth {
-    return dateTimeToDayOfWeek! + ", " + dateTimeToDayAndMonth;
-  }
-
-  String get convertToString {
-    var formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-    return formatter.format(this);
-  }
-
-  String get toUtcString {
-    return toUtc().toIso8601String();
-  }
-
-  String get toUtcServer {
-    final formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    return formatter.format(toLocal());
-  }
+  String get toUtcServer =>
+      DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(toLocal());
 
   DateTime get onlyUtcDate => DateTime.utc(year, month, day);
 

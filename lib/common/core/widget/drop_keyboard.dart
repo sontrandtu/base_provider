@@ -24,7 +24,7 @@ class DropKeyboard extends StatelessWidget {
             child,
             Visibility(
               visible: status == Status.loading,
-              child: const BaseIndicator(),
+              child: const IndicatorComp(),
             ),
           ]),
         ),

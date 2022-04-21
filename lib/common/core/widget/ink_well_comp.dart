@@ -1,7 +1,7 @@
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 
-class BaseInkWell extends StatelessWidget {
+class InkWellComp extends StatelessWidget {
   final String? title;
   final Widget? child;
   final Function()? onTab;
@@ -26,7 +26,7 @@ class BaseInkWell extends StatelessWidget {
   );*/
   final Border? border;
 
-  const BaseInkWell({
+  const InkWellComp({
     Key? key,
     this.title,
     this.child,

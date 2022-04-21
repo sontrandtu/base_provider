@@ -50,7 +50,7 @@ class ElevatedButtonComp extends StatelessWidget {
         style: buttonStyle ??
             ElevatedButton.styleFrom(
               padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
-              primary: (primaryColor ?? ColorResource.primarySwatch)
+              primary: (primaryColor ?? ColorResource.primarySwatchMaterial)
                   .withOpacity(status == Status.waiting ? 0.5 : 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),

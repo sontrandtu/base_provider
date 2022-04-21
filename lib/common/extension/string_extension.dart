@@ -1,10 +1,14 @@
 import 'dart:math';
+
+import 'package:achitech_weup/common/core/base_function.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random rnd = Random();
 
-String getRandomString(int length) => String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
 
 extension StringExtension on String {
   bool search(String query) {
@@ -23,7 +27,8 @@ extension StringExtension on String {
   }
 
   bool get isValidUrl {
-    final regex = RegExp(r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$");
+    final regex = RegExp(
+        r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$");
     return regex.hasMatch(this);
   }
 
@@ -85,7 +90,8 @@ extension StringExtension on String {
   String get removeFirstCharacterIsZero => int.parse(this).toString();
 
   bool get isValidEmail {
-    RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    RegExp regex = RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
     return regex.hasMatch(this);
   }
 
@@ -126,12 +132,38 @@ extension StringExtension on String {
     return this;
   }
 
+  String _toDecimal(String number, int unit) =>
+      (double.parse(number) / unit).toStringAsFixed(2);
 
-  String _toDecimal(String number, int unit) => (double.parse(number) / unit).toStringAsFixed(2);
-
-  String get inCaps => length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String get inCaps =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
 
   String get allInCaps => toUpperCase();
 
-  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
+  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ')
+      .split(" ")
+      .map((str) => str.inCaps)
+      .join(" ");
+
+  DateTime convertToDateTime({required String pattern}) {
+    try {
+      return DateFormat(pattern).parse(this);
+    } catch (exception) {
+      showError(exception.toString());
+      return DateTime.now();
+    }
+  }
+
+  String changeFormatDateTime({
+    required String newPattern,
+    required String currentPattern,
+  }) {
+    try {
+      return DateFormat(currentPattern)
+          .format(DateFormat(newPattern).parse(this));
+    } catch (exception) {
+      showError(exception.toString());
+      return '';
+    }
+  }
 }

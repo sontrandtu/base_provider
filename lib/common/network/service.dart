@@ -1,4 +1,3 @@
-import 'package:achitech_weup/common/core/sys/base_response.dart';
 import 'package:achitech_weup/system/model/post.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';

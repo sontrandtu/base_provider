@@ -20,14 +20,14 @@ class ThemeManager {
     primarySwatch: ColorResource.primarySwatchMaterial,
     fontFamily: 'Babylon',
     textTheme: const TextTheme(
-      headline6: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-      headline5: TextStyle(fontWeight: FontWeight.w600,  fontSize: 16),
-      headline4: TextStyle(fontWeight: FontWeight.w600,  fontSize: 18),
-      headline3: TextStyle(fontWeight: FontWeight.w600,  fontSize: 20),
-      headline2: TextStyle(fontWeight: FontWeight.w600,  fontSize: 22),
-      headline1: TextStyle(fontWeight: FontWeight.w600,  fontSize: 24),
-      bodyText1: TextStyle(fontWeight: FontWeight.w400,  fontSize: 16),
-      bodyText2: TextStyle(fontWeight: FontWeight.w400,  fontSize: 14),
+      headline6: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody, fontSize: 14),
+      headline5: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody,  fontSize: 16),
+      headline4: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody,  fontSize: 18),
+      headline3: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody,  fontSize: 20),
+      headline2: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody,  fontSize: 22),
+      headline1: TextStyle(fontWeight: FontWeight.w600,color: ColorResource.textBody,  fontSize: 24),
+      bodyText1: TextStyle(fontWeight: FontWeight.w400,color: ColorResource.textBody,  fontSize: 16),
+      bodyText2: TextStyle(fontWeight: FontWeight.w400,color: ColorResource.textBody,  fontSize: 14),
     ),
   );
 

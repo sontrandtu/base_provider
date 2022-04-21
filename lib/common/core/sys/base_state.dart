@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:achitech_weup/common/core/sys/base_view_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 
 abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> extends State<T> {
   late E viewModel;
@@ -14,33 +14,29 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
 
   RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
-  void hideKeyboard() {
-    FocusScope.of(context).unfocus();
-  }
-
   void setViewModel();
 
   @override
-  void initState() {  setViewModel();
+  void initState() {
     super.initState();
-
-
+    setViewModel();
+    log('$E was installed', name: 'WEUP-APP');
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       _width = MediaQuery.of(context).size.width;
       _height = MediaQuery.of(context).size.height;
 
-      viewModel.onViewCreated();
+      viewModel.setRouteSetting(routeSetting);
+
+      viewModel.setBuildContext(context);
+
+      viewModel.initialData();
     });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    viewModel.setRouteSetting(routeSetting);
-    log('$E was installed', name: 'WEUP-APP');
-
-    viewModel.initialData();
   }
 
   @override

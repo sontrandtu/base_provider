@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
           ),
           TextButtonComp(title: 'ABC', onPressed: () {}),
           IconButton(onPressed: (){}, icon: Icon(Icons.add),splashRadius: 1,),
-          InkWellComp(onTab: (){}, child: Icon(Icons.add)),
+          InkWellComp(onTap: (){}, child: Icon(Icons.add)),
           DropdownComp(
             listItems: [
               BaseOptionDropdown(id: '1', name: '1adfgdfsgdasfdasfdsfdasfsdfasfdasfsfdsfdsfdasfdsfdsfdsfdsffaadsfdsfdsfdsfsdfasdfdasfdssdfdasf'),

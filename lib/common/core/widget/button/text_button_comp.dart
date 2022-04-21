@@ -8,23 +8,17 @@ class TextButtonComp extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? style;
   final Status? status;
-  final FontWeight? titleFontWeight;
-  final double? titleSize;
   final double? borderRadius;
   final double? widthValue;
   final double? heightValue;
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
-  final Color? titleColor;
 
   const TextButtonComp({
     Key? key,
     this.title,
     this.child,
-    this.titleColor,
     this.style,
-    this.titleSize,
-    this.titleFontWeight,
     this.widthValue,
     this.heightValue,
     this.onPressed,
@@ -46,11 +40,7 @@ class TextButtonComp extends StatelessWidget {
             Text(
               title ?? '',
               style: style ??
-                  TextStyle(
-                    color: titleColor,
-                    fontSize: titleSize,
-                    fontWeight: titleFontWeight,
-                  ),
+                  Theme.of(context).textTheme.headline4,
             ),
         style: buttonStyle ??
             TextButton.styleFrom(

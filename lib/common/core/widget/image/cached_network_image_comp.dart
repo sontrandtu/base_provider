@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class NetworkImageComp extends StatelessWidget {
+class CachedNetworkImageComp extends StatelessWidget {
   final double width;
   final double height;
   final String url;
@@ -16,7 +16,7 @@ class NetworkImageComp extends StatelessWidget {
   final BorderRadius? borderRadius;
   final int? placeholderDuration;
 
-  const NetworkImageComp({
+  const CachedNetworkImageComp({
     Key? key,
     required this.url,
     required this.width,

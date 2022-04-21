@@ -25,7 +25,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 32),
-              NetworkImageComp(
+              CachedNetworkImageComp(
                   url:
                       'https://cockpit.axenu.com/api/cockpit/image/?token=ad5bf77cc0fb358931a4247452fcea&w=300&h=300&o=true&m=fitToHeight&src=/storage/uploads/2020/02/13/5e454de6a6d7bXtEn7sJS_400x400.png',
                   width: width / 2,
@@ -57,15 +57,15 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Bạn chưa có tài khoản?', style: appStyle.textTheme.bodyText1),
+                  Text('Bạn chưa có tài khoản?', style: Theme.of(context).textTheme.bodyText1),
                   InkWellComp(
-                    onTab: viewModel.register,
+                    onTap: viewModel.register,
                     backgroundColor: Colors.transparent,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                       child: Text(
                         'Đăng ký ngay',
-                        style: appStyle.textTheme.bodyText1?.apply(
+                        style: Theme.of(context).textTheme.bodyText2?.apply(
                             decoration: TextDecoration.underline,
                             fontStyle: FontStyle.italic,
                             color: ColorResource.primary),

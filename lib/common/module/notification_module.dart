@@ -5,6 +5,10 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationModule {
   NotificationModule._internal();
 
+  factory NotificationModule(){
+    return instance;
+  }
+
   static NotificationModule get instance => NotificationModule._internal();
 
   Function? onSelectNotification;

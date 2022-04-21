@@ -40,7 +40,7 @@ class ElevatedButtonComp extends StatelessWidget {
         child: child ??
             Text(title ?? '',
                 style: style ??
-                    Theme.of(context).textTheme.headline4),
+                    appStyle.textTheme.headline4),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
               padding: padding ?? const EdgeInsets.symmetric(vertical: 8),

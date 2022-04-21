@@ -131,21 +131,21 @@ class _TextFieldCompState extends State<TextFieldComp> {
         keyboardType: widget.inputType,
         textAlignVertical: TextAlignVertical.center,
         readOnly: widget.isReadOnly ?? false,
-        style: widget.style ?? Theme.of(context).textTheme.bodyText1,
+        style: widget.style ?? appStyle.textTheme.bodyText1,
         decoration: inputDecoration(),
       ),
     );
   }
 
   InputDecoration inputDecoration() => InputDecoration(
-        errorStyle: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.red),
+        errorStyle: appStyle.textTheme.bodyText2?.apply(color: Colors.red),
         filled: true,
         fillColor: widget.fillColor ?? Colors.white,
         labelText: widget.label ?? widget.hint,
         labelStyle: widget.labelStyle,
         alignLabelWithHint: true,
         hintText: widget.hint,
-        hintStyle: (widget.hintStyle ?? Theme.of(context).textTheme.bodyText2),
+        hintStyle: (widget.hintStyle ?? appStyle.textTheme.bodyText2),
         contentPadding: widget.contentPadding ??
             EdgeInsets.symmetric(
               vertical: widget.padV ?? 16,

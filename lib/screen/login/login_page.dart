@@ -57,7 +57,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Bạn chưa có tài khoản?', style: Theme.of(context).textTheme.bodyText1),
+                  Text('Bạn chưa có tài khoản?', style: appStyle.textTheme.bodyText1),
                   InkWellComp(
                     onTap: viewModel.register,
                     backgroundColor: Colors.transparent,
@@ -65,7 +65,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                       child: Text(
                         'Đăng ký ngay',
-                        style: Theme.of(context).textTheme.bodyText2?.apply(
+                        style: appStyle.textTheme.bodyText2?.apply(
                             decoration: TextDecoration.underline,
                             fontStyle: FontStyle.italic,
                             color: ColorResource.primary),
@@ -82,5 +82,5 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   }
 
   @override
-  void setViewModel() => viewModel = loginViewModel;
+  void initViewModel() => viewModel = loginViewModel;
 }

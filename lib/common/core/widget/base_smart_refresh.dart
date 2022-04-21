@@ -44,7 +44,7 @@ class BaseSmartRefresh extends StatelessWidget {
             ? Center(
                 child: Text(
                   'Không có dữ liệu',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: appStyle.textTheme.bodyText1,
                 ),
               )
             : const SizedBox(width: 0, height: 0),

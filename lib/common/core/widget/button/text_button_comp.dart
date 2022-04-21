@@ -1,33 +1,38 @@
+import 'package:achitech_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
-class BaseTextButton extends StatelessWidget {
+class TextButtonComp extends StatelessWidget {
   final String? title;
   final Widget? child;
-  final Function()? onTab;
-  final Color? titleColor;
+  final Function()? onPressed;
+  final EdgeInsetsGeometry? padding;
   final TextStyle? style;
-  final double? titleSize;
+  final Status? status;
   final FontWeight? titleFontWeight;
-  final double? borderRadiusValue;
-  final ButtonStyle? buttonStyleValue;
-  final Color? primaryColorValue;
+  final double? titleSize;
+  final double? borderRadius;
   final double? widthValue;
   final double? heightValue;
+  final ButtonStyle? buttonStyle;
+  final Color? primaryColor;
+  final Color? titleColor;
 
-  const BaseTextButton({
+  const TextButtonComp({
     Key? key,
     this.title,
     this.child,
-    this.onTab,
     this.titleColor,
     this.style,
     this.titleSize,
     this.titleFontWeight,
-    this.borderRadiusValue,
-    this.buttonStyleValue,
-    this.primaryColorValue,
     this.widthValue,
     this.heightValue,
+    this.onPressed,
+    this.padding,
+    this.status,
+    this.borderRadius,
+    this.buttonStyle,
+    this.primaryColor,
   }) : super(key: key);
 
   @override
@@ -36,7 +41,7 @@ class BaseTextButton extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: TextButton(
-        onPressed: onTab,
+        onPressed: status != Status.waiting ? onPressed : null,
         child: child ??
             Text(
               title ?? '',
@@ -47,11 +52,12 @@ class BaseTextButton extends StatelessWidget {
                     fontWeight: titleFontWeight,
                   ),
             ),
-        style: buttonStyleValue ??
+        style: buttonStyle ??
             TextButton.styleFrom(
-              primary: primaryColorValue,
+              padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
+              primary: primaryColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusValue ?? 0),
+                borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),
             ),
       ),

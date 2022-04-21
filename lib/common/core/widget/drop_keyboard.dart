@@ -19,7 +19,6 @@ class DropKeyboard extends StatelessWidget {
         onClick?.call();
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: SafeArea(
           child: Stack(children: [
             child,

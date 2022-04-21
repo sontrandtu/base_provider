@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:achitech_weup/common/app_common.dart';
+import 'package:achitech_weup/common/helper/app_common.dart';
 import 'package:achitech_weup/common/resource/app_resource.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

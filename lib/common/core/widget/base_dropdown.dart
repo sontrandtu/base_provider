@@ -1,7 +1,8 @@
 import 'package:achitech_weup/common/core/sys/base_option_dropdown.dart';
+import 'package:achitech_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
-class DropdownCustom extends StatelessWidget {
+class DropdownComp extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? currentValue, hint, error, label;
@@ -31,8 +32,7 @@ class DropdownCustom extends StatelessWidget {
   final GlobalKey dropdownKey = GlobalKey();
   final _dropdownFormFieldKey = GlobalKey<FormState>();
 
-
-  DropdownCustom({
+  DropdownComp({
     Key? key,
     this.prefixIcon,
     this.currentValue,
@@ -57,12 +57,13 @@ class DropdownCustom extends StatelessWidget {
     this.filled,
     this.hintStyle,
     this.selectionStyle,
-    this.selectedStyle, this.bgSelection, this.bgSelected,
+    this.selectedStyle,
+    this.bgSelection,
+    this.bgSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
     return Material(
       child: InkWell(
@@ -87,7 +88,7 @@ class DropdownCustom extends StatelessWidget {
                 decoration: border(),
                 validator: (value) => onValidator?.call(value),
                 key: dropdownKey,
-                menuMaxHeight:  height / 2,
+                menuMaxHeight: height / 2,
                 value: currentValue == '' ? null : currentValue,
                 isExpanded: true,
                 isDense: false,
@@ -101,15 +102,16 @@ class DropdownCustom extends StatelessWidget {
                 },
                 items: listItems!.map((value) {
                   return DropdownMenuItem(
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                        onTapCallBack?.call(value, index ?? 0);
-                      },
-                      value: value,
-                      child: Text(value.name ?? '',
-                          style: selectionStyle ??
-                              const TextStyle(
-                                  fontSize: 14, color: Colors.black)));
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      onTapCallBack?.call(value, index ?? 0);
+                    },
+                    value: value,
+                    child: Text(
+                      value.name ?? '',
+                      style: selectionStyle,
+                    ),
+                  );
                 }).toList(),
                 selectedItemBuilder: (context) => listItems!
                     .map(
@@ -117,9 +119,7 @@ class DropdownCustom extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           value.name ?? '',
-                          style: selectedStyle ??
-                              const TextStyle(
-                                  fontSize: 14, color: Colors.black),
+                          style: selectedStyle,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -140,6 +140,7 @@ class DropdownCustom extends StatelessWidget {
             hintText: hint,
             errorText: error,
             label: label != null ? Text(label ?? '') : null,
+            labelStyle: TextStyle(color: ColorResource.primary),
             suffixIcon: suffixIcon,
             suffixIconConstraints: BoxConstraints(
               minWidth: paddingSuffixIcon ?? 36,
@@ -166,8 +167,8 @@ class DropdownCustom extends StatelessWidget {
             focusedBorder: isBorder!
                 ? focusedBorder ??
                     OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          width: 1, color: Colors.white),
+                      borderSide:
+                           BorderSide(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.all(
                         Radius.circular(borderRadius ?? 8),
                       ),

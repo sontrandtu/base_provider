@@ -1,10 +1,10 @@
-import 'package:achitech_weup/common/constant.dart';
-import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/page_manager/page_manager.dart';
+import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
+
+import 'common/helper/constant.dart';
 
 final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 
@@ -21,7 +21,7 @@ class Application extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      initialRoute: RoutePath.initial,
+      initialRoute: RoutePath.home,
       theme: appStyle,
       onGenerateRoute: generateRoute,
       debugShowMaterialGrid: false);

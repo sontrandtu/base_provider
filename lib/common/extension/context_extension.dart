@@ -17,7 +17,10 @@ extension ContextExtension on BuildContext {
   TextStyle textStyle({
     Color? color,
   }) {
-    return Theme.of(this).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.normal, color: color);
+    return Theme.of(this)
+        .textTheme
+        .bodyText1!
+        .copyWith(fontWeight: FontWeight.normal, color: color);
   }
 }
 

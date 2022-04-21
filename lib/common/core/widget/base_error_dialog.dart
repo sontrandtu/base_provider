@@ -1,4 +1,6 @@
 import 'package:achitech_weup/common/core/theme_manager.dart';
+import 'package:achitech_weup/common/extension/app_extension.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BaseErrorDialog extends StatelessWidget {
@@ -26,9 +28,9 @@ class BaseErrorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async=>false,
+      onWillPop: () async => false,
       child: AlertDialog(
-        title: Text(title ?? 'Thông báo'.toUpperCase(), style: appStyle.textTheme.headline3),
+        title: Text(title ?? 'title'.tr().toUpperCase(), style: appStyle.textTheme.headline3),
         content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
         insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         actions: [

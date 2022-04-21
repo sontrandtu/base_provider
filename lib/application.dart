@@ -1,8 +1,8 @@
 import 'package:achitech_weup/common/core/page_manager/page_manager.dart';
 import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/theme_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'common/helper/constant.dart';
 
@@ -13,16 +13,14 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-      navigatorKey: navigator,
-      debugShowCheckedModeBanner: false,
-      title: Constant.app_name,
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      initialRoute: RoutePath.home,
-      theme: appStyle,
-      onGenerateRoute: generateRoute,
-      debugShowMaterialGrid: false);
+    navigatorKey: navigator,
+    theme: appStyle,
+    onGenerateRoute: generateRoute,
+    debugShowCheckedModeBanner: false,
+    title: Constant.app_name,
+    initialRoute: RoutePath.initial,
+    locale: context.locale,
+    localizationsDelegates: context.localizationDelegates,
+    supportedLocales: context.supportedLocales,
+  );
 }

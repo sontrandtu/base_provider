@@ -162,7 +162,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         enabledBorder: widget.isBorder!
             ? widget.enabledBorder ??
                 OutlineInputBorder(
-                  borderSide: const BorderSide(width: 1, color: Colors.grey),
+                  borderSide: const BorderSide(width: 1, color: ColorResource.divider),
                   borderRadius: BorderRadius.all(
                     Radius.circular(widget.borderRadius ?? 8),
                   ),

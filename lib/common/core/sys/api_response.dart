@@ -33,16 +33,6 @@ class ApiResponse<T> {
 
 extension FutureExtensions<T> on Future<HttpResponse<T>> {
   Future<ApiResponse<T>> wrap() async {
-    showDialog(
-        context: navigator.currentContext!,
-        barrierDismissible: false,
-        builder: (context) => BaseErrorDialog(
-              content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
-              showCancel: false,
-              mConfirm: () =>
-                  navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false),
-            ));
-    return Future.value(ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
     try {
       final httpResponse = await this;
       return Future.value(ApiResponse<T>(data: httpResponse.data, code: httpResponse.response.statusCode));
@@ -50,12 +40,14 @@ extension FutureExtensions<T> on Future<HttpResponse<T>> {
       log('FutureExtensions ===============${error.toString()}', name: 'WEUP-APP');
       if (error is DioError) {
         if (error.response?.statusCode == 403) {
-          navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false);
           showDialog(
               context: navigator.currentContext!,
-              builder: (context) => const BaseErrorDialog(
-                    content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
-                  ));
+              barrierDismissible: false,
+              builder: (BuildContext context) => BaseErrorDialog(
+                  content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
+                  showCancel: false,
+                  mConfirm: () =>
+                      navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false)));
           return Future.value(
               ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
         }

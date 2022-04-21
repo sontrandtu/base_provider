@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:url_launcher/url_launcher.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';

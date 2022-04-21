@@ -26,8 +26,9 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
           status: provider.status,
           child: Column(
             children: [
-              TextButtonComp(title: 'Click me',onPressed: ()=> Navigator.pushNamed(context,RoutePath.login,arguments: Post(title: '123123',id: 1)),),
-              Expanded(child: ListView.builder(itemBuilder: _buildItem,itemCount: provider.posts.length,))
+              ElevatedButtonComp(
+                title: 'Click me',
+              ),
             ],
           ),
         ),
@@ -35,8 +36,5 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index) {
-    Post post = viewModel.posts[index];
-    return InkWell(onTap: ()=> null,child: Container(padding: EdgeInsets.all(8),child: Text(post.title ?? ''),));
-  }
+
 }

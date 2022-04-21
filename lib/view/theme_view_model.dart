@@ -1,6 +1,8 @@
+import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/base_view_model.dart';
 import 'package:achitech_weup/common/local_storage/app_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ThemeViewModel extends BaseViewModel {
   late ThemeMode _mode;
@@ -8,15 +10,33 @@ class ThemeViewModel extends BaseViewModel {
   ThemeMode get mode => _mode;
 
   ThemeViewModel() {
-    _mode = HiveStorage.getValue(HiveKey.themeKey, 'light') == 'light'
-        ? ThemeMode.light
-        : ThemeMode.dark;
+    _mode = getInitMode;
   }
 
   Future<void> toggleMode() async {
-    _mode = _mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    String saveTheme = _mode == ThemeMode.light ? ' light' : 'dark';
+    _mode = getThemeMode;
+
+    appStyle = getThemeData;
+
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
+
+    String saveTheme = isLightMode ? ' light' : 'dark';
+
     await HiveStorage.putValue(HiveKey.themeKey, saveTheme);
+
     notifyListeners();
   }
+
+  bool get isLightMode => _mode == ThemeMode.light;
+
+  ThemeMode get getThemeMode => isLightMode ? ThemeMode.dark : ThemeMode.light;
+
+  ThemeMode get getInitMode =>
+      HiveStorage.getValue(HiveKey.themeKey, 'light') == 'light' ? ThemeMode.light : ThemeMode.dark;
+
+  ThemeData get getThemeData =>
+      isLightMode ? ThemeManager.instance.lightTheme : ThemeManager.instance.darkTheme;
+
+  Brightness get getBrightness => isLightMode ? Brightness.dark : Brightness.light;
 }

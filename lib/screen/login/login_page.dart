@@ -82,5 +82,5 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   }
 
   @override
-  void setViewModel() => viewModel = loginViewModel;
+  void initViewModel() => viewModel = loginViewModel;
 }

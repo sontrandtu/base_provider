@@ -18,9 +18,21 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     return Consumer<LoginViewModel>(
         builder: (_, provider, __) => DropKeyboard(
             status: provider.status,
-            child: BaseTextButton(
-              title: provider.args,
-              onTab: updateSplash,
+            child: Column(
+              children: [
+                BaseTextButton(
+                  title: provider.post?.title,
+                  onTab: updateSplash,
+                ),
+                BaseTextButton(
+                  title: 'Next',
+                  onTab: toNewPage,
+                ),
+                BaseTextButton(
+                  title: 'Next',
+                  onTab: logAll,
+                ),
+              ],
             )));
   }
 
@@ -31,5 +43,13 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     splashViewModel.data = '123123123';
     splashViewModel.update();
     Navigator.pop(context);
+  }
+
+  toNewPage() {
+   Navigator.pushNamed(context, RoutePath.home,arguments: runtimeType.toString());
+  }
+
+  logAll() {
+    viewModel.initialData();
   }
 }

@@ -1,17 +1,15 @@
 import 'dart:developer';
 
-import 'package:achitech_weup/common/core/page_manager/app_setting.dart';
 import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/widget/undefined_layout.dart';
+import 'package:achitech_weup/screen/home/home_page.dart';
 import 'package:achitech_weup/screen/login/login_page.dart';
 import 'package:achitech_weup/screen/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-
   Widget page;
-
 
   switch (settings.name) {
     case RoutePath.initial:
@@ -20,12 +18,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RoutePath.login:
       page = const LoginPage();
       break;
+    case RoutePath.home:
+      page = const HomePage();
+      break;
     default:
-      page = const UndefinedLayout();
+      page =  UndefinedLayout(name: settings.name,);
       break;
   }
-
-  AppSetting.settings = settings;
   log('Page: $page | RoutePath: ${settings.name} |Args: ${settings.arguments}', name: 'WEUP-APP');
 
   return PageRouteBuilder(

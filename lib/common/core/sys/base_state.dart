@@ -12,6 +12,8 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
 
   double get height => _height;
 
+  RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
+
   void hideKeyboard() {
     FocusScope.of(context).unfocus();
   }
@@ -19,21 +21,27 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
   void setViewModel();
 
   @override
-  void initState() {
+  void initState() {  setViewModel();
     super.initState();
-    log('$E was installed', name: 'WEUP-APP');
-    setViewModel();
-    viewModel.initialData();
+
+
+
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _width = MediaQuery.of(context).size.width;
+      _height = MediaQuery.of(context).size.height;
+
+      viewModel.onViewCreated();
+    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _width = MediaQuery.of(context).size.width;
-    _height = MediaQuery.of(context).size.height;
-    viewModel.onViewCreated();
-  }
+    viewModel.setRouteSetting(routeSetting);
+    log('$E was installed', name: 'WEUP-APP');
 
+    viewModel.initialData();
+  }
 
   @override
   void dispose() {
@@ -41,5 +49,4 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
     viewModel.onDispose();
     super.dispose();
   }
-
 }

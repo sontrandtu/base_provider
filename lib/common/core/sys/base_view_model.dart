@@ -15,7 +15,6 @@ class BaseViewModel extends ChangeNotifier {
   Status get status => _status;
 
 
-
   String? get currentRoute => _settings?.name;
 
   Future<bool> get isConnecting async => await getConnection();

@@ -1,14 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 
 class HiveStorage {
   static const String boxName = 'local.data';
 
   static Future<void> install() async {
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
+    var path = Directory.current.path;
+    Hive.init(path);
     await Hive.openBox(boxName);
   }
 
@@ -47,4 +47,8 @@ class HiveStorage {
     final Box box = Hive.box(boxName);
     await box.deleteFromDisk();
   }
+}
+
+class HiveKey {
+  static const String themeKey = 'light';
 }

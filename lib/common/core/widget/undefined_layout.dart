@@ -1,4 +1,3 @@
-import 'package:achitech_weup/common/core/widget/base_app_header.dart';
 import 'package:achitech_weup/common/core/widget/drop_keyboard.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class UndefinedLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropKeyboard(
       child: Column(children: [
-        const BaseAppHeader(),
         Text(name ?? ''),
       ]),
     );

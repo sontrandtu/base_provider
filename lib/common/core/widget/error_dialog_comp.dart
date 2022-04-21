@@ -28,8 +28,8 @@ class BaseErrorDialog extends StatelessWidget {
     return WillPopScope(
       onWillPop: ()async=>false,
       child: AlertDialog(
-        title: Text(title ?? 'Thông báo'.toUpperCase(), style: appStyle.textTheme.headline3),
-        content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
+        title: Text(title ?? 'Thông báo'.toUpperCase(), style: Theme.of(context).textTheme.headline3),
+        content: Text(content ?? '', style: Theme.of(context).textTheme.bodyText1),
         insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         actions: [
           showConfirm ?? true

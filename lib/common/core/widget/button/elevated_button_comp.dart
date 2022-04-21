@@ -9,14 +9,11 @@ class ElevatedButtonComp extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? style;
   final Status? status;
-  final FontWeight? titleFontWeight;
-  final double? titleSize;
   final double? borderRadius;
   final double? widthValue;
   final double? heightValue;
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
-  final Color? titleColor;
 
   const ElevatedButtonComp({
     Key? key,
@@ -25,10 +22,7 @@ class ElevatedButtonComp extends StatelessWidget {
     this.onPressed,
     this.status,
     this.padding,
-    this.titleColor,
     this.style,
-    this.titleSize,
-    this.titleFontWeight,
     this.borderRadius,
     this.buttonStyle,
     this.primaryColor,
@@ -46,7 +40,7 @@ class ElevatedButtonComp extends StatelessWidget {
         child: child ??
             Text(title ?? '',
                 style: style ??
-                    appStyle.textTheme.headline4?.apply(color: Colors.white)),
+                    Theme.of(context).textTheme.headline4),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
               padding: padding ?? const EdgeInsets.symmetric(vertical: 8),

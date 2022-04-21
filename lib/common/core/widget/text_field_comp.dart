@@ -125,7 +125,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         textAlignVertical: TextAlignVertical.center,
         readOnly: widget.isReadOnly ?? false,
         style: widget.style ??
-            appStyle.textTheme.bodyText1
+            Theme.of(context).textTheme.bodyText1
                 ,
         decoration: inputDecoration(),
       ),
@@ -133,7 +133,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
   }
 
   InputDecoration inputDecoration() => InputDecoration(
-        errorStyle: appStyle.textTheme.bodyText2?.apply(color: Colors.red),
+        errorStyle: Theme.of(context).textTheme.bodyText2?.apply(color: Colors.red),
         filled: true,
         fillColor: widget.fillColor ?? Colors.white,
         labelText: widget.label ?? widget.hint,
@@ -141,7 +141,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         alignLabelWithHint: true,
         hintText: widget.hint,
         hintStyle: (widget.hintStyle ??
-            appStyle.textTheme.bodyText2),
+            Theme.of(context).textTheme.bodyText2),
         contentPadding: widget.contentPadding ??
             EdgeInsets.symmetric(
               vertical: widget.padV ?? 16,

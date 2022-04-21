@@ -1,26 +1,22 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationModule {
-  static NotificationModule? _module;
+  NotificationModule._internal();
+
+  static NotificationModule get instance => NotificationModule._internal();
+
   Function? onSelectNotification;
+
   late FlutterLocalNotificationsPlugin _fltNotification;
   late NotificationDetails _generalNotificationDetails;
 
-  static NotificationModule get instance => _getInstance();
-
-  static NotificationModule _getInstance() {
-    _module ??= NotificationModule();
-    _module?.initNotification();
-    return _module!;
-  }
-
   void initNotification() {
     InitializationSettings initSetting = const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-        iOS: IOSInitializationSettings());
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'), iOS: IOSInitializationSettings());
     _fltNotification = FlutterLocalNotificationsPlugin();
-    _fltNotification.initialize(initSetting,
-        onSelectNotification: (s) => onSelectNotification?.call(s));
+    _fltNotification.initialize(initSetting, onSelectNotification: (s) => onSelectNotification?.call(s));
 
     _generalNotificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails('1', 'push_notify_channel',
@@ -29,6 +25,23 @@ class NotificationModule {
             priority: Priority.high,
             ticker: 'ticker'),
         iOS: IOSNotificationDetails());
+  }
+
+  Future<void> schedule({String? id, String? title, String? body, tz.TZDateTime? scheduledTime}) async {
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.local);
+
+    var androidSpecifics = AndroidNotificationDetails(id ?? '-1', 'Scheduled notification',
+        channelDescription: 'A scheduled notification', icon: 'icon');
+
+    var iOSSpecifics = const IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(android: androidSpecifics, iOS: iOSSpecifics);
+
+    await _fltNotification.zonedSchedule(int.parse(id ?? '-1'), title, body,
+        scheduledTime ?? tz.TZDateTime.now(tz.local), platformChannelSpecifics,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+
   }
 
   void show(int id, String? title, String? body, {String? payload}) {

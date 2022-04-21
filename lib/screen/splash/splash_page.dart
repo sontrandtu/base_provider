@@ -2,7 +2,6 @@ import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/base_state.dart';
 import 'package:achitech_weup/main.dart';
 import 'package:achitech_weup/screen/splash/splash_view_model.dart';
-import 'package:achitech_weup/system/model/post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,19 +21,8 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
     return ChangeNotifierProvider.value(
       value: viewModel,
       child: Consumer<SplashViewModel>(
-        builder: (_, provider, __) => DropKeyboard(
-          status: provider.status,
-          child: Column(
-            children: [
-              ElevatedButtonComp(
-                title: 'Click me',
-              ),
-            ],
-          ),
-        ),
+        builder: (_, provider, __) => DropKeyboard(status: provider.status, child: Container()),
       ),
     );
   }
-
-
 }

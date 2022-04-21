@@ -17,7 +17,7 @@ class TextFieldComp extends StatefulWidget {
   final Function(String value)? onFieldSubmitted;
   final Function()? onComplete;
   final Function? onValidator;
-  final bool? isReadOnly;
+
   final int? minLine, maxLines;
   final double? padH, padV, borderRadius;
   final TextCapitalization? capitalization;
@@ -26,24 +26,25 @@ class TextFieldComp extends StatefulWidget {
   final Color? fillColor;
   final bool? enable;
   final BoxConstraints? suffixConstraint, prefixConstraint;
-  final OutlineInputBorder? enabledBorder,
-      focusedBorder,
-      disableBorder,
-      errorBorder,
-      focusedErrorBorder;
+  final OutlineInputBorder? enabledBorder, focusedBorder, disableBorder, errorBorder, focusedErrorBorder;
   final EdgeInsetsGeometry? contentPadding;
   final List<TextInputFormatter>? inputFormatters;
-  final bool? isDoubleNum;
+
   final double? paddingSuffixIcon;
   final double? paddingPrefixIcon;
   final bool? isBorder;
   final bool? isUnderLine;
+  final bool? isDoubleNum;
+  final bool? isReadOnly;
+
+  final bool? isInvisiblePassword;
 
   const TextFieldComp({
     Key? key,
     this.prefixIcon,
     this.suffixIcon,
     this.inputType,
+    this.isInvisiblePassword = false,
     this.editingController,
     this.hint,
     this.onChange,
@@ -80,7 +81,8 @@ class TextFieldComp extends StatefulWidget {
     this.isBorder = false,
     this.enabledBorder,
     this.focusedBorder,
-    this.isUnderLine = false, this.labelStyle,
+    this.isUnderLine = false,
+    this.labelStyle,
   }) : super(key: key);
 
   @override
@@ -88,12 +90,18 @@ class TextFieldComp extends StatefulWidget {
 }
 
 class _TextFieldCompState extends State<TextFieldComp> {
-
   final _textFormFieldKey = GlobalKey<FormState>();
+  bool obscureText = false;
+  Widget? suffixIcon = SizedBox();
 
   @override
   void initState() {
     super.initState();
+    suffixIcon = widget.suffixIcon;
+    if (widget.isInvisiblePassword!) {
+      obscureText = true;
+      suffixIcon = InkWell(onTap: _changeObscure, child: const Icon(Icons.remove_red_eye,size: 24,));
+    }
   }
 
   @override
@@ -103,12 +111,12 @@ class _TextFieldCompState extends State<TextFieldComp> {
       child: TextFormField(
         controller: widget.editingController,
         enabled: widget.enable ?? true,
+        obscureText: obscureText,
         onChanged: (String value) => widget.onChange,
         validator: (value) => widget.onValidator?.call(value),
         onEditingComplete: () => widget.onComplete,
         onTap: () => widget.onTap,
-        onFieldSubmitted: (value) =>
-            (value) => widget.onFieldSubmitted?.call(value),
+        onFieldSubmitted: (value) => (value) => widget.onFieldSubmitted?.call(value),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         inputFormatters: widget.inputFormatters ??
             ((widget.inputType == TextInputType.number)
@@ -116,17 +124,14 @@ class _TextFieldCompState extends State<TextFieldComp> {
                     ? [FilteringTextInputFormatter.digitsOnly]
                     : [FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))])
                 : []),
-        textCapitalization:
-            widget.capitalization ?? TextCapitalization.sentences,
+        textCapitalization: widget.capitalization ?? TextCapitalization.sentences,
         textInputAction: widget.inputAction ?? TextInputAction.next,
-        minLines: widget.minLine,
-        maxLines: widget.maxLines,
+        minLines: widget.minLine ?? 1,
+        maxLines: widget.maxLines ?? 1,
         keyboardType: widget.inputType,
         textAlignVertical: TextAlignVertical.center,
         readOnly: widget.isReadOnly ?? false,
-        style: widget.style ??
-            appStyle.textTheme.bodyText1
-                ,
+        style: widget.style ?? appStyle.textTheme.bodyText1,
         decoration: inputDecoration(),
       ),
     );
@@ -140,16 +145,15 @@ class _TextFieldCompState extends State<TextFieldComp> {
         labelStyle: widget.labelStyle,
         alignLabelWithHint: true,
         hintText: widget.hint,
-        hintStyle: (widget.hintStyle ??
-            appStyle.textTheme.bodyText2),
+        hintStyle: (widget.hintStyle ?? appStyle.textTheme.bodyText2),
         contentPadding: widget.contentPadding ??
             EdgeInsets.symmetric(
               vertical: widget.padV ?? 16,
-              horizontal: widget.padH ?? 8,
+              horizontal: widget.padH ?? 12,
             ),
         isDense: true,
         prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon,
+        suffixIcon: suffixIcon,
         prefixIconConstraints: BoxConstraints(
           minWidth: widget.paddingPrefixIcon ?? 36,
           minHeight: widget.paddingPrefixIcon ?? 36,
@@ -206,4 +210,12 @@ class _TextFieldCompState extends State<TextFieldComp> {
                 ? null
                 : InputBorder.none,
       );
+
+  void _changeObscure() {
+    obscureText = !obscureText;
+
+    suffixIcon = InkWell(
+        onTap: _changeObscure, child: Icon(obscureText ? Icons.remove_red_eye : Icons.visibility_off,size: 24,));
+    setState(() {});
+  }
 }

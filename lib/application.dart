@@ -3,7 +3,6 @@ import 'package:achitech_weup/common/core/page_manager/route_path.dart';
 import 'package:achitech_weup/common/core/theme_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import 'common/helper/constant.dart';
 
 final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();

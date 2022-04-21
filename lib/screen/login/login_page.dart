@@ -17,70 +17,70 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
-        builder: (_, provider, __) => DropKeyboard(
-            status: provider.status,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
+      builder: (_, provider, __) => DropKeyboard(
+        status: provider.status,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 32),
+              NetworkImageComp(
+                  url:
+                      'https://cockpit.axenu.com/api/cockpit/image/?token=ad5bf77cc0fb358931a4247452fcea&w=300&h=300&o=true&m=fitToHeight&src=/storage/uploads/2020/02/13/5e454de6a6d7bXtEn7sJS_400x400.png',
+                  width: width / 2,
+                  height: width / 2),
+              const SizedBox(height: 32),
+              TextFieldComp(
+                editingController: viewModel.userController,
+                onValidator: (s) => viewModel.validator(s, 0),
+                hint: 'Tên tài khoản',
+                isBorder: true,
+              ),
+              const SizedBox(height: 16),
+              TextFieldComp(
+                editingController: viewModel.passwordController,
+                onValidator: (s) => viewModel.validator(s, 1),
+                hint: 'Mật khẩu',
+                isInvisiblePassword: true,
+                isBorder: true,
+              ),
+              const SizedBox(height: 32),
+              ElevatedButtonComp(
+                title: 'Đăng nhập',
+                widthValue: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                borderRadius: 4,
+                onPressed: viewModel.login,
+              ),
+              SizedBox(height: height * 0.25),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: SizedBox()),
-                  TextFieldComp(
-                    hint: 'Tên tài khoản',
-                    isBorder: true,
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextFieldComp(
-                    hint: 'Mật khẩu',
-                    isBorder: true,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButtonComp(
-                    title: 'Click me',
-                    widthValue: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    borderRadius: 4,
-                    onPressed: _login,
-                  ),
-                  Expanded(child: SizedBox()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Bạn chưa có tài khoản?', style: appStyle.textTheme.bodyText1),
-                      InkWell(
-                        onTap: _register,
-                        splashColor: Colors.transparent,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                          child: Text(
-                            'Đăng ký ngay',
-                            style: appStyle.textTheme.bodyText1?.apply(
-                                decoration: TextDecoration.underline,
-                                color: ColorResource.primary,
-                                fontStyle: FontStyle.italic),
-                          ),
-                        ),
+                  Text('Bạn chưa có tài khoản?', style: appStyle.textTheme.bodyText1),
+                  InkWellComp(
+                    onTab: viewModel.register,
+                    backgroundColor: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                      child: Text(
+                        'Đăng ký ngay',
+                        style: appStyle.textTheme.bodyText1?.apply(
+                            decoration: TextDecoration.underline,
+                            fontStyle: FontStyle.italic,
+                            color: ColorResource.primary),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 32,
+                    ),
                   ),
                 ],
               ),
-            )));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   void setViewModel() => viewModel = loginViewModel;
-
-  Future<void> _login() async {
-    viewModel.login();
-  }
-
-  void _register() {}
 }

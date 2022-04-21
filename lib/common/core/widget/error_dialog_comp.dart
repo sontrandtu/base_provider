@@ -26,7 +26,8 @@ class BaseErrorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title ?? 'Thông báo'.toUpperCase(), style: appStyle.textTheme.headline3),
+      title: Text(title ?? 'Thông báo'.toUpperCase(),
+          style: appStyle.textTheme.headline3),
       content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
       insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       actions: [
@@ -38,7 +39,8 @@ class BaseErrorDialog extends StatelessWidget {
                 },
                 child: Text(
                   textButtonConfirm ?? 'Đồng ý',
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 16),
                 ),
               )
             : const SizedBox(),
@@ -50,7 +52,8 @@ class BaseErrorDialog extends StatelessWidget {
                 },
                 child: Text(
                   textButtonCancel ?? 'Hủy',
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 16),
                 ),
               )
             : const SizedBox(),

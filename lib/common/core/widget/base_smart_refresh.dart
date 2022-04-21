@@ -21,6 +21,21 @@ class BaseSmartRefresh extends StatelessWidget {
   final ScrollPhysics? physics;
   final int? itemCount;
 
+  const BaseSmartRefresh(
+      {this.controller,
+      this.child,
+      this.itemBuilder,
+      this.header,
+      this.footer,
+      this.enablePullDown,
+      this.enablePullUp,
+      this.onLoading,
+      this.onRefresh,
+      this.physics,
+      this.itemCount,
+      Key? key})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -37,18 +52,18 @@ class BaseSmartRefresh extends StatelessWidget {
           controller: controller?.controller ?? RefreshController(),
           child: child ??
               ListView.builder(
-                  itemCount: itemCount, itemBuilder: (context, index) => itemBuilder?.call(context, index)),
+                  itemCount: itemCount,
+                  itemBuilder: (context, index) =>
+                      itemBuilder?.call(context, index)),
           enablePullDown: enablePullDown ?? true,
           enablePullUp: enablePullUp ?? true,
-          // header: header ??
-          //     const ClassicHeader(
-          //         releaseText: '', refreshingText: '', failedText: '', idleText: ''),
+          header: header,
           footer: footer ??
               ClassicFooter(
                 loadingText: 'Đang tải',
                 canLoadingText: '',
                 idleText: '',
-                idleIcon: SizedBox(width: 0, height: 0),
+                idleIcon: const SizedBox(width: 0, height: 0),
                 loadingIcon: SizedBox(
                   width: 25.0,
                   height: 25.0,
@@ -60,26 +75,13 @@ class BaseSmartRefresh extends StatelessWidget {
                         ),
                 ),
               ),
-          onLoading: () async => await controller?.loadMoreData() ?? onLoading?.call(),
-          onRefresh: () async => await controller?.refreshData() ?? onRefresh?.call(),
+          onLoading: () async =>
+              await controller?.loadMoreData() ?? onLoading?.call(),
+          onRefresh: () async =>
+              await controller?.refreshData() ?? onRefresh?.call(),
           physics: physics,
         ),
       ],
     );
   }
-
-  BaseSmartRefresh(
-      {this.controller,
-      this.child,
-      this.itemBuilder,
-      this.header,
-      this.footer,
-      this.enablePullDown,
-      this.enablePullUp,
-      this.onLoading,
-      this.onRefresh,
-      this.physics,
-      this.itemCount,
-      Key? key})
-      : super(key: key);
 }

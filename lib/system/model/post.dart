@@ -13,6 +13,9 @@ class Post {
     body = json['body'];
   }
 
+
+
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['userId'] = this.userId;

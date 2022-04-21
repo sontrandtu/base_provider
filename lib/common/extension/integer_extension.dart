@@ -13,7 +13,7 @@ extension IntegerExtension on int {
     return DateTime.fromMillisecondsSinceEpoch(this * 1000).dateTimeString;
   }
 
-  String get dateString => DateTime.fromMillisecondsSinceEpoch(this * 1000).dateString;
+  String get dateString => DateTime.fromMillisecondsSinceEpoch(this * 1000).convertToString(pattern: ddMMyyyy);
 
   DateTime get dateTimeValue => DateTime.fromMillisecondsSinceEpoch(this * 1000);
 

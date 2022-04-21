@@ -126,7 +126,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         readOnly: widget.isReadOnly ?? false,
         style: widget.style ??
             appStyle.textTheme.bodyText1
-                ?.apply(color: ColorResource.textBody),
+                ,
         decoration: inputDecoration(),
       ),
     );
@@ -141,8 +141,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         alignLabelWithHint: true,
         hintText: widget.hint,
         hintStyle: (widget.hintStyle ??
-            appStyle.textTheme.bodyText2
-                ?.apply(color: ColorResource.textBody.withOpacity(0.5))),
+            appStyle.textTheme.bodyText2),
         contentPadding: widget.contentPadding ??
             EdgeInsets.symmetric(
               vertical: widget.padV ?? 16,
@@ -175,7 +174,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
                 OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 1,
-                    color: ColorResource.primarySwatch,
+                    color: ColorResource.primarySwatchMaterial,
                   ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(widget.borderRadius ?? 8),

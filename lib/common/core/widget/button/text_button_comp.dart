@@ -1,3 +1,4 @@
+import 'package:achitech_weup/common/core/theme_manager.dart';
 import 'package:achitech_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class TextButtonComp extends StatelessWidget {
             Text(
               title ?? '',
               style: style ??
-                  Theme.of(context).textTheme.headline4,
+                  appStyle.textTheme.headline4,
             ),
         style: buttonStyle ??
             TextButton.styleFrom(

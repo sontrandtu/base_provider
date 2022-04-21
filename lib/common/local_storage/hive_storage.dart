@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HiveStorage {
   static const String boxName = 'local.data';
 
   static Future<void> install() async {
-    var path = Directory.current.path;
-    Hive.init(path);
+    var dir = await getApplicationDocumentsDirectory();
+    Hive.init(dir.path);
     await Hive.openBox(boxName);
   }
 

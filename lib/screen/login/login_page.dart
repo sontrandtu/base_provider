@@ -1,10 +1,10 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/button/cupertino_swtich_comp.dart';
 import 'package:achitecture_weup/common/extension/app_extension.dart';
 import 'package:achitecture_weup/common/helper/key_language.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
+import 'package:achitecture_weup/screen/login/components/language_layout.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -82,47 +82,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                 ],
               ),
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Stack(
-                children: [
-                  CupertinoSwitchComp(
-                    value: provider.currentLanguage,
-                    onChanged: provider.changeSwitch,
-                  ),
-                  Positioned(
-                    top: 12,
-                    left: 12,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => provider.changeSwitch(false),
-                          child: Text(
-                            'VI',
-                            style: appStyle.textTheme.headline5
-                                ?.copyWith(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        GestureDetector(
-                          onTap: () => provider.changeSwitch(true),
-                          child: Text(
-                            'EN',
-                            style: appStyle.textTheme.headline5?.copyWith(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w900,
-                                color: provider.currentLanguage ? Colors.transparent : null),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
+            const Positioned(top: 0, right: 0, child: LanguageLayout())
           ],
         ),
       ),

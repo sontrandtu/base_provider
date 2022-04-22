@@ -74,4 +74,5 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
 
   @override
   void initViewModel() => viewModel = HomeViewModel();
+
 }

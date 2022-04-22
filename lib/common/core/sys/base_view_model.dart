@@ -4,7 +4,7 @@ import 'package:achitecture_weup/common/core/page_manager/app_navigator.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
-class BaseViewModel extends ChangeNotifier {
+abstract class BaseViewModel extends ChangeNotifier {
   Status _status = Status.loading;
 
   RouteSettings? _settings;
@@ -12,6 +12,8 @@ class BaseViewModel extends ChangeNotifier {
   BuildContext? _context;
 
   AppNavigator? _appNavigator = AppNavigator();
+
+  /// ---------------------------------------------------
 
   AppNavigator get appNavigator => _appNavigator!;
 
@@ -23,7 +25,7 @@ class BaseViewModel extends ChangeNotifier {
 
   Future<bool> get isConnecting async => await getConnection();
 
-  //-----------------------------------------------------
+  /// -----------------------------------------------------
 
   dynamic getArguments() => _settings?.arguments;
 
@@ -32,10 +34,6 @@ class BaseViewModel extends ChangeNotifier {
   Future<void> fetchData() async {}
 
   void onViewCreated() {}
-
-  void onDispose() {
-    _appNavigator = null;
-  }
 
   Future<void> delay(int millis) async => await Future.delayed(Duration(milliseconds: millis));
 
@@ -56,6 +54,9 @@ class BaseViewModel extends ChangeNotifier {
 
   void setRouteSetting(RouteSettings? rs) => _settings = rs;
 
+
+
+
   void setBuildContext(BuildContext? ctx) {
     _context = ctx;
     _appNavigator?.setBuildContext(ctx);
@@ -68,4 +69,9 @@ class BaseViewModel extends ChangeNotifier {
   }
 
   void update() => notifyListeners();
+
+  @mustCallSuper
+  void onDispose() {
+    _appNavigator = null;
+  }
 }

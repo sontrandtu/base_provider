@@ -21,9 +21,15 @@ class Client {
         baseUrl: _BASE_URL,
         connectTimeout: _CONNECT_TIMEOUT,
         receiveTimeout: _RECEIVE_TIMEOUT,
-        headers: {'id' : '-1'},
+        headers: {'id': '-1'},
         contentType: _CONTENT_TYPE));
-
+    _dio?.interceptors.add(InterceptorsWrapper(onResponse: (response, handler) {
+      _dio = null;
+      return handler.next(response);
+    }, onError: (error, handler) {
+      _dio = null;
+      return handler.next(error);
+    }));
     if (kDebugMode) {
       _dio?.interceptors.add(PrettyDioLogger(
           logPrint: _logPrint,

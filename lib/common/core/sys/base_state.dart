@@ -1,12 +1,17 @@
 import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> extends State<T> {
-  late E viewModel;
+abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
+  VM? _viewModel;
   double _width = 0;
   double _height = 0;
+
+  set viewModel(VM value) => _viewModel = value;
+
+  VM get viewModel => _viewModel!;
 
   double get width => _width;
 
@@ -18,21 +23,22 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
 
   @override
   void initState() {
-
     super.initState();
     initViewModel();
 
-    log('$E was installed', name: 'WEUP-APP');
+    log('$VM was installed', name: 'WEUP-APP');
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       _width = MediaQuery.of(context).size.width;
       _height = MediaQuery.of(context).size.height;
+
       appStyle = Theme.of(context);
-      viewModel.setRouteSetting(routeSetting);
 
-      viewModel.setBuildContext(context);
+      _viewModel?.setRouteSetting(routeSetting);
 
-      viewModel.initialData();
+      _viewModel?.setBuildContext(context);
+
+      _viewModel?.initialData();
     });
   }
 
@@ -43,8 +49,8 @@ abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> exte
 
   @override
   void dispose() {
-    log('$E was closed', name: 'WEUP-APP');
-    viewModel.onDispose();
+    log('$VM was closed', name: 'WEUP-APP');
+    _viewModel = null;
     super.dispose();
   }
 }

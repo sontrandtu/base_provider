@@ -47,7 +47,7 @@ extension FutureExtensions<T> on Future<HttpResponse<T>> {
                   content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
                   showCancel: false,
                   mConfirm: () =>
-                      navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.home, (route) => false)));
+                      navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.HOME, (route) => false)));
           return Future.value(
               ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
         }

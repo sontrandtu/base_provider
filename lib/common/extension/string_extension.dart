@@ -1,16 +1,19 @@
 import 'dart:math';
 
-import 'package:achitech_weup/common/core/base_function.dart';
+import 'package:achitech_weup/common/core/sys/base_function.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random rnd = Random();
 
-String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-    length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+String getRandomString(int length) =>
+    String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
 
 extension StringExtension on String {
+  String get tl => this.tr();
+
   bool search(String query) {
     final String nonUnicode = toLowerCase().convertToUnsigned;
     final String nonUnicodeQuery = query.trim().toLowerCase().convertToUnsigned;
@@ -27,8 +30,7 @@ extension StringExtension on String {
   }
 
   bool get isValidUrl {
-    final regex = RegExp(
-        r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$");
+    final regex = RegExp(r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$");
     return regex.hasMatch(this);
   }
 
@@ -132,18 +134,14 @@ extension StringExtension on String {
     return this;
   }
 
-  String _toDecimal(String number, int unit) =>
-      (double.parse(number) / unit).toStringAsFixed(2);
+  String _toDecimal(String number, int unit) => (double.parse(number) / unit).toStringAsFixed(2);
 
-  String get inCaps =>
-      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String get inCaps => length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
 
   String get allInCaps => toUpperCase();
 
-  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ')
-      .split(" ")
-      .map((str) => str.inCaps)
-      .join(" ");
+  String get capitalizeFirstOfEach =>
+      replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
 
   DateTime convertToDateTime({required String pattern}) {
     try {
@@ -159,8 +157,7 @@ extension StringExtension on String {
     required String currentPattern,
   }) {
     try {
-      return DateFormat(currentPattern)
-          .format(DateFormat(newPattern).parse(this));
+      return DateFormat(currentPattern).format(DateFormat(newPattern).parse(this));
     } catch (exception) {
       showError(exception.toString());
       return '';

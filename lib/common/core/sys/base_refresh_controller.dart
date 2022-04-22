@@ -1,5 +1,5 @@
 
-import 'package:achitech_weup/common/core/base_function.dart';
+import 'package:achitech_weup/common/core/sys/base_function.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class BaseRefreshController {

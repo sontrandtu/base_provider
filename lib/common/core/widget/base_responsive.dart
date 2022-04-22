@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:achitech_weup/common/core/base_function.dart';
+import 'package:achitech_weup/common/core/sys/base_function.dart';
 
 const int largeScreenSize = 1366;
 const int mediumScreenSize = 768;

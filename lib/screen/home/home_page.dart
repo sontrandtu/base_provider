@@ -1,8 +1,5 @@
 import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/base_state.dart';
-import 'package:achitech_weup/common/core/widget/button/cupertino_swtich_comp.dart';
-import 'package:achitech_weup/common/core/widget/date_picker.dart';
-import 'package:achitech_weup/common/core/widget/dialog/date_picker_dialog.dart';
 import 'package:achitech_weup/main.dart';
 import 'package:achitech_weup/screen/home/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +26,11 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'ABC',
+                KeyLanguage.title.tl,
+                style: appStyle.textTheme.bodyText2,
+              ),
+              Text(
+                'Current language: ${value.language}',
                 style: appStyle.textTheme.bodyText2,
               ),
               TextButtonComp(
@@ -49,6 +50,14 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
               SwitchComp(
                 onChanged: value.changeSwitch,
                 value: value.valueSwitch,
+              ),
+              ElevatedButtonComp(
+                title: 'HHHHHHHH',
+                onPressed: () {},
+              ),
+              ElevatedButtonComp(
+                title: 'Change language',
+                onPressed: viewModel.changLanguage,
               ),
             ],
           ),

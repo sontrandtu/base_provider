@@ -1,5 +1,6 @@
 import 'package:achitech_weup/common/core/app_core.dart';
 import 'package:achitech_weup/common/core/sys/base_state.dart';
+import 'package:achitech_weup/common/core/widget/button/cupertino_swtich_comp.dart';
 import 'package:achitech_weup/common/extension/app_extension.dart';
 import 'package:achitech_weup/common/helper/key_language.dart';
 import 'package:achitech_weup/common/resource/app_resource.dart';
@@ -61,7 +62,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(  KeyLanguage.askUsername.tl, style: appStyle.textTheme.bodyText1),
+                      Text(KeyLanguage.askUsername.tl, style: appStyle.textTheme.bodyText1),
                       InkWellComp(
                         onTap: viewModel.register,
                         backgroundColor: Colors.transparent,
@@ -81,7 +82,47 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                 ],
               ),
             ),
-
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Stack(
+                children: [
+                  CupertinoSwitchComp(
+                    value: provider.currentLanguage,
+                    onChanged: provider.changeSwitch,
+                  ),
+                  Positioned(
+                    top: 12,
+                    left: 12,
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => provider.changeSwitch(false),
+                          child: Text(
+                            'VI',
+                            style: appStyle.textTheme.headline5
+                                ?.copyWith(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        GestureDetector(
+                          onTap: () => provider.changeSwitch(true),
+                          child: Text(
+                            'EN',
+                            style: appStyle.textTheme.headline5?.copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900,
+                                color: provider.currentLanguage ? Colors.transparent : null),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

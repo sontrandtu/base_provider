@@ -21,7 +21,7 @@ class ThemeViewModel extends BaseViewModel {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
 
-    String saveTheme = isLightMode ? ' light' : 'dark';
+    String saveTheme = isLightMode ? 'light' : 'dark';
 
     await HiveStorage.putValue(HiveKey.themeKey, saveTheme);
 

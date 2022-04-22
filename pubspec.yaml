@@ -48,6 +48,9 @@ dependencies:
   #r
   retrofit: 3.0.1
 
+  #s
+  syncfusion_flutter_datepicker: ^20.1.50
+
   #u
   url_launcher: ^6.0.20
 

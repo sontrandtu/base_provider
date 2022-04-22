@@ -8,9 +8,11 @@ class ColorResource {
   static const Color textBody = Color(0xFF666666);
 
   static const Color divider = Color(0xFFEFEFEF);
+
   static MaterialColor primarySwatchMaterial =
-      customMaterialColor( const Color(0xFF0A1F72));
-  static const Color primarySwatch = Color(0xFFFAFF46);
+      customMaterialColor(primarySwatch);
+  static const Color primarySwatch = Color(0xFF0A1F72);
+
   static Color colorSplash = primarySwatchMaterial.withAlpha(100);
   static Color colorHighLight = primarySwatchMaterial.withAlpha(50);
 }

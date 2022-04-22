@@ -32,7 +32,8 @@ class ApiResponse<T> {
 }
 
 extension FutureExtensions<T> on Future<HttpResponse<T>> {
-  Future<ApiResponse<T>> wrap() async {
+  Future<ApiResponse<T>>
+  wrap() async {
     try {
       final httpResponse = await this;
       return Future.value(ApiResponse<T>(data: httpResponse.data, code: httpResponse.response.statusCode));

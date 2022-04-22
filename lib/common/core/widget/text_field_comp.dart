@@ -140,7 +140,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
   InputDecoration inputDecoration() => InputDecoration(
         errorStyle: appStyle.textTheme.bodyText2?.apply(color: Colors.red),
         filled: true,
-        fillColor: widget.fillColor ?? Colors.white,
+        fillColor: widget.fillColor,
         labelText: widget.label ?? widget.hint,
         labelStyle: widget.labelStyle,
         alignLabelWithHint: true,

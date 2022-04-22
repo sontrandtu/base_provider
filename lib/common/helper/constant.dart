@@ -21,3 +21,8 @@ class LanguageCountryConstant {
   static const String VI = 'VN';
   static const String EN = 'US';
 }
+
+class ThemeModeConstant {
+  static const String DARK = 'dark';
+  static const String LIGHT  = 'light';
+}

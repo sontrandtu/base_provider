@@ -19,7 +19,7 @@ class Application extends StatelessWidget {
           navigatorKey: navigator,
           debugShowCheckedModeBanner: false,
           title: AppConstant.APP_NAME,
-          initialRoute: RoutePath.HOME,
+          initialRoute: RoutePath.INITIAL,
           onGenerateRoute: generateRoute,
           themeMode: value.mode,
           darkTheme: ThemeManager.instance.darkTheme,

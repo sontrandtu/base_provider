@@ -54,7 +54,6 @@ class ThemeManager {
   ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: ColorResource.primary,
-    cardColor: Colors.white,
     indicatorColor: ColorResource.primary,
     dividerColor: Colors.blueGrey,
     toggleableActiveColor: ColorResource.primary,

@@ -20,4 +20,6 @@ class AppNavigator {
   Future<dynamic> pushNamedAndRemoveUntil(String routeName, {dynamic arguments}) async =>
       await Navigator.pushNamedAndRemoveUntil(_context!, routeName, (Route<dynamic> route) => false,
           arguments: arguments);
+
+  void back({dynamic result}) async => Navigator.pop(_context!, result);
 }

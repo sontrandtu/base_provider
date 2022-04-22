@@ -1,3 +1,8 @@
 {
-  "title": "Tiêu đề"
+  "title": "Tiêu đề",
+  "userName": "Tên tài khoản",
+  "password": "Mật khẩu",
+  "login": "Đăng nhập",
+  "askUsername": "Bạn chưa có tài khoản?",
+  "registerNow": "Đăng ký ngay"
 }

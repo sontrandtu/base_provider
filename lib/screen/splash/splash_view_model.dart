@@ -10,8 +10,8 @@ class SplashViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
-    // await delay(1000);
-    // setStatus(Status.success);
-    // pushReplacementNamed(RoutePath.login);
+    await delay(1000);
+    setStatus(Status.success);
+    appNavigator.pushReplacementNamed(RoutePath.LOGIN);
   }
 }

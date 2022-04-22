@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/core/theme/theme_manager.dart';
+import 'package:achitech_weup/common/core/theme_manager.dart';
 import 'package:achitech_weup/common/extension/app_extension.dart';
 import 'package:achitech_weup/common/resource/app_resource.dart';
 import 'package:easy_localization/easy_localization.dart';

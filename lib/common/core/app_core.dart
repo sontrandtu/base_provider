@@ -9,10 +9,10 @@ export 'sys/base_function.dart';
 
 export 'widget/apbar_comp.dart';
 export 'widget/dropdown_comp.dart';
-export 'widget/error_dialog_comp.dart';
+export 'widget/dialog/error_dialog_comp.dart';
 export 'widget/indicator_comp.dart';
 export 'widget/ink_well_comp.dart';
-export 'widget/base_smart_refresh.dart';
+export 'widget/smart_refresh_comp.dart';
 export 'widget/text_field_comp.dart';
 export 'widget/drop_keyboard.dart';
 export 'widget/scroll_top_comp.dart';

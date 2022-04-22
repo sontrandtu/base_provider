@@ -1,11 +1,12 @@
+
+
 import 'package:achitech_weup/common/core/sys/base_view_model.dart';
-import 'package:achitech_weup/common/helper/app_common.dart';
-import 'package:achitech_weup/common/helper/constant.dart';
-import 'package:flutter/cupertino.dart';
 
 class HomeViewModel extends BaseViewModel {
   String? language;
+  bool _valueSwitch= false;
 
+  get valueSwitch => _valueSwitch;
   @override
   Future<void> initialData() async {
     language = ViewUtils.getLocale()?.languageCode;
@@ -23,6 +24,11 @@ class HomeViewModel extends BaseViewModel {
 
   void setLanguage() {
     language = ViewUtils.getLocale()?.languageCode;
+    notifyListeners();
+  }
+
+  void changeSwitch(bool value) {
+    _valueSwitch = value;
     notifyListeners();
   }
 }

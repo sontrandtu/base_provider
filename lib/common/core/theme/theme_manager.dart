@@ -12,8 +12,7 @@ class ThemeManager {
   ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: ColorResource.primary,
-    indicatorColor: ColorResource.primary,
-    dialogBackgroundColor: Colors.white,
+    indicatorColor: ColorResource.primary,backgroundColor: Colors.white,
     dividerColor: Colors.blueGrey,
     toggleableActiveColor: ColorResource.primary,
     splashColor: ColorResource.colorSplash,

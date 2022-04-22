@@ -1,5 +1,5 @@
 class AppConstant {
-  static const String APP_NAME = 'Flutter WEUP';
+  static const String APP_NAME = 'WEUP APP';
 }
 
 class HttpConstant {

@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:achitech_weup/application.dart';
-import 'package:achitech_weup/common/core/app_core.dart';
-import 'package:achitech_weup/common/core/sys/server_error.dart';
+import 'package:achitecture_weup/application.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/sys/server_error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:retrofit/retrofit.dart';

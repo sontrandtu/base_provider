@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 

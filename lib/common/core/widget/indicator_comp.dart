@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

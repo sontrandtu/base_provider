@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:achitech_weup/common/core/app_core.dart';
-import 'package:achitech_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseState<T extends StatefulWidget, E extends BaseViewModel> extends State<T> {

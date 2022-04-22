@@ -1,5 +1,5 @@
-import 'package:achitech_weup/common/core/sys/base_option_dropdown.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/core/sys/base_option_dropdown.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
 class DropdownComp extends StatelessWidget {

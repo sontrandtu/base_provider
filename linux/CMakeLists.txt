@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "achitech_weup")
-set(APPLICATION_ID "vn.weupgroup.achitech_weup.achitech_weup")
+set(BINARY_NAME "achitecture_weup")
+set(APPLICATION_ID "vn.weupgroup.achitecture_weup.achitecture_weup")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,5 +1,5 @@
-import 'package:achitech_weup/common/core/sys/base_function.dart';
-import 'package:achitech_weup/common/network/service.dart';
+import 'package:achitecture_weup/common/core/sys/base_function.dart';
+import 'package:achitecture_weup/common/network/service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

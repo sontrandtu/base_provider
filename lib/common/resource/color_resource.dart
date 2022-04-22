@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/helper/custom_material_color.dart';
+import 'package:achitecture_weup/common/helper/custom_material_color.dart';
 import 'package:flutter/material.dart';
 
 class ColorResource {

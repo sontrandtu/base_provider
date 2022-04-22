@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:achitech_weup/common/core/sys/base_function.dart';
+import 'package:achitecture_weup/common/core/sys/base_function.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';

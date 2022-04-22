@@ -1,10 +1,10 @@
-import 'package:achitech_weup/common/core/app_core.dart';
-import 'package:achitech_weup/common/core/sys/base_state.dart';
-import 'package:achitech_weup/common/core/widget/button/cupertino_swtich_comp.dart';
-import 'package:achitech_weup/common/extension/app_extension.dart';
-import 'package:achitech_weup/common/helper/key_language.dart';
-import 'package:achitech_weup/main.dart';
-import 'package:achitech_weup/screen/home/home_view_model.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/button/cupertino_swtich_comp.dart';
+import 'package:achitecture_weup/common/extension/app_extension.dart';
+import 'package:achitecture_weup/common/helper/key_language.dart';
+import 'package:achitecture_weup/main.dart';
+import 'package:achitecture_weup/screen/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

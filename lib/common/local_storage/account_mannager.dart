@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/local_storage/hive_storage.dart';
+import 'package:achitecture_weup/common/local_storage/hive_storage.dart';
 
 class AccountManager {
   static final AccountManager _accountManager = AccountManager._internal();

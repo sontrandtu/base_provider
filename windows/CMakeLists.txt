@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(achitech_weup LANGUAGES CXX)
+project(achitecture_weup LANGUAGES CXX)
 
-set(BINARY_NAME "achitech_weup")
+set(BINARY_NAME "achitecture_weup")
 
 cmake_policy(SET CMP0063 NEW)
 

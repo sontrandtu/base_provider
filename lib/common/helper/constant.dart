@@ -1,5 +1,5 @@
 class AppConstant {
-  static const String APP_NAME = 'Flutter WEUP';
+  static const String APP_NAME = 'WEUP APP';
 }
 
 class HttpConstant {
@@ -20,4 +20,9 @@ class LanguageCodeConstant {
 class LanguageCountryConstant {
   static const String VI = 'VN';
   static const String EN = 'US';
+}
+
+class ThemeModeConstant {
+  static const String DARK = 'dark';
+  static const String LIGHT  = 'light';
 }

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:achitech_weup/common/core/sys/base_refresh_controller.dart';
-import 'package:achitech_weup/common/core/theme/theme_manager.dart';
-import 'package:achitech_weup/common/resource/color_resource.dart';
+import 'package:achitecture_weup/common/core/sys/base_refresh_controller.dart';
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/resource/color_resource.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

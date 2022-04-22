@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:achitech_weup/common/core/sys/app_navigator.dart';
-import 'package:achitech_weup/common/resource/enum_resource.dart';
+import 'package:achitecture_weup/common/core/page_manager/app_navigator.dart';
+import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
 class BaseViewModel extends ChangeNotifier {

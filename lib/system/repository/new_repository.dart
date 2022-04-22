@@ -1,6 +1,6 @@
-import 'package:achitech_weup/common/core/app_core.dart';
-import 'package:achitech_weup/common/network/client.dart';
-import 'package:achitech_weup/system/model/post.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/network/client.dart';
+import 'package:achitecture_weup/system/model/post.dart';
 
 class NewRepository extends BaseRepository {
   NewRepository._internal();

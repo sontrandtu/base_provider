@@ -1,3 +1,8 @@
 {
-  "title": "Title"
+  "title": "Title",
+  "userName": "User name",
+  "password": "Password",
+  "login": "Login",
+  "askUsername": "Do you has user name?",
+  "registerNow": "Register now"
 }

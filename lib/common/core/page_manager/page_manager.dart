@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:achitech_weup/common/core/page_manager/route_path.dart';
-import 'package:achitech_weup/common/core/widget/undefined_layout.dart';
-import 'package:achitech_weup/screen/home/home_page.dart';
-import 'package:achitech_weup/screen/login/login_page.dart';
-import 'package:achitech_weup/screen/splash/splash_page.dart';
+import 'package:achitecture_weup/common/core/page_manager/push_page_builder.dart';
+import 'package:achitecture_weup/common/core/page_manager/route_path.dart';
+import 'package:achitecture_weup/common/core/widget/undefined_layout.dart';
+import 'package:achitecture_weup/screen/home/home_page.dart';
+import 'package:achitecture_weup/screen/login/login_page.dart';
+import 'package:achitecture_weup/screen/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,23 +28,5 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   }
   log('Page: $page | RoutePath: ${settings.name} |Args: ${settings.arguments}', name: 'WEUP-APP');
 
-  return PageRouteBuilder(
-      settings: settings,
-      pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
-
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      });
+  return PushPageBuilder.pushPageBuilder(settings, page);
 }

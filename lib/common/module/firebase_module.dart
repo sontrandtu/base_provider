@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:achitech_weup/common/core/sys/base_function.dart';
+import 'package:achitecture_weup/common/core/sys/base_function.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,4 +1,4 @@
-package vn.weupgroup.achitech_weup.achitech_weup
+package vn.weupgroup.achitecture_weup.achitecture_weup
 
 import io.flutter.embedding.android.FlutterActivity
 

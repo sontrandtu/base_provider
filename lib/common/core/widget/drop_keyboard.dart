@@ -1,6 +1,6 @@
-import 'package:achitech_weup/common/core/app_core.dart';
-import 'package:achitech_weup/common/core/sys/base_view_model.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
 class DropKeyboard extends StatelessWidget {

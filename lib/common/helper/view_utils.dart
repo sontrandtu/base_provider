@@ -1,5 +1,5 @@
-import 'package:achitech_weup/application.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/application.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

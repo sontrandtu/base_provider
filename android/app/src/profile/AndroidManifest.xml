@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vn.weupgroup.achitech_weup.achitech_weup">
+    package="vn.weupgroup.achitecture_weup.achitecture_weup">
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

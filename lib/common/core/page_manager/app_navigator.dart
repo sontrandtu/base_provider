@@ -26,4 +26,6 @@ class AppNavigator {
       await Navigator.pushNamedAndRemoveUntil(
           _context!, routeName, (Route<dynamic> route) => false,
           arguments: arguments);
+
+  void back({dynamic result}) async => Navigator.pop(_context!, result);
 }

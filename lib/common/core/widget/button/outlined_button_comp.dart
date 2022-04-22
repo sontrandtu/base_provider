@@ -1,6 +1,6 @@
-import 'package:achitech_weup/common/core/theme/theme_manager.dart';
-import 'package:achitech_weup/common/resource/color_resource.dart';
-import 'package:achitech_weup/common/resource/enum_resource.dart';
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/resource/color_resource.dart';
+import 'package:achitecture_weup/common/resource/enum_resource.dart';
 
 import 'package:flutter/material.dart';
 

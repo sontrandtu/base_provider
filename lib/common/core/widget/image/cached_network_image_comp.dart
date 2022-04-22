@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

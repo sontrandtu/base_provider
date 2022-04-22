@@ -53,7 +53,7 @@ class InkWellComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: backgroundColor,
+      color: backgroundColor ?? Colors.transparent,
       shape: border,
       borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
       child: Container(

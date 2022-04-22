@@ -1,5 +1,6 @@
-import 'package:achitech_weup/common/core/theme/theme_manager.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -92,7 +93,7 @@ class TextFieldComp extends StatefulWidget {
 class _TextFieldCompState extends State<TextFieldComp> {
   final _textFormFieldKey = GlobalKey<FormState>();
   bool obscureText = false;
-  Widget? suffixIcon = SizedBox();
+  Widget? suffixIcon = const SizedBox();
 
   @override
   void initState() {
@@ -100,7 +101,8 @@ class _TextFieldCompState extends State<TextFieldComp> {
     suffixIcon = widget.suffixIcon;
     if (widget.isInvisiblePassword!) {
       obscureText = true;
-      suffixIcon = InkWell(onTap: _changeObscure, child: const Icon(Icons.remove_red_eye,size: 24,));
+      suffixIcon =  InkWellComp(
+          isTransparent: true,onTap: _changeObscure, child: const Icon(Icons.remove_red_eye,size: 24,));
     }
   }
 
@@ -140,7 +142,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
   InputDecoration inputDecoration() => InputDecoration(
         errorStyle: appStyle.textTheme.bodyText2?.apply(color: Colors.red),
         filled: true,
-        fillColor: widget.fillColor ?? Colors.white,
+        fillColor: widget.fillColor,
         labelText: widget.label ?? widget.hint,
         labelStyle: widget.labelStyle,
         alignLabelWithHint: true,
@@ -214,7 +216,8 @@ class _TextFieldCompState extends State<TextFieldComp> {
   void _changeObscure() {
     obscureText = !obscureText;
 
-    suffixIcon = InkWell(
+    suffixIcon = InkWellComp(
+      isTransparent: true,
         onTap: _changeObscure, child: Icon(obscureText ? Icons.remove_red_eye : Icons.visibility_off,size: 24,));
     setState(() {});
   }

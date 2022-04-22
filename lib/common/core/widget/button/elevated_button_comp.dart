@@ -1,5 +1,5 @@
-import 'package:achitech_weup/common/core/theme/theme_manager.dart';
-import 'package:achitech_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
 class ElevatedButtonComp extends StatelessWidget {
@@ -40,7 +40,7 @@ class ElevatedButtonComp extends StatelessWidget {
         child: child ??
             Text(title ?? '',
                 style: style ??
-                    appStyle.textTheme.headline4),
+                    appStyle.textTheme.headline4?.apply(color: Colors.white)),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
               padding: padding ?? const EdgeInsets.symmetric(vertical: 8),

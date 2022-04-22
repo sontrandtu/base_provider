@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "vn.weupgroup.achitech_weup" "\0"
-            VALUE "FileDescription", "achitech_weup" "\0"
+            VALUE "CompanyName", "vn.weupgroup.achitecture_weup" "\0"
+            VALUE "FileDescription", "achitecture_weup" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "achitech_weup" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 vn.weupgroup.achitech_weup. All rights reserved." "\0"
-            VALUE "OriginalFilename", "achitech_weup.exe" "\0"
-            VALUE "ProductName", "achitech_weup" "\0"
+            VALUE "InternalName", "achitecture_weup" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 vn.weupgroup.achitecture_weup. All rights reserved." "\0"
+            VALUE "OriginalFilename", "achitecture_weup.exe" "\0"
+            VALUE "ProductName", "achitecture_weup" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

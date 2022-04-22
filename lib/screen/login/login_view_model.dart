@@ -16,12 +16,12 @@ class LoginViewModel extends BaseViewModel {
   void login() async {
     setStatus(Status.loading);
     await delay(2000);
-    pushReplacementNamed(RoutePath.home);
+    appNavigator.pushReplacementNamed(RoutePath.HOME);
     setStatus(Status.success);
   }
 
   void register() {
-    dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
+    appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
   }
 
   String? validator(String s, index) {

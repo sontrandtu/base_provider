@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:achitech_weup/common/core/sys/app_navigator.dart';
 import 'package:achitech_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +11,19 @@ class BaseViewModel extends ChangeNotifier {
 
   BuildContext? _context;
 
+  AppNavigator? _appNavigator = AppNavigator();
+
+  AppNavigator get appNavigator => _appNavigator!;
+
   Status get status => _status;
 
-  BuildContext get context => _context!;
+  // BuildContext get context => _context!;
 
   String? get currentRoute => _settings?.name;
 
   Future<bool> get isConnecting async => await getConnection();
+
+  //-----------------------------------------------------
 
   dynamic getArguments() => _settings?.arguments;
 
@@ -26,10 +33,11 @@ class BaseViewModel extends ChangeNotifier {
 
   void onViewCreated() {}
 
-  void onDispose() {}
+  void onDispose() {
+    _appNavigator = null;
+  }
 
-  Future<void> delay(int millis) async =>
-      await Future.delayed(Duration(milliseconds: millis));
+  Future<void> delay(int millis) async => await Future.delayed(Duration(milliseconds: millis));
 
   Future<bool> getConnection() async {
     try {
@@ -48,28 +56,10 @@ class BaseViewModel extends ChangeNotifier {
 
   void setRouteSetting(RouteSettings? rs) => _settings = rs;
 
-  void setBuildContext(BuildContext? ctx) => _context = ctx;
-
-  Future<dynamic> dialog(Widget dialog, {dynamic arguments}) async =>
-      await showDialog(
-          context: context,
-          builder: (context) => dialog,
-          barrierDismissible: false,
-          routeSettings: RouteSettings(arguments: arguments));
-
-  Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushNamed(context, routeName, arguments: arguments);
-
-  Future<dynamic> pushReplacementNamed(String routeName,
-          {dynamic arguments}) async =>
-      await Navigator.pushReplacementNamed(context, routeName,
-          arguments: arguments);
-
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
-          {dynamic arguments}) async =>
-      await Navigator.pushNamedAndRemoveUntil(
-          context, routeName, (Route<dynamic> route) => false,
-          arguments: arguments);
+  void setBuildContext(BuildContext? ctx) {
+    _context = ctx;
+    _appNavigator?.setBuildContext(ctx);
+  }
 
   bool checkNull(dynamic value) {
     if (value != null) return false;

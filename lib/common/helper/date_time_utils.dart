@@ -1,4 +1,4 @@
-import 'package:achitech_weup/common/core/base_function.dart';
+import 'package:achitech_weup/common/core/sys/base_function.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {
@@ -36,7 +36,9 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
-  }static DateTime? intParse(int data) {
+  }
+
+  static DateTime? intParse(int data) {
     try {
       return DateTime.fromMillisecondsSinceEpoch(data * 1000);
     } catch (exception) {

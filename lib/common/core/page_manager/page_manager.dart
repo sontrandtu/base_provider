@@ -12,13 +12,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   Widget page;
 
   switch (settings.name) {
-    case RoutePath.initial:
+    case RoutePath.INITIAL:
       page = const SplashPage();
       break;
-    case RoutePath.login:
+    case RoutePath.LOGIN:
       page = const LoginPage();
       break;
-    case RoutePath.home:
+    case RoutePath.HOME:
       page = const HomePage();
       break;
     default:

@@ -1,9 +1,7 @@
-import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/system/model/post.dart';
-import 'package:flutter/cupertino.dart';
 
 class SplashViewModel extends BaseViewModel {
   List<Post> posts = [];

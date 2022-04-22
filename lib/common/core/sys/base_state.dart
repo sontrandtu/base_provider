@@ -49,8 +49,10 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
   @override
   void dispose() {
-    log('$VM was closed', name: 'WEUP-APP');
+
+    viewModel.onDispose();
     _viewModel = null;
+    log('$VM was closed', name: 'WEUP-APP');
     super.dispose();
   }
 }

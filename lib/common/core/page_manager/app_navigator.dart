@@ -1,3 +1,4 @@
+import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigator {
@@ -5,13 +6,28 @@ class AppNavigator {
 
   void setBuildContext(BuildContext? ctx) => _context = ctx;
 
-  Future<dynamic> dialog(Widget dialog,
-          {dynamic arguments, bool? barrierDismissible}) async =>
+  Future<dynamic> dialog(
+    Widget dialog, {
+    dynamic arguments,
+    bool? barrierDismissible,
+  }) async =>
       await showDialog(
-          context: _context!,
-          builder: (context) => dialog,
-          barrierDismissible: barrierDismissible ?? false,
-          routeSettings: RouteSettings(arguments: arguments));
+        context: _context!,
+        builder: (context) => dialog,
+        barrierDismissible: barrierDismissible ?? false,
+        routeSettings: RouteSettings(arguments: arguments),
+      );
+
+  Future<dynamic> bottomSheetDialog(
+    Widget dialog, {
+    dynamic arguments,
+  }) async =>
+      await showModalBottomSheet(
+        context: _context!,
+        builder: (context) => dialog,
+        routeSettings: RouteSettings(arguments: arguments),
+
+      );
 
   Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async =>
       await Navigator.pushNamed(_context!, routeName, arguments: arguments);

@@ -9,11 +9,11 @@ class CachedNetworkImageComp extends StatelessWidget {
   final String url;
   final String borderStyle;
   final Widget? widgetPlaceHolder, widgetError;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final double borderWidth;
   final Color borderColor;
   final String? resourceErrorImage;
-  final BorderRadius? borderRadius;
+  final double? borderRadius;
   final int? placeholderDuration;
 
   const CachedNetworkImageComp({
@@ -23,7 +23,7 @@ class CachedNetworkImageComp extends StatelessWidget {
     required this.height,
     this.borderStyle = 'all',
     this.widgetPlaceHolder,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor,
     this.borderWidth = 0,
     this.borderColor = Colors.transparent,
     this.resourceErrorImage,
@@ -35,17 +35,17 @@ class CachedNetworkImageComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(0),
+      borderRadius: BorderRadius.circular(borderRadius ?? 0),
       child: CachedNetworkImage(
-        fadeOutDuration: Duration(microseconds: placeholderDuration ?? 300),
-        fadeInDuration: Duration(microseconds: placeholderDuration ?? 300),
+        // fadeOutDuration: Duration(microseconds: placeholderDuration ?? 600),
+        // fadeInDuration: Duration(microseconds: placeholderDuration ?? 300),
         imageUrl: url,
         placeholder: (_, __) {
           return Container(
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: backgroundColor,
+              color: backgroundColor ?? ColorResource.primarySwatch,
               border: Border.all(width: borderWidth, color: borderColor),
             ),
             child: widgetPlaceHolder,

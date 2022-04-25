@@ -17,6 +17,7 @@ dependencies:
   #c
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.0
+  carousel_slider: ^4.1.1
 
   #d
   dotted_decoration: ^2.0.0
@@ -38,18 +39,22 @@ dependencies:
 
   #i
   intl: ^0.17.0
+  image_picker: ^0.8.5
 
   #p
   pull_to_refresh: ^2.0.0
   pretty_dio_logger: ^1.1.1
   provider: ^6.0.0
   path_provider: ^2.0.9
+  permission_handler: ^8.3.0
 
   #r
   retrofit: 3.0.1
 
   #s
   syncfusion_flutter_datepicker: ^20.1.50
+  share_plus: ^4.0.4
+  smooth_page_indicator: ^1.0.0+2
 
   #u
   url_launcher: ^6.0.20

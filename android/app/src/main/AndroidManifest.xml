@@ -2,7 +2,10 @@
     package="vn.weupgroup.achitecture_weup.achitecture_weup">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-   <application
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
 
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"

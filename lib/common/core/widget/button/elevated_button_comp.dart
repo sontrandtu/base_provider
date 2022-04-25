@@ -14,6 +14,7 @@ class ElevatedButtonComp extends StatelessWidget {
   final double? heightValue;
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
+  final double? elevation;
 
   const ElevatedButtonComp({
     Key? key,
@@ -28,6 +29,7 @@ class ElevatedButtonComp extends StatelessWidget {
     this.primaryColor,
     this.widthValue,
     this.heightValue,
+    this.elevation,
   }) : super(key: key);
 
   @override
@@ -43,12 +45,14 @@ class ElevatedButtonComp extends StatelessWidget {
                     appStyle.textTheme.headline4?.apply(color: Colors.white)),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
-              padding: padding ?? const EdgeInsets.symmetric(vertical: 8),
+              padding: padding ??
+                  const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               primary: (primaryColor ?? ColorResource.primarySwatchMaterial)
                   .withOpacity(status == Status.waiting ? 0.5 : 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),
+              elevation: elevation,
             ),
       ),
     );

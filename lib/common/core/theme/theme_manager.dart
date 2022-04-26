@@ -48,7 +48,7 @@ class ThemeManager {
           color: ColorResource.textBody,
           fontSize: 16),
       bodyText2: TextStyle(
-          fontWeight: FontWeight.w400, color: Colors.red, fontSize: 14),
+          fontWeight: FontWeight.w400, color: ColorResource.textBody, fontSize: 14),
     ),
   );
 

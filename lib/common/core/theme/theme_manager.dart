@@ -107,6 +107,7 @@ class ThemeManager {
       bodyText2: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 14),
+
     ),
   );
 }

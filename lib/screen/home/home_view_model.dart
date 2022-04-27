@@ -1,6 +1,13 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:flutter/material.dart';
+
+class HomeArgs{
+  String admin= 'admin';
+
+}
 
 class HomeViewModel extends BaseViewModel {
   String? language;
@@ -11,6 +18,10 @@ class HomeViewModel extends BaseViewModel {
   String radioValue3 = 'c';
   String radioValue4 = 'd';
   String groupRadio = 'e';
+
+  bool val_1 = false;
+  bool val_2 = false;
+  bool val_3 = false;
 
   get valueSwitch => _valueSwitch;
 
@@ -37,11 +48,26 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void changeSwitch(bool? value) {
-    _valueSwitch = value ?? false;
+    _valueSwitch = value?? false;
     notifyListeners();
   }
 
-  void changeRadio(String? value)  {
+  void changeSwitch1(bool value) {
+    val_1 = value;
+    notifyListeners();
+  }
+
+  void changeSwitch2(bool value) {
+    val_2 = value;
+    notifyListeners();
+  }
+
+  void changeSwitch3(bool value) {
+    val_3 = value;
+    notifyListeners();
+  }
+
+  void changeRadio(String? value) {
     groupRadio = value ?? 'c';
     update();
   }

@@ -8,6 +8,9 @@ class RadioCustomComp<T> extends StatelessWidget {
   final Function(T? value) onChanged;
   final Widget widgetDefault, widgetSelected;
   final AnimatedSwitcherTransitionBuilder? transitionBuilder;
+  final double scaleEnd;
+  final double scaleBegin;
+  final int duration;
 
   RadioCustomComp({
     Key? key,
@@ -17,6 +20,9 @@ class RadioCustomComp<T> extends StatelessWidget {
     required this.widgetDefault,
     required this.widgetSelected,
     this.transitionBuilder,
+    this.scaleEnd = 1,
+    this.scaleBegin = 3.5,
+    this.duration = 300,
   }) : super(key: key);
 
   @override
@@ -24,14 +30,27 @@ class RadioCustomComp<T> extends StatelessWidget {
     return InkWellComp(
       isTransparent: true,
       paddingAll: 0,
-      onTap: () => onChanged(value),
+      onTap: () {
+        if (groupValue != value) {
+          onChanged(value);
+        }
+      },
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
+        duration:  Duration(milliseconds:  duration ),
+        reverseDuration: const Duration(microseconds: 500),
         transitionBuilder: transitionBuilder ??
-            (child, anim) => child.key == const ValueKey('widgetDefault')
+            (child, anim) => child.key == const ValueKey('widgetSelected')
                 ? ScaleTransition(
-                    scale: anim,
-                    child: child,
+                    scale: Tween<double>(begin: scaleBegin, end: scaleEnd).animate(anim),
+                    child: scaleEnd == 1
+                        ? ScaleTransition(
+                            scale: anim,
+                            child: child,
+                          )
+                        : FadeTransition(
+                            opacity: anim,
+                            child: child,
+                          ),
                   )
                 : FadeTransition(
                     opacity: anim,
@@ -39,12 +58,12 @@ class RadioCustomComp<T> extends StatelessWidget {
                   ),
         child: groupValue == value
             ? Container(
-                key: const ValueKey('widgetDefault'),
-                child: widgetDefault,
-              )
-            : Container(
                 key: const ValueKey('widgetSelected'),
                 child: widgetSelected,
+              )
+            : Container(
+                key: const ValueKey('widgetDefault'),
+                child: widgetDefault,
               ),
       ),
     );

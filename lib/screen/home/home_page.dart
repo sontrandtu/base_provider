@@ -3,8 +3,11 @@ import 'dart:io';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/bottombar/bottom_bar_fab_comp.dart';
+import 'package:achitecture_weup/common/core/widget/button/animated_button_comp.dart';
 import 'package:achitecture_weup/common/core/widget/button/cupertino_swtich_comp.dart';
 import 'package:achitecture_weup/common/core/widget/check_box/check_box_comp.dart';
+import 'package:achitecture_weup/common/core/widget/check_box/check_box_custom_comp.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/cupertino_picker.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/date_picker_custom_dialog.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/pick_img_bottomsheet_dialog.dart';
@@ -34,6 +37,9 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   String radioValue1 = 'a';
   String radioValue2 = 'b';
   String groupRadio = 'e';
+  PositionAnimatedButton positionButton = PositionAnimatedButton(
+    child: Text('abc'),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +54,9 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // const SliderComp(images: [
-                  //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/11198281229096493_456282371.jpg',
+                  //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
-                  //   'https://www.tapchikientruc.com.vn/wp-content/uploads/2017/12/17B12014-tckt.vn-02.jpg'
+                  //   'https://www.tapchikientruc.com.vn/wp-content/uploads/2017/8/17B8014-tckt.vn-02.jpg'
                   // ]),
                   // Text(
                   //   KeyLanguage.title.tl,
@@ -131,20 +137,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     onChanged: value.changeRadio,
                     widgetDefault: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.blue,
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    widgetSelected: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         color: Colors.grey.withOpacity(0.5),
                       ),
                       child: const Padding(
@@ -155,6 +148,19 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                         ),
                       ),
                     ),
+                    widgetSelected: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.blue,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.male_rounded,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                   RadioCustomComp<String>(
                     value: value.radioValue2,
@@ -162,20 +168,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     onChanged: value.changeRadio,
                     widgetDefault: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.pinkAccent,
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.female_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    widgetSelected: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         color: Colors.grey.withOpacity(0.5),
                       ),
                       child: const Padding(
@@ -186,7 +179,146 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                         ),
                       ),
                     ),
+                    widgetSelected: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.pinkAccent,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.female_rounded,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
+                  Wrap(
+                    children: [
+                      CheckBoxCustomComp(
+                        value: value.val_1,
+                        onChanged: value.changeSwitch1,
+                        widgetDefault: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Tennis',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                            ),
+                          ),
+                        ),
+                        widgetSelected: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: ColorResource.primarySwatch),
+                            color: ColorResource.primarySwatch,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Tennis',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      CheckBoxCustomComp(
+                        value: value.val_2,
+                        onChanged: value.changeSwitch2,
+                        widgetDefault: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Base Ball',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                            ),
+                          ),
+                        ),
+                        widgetSelected: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: ColorResource.primarySwatch),
+                            color: ColorResource.primarySwatch,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Base Ball',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      CheckBoxCustomComp(
+                        value: value.val_3,
+                        onChanged: value.changeSwitch3,
+                        widgetDefault: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Swim',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                            ),
+                          ),
+                        ),
+                        widgetSelected: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: ColorResource.primarySwatch),
+                            color: ColorResource.primarySwatch,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              'Swim',
+                              style: appStyle.textTheme.bodyText2!
+                                  .apply(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(height: 100, child: BottomBarFabComp()),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  AnimatedButton(
+                      onPressed: () {
+                        setState(() {
+                          log('OKJOKO');
+                        });
+                      },
+                      bodyAnimated:positionButton),
                 ],
               ),
             ),

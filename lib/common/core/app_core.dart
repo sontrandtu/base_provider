@@ -24,6 +24,7 @@ export 'widget/base_responsive.dart';
 
 ///C
 export 'widget/check_box/check_box_comp.dart';
+export 'widget/check_box/check_box_custom_comp.dart';
 
 ///D
 export 'widget/dropdown_comp.dart';

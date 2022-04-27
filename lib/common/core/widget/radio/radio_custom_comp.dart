@@ -8,6 +8,7 @@ class RadioCustomComp<T> extends StatelessWidget {
   final Function(T? value) onChanged;
   final Widget widgetDefault, widgetSelected;
   final AnimatedSwitcherTransitionBuilder? transitionBuilder;
+  final double? scaleEnd;
 
   RadioCustomComp({
     Key? key,
@@ -17,6 +18,7 @@ class RadioCustomComp<T> extends StatelessWidget {
     required this.widgetDefault,
     required this.widgetSelected,
     this.transitionBuilder,
+    this.scaleEnd,
   }) : super(key: key);
 
   @override
@@ -28,10 +30,14 @@ class RadioCustomComp<T> extends StatelessWidget {
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 250),
         transitionBuilder: transitionBuilder ??
-            (child, anim) => child.key == const ValueKey('widgetDefault')
+            (child, anim) => child.key == const ValueKey('widgetSelected')
                 ? ScaleTransition(
-                    scale: anim,
-                    child: child,
+                    scale: Tween<double>(begin: 1, end: scaleEnd ?? 1)
+                        .animate(anim),
+                    child: ScaleTransition(
+                      scale: anim,
+                      child: child,
+                    ),
                   )
                 : FadeTransition(
                     opacity: anim,
@@ -39,12 +45,12 @@ class RadioCustomComp<T> extends StatelessWidget {
                   ),
         child: groupValue == value
             ? Container(
-                key: const ValueKey('widgetDefault'),
-                child: widgetDefault,
-              )
-            : Container(
                 key: const ValueKey('widgetSelected'),
                 child: widgetSelected,
+              )
+            : Container(
+                key: const ValueKey('widgetDefault'),
+                child: widgetDefault,
               ),
       ),
     );

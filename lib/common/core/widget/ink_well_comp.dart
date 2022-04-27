@@ -69,7 +69,7 @@ class InkWellComp extends StatelessWidget {
           highlightColor: isTransparent! ? Colors.transparent : null,
           onTap: onTap,
           borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
-          child: Container(
+          child:  Container(
             padding: padding ?? EdgeInsets.all(paddingAll ?? 8),
             child: child ??
                 Text(

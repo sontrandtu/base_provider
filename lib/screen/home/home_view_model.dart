@@ -1,12 +1,13 @@
 import 'dart:developer';
 
+import 'package:achitecture_weup/common/core/model_base/option_multiple_select.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
+import 'package:achitecture_weup/screen/home/home_page.dart';
 import 'package:flutter/material.dart';
 
-class HomeArgs{
-  String admin= 'admin';
-
+class HomeArgs {
+  String admin = 'admin';
 }
 
 class HomeViewModel extends BaseViewModel {
@@ -25,8 +26,14 @@ class HomeViewModel extends BaseViewModel {
 
   get valueSwitch => _valueSwitch;
 
+  List<A> listA = [];
+  List<A> listASelected = [];
+  List<OptionMultipleSelect<A>> listMultipleData = [];
+
   @override
   Future<void> initialData() async {
+    initData();
+
     language = ViewUtils.getLocale()?.languageCode;
   }
 
@@ -48,7 +55,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void changeSwitch(bool? value) {
-    _valueSwitch = value?? false;
+    _valueSwitch = value ?? false;
     notifyListeners();
   }
 
@@ -70,5 +77,24 @@ class HomeViewModel extends BaseViewModel {
   void changeRadio(String? value) {
     groupRadio = value ?? 'c';
     update();
+  }
+
+  void initData() {
+    for (int i = 1; i <= 10; i++) {
+      listA.add(A(hovaTen: 'Number $i', tuoi: i));
+    }
+
+    for (var element in listA) {
+      listMultipleData.add(
+          OptionMultipleSelect<A>(title: element.hovaTen ?? '', data: element));
+    }
+  }
+
+  void onChangeMultiple(List<OptionMultipleSelect<A>> listValue) {
+    for (var element in listValue) {
+      listASelected.add(element.data);
+    }
+
+    log('LENGHT ${listASelected.length}');
   }
 }

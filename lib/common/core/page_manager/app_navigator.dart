@@ -26,7 +26,6 @@ class AppNavigator {
         context: _context!,
         builder: (context) => dialog,
         routeSettings: RouteSettings(arguments: arguments),
-
       );
 
   Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async =>

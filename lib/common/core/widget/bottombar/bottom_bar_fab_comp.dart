@@ -45,8 +45,9 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
           height: 60,
           width: 60,
           child: FloatingActionButton(
+            backgroundColor: ColorResource.primarySwatch,
             onPressed: null,
-            child: Icon(Icons.add), //icon inside button
+            child: Icon(Icons.add,color: Colors.white,), //icon inside button
           ),
         ),
       ),

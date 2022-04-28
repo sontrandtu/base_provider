@@ -48,6 +48,7 @@ class TextButtonComp extends StatelessWidget {
               padding: padding ??
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               primary: primaryColor,
+              textStyle : style ?? appStyle.textTheme.headline4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

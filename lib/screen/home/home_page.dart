@@ -1,16 +1,13 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/bottombar/bottom_bar_fab_comp.dart';
-import 'package:achitecture_weup/common/core/widget/button/position_ani_button_comp.dart';
-import 'package:achitecture_weup/common/core/widget/button/scale_ani_button_comp.dart';
-import 'package:achitecture_weup/common/core/widget/check_box/check_box_comp.dart';
-import 'package:achitecture_weup/common/core/widget/check_box/check_box_custom_comp.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:overflow_view/overflow_view.dart';
 import 'package:provider/provider.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,6 +30,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   }
 
   final jobRoleCtrl = TextEditingController();
+  String urlImage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +45,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  StorageImageComp(url: urlImage, width: 100, height: 100),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -64,10 +63,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   //   title: 'Back',
                   //   onPressed: () => value.appNavigator.back(),
                   // ),
-                  // TextButtonComp(
-                  //   title: 'Change Theme',
-                  //   onPressed: () => themeViewModel.toggleMode(),
-                  // ),
+                  TextButtonComp(
+                    title: 'Change Theme',
+                    onPressed: () => themeViewModel.toggleMode(),
+                  ),
                   // ElevatedButtonComp(
                   //   title: 'Date Picker',
                   //   onPressed: () async {
@@ -96,20 +95,20 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   //     //log("Result Time $a");
                   //   },
                   // ),
-                  // ElevatedButtonComp(
-                  //   title: 'Time Picker Material',
-                  //   onPressed: () async {
-                  //     DateTime? a =
-                  //         await viewModel.appNavigator.bottomSheetDialog(
-                  //       const CupertinoPickerDialog(),
-                  //     );
-                  //     log("Result Time $a");
-                  //   },
-                  // ),
-                  // ElevatedButtonComp(
-                  //   title: 'Change language',
-                  //   onPressed: viewModel.changLanguage,
-                  // ),
+                  ElevatedButtonComp(
+                    title: 'Time Picker Material',
+                    onPressed: () async {
+                      DateTime? a =
+                          await viewModel.appNavigator.bottomSheetDialog(
+                        const CupertinoPickerDialog(),
+                      );
+                      log("Result Time $a");
+                    },
+                  ),
+                  ElevatedButtonComp(
+                    title: 'Change language',
+                    onPressed: viewModel.changLanguage,
+                  ),
 
                   CheckBoxComp(
                     value: value.valueSwitch,
@@ -300,7 +299,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     height: 16,
                   ),
                   PositionAniButtonComp(
-                    onPressed: () {},
+                    onPressed: () {
+                      viewModel.appNavigator
+                          .bottomSheetDialog(const PickImgBottomSheetDialog());
+                    },
                     child: const Text(
                       'Simple button',
                       style: TextStyle(
@@ -314,7 +316,11 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     height: 16,
                   ),
                   ScaleAniButtonComp(
-                    onPressed: () {},
+                    onPressed: () async {
+                      urlImage = await viewModel.appNavigator
+                          .bottomSheetDialog(const PickImgBottomSheetDialog());
+                      setState(() {});
+                    },
                     child: const Text(
                       'Simple button',
                       style: TextStyle(
@@ -324,42 +330,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButtonComp(
-                    title: 'Image Picker',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    padding: EdgeInsets.all(16),
-                    borderRadius: 16,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(
-                    height: 108,
-                  ),
 
-                  OverflowView(
-                    direction: Axis.horizontal,
-                    spacing: 4,
-                    children: <Widget>[
-                      for (int i = 0; i < 10; i++)
-                        Container(
-                          width: 50,
-                          height: 50,
-                          color: Colors.red,
-                        )
-                    ],
-                    builder: (context, remaining) {
-                      return Text('... $remaining');
-                    },
-                  ),
-
-                  const SizedBox(
-                    height: 108,
+                  MultipleSelectComp<A>(
+                    onChange: value.onChangeMultiple,
+                    listItems: value.listMultipleData,
                   ),
                 ],
               ),
@@ -372,4 +346,11 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
 
   @override
   void initViewModel() => viewModel = HomeViewModel();
+}
+
+class A {
+  String? hovaTen;
+  int? tuoi;
+
+  A({this.hovaTen, this.tuoi});
 }

@@ -1,4 +1,4 @@
-import 'package:achitecture_weup/common/core/sys/base_option_dropdown.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class DropdownComp extends StatelessWidget {
   final Widget? prefixIcon;
   final String? currentValue, hint, error, label;
   final int? index;
-  final List<BaseOptionDropdown>? listItems;
+  final List<BaseOptionDropdown> listItems;
   final OutlineInputBorder? enabledBorder;
   final OutlineInputBorder? focusedBorder;
   final OutlineInputBorder? errorBorder;
@@ -15,6 +15,7 @@ class DropdownComp extends StatelessWidget {
   final double? borderRadius;
   final Function? onValidator;
   final Function? onTapCallBack;
+  final Function(dynamic value) onChange;
   final TextStyle? hintStyle;
   final TextStyle? selectionStyle;
   final TextStyle? selectedStyle;
@@ -34,11 +35,12 @@ class DropdownComp extends StatelessWidget {
 
   DropdownComp({
     Key? key,
+    required this.onChange,
+    required this.listItems,
     this.prefixIcon,
     this.currentValue,
     this.hint,
     this.index,
-    this.listItems,
     this.borderRadius,
     this.onTapCallBack,
     this.errorBorder,
@@ -68,7 +70,7 @@ class DropdownComp extends StatelessWidget {
     return Material(
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () => (listItems?.length ?? -1) > 0
+        onTap: () => listItems.isNotEmpty
             ? openDropdownAnyWhere()
             : FocusScope.of(context).unfocus(),
         child: Focus(
@@ -94,13 +96,14 @@ class DropdownComp extends StatelessWidget {
                 isDense: false,
                 onTap: () => FocusScope.of(context).unfocus(),
                 onChanged: (value) {
-                  if (_dropdownFormFieldKey.currentState != null) {
-                    if (_dropdownFormFieldKey.currentState!.validate()) {
-                      _dropdownFormFieldKey.currentState!.save();
-                    }
-                  }
+                  // if (_dropdownFormFieldKey.currentState != null) {
+                  //   if (_dropdownFormFieldKey.currentState!.validate()) {
+                  //     _dropdownFormFieldKey.currentState!.save();
+                  //   }
+                  // }
+                  onChange(value);
                 },
-                items: listItems!.map((value) {
+                items: listItems.map((value) {
                   return DropdownMenuItem(
                     onTap: () {
                       FocusScope.of(context).unfocus();
@@ -113,7 +116,7 @@ class DropdownComp extends StatelessWidget {
                     ),
                   );
                 }).toList(),
-                selectedItemBuilder: (context) => listItems!
+                selectedItemBuilder: (context) => listItems
                     .map(
                       (value) => Align(
                         alignment: Alignment.centerLeft,
@@ -167,8 +170,7 @@ class DropdownComp extends StatelessWidget {
             focusedBorder: isBorder!
                 ? focusedBorder ??
                     OutlineInputBorder(
-                      borderSide:
-                           BorderSide(width: 1, color: Colors.grey),
+                      borderSide: BorderSide(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.all(
                         Radius.circular(borderRadius ?? 8),
                       ),

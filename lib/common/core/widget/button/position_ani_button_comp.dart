@@ -1,8 +1,7 @@
-import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
 class PositionAniButtonComp extends StatefulWidget {
-  final Function() onPressed;
+  final GestureTapCallback onPressed;
   final bool enabled;
   final Widget child;
   final Color color;
@@ -18,10 +17,10 @@ class PositionAniButtonComp extends StatefulWidget {
     required this.onPressed,
     this.enabled = true,
     this.color = Colors.blue,
-    this.height = 80,
+    this.height = 60,
     this.width = 160,
     this.shadowDegree = ShadowDegree.light,
-    this.duration = 100,
+    this.duration = 70,
     this.borderRadius = 16,
   }) : super(key: key);
 
@@ -36,20 +35,21 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp> {
     setState(() {
       tap = true;
     });
-    widget.onPressed;
   }
 
   void _unPressedOnTapUp(_) => _unPressed();
 
-  void _unPressed() {
+  Future<void> _unPressed() async {
     setState(() {
       tap = false;
     });
+    await Future.delayed(const Duration(milliseconds: 50));
+    widget.onPressed();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height=widget.height - 4;
+    double height = widget.height - 4;
     return GestureDetector(
       child: SizedBox(
         width: widget.width,

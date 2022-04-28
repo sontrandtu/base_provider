@@ -1,8 +1,8 @@
-import 'package:dotted_decoration/dotted_decoration.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:flutter/material.dart';
 
 class ScaleAniButtonComp extends StatefulWidget {
-  final Function() onPressed;
+  final GestureTapCallback onPressed;
   final bool enabled;
   final Widget child;
   final Color color;
@@ -11,6 +11,7 @@ class ScaleAniButtonComp extends StatefulWidget {
   final double elevation;
   final EdgeInsetsGeometry? padding;
   final bool isElevation;
+  final double scaleBegin, scaleEnd;
 
   const ScaleAniButtonComp({
     Key? key,
@@ -18,10 +19,13 @@ class ScaleAniButtonComp extends StatefulWidget {
     required this.onPressed,
     this.enabled = true,
     this.color = Colors.blue,
-    this.duration = 100,
+    this.duration = 70,
     this.borderRadius = 16,
     this.elevation = 4,
-    this.padding, this.isElevation=true,
+    this.padding,
+    this.isElevation = true,
+    this.scaleBegin = 0.8,
+    this.scaleEnd = 1,
   }) : super(key: key);
 
   @override
@@ -35,36 +39,39 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp> {
     setState(() {
       tap = true;
     });
-    widget.onPressed;
   }
 
   void _unPressedOnTapUp(_) => _unPressed();
 
-  void _unPressed() {
+  Future<void> _unPressed()  async {
     setState(() {
       tap = false;
     });
+    await Future.delayed(const Duration(milliseconds: 70));
+    widget.onPressed();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: AnimatedScale(
-        scale: tap ? 0.8 : 1,
+        curve:Curves.easeIn,
+        scale: tap ? widget.scaleBegin : widget.scaleEnd,
         duration: Duration(milliseconds: widget.duration),
         child: Container(
           padding: widget.padding ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: widget.color,
             borderRadius: BorderRadius.circular(widget.borderRadius),
-            boxShadow: widget.isElevation ? [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ] : null,
+            boxShadow: widget.isElevation
+                ? [
+                    BoxShadow(
+                      color: appStyle.shadowColor.withOpacity(0.4),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : null,
           ),
           child: widget.child,
         ),

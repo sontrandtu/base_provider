@@ -4,5 +4,12 @@
   "password": "Mật khẩu",
   "login": "Đăng nhập",
   "askUsername": "Bạn chưa có tài khoản?",
-  "registerNow": "Đăng ký ngay"
+  "registerNow": "Đăng ký ngay",
+  "cancel": "Hủy",
+  "confirm": "Xác nhận",
+  "camera": "Máy ảnh",
+  "imageGallery": "Thư viện",
+  "questionCamera":"Ứng dụng cần quyền truy cập vào máy ảnh",
+  "questionImageGallery": "Ứng dụng cần quyền truy cập vào thư viện ảnh",
+  "setting": "Cài đặt"
 }

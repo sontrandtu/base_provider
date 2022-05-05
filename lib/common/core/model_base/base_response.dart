@@ -1,6 +1,6 @@
-class BaseResponse {
+class BaseResponse <T>{
   String? version;
-  dynamic data;
+  T? data;
   String? errorMsg;
   int? error;
 

@@ -4,7 +4,8 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
+abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
+    extends State<T> {
   VM? _viewModel;
   double _width = 0;
   double _height = 0;
@@ -49,7 +50,6 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
   @override
   void dispose() {
-
     viewModel.onDispose();
     _viewModel = null;
     log('$VM was closed', name: 'WEUP-APP');

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/page_manager/app_navigator.dart';
-import 'package:achitecture_weup/common/core/sys/api_response.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';

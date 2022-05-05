@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:achitecture_weup/common/core/sys/base_function.dart';
 
 const int largeScreenSize = 1366;
 const int mediumScreenSize = 768;

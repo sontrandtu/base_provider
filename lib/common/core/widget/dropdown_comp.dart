@@ -143,7 +143,7 @@ class DropdownComp extends StatelessWidget {
             hintText: hint,
             errorText: error,
             label: label != null ? Text(label ?? '') : null,
-            labelStyle: TextStyle(color: ColorResource.primary),
+            labelStyle: const TextStyle(color: ColorResource.primary),
             suffixIcon: suffixIcon,
             suffixIconConstraints: BoxConstraints(
               minWidth: paddingSuffixIcon ?? 36,
@@ -170,7 +170,7 @@ class DropdownComp extends StatelessWidget {
             focusedBorder: isBorder!
                 ? focusedBorder ??
                     OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Colors.grey),
+                      borderSide: const BorderSide(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.all(
                         Radius.circular(borderRadius ?? 8),
                       ),
@@ -205,7 +205,7 @@ class DropdownComp extends StatelessWidget {
     GestureDetector? detector;
     void searchForGestureDetector(BuildContext element) {
       element.visitChildElements((element) {
-        if (element.widget != null && element.widget is GestureDetector) {
+        if (element.widget is GestureDetector) {
           detector = element.widget as GestureDetector;
           return;
         } else {

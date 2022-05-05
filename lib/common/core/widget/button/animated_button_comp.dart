@@ -1,19 +1,19 @@
 library animated_button;
 
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+
 //D
 class AnimatedButton extends StatefulWidget {
   final GestureTapCallback onPressed;
   final bool enabled;
-  final BodyAnimated bodyAnimated;//c - A||B
+  final BodyAnimated bodyAnimated; //c - A||B
 
   const AnimatedButton({
     Key? key,
     required this.onPressed,
-    this.enabled=true,
+    this.enabled = true,
     required this.bodyAnimated,
   }) : super(key: key);
 
@@ -33,7 +33,6 @@ class _AnimatedButtonState extends State<AnimatedButton> {
   }
 
   void _pressed(_) {
-
     setState(() {
       widget.bodyAnimated.tap = true;
       log('${widget.bodyAnimated.tap}');
@@ -52,17 +51,17 @@ class _AnimatedButtonState extends State<AnimatedButton> {
 
 // ignore: must_be_immutable
 class BodyAnimated extends StatelessWidget {
-  bool tap=false;
+  bool tap = false;
 
   BodyAnimated({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     log('rebuild');
-    return Container(child: Text('abc'),);
+    return const Text('abc');
   }
-
 }
 
 enum ShadowDegree { light, dark }
@@ -78,7 +77,7 @@ class PositionAnimatedButton extends BodyAnimated {
   final int duration;
   final BoxShape shape;
 
-   PositionAnimatedButton({
+  PositionAnimatedButton({
     Key? key,
     this.child,
     this.enabled = true,
@@ -111,13 +110,11 @@ class PositionAnimatedButton extends BodyAnimated {
               height: height - 4,
               width: width,
               decoration: BoxDecoration(
-                color: enabled
-                    ? darken(color, shadowDegree)
-                    : darken(Colors.grey, shadowDegree),
+                color: enabled ? darken(color, shadowDegree) : darken(Colors.grey, shadowDegree),
                 borderRadius: shape != BoxShape.circle
                     ? const BorderRadius.all(
-                  Radius.circular(16),
-                )
+                        Radius.circular(16),
+                      )
                     : null,
                 shape: shape,
               ),
@@ -134,8 +131,8 @@ class PositionAnimatedButton extends BodyAnimated {
                 color: enabled ? color : Colors.grey,
                 borderRadius: shape != BoxShape.circle
                     ? const BorderRadius.all(
-                  Radius.circular(16),
-                )
+                        Radius.circular(16),
+                      )
                     : null,
                 shape: shape,
               ),
@@ -148,5 +145,4 @@ class PositionAnimatedButton extends BodyAnimated {
       ),
     );
   }
-
 }

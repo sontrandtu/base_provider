@@ -24,8 +24,9 @@ extension StringExtension on String {
     try {
       return regex.stringMatch(this)?.split('.').first ?? '';
     } catch (ex) {
-      print(ex);
+      showLog(ex);
     }
+    return null;
   }
 
   bool get isValidUrl {

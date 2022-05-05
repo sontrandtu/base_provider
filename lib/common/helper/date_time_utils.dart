@@ -13,6 +13,7 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }
 
   static String? intToFormat(int data, String toPattern) {
@@ -21,6 +22,7 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }
 
   static String? format(DateTime currentDate, String toPattern) {
@@ -29,6 +31,7 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }
 
   static DateTime? parse(String data, String toPattern) {
@@ -37,12 +40,14 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }static DateTime? intParse(int data) {
     try {
       return DateTime.fromMillisecondsSinceEpoch(data * 1000);
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }
 
   static DateTime? dToD(DateTime data, String fromPattern, String toPattern) {
@@ -51,5 +56,6 @@ class DateTimeUtils {
     } catch (exception) {
       showError(exception.toString());
     }
+    return null;
   }
 }

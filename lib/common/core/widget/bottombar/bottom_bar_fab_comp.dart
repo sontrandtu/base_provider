@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/widget/button/scale_ani_button_comp.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +87,7 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
                         style: appStyle.textTheme.bodyText2!
                             .copyWith(color: Colors.white, fontSize: 10),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       )
                     ],
@@ -123,7 +122,7 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
                         style: appStyle.textTheme.bodyText2!
                             .copyWith(color: Colors.white, fontSize: 10),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       )
                     ],
@@ -142,7 +141,7 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
                             .copyWith(color: Colors.white, fontSize: 10),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                   ],
@@ -175,7 +174,7 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
                         style: appStyle.textTheme.bodyText2!
                             .copyWith(color: Colors.white, fontSize: 10),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       )
                     ],
@@ -209,7 +208,7 @@ class _BottomBarFabCompState extends State<BottomBarFabComp> {
                         style: appStyle.textTheme.bodyText2!
                             .copyWith(color: Colors.white, fontSize: 10),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       )
                     ],

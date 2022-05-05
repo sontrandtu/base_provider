@@ -1,4 +1,3 @@
-import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/sys/permission_config.dart';
 import 'package:achitecture_weup/common/extension/app_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:achitecture_weup/common/core/widget/ink_well_comp.dart';
 import 'package:flutter/material.dart';

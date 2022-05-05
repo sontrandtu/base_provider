@@ -19,12 +19,12 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
   RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
-  void initViewModel();
+  VM initViewModel();
 
   @override
   void initState() {
     super.initState();
-    initViewModel();
+    _viewModel = initViewModel();
 
     log('$VM was installed', name: 'WEUP-APP');
 
@@ -53,6 +53,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
     viewModel.onDispose();
     _viewModel = null;
     log('$VM was closed', name: 'WEUP-APP');
+
     super.dispose();
   }
 }

@@ -17,6 +17,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
+
+
+  @override
+  LoginViewModel initViewModel() => loginViewModel;
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginViewModel>(
@@ -89,6 +95,4 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     );
   }
 
-  @override
-  void initViewModel() => viewModel = loginViewModel;
 }

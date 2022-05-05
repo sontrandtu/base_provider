@@ -6,6 +6,7 @@ import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:achitecture_weup/system/model/post.dart';
 import 'package:achitecture_weup/system/repository/new_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginViewModel extends BaseViewModel {
   final userController = TextEditingController();
@@ -25,7 +26,7 @@ class LoginViewModel extends BaseViewModel {
 
     if (await getConnection(reconnect: login)) return;
 
-    ApiResponse<List<Post>> response = await NewRepository.instance.getAllPost();
+    ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
 
     if (checkNull(response,isInitial: false)) return;
 

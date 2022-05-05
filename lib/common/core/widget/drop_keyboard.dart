@@ -1,14 +1,13 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 
 class DropKeyboard extends StatelessWidget {
-  const DropKeyboard({this.value, this.status, required this.child, this.onClick, Key? key})
+  const DropKeyboard({this.appBar, this.status, required this.child, this.onClick, Key? key})
       : super(key: key);
   final Widget child;
+  final PreferredSizeWidget? appBar;
   final Status? status;
-  final BaseViewModel? value;
   final Function? onClick;
 
   @override
@@ -19,9 +18,11 @@ class DropKeyboard extends StatelessWidget {
         onClick?.call();
       },
       child: Scaffold(
+        extendBody: true,
+        appBar: appBar,
         body: SafeArea(
           child: Stack(children: [
-            child,
+            Visibility(visible: status != Status.errorInit, child: child),
             Visibility(
               visible: status == Status.loading,
               child: const IndicatorComp(),

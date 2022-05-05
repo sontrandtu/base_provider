@@ -10,7 +10,7 @@ class IndicatorComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorResource.textBody.withOpacity(0.05),
+      color: ColorResource.textBody.withOpacity(0.03),
       child: Center(
         child: Platform.isAndroid
             ? const CircularProgressIndicator(color: ColorResource.primary)

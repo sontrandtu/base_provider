@@ -39,7 +39,7 @@ class OutlinedButtonComp extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: OutlinedButton(
-        onPressed: status != Status.waiting ? onPressed : null,
+        onPressed: status != Status.loading ? onPressed : null,
         child: child ??
             Text(
               title ?? '',

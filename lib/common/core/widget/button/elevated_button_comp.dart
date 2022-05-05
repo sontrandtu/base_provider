@@ -154,7 +154,7 @@ class ElevatedButtonComp extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: ElevatedButton(
-        onPressed: status != Status.waiting ? onPressed : null,
+        onPressed: status != Status.loading ? onPressed : null,
         child: child ??
             Text(title ?? '',
                 style: style ??
@@ -164,7 +164,7 @@ class ElevatedButtonComp extends StatelessWidget {
               padding: padding ??
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               primary: (primaryColor ?? ColorResource.primarySwatchMaterial)
-                  .withOpacity(status == Status.waiting ? 0.5 : 1),
+                  .withOpacity(status == Status.loading ? 0.5 : 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

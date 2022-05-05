@@ -3,6 +3,8 @@ import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
+import 'package:achitecture_weup/system/model/post.dart';
+import 'package:achitecture_weup/system/repository/new_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginViewModel extends BaseViewModel {
@@ -14,19 +16,24 @@ class LoginViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
     setStatus(Status.success);
-
   }
+
 
   void login() async {
     setStatus(Status.loading);
     await delay(1000);
-    appNavigator.pushNamed(RoutePath.HOME);
+
+    if (await getConnection(reconnect: login)) return;
+
+    ApiResponse<List<Post>> response = await NewRepository.instance.getAllPost();
+
+    if (checkNull(response,isInitial: false)) return;
+
     setStatus(Status.success);
   }
 
   void register() {
-    appNavigator.dialog(const BaseErrorDialog(
-        content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
+    appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
   }
 
   String? validator(String s, index) {
@@ -46,11 +53,9 @@ class LoginViewModel extends BaseViewModel {
     currentLanguage = value;
     update();
     if (currentLanguage) {
-      ViewUtils.changeLanguage(
-          const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
+      ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
       return;
     }
-    ViewUtils.changeLanguage(
-        const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
+    ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
   }
 }

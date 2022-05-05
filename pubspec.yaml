@@ -36,6 +36,7 @@ dependencies:
   firebase_core: ^1.10.6
   flex_color_scheme: ^5.0.0
   flutter_html: ^2.1.5
+  fluttertoast: ^8.0.9
 
   #h
   hive: ^2.1.0

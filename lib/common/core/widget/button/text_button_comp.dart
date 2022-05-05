@@ -36,7 +36,7 @@ class TextButtonComp extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: TextButton(
-        onPressed: status != Status.waiting ? onPressed : null,
+        onPressed: status != Status.loading ? onPressed : null,
         child: child ??
             Text(
               title ?? '',

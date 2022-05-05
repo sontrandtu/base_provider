@@ -13,7 +13,7 @@ const String yyyyMMddTHHmmssSSS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 const String MMyyyy = 'MM/yyyy';
 const String dd = 'dd';
 
-extension DateTimextention on DateTime {
+extension DateTimeExtention on DateTime {
   Duration get minutesFromMidNight => Duration(minutes: minute + hour * 60);
 
   String get dayOfWeekNumber {

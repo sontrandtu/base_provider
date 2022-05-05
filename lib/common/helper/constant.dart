@@ -3,10 +3,11 @@ class AppConstant {
 }
 
 class HttpConstant {
-  static const String NOT_CONNECT_ERROR = 'Không có kết nối. Vui lòng thử lại sau';
+  static const String CONNECT_ERROR = 'Không có kết nối. Vui lòng thử lại sau';
   static const String UNKNOWN = 'Đã có lỗi xảy ra. Vui lòng thử lại sau';
-  static const String RETRIEVE_TIME_OUT = 'Hết hạn yêu cầu. Vui lòng thử lại sau';
-  static const String CONNECT_TIME_OUT = 'Hết hạn yêu cầu. Vui lòng thử lại sau';
+  static const String TIME_OUT = 'Hết hạn yêu cầu. Vui lòng thử lại sau';
+  static const String BAD_GATEWAY = 'Server bận. Vui lòng thử lại sau';
+
   static const String NOT_FOUND = 'Không tìm thấy nội dung yêu cầu. Vui lòng thử lại sau';
   static const String FORBIDDEN = 'Truy cập bị hạn chế. Vui lòng thử lại sau';
   static const String TOKEN_EXPIRED = 'Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại';

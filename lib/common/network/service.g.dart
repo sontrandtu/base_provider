@@ -16,9 +16,10 @@ class _Service implements Service {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<Post>?>> getAllPost() async {
+  Future<HttpResponse<List<Post>?>> getAllPost(m) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(m);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(

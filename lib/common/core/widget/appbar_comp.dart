@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'button/icon_button_comp.dart';
 
 class AppBarComp extends PreferredSize {
-  final String? title;
+  final dynamic title;
   final TextStyle? style;
   final List<Widget>? action;
   final Color? backgroundColor;
@@ -16,6 +16,7 @@ class AppBarComp extends PreferredSize {
   final Icon? iconLeading;
   final Function? onLeading;
   final SystemUiOverlayStyle? systemOverlayStyle;
+  final PreferredSizeWidget? bottom;
 
   AppBarComp({
     Key? key,
@@ -31,6 +32,7 @@ class AppBarComp extends PreferredSize {
     this.flexibleSpace,
     this.iconLeading,
     this.onLeading,
+    this.bottom,
   }) : super(
             key: key,
             preferredSize: const Size(double.infinity, kToolbarHeight),
@@ -42,8 +44,8 @@ class AppBarComp extends PreferredSize {
   @override
   Widget build(BuildContext context) => AppBar(
         systemOverlayStyle: systemOverlayStyle ?? SystemUiOverlayStyle.light,
-        title: Text(
-          title ?? '',
+        title: title is Widget ? title : Text(
+          title,
           style: style ??
               const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
           overflow: TextOverflow.ellipsis,
@@ -66,5 +68,6 @@ class AppBarComp extends PreferredSize {
             : const SizedBox(),
         iconTheme: IconThemeData(color: colorIcon),
         actions: action,
+        bottom: bottom,
       );
 }

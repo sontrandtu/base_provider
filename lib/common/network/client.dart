@@ -1,10 +1,8 @@
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
 import 'package:achitecture_weup/common/network/service.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:cookie_jar/cookie_jar.dart';
 
 class Client {
   static String _BASE_URL = 'https://dominhduong.weuptech.vn/cms/api/v1';
@@ -25,8 +23,6 @@ class Client {
         receiveTimeout: _RECEIVE_TIMEOUT,
         headers: {'id': '-1'},
         contentType: _CONTENT_TYPE));
-    final CookieJar cookieJar = CookieJar();
-    _dio?.interceptors.add(CookieManager(cookieJar));
 
     _dio?.interceptors.add(InterceptorsWrapper(onResponse: (response, handler) {
       _dio = null;

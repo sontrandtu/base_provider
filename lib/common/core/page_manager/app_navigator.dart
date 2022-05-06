@@ -12,7 +12,8 @@ class AppNavigator {
   /*
   * Hiển thị dialog
   * */
-  Future<dynamic> dialog(Widget dialog, {dynamic arguments, bool? barrierDismissible}) async =>
+  Future<dynamic> dialog(Widget dialog,
+          {dynamic arguments, bool? barrierDismissible}) async =>
       await showDialog(
           context: _context,
           builder: (context) => dialog,
@@ -22,8 +23,11 @@ class AppNavigator {
   /*
   * Hiển thị bottomSheet
   * */
-  Future<dynamic> bottomSheetDialog(Widget dialog, {dynamic arguments}) async => await showModalBottomSheet(
-      context: _context, builder: (context) => dialog, routeSettings: RouteSettings(arguments: arguments));
+  Future<dynamic> bottomSheetDialog(Widget dialog, {dynamic arguments}) async =>
+      await showModalBottomSheet(
+          context: _context,
+          builder: (context) => dialog,
+          routeSettings: RouteSettings(arguments: arguments));
 
   /*
   * Navigate to new page with [RouteName]
@@ -34,15 +38,25 @@ class AppNavigator {
   /*
   * Navigate to new page with [RouteName] and replace [current page]
   * */
-  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushReplacementNamed(_context, routeName, arguments: arguments);
+  Future<dynamic> pushReplacementNamed(String routeName,
+          {dynamic arguments}) async =>
+      await Navigator.pushReplacementNamed(_context, routeName,
+          arguments: arguments);
 
   /*
   * Navigate to new page with [RouteName] and replace all util pages
   * */
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushNamedAndRemoveUntil(_context, routeName, (Route<dynamic> route) => false,
+  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
+          {dynamic arguments}) async =>
+      await Navigator.pushNamedAndRemoveUntil(
+          _context, routeName, (Route<dynamic> route) => false,
           arguments: arguments);
+
+  /*
+  * Close Dialog, bottomsheet
+  * */
+  Future<dynamic> pop([dynamic result]) async =>
+      Navigator.pop(_context, result);
 
   /*
   * Close dialog, page,...

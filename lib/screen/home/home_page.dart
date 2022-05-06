@@ -1,13 +1,11 @@
-import 'dart:developer';
-
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,7 +43,12 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageViewer(url: urlImage, width: 100, height: 100, type: TypeImageViewer.storage,),
+                  ImageViewer(
+                    url: urlImage,
+                    width: 100,
+                    height: 100,
+                    type: TypeImageViewer.storage,
+                  ),
                   ImageViewer(url: urlImage, width: 100, height: 100),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
@@ -103,7 +106,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                           await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
-                      log("Result Time $a");
                     },
                   ),
                   ElevatedButtonComp(

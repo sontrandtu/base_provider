@@ -23,3 +23,24 @@ print_r(dynamic input) {
     }
   }
 }
+
+empty(dynamic input, [bool hasZero = false]) {
+  if (input != null) {
+    if (input is String && input.isEmpty) {
+      return false;
+    }
+    if (input is num) {
+      if (input == 0 || input == .0 && !hasZero) {
+        return false;
+      }
+      return true;
+    }
+    if (input is List && input.isNotEmpty) {
+      return false;
+    }
+    if (input is Map && input.isNotEmpty) {
+      return false;
+    }
+  }
+  return true;
+}

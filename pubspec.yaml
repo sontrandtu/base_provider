@@ -23,7 +23,6 @@ dependencies:
 
   #d
   dotted_decoration: ^2.0.0
-
   #e
   easy_localization: ^3.0.0
 
@@ -63,7 +62,6 @@ dependencies:
   share_plus: ^4.0.4
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^2.0.0
-
   #u
   url_launcher: ^6.0.20
 

@@ -11,25 +11,20 @@ class ApiResponse<T> {
   int? code;
 
   ApiResponse({this.data, this.code, this.message});
-
-  bool get isOk => code == 200;
-
-  bool get isDataNull => data == null;
-
-  bool get isOnWebsite => code == 302;
 }
 
 extension FutureExtensions<T> on Future<HttpResponse<T?>> {
-
   Future<ApiResponse<T>> wrap() async {
     try {
-
       HttpResponse httpResponse = await this;
 
       final String? okMessage = httpResponse.response.data['message'];
-      return Future.value(
-          ApiResponse(code: httpResponse.response.statusCode, message: okMessage, data: httpResponse.data));
+      final int? okErrorCode = httpResponse.response.data['error'];
 
+      return Future.value(ApiResponse(
+          code: okErrorCode ?? httpResponse.response.statusCode,
+          message: okMessage,
+          data: httpResponse.data));
     } catch (error) {
       showError(error);
       if (error is DioError) {
@@ -53,7 +48,6 @@ extension FutureExtensions<T> on Future<HttpResponse<T?>> {
   }
 
   Future<ApiResponse<T>> _okError(DioError error) {
-
     int? statusCode = error.response?.statusCode;
     String? message = '$statusCode - ${error.response?.statusMessage}';
 

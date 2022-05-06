@@ -16,24 +16,28 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+    print(getArguments());
     setStatus(Status.success);
   }
 
 
   void login() async {
     setStatus(Status.loading);
-    await delay(1000);
+    await delay(500);
 
-    if (await getConnection(reconnect: login)) return;
-
-    ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
-
-    if (checkNull(response,isInitial: false)) return;
+    // if (await getConnection(reconnect: login)) return;
+    //
+    // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
+    //
+    // if (checkNull(response,isInitial: false)) return;
 
     setStatus(Status.success);
+
+    // appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {
+    print(getArguments());
     appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
   }
 

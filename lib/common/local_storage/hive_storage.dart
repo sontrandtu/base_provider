@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 class HiveStorage {
   static const String boxName = 'local.data';
+  static Box get box => Hive.box(boxName);
 
   static Future<void> install() async {
     var dir = await getApplicationDocumentsDirectory();
@@ -13,7 +14,6 @@ class HiveStorage {
   }
 
   static Future<void> putValue(String key, dynamic value) async {
-    final Box box = Hive.box(boxName);
 
     switch (value) {
       case String:
@@ -28,9 +28,8 @@ class HiveStorage {
     }
   }
 
-  static dynamic getValue(String key, dynamic defaultValue) {
-    final Box box = Hive.box(boxName);
-    if (!box.containsKey(key)) return defaultValue;
+  static dynamic getValue(String key, {dynamic defaultValue}) {
+    if (!isExist(key)) return defaultValue;
 
     switch (defaultValue) {
       case String:
@@ -43,10 +42,20 @@ class HiveStorage {
     }
   }
 
+  static isExist(String key) => box.containsKey(key);
+
+  static delete(String key) {
+    if (isExist(key)) {
+      box.delete(key);
+    }
+    return;
+  }
+
   static Future<void> clearData() async {
     final Box box = Hive.box(boxName);
     await box.deleteFromDisk();
   }
+
 }
 
 class HiveKey {

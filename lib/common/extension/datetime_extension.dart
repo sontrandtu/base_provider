@@ -17,31 +17,12 @@ extension DateTimeExtention on DateTime {
   Duration get minutesFromMidNight => Duration(minutes: minute + hour * 60);
 
   String get dayOfWeekNumber {
-    String dayOfWeek = '';
     switch (weekday) {
-      case DateTime.monday:
-        dayOfWeek = "Thứ 2";
-        break;
-      case DateTime.tuesday:
-        dayOfWeek = "Thứ 3";
-        break;
-      case DateTime.wednesday:
-        dayOfWeek = "Thứ 4";
-        break;
-      case DateTime.thursday:
-        dayOfWeek = "Thứ 5";
-        break;
-      case DateTime.friday:
-        dayOfWeek = "Thứ 6";
-        break;
-      case DateTime.saturday:
-        dayOfWeek = "Thứ 7";
-        break;
       case DateTime.sunday:
-        dayOfWeek = "Chủ nhật";
-        break;
+        return "Chủ nhật";
+      default:
+        return "Thứ ${weekday + 1}";
     }
-    return dayOfWeek;
   }
 
   String get dayOfWeekString {

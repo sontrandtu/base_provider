@@ -33,7 +33,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
+    log('didChangeDependencies', name: 'WEUP-APP-${DateTime.now()}');
     appStyle = Theme.of(context);
 
     _viewModel?.setBuildContext(context);

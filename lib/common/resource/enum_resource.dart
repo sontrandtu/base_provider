@@ -8,6 +8,10 @@ enum Status {
   * */
   loading,
   /*
+  * [Status.loading] sự kiện được xảy ra lần đầu tiên khi vào một màn hình
+  * */
+  waiting,
+  /*
   * [Status.errorInit] sự kiện được xảy ra lần đầu tiên khi vào một màn hình
   * nhưng các request đầu tiên đó bị lỗi
   * */

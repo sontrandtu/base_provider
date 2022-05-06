@@ -9,6 +9,7 @@ class NewRepository extends BaseRepository {
   static NewRepository get instance => NewRepository._internal();
 
   Future<ApiResponse<List<Post>>> getAllPost(Map<String,dynamic> dtaa) async {
-    return await Client.getClient().getAllPost(<String,dynamic>{}).wrap();
+
+    return await Client.getClient().getAllPost(dtaa['id'], dtaa['id2']).wrap();
   }
 }

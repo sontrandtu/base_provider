@@ -45,8 +45,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  StorageImageComp(url: urlImage, width: 100, height: 100),
-                  AssetImageComp(url: urlImage, width: 100, height: 100),
+                  ImageViewer(url: urlImage, width: 100, height: 100, type: TypeImageViewer.storage,),
+                  ImageViewer(url: urlImage, width: 100, height: 100),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',

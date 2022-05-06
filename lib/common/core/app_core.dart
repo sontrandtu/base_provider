@@ -43,8 +43,7 @@ export 'widget/dialog/permission_dialog.dart';
 ///I
 export 'widget/image/cached_network_image_comp.dart';
 export 'widget/image/svg_comp.dart';
-export 'widget/image/asset_image_comp.dart';
-export 'widget/image/storage_image.dart';
+export 'widget/image/image_viewer.dart';
 export 'widget/image/slider_comp.dart';
 export 'widget/indicator_comp.dart';
 export 'widget/ink_well_comp.dart';

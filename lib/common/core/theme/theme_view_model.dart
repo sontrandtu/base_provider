@@ -34,7 +34,7 @@ class ThemeViewModel extends BaseViewModel {
   ThemeMode get getThemeMode => isLightMode ? ThemeMode.dark : ThemeMode.light;
 
   ThemeMode get getInitMode =>
-      HiveStorage.getValue(HiveKey.themeKey, ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT
+      HiveStorage.getValue(HiveKey.themeKey, defaultValue: ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT
           ? ThemeMode.light
           : ThemeMode.dark;
 

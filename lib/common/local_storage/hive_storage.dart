@@ -28,8 +28,8 @@ class HiveStorage {
     }
   }
 
-  static dynamic getValue(String key, dynamic defaultValue) {
-    if (!box.containsKey(key)) return defaultValue;
+  static dynamic getValue(String key, {dynamic defaultValue}) {
+    if (!isExist(key)) return defaultValue;
 
     switch (defaultValue) {
       case String:
@@ -42,10 +42,13 @@ class HiveStorage {
     }
   }
 
+  static isExist(String key) => box.containsKey(key);
+
   static delete(String key) {
-    if (!box.containsKey(key)) {
+    if (isExist(key)) {
       box.delete(key);
     }
+    return;
   }
 
   static Future<void> clearData() async {

@@ -32,6 +32,7 @@ class HomeViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+    print(getArguments());
     initData();
 
     language = ViewUtils.getLocale()?.languageCode;
@@ -39,13 +40,11 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> changLanguage() async {
     if (ViewUtils.getLocale()?.languageCode == LanguageCodeConstant.VI) {
-      ViewUtils.changeLanguage(
-          const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
+      ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
       setLanguage();
       return;
     }
-    ViewUtils.changeLanguage(
-        const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
+    ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
     setLanguage();
   }
 
@@ -85,8 +84,7 @@ class HomeViewModel extends BaseViewModel {
     }
 
     for (var element in listA) {
-      listMultipleData.add(
-          OptionMultipleSelect<A>(title: element.hovaTen ?? '', data: element));
+      listMultipleData.add(OptionMultipleSelect<A>(title: element.hovaTen ?? '', data: element));
     }
   }
 

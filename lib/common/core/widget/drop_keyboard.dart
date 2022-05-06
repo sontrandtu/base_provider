@@ -22,9 +22,9 @@ class DropKeyboard extends StatelessWidget {
         appBar: appBar,
         body: SafeArea(
           child: Stack(children: [
-            Visibility(visible: status != Status.errorInit, child: child),
+            Visibility(visible: status != Status.errorInit && status != Status.loading, child: child),
             Visibility(
-              visible: status == Status.loading,
+              visible: status == Status.loading || status == Status.waiting,
               child: const IndicatorComp(),
             ),
           ]),

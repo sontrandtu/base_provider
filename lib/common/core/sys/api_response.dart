@@ -20,6 +20,7 @@ extension FutureExtensions<T> on Future<HttpResponse<T?>> {
 
       final String? okMessage = httpResponse.response.data['message'];
       final int? okErrorCode = httpResponse.response.data['error'];
+
       return Future.value(ApiResponse(
           code: okErrorCode ?? httpResponse.response.statusCode,
           message: okMessage,

@@ -1,11 +1,12 @@
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:flutter/material.dart';
+import 'package:achitecture_weup/common/extension/app_extension.dart';
 
 class CustomDialog extends StatefulWidget {
   final String title;
   final dynamic description;
-  final String cancelText;
-  final String confirmText;
+  final String? cancelText;
+  final String? confirmText;
   final VoidCallback? onConfirm;
   final bool isAccept;
   final bool isCancel;
@@ -18,8 +19,8 @@ class CustomDialog extends StatefulWidget {
       required this.description,
       this.onConfirm,
       this.isAccept = true,
-       this.confirmText = 'Đồng ý',
-       this.cancelText = 'Hủy',
+       this.confirmText,
+       this.cancelText,
       this.isCancel = false,
       this.onCancel,
       this.isClose = false,
@@ -88,7 +89,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: widget.onCancel,
-                    child: Center(child: Text(widget.cancelText)),
+                    child: Center(child: Text(widget.cancelText ?? 'Hủy'.tl)),
                   ),
                 ),
               ),
@@ -108,7 +109,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: widget.onConfirm,
-                    child: Center(child: Text(widget.confirmText)),
+                    child: Center(child: Text(widget.confirmText ?? 'Đồng ý'.tl)),
                   ),
                 ),
               ),

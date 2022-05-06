@@ -1,4 +1,4 @@
-// TODO : call api loi thi dung lai
+// call api loi thi dung lai
 extension ObjectExtension on dynamic {
   bool _isNotNull() {
     return this != null;

@@ -2,8 +2,6 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
-import 'package:achitecture_weup/common/helper/system_utils.dart';
-import 'package:achitecture_weup/common/local_storage/app_storage.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:achitecture_weup/system/model/post.dart';
 import 'package:achitecture_weup/system/repository/new_repository.dart';
@@ -18,33 +16,29 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
-    if (HiveStorage.isExist(KeyLanguage.language)) {
-      currentLanguage =
-          HiveStorage.getValue(KeyLanguage.language) == LanguageCodeConstant.EN
-              ? true
-              : false;
-    }
-    print_r('currentLanguage: $currentLanguage');
+    print(getArguments());
     setStatus(Status.success);
   }
+
 
   void login() async {
     setStatus(Status.loading);
-    await delay(1000);
+    await delay(500);
 
-    if (await getConnection(reconnect: login)) return;
-
-    ApiResponse<List<Post>> response =
-        await compute(NewRepository.instance.getAllPost, <String, dynamic>{});
-
-    if (checkNull(response, isInitial: false)) return;
+    // if (await getConnection(reconnect: login)) return;
+    //
+    // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
+    //
+    // if (checkNull(response,isInitial: false)) return;
 
     setStatus(Status.success);
+
+    appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {
-    appNavigator.dialog(const BaseErrorDialog(
-        content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
+    print(getArguments());
+    appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
   }
 
   String? validator(String s, index) {
@@ -64,14 +58,9 @@ class LoginViewModel extends BaseViewModel {
     currentLanguage = value;
     update();
     if (currentLanguage) {
-      ViewUtils.changeLanguage(
-          const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
-    } else {
-      ViewUtils.changeLanguage(
-          const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
+      ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
+      return;
     }
-    HiveStorage.putValue(KeyLanguage.language,
-        currentLanguage ? LanguageCodeConstant.EN : LanguageCodeConstant.VI);
-    return;
+    ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
   }
 }

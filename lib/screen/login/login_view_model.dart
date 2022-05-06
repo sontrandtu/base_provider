@@ -33,7 +33,7 @@ class LoginViewModel extends BaseViewModel {
 
     setStatus(Status.success);
 
-    // appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
+     appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {

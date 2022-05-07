@@ -37,9 +37,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   String radioValue1 = 'a';
   String radioValue2 = 'b';
   String groupRadio = 'e';
-  PositionAnimatedButton positionButton = PositionAnimatedButton(
-    child: Text('abc'),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -318,7 +315,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                           log('OKJOKO');
                         });
                       },
-                      bodyAnimated:positionButton),
+                      bodyAnimated:PositionAnimatedButton(child: Text('abc'),)),
                 ],
               ),
             ),

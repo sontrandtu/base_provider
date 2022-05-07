@@ -13,7 +13,7 @@ export 'theme/theme_manager.dart';
 export 'theme/theme_view_model.dart';
 
 /// A
-export 'widget/apbar_comp.dart';
+export 'widget/appbar_comp.dart';
 
 ///B
 export 'widget/button/elevated_button_comp.dart';

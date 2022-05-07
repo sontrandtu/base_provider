@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dart:io' as io;
 
 // ignore: non_constant_identifier_names
 print_r(dynamic input) {
@@ -21,4 +22,25 @@ print_r(dynamic input) {
       return;
     }
   }
+}
+
+empty(dynamic input, [bool hasZero = false]) {
+  if (input != null) {
+    if (input is String && input.isEmpty) {
+      return false;
+    }
+    if (input is num) {
+      if (input == 0 || input == .0 && !hasZero) {
+        return false;
+      }
+      return true;
+    }
+    if (input is List && input.isNotEmpty) {
+      return false;
+    }
+    if (input is Map && input.isNotEmpty) {
+      return false;
+    }
+  }
+  return true;
 }

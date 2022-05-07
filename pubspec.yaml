@@ -15,16 +15,14 @@ dependencies:
     sdk: flutter
 
   #a
-
+  animated_button: ^0.2.0
   #c
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.0
   carousel_slider: ^4.1.1
-  cookie_jar: 3.0.1
 
   #d
   dotted_decoration: ^2.0.0
-  dio_cookie_manager: ^2.0.0
   #e
   easy_localization: ^3.0.0
 
@@ -38,6 +36,7 @@ dependencies:
   flex_color_scheme: ^5.0.0
   flutter_html: ^2.1.5
   fluttertoast: ^8.0.9
+
 
   #h
   hive: ^2.1.0
@@ -64,6 +63,7 @@ dependencies:
   share_plus: ^4.0.4
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^2.0.0
+  spring_button: ^2.0.0
 
   #u
   url_launcher: ^6.0.20

@@ -28,23 +28,49 @@ class PositionAniButtonComp extends StatefulWidget {
   State<PositionAniButtonComp> createState() => _PositionAniButtonCompState();
 }
 
-class _PositionAniButtonCompState extends State<PositionAniButtonComp> {
-  bool tap = false;
+class _PositionAniButtonCompState extends State<PositionAniButtonComp>
+    with SingleTickerProviderStateMixin {
+  late Animation animation;
 
-  void _pressed(_) {
-    setState(() {
-      tap = true;
-    });
+  late AnimationController animationController;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 100),
+      value: 1,
+    );
+
+    animation = Tween(
+      begin: 0.0,
+      end: 4.0,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.elasticOut,
+      ),
+    );
+
+    super.initState();
   }
 
-  void _unPressedOnTapUp(_) => _unPressed();
+  void _pressed(_) {
+    animationController.value = 0;
+  }
 
-  Future<void> _unPressed() async {
-    setState(() {
-      tap = false;
-    });
-    await Future.delayed(const Duration(milliseconds: 50));
-    widget.onPressed();
+  void _unPressedOnTapUp(_) {
+    animationController.forward();
+  }
+
+  void _unPressed() {
+    animationController.value = 4;
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,24 +97,27 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp> {
                 ),
               ),
             ),
-            AnimatedPositioned(
-              curve: Curves.easeIn,
-              duration: Duration(milliseconds: widget.duration),
-              bottom: tap ? 0 : 4,
-              child: Container(
-                height: height,
-                width: widget.width,
-                decoration: BoxDecoration(
-                  color: widget.enabled ? widget.color : Colors.grey,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(widget.borderRadius),
-                  ),
-                ),
-                child: Center(
-                  child: widget.child,
-                ),
-              ),
-            ),
+            AnimatedBuilder(
+                animation: animation,
+                builder: (BuildContext context, Widget? cachedChild) {
+                  return AnimatedPositioned(
+                    duration: Duration(milliseconds: 50),
+                    bottom: animation.value,
+                    child: Container(
+                      height: height,
+                      width: widget.width,
+                      decoration: BoxDecoration(
+                        color: widget.enabled ? widget.color : Colors.grey,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(widget.borderRadius),
+                        ),
+                      ),
+                      child: Center(
+                        child: widget.child,
+                      ),
+                    ),
+                  );
+                }),
           ],
         ),
       ),

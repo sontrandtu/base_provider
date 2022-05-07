@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:spring_button/spring_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,7 +45,12 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageViewer(url: urlImage, width: 100, height: 100, type: TypeImageViewer.storage,),
+                  ImageViewer(
+                    url: urlImage,
+                    width: 100,
+                    height: 100,
+                    type: TypeImageViewer.storage,
+                  ),
                   ImageViewer(url: urlImage, width: 100, height: 100),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
@@ -103,7 +108,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                           await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
-                      log("Result Time $a");
                     },
                   ),
                   ElevatedButtonComp(
@@ -301,8 +305,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ),
                   PositionAniButtonComp(
                     onPressed: () {
-                      viewModel.appNavigator
-                          .bottomSheetDialog(const PickImgBottomSheetDialog());
                     },
                     child: const Text(
                       'Simple button',
@@ -316,7 +318,28 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
-                  ScaleAniButtonComp(
+                  AnimatedButton(
+                    child: Text(
+                      'Simple button',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+              SpringButton(
+                SpringButtonType.OnlyScale,
+                Container(color:Colors.red,child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('abc'),
+                )),
+                onTapDown: (_) {} ,
+                onLongPress: () {},
+                onLongPressEnd: (_) {},
+              ),
+              ScaleAniButtonComp(
                     onPressed: () async {
                       urlImage = await viewModel.appNavigator
                           .bottomSheetDialog(const PickImgBottomSheetDialog());
@@ -326,7 +349,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       'Simple button',
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

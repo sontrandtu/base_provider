@@ -1,7 +1,5 @@
-import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CachedNetworkImageComp extends StatelessWidget {
   final double width;
@@ -40,17 +38,15 @@ class CachedNetworkImageComp extends StatelessWidget {
         // fadeOutDuration: Duration(microseconds: placeholderDuration ?? 600),
         // fadeInDuration: Duration(microseconds: placeholderDuration ?? 300),
         imageUrl: url,
-        placeholder: (_, __) {
-          return Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-              color: backgroundColor ?? ColorResource.primarySwatch,
-              border: Border.all(width: borderWidth, color: borderColor),
-            ),
-            child: widgetPlaceHolder,
-          );
-        },
+        placeholder: (_, __) => Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            border: Border.all(width: borderWidth, color: borderColor),
+          ),
+          child: widgetPlaceHolder,
+        ),
         errorWidget: (_, __, ___) =>
             widgetError ??
             Container(

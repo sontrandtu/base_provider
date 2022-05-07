@@ -32,7 +32,7 @@ class BaseSmartRefresh extends StatelessWidget {
       this.onLoading,
       this.onRefresh,
       this.physics,
-      this.itemCount,
+      required this.itemCount,
       Key? key})
       : super(key: key);
 

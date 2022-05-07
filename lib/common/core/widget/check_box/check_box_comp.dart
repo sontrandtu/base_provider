@@ -35,7 +35,7 @@ class CheckBoxComp extends StatelessWidget {
   Widget build(BuildContext context) {
     return !isListTile!
         ? Transform.scale(
-            scale: 1.3,
+            scale: 1.2,
             child: Checkbox(
               value: value,
               onChanged: onChanged,

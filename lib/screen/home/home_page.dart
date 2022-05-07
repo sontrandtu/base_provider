@@ -1,30 +1,13 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/bottombar/bottom_bar_fab_comp.dart';
-import 'package:achitecture_weup/common/core/widget/button/animated_button_comp.dart';
-import 'package:achitecture_weup/common/core/widget/button/cupertino_swtich_comp.dart';
-import 'package:achitecture_weup/common/core/widget/check_box/check_box_comp.dart';
-import 'package:achitecture_weup/common/core/widget/check_box/check_box_custom_comp.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/cupertino_picker.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/date_picker_custom_dialog.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/pick_img_bottomsheet_dialog.dart';
-import 'package:achitecture_weup/common/core/widget/image/slider_comp.dart';
-import 'package:achitecture_weup/common/core/widget/radio/radio_comp.dart';
-import 'package:achitecture_weup/common/extension/string_extension.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
+import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../../common/core/widget/button/switch_comp.dart';
+import 'package:spring_button/spring_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,6 +21,17 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   String radioValue2 = 'b';
   String groupRadio = 'e';
 
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {});
+  }
+
+  final jobRoleCtrl = TextEditingController();
+  String urlImage = '';
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
@@ -46,10 +40,18 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
         builder: (context, value, child) => Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  ImageViewer(
+                    url: urlImage,
+                    width: 100,
+                    height: 100,
+                    type: TypeImageViewer.storage,
+                  ),
+                  ImageViewer(url: urlImage, width: 100, height: 100),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -67,10 +69,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   //   title: 'Back',
                   //   onPressed: () => value.appNavigator.back(),
                   // ),
-                  // TextButtonComp(
-                  //   title: 'Change Theme',
-                  //   onPressed: () => themeViewModel.toggleMode(),
-                  // ),
+                  TextButtonComp(
+                    title: 'Change Theme',
+                    onPressed: () => themeViewModel.toggleMode(),
+                  ),
                   // ElevatedButtonComp(
                   //   title: 'Date Picker',
                   //   onPressed: () async {
@@ -99,35 +101,27 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   //     //log("Result Time $a");
                   //   },
                   // ),
-                  // ElevatedButtonComp(
-                  //   title: 'Time Picker Material',
-                  //   onPressed: () async {
-                  //     DateTime? a =
-                  //         await viewModel.appNavigator.bottomSheetDialog(
-                  //       const CupertinoPickerDialog(),
-                  //     );
-                  //     log("Result Time $a");
-                  //   },
-                  // ),
-                  // ElevatedButtonComp(
-                  //   title: 'Change language',
-                  //   onPressed: viewModel.changLanguage,
-                  // ),
-                  // ElevatedButtonComp(
-                  //   title: 'Image Picker',
-                  //   onPressed: () {
-                  //     viewModel.appNavigator.bottomSheetDialog(
-                  //       const PickImgBottomSheetDialog(),
-                  //     );
-                  //   },
-                  // ),
-                  // CheckBoxComp(
-                  //   value: value.valueSwitch,
-                  //   onChanged: value.changeSwitch,
-                  //   side: const BorderSide(width: 1),
-                  //   shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(4)),
-                  // ),
+                  ElevatedButtonComp(
+                    title: 'Time Picker Material',
+                    onPressed: () async {
+                      DateTime? a =
+                          await viewModel.appNavigator.bottomSheetDialog(
+                        const CupertinoPickerDialog(),
+                      );
+                    },
+                  ),
+                  ElevatedButtonComp(
+                    title: 'Change language',
+                    onPressed: viewModel.changLanguage,
+                  ),
+
+                  CheckBoxComp(
+                    value: value.valueSwitch,
+                    onChanged: value.changeSwitch,
+                    side: const BorderSide(width: 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
+                  ),
                   RadioCustomComp<String>(
                     value: value.radioValue1,
                     groupValue: value.groupRadio,
@@ -305,17 +299,65 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       ),
                     ],
                   ),
-                  Container(height: 100, child: BottomBarFabComp()),
-                  SizedBox(
+                  const SizedBox(height: 100, child: BottomBarFabComp()),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  PositionAniButtonComp(
+                    onPressed: () {
+                    },
+                    child: const Text(
+                      'Simple button',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
                     height: 16,
                   ),
                   AnimatedButton(
-                      onPressed: () {
-                        setState(() {
-                          log('OKJOKO');
-                        });
-                      },
-                      bodyAnimated:PositionAnimatedButton(child: Text('abc'),)),
+                    child: Text(
+                      'Simple button',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+              SpringButton(
+                SpringButtonType.OnlyScale,
+                Container(color:Colors.red,child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('abc'),
+                )),
+                onTapDown: (_) {} ,
+                onLongPress: () {},
+                onLongPressEnd: (_) {},
+              ),
+              ScaleAniButtonComp(
+                    onPressed: () async {
+                      urlImage = await viewModel.appNavigator
+                          .bottomSheetDialog(const PickImgBottomSheetDialog());
+                      setState(() {});
+                    },
+                    child: const Text(
+                      'Simple button',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+
+                  MultipleSelectComp<A>(
+                    onChange: value.onChangeMultiple,
+                    listItems: value.listMultipleData,
+                  ),
                 ],
               ),
             ),
@@ -326,5 +368,12 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   }
 
   @override
-  void initViewModel() => viewModel = HomeViewModel();
+  HomeViewModel get init => HomeViewModel();
+}
+
+class A {
+  String? hovaTen;
+  int? tuoi;
+
+  A({this.hovaTen, this.tuoi});
 }

@@ -1,5 +1,4 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

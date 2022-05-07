@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -25,8 +24,9 @@ extension StringExtension on String {
     try {
       return regex.stringMatch(this)?.split('.').first ?? '';
     } catch (ex) {
-      print(ex);
+      showLog(ex);
     }
+    return null;
   }
 
   bool get isValidUrl {

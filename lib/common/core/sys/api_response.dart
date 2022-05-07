@@ -1,66 +1,72 @@
-import 'dart:developer';
+import 'dart:io';
 
-import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/server_error.dart';
+import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:retrofit/retrofit.dart';
 
 class ApiResponse<T> {
   T? data;
   String? message;
   int? code;
-  dynamic error;
 
-  ApiResponse({this.data, this.code, this.message, this.error}) {
-    if (error is DioError) {
-      if (message == null || (message?.isEmpty ?? true)) {
-        message = ServerError.withDioError(error: error).errorMessage;
+  ApiResponse({this.data, this.code, this.message});
+}
+
+extension FutureExtensions<T> on Future<HttpResponse<T?>> {
+  Future<ApiResponse<T>> wrap() async {
+    try {
+      HttpResponse httpResponse = await this;
+
+      final String? okMessage = httpResponse.response.data['message'];
+      final int? okErrorCode = httpResponse.response.data['error'];
+
+      return Future.value(ApiResponse(
+          code: okErrorCode ?? httpResponse.response.statusCode,
+          message: okMessage,
+          data: httpResponse.data));
+    } catch (error) {
+      showError(error);
+      if (error is DioError) {
+        switch (error.type) {
+          case DioErrorType.response:
+            return _okError(error);
+
+          case DioErrorType.sendTimeout:
+          case DioErrorType.connectTimeout:
+          case DioErrorType.receiveTimeout:
+            return Future.value(
+                ApiResponse(code: error.response?.statusCode, message: HttpConstant.TIME_OUT));
+
+          default:
+            return Future.value(ApiResponse(code: error.response?.statusCode, message: HttpConstant.UNKNOWN));
+        }
       }
-      return;
-    } else {
-      message = error.toString();
+
+      return Future.value(ApiResponse(message: HttpConstant.UNKNOWN));
     }
   }
 
-  bool get isOk => code == 200;
+  Future<ApiResponse<T>> _okError(DioError error) {
+    int? statusCode = error.response?.statusCode;
+    String? message = '$statusCode - ${error.response?.statusMessage}';
 
-  bool get isDataNull => data == null;
+    switch (statusCode) {
+      case HttpStatus.forbidden:
+        return Future.value(ApiResponse(code: error.response?.statusCode, message: HttpConstant.FORBIDDEN));
 
-  bool get isOnWebsite => code == 302;
-}
-
-extension FutureExtensions<T> on Future<HttpResponse<T>> {
-  Future<ApiResponse<T>>
-  wrap() async {
-    try {
-      final httpResponse = await this;
-      return Future.value(ApiResponse<T>(data: httpResponse.data, code: httpResponse.response.statusCode));
-    } catch (error) {
-      log('FutureExtensions ===============${error.toString()}', name: 'WEUP-APP');
-      if (error is DioError) {
-        if (error.response?.statusCode == 403) {
-          showDialog(
-              context: navigator.currentContext!,
-              barrierDismissible: false,
-              builder: (BuildContext context) => BaseErrorDialog(
-                  content: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại',
-                  showCancel: false,
-                  mConfirm: () =>
-                      navigator.currentState?.pushNamedAndRemoveUntil(RoutePath.HOME, (route) => false)));
-          return Future.value(
-              ApiResponse(code: 99, error: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'));
-        }
-        if (error.response == null) {
-          return Future.value(ApiResponse(code: error.response?.statusCode ?? 0, error: error));
-        }
-        final String? message = error.response?.data['message'];
+      case HttpStatus.unauthorized:
         return Future.value(
-            ApiResponse(code: error.response?.statusCode ?? 0, error: error, message: message));
-      } else {
-        return Future.value(ApiResponse(error: error));
-      }
+            ApiResponse(code: error.response?.statusCode, message: HttpConstant.TOKEN_EXPIRED));
+
+      case HttpStatus.requestTimeout:
+        return Future.value(ApiResponse(code: error.response?.statusCode, message: HttpConstant.TIME_OUT));
+
+      case HttpStatus.badGateway:
+        return Future.value(ApiResponse(code: error.response?.statusCode, message: HttpConstant.BAD_GATEWAY));
+
+      default:
+        return Future.value(ApiResponse(code: error.response?.statusCode, message: message));
     }
   }
 }

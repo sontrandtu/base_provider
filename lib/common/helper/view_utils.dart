@@ -2,6 +2,7 @@ import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ViewUtils {
   static void hideKeyboard({BuildContext? context}) =>
@@ -23,4 +24,18 @@ class ViewUtils {
 
   static double get height =>
       MediaQuery.of(navigator.currentContext!).size.height;
+
+  static double get heightStatusBar =>
+      MediaQuery.of(navigator.currentContext!).padding.top;
+
+  static double get paddingBase => 12;
+
+  static void toast(dynamic msg) => Fluttertoast.showToast(
+        msg: msg.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: ColorResource.primary,
+        textColor: ColorResource.textBody,
+        fontSize: 16.0,
+      );
 }

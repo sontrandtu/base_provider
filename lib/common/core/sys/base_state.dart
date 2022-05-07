@@ -4,13 +4,10 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
-    extends State<T> {
+abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
   VM? _viewModel;
   double _width = 0;
   double _height = 0;
-
-  set viewModel(VM value) => _viewModel = value;
 
   VM get viewModel => _viewModel!;
 
@@ -18,41 +15,43 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
 
   double get height => _height;
 
-  RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
+  // RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
-  void initViewModel();
+  VM get init;
 
   @override
   void initState() {
+    _viewModel = init;
+
     super.initState();
-    initViewModel();
 
-    log('$VM was installed', name: 'WEUP-APP');
+    log('$VM was installed', name: 'WEUP-APP-${DateTime.now()}');
 
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      _width = MediaQuery.of(context).size.width;
-      _height = MediaQuery.of(context).size.height;
-
-      appStyle = Theme.of(context);
-
-      _viewModel?.setRouteSetting(routeSetting);
-
-      _viewModel?.setBuildContext(context);
-
-      _viewModel?.initialData();
-    });
+    WidgetsBinding.instance?.addPostFrameCallback((_) => _viewModel?.onViewCreated());
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    log('didChangeDependencies', name: 'WEUP-APP-${DateTime.now()}');
+    appStyle = Theme.of(context);
+
+    _viewModel?.setBuildContext(context);
+
+    _viewModel?.initialData();
+
+    _width = MediaQuery.of(context).size.width;
+
+    _height = MediaQuery.of(context).size.height;
   }
 
   @override
   void dispose() {
-    viewModel.onDispose();
+    _viewModel?.onDispose();
     _viewModel = null;
+
     log('$VM was closed', name: 'WEUP-APP');
+
     super.dispose();
   }
 }

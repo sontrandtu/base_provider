@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class InkWellComp extends StatelessWidget {
   final String? title;
   final Widget? child;
-  final Function()? onTap;
+  final Function() onTap;
   final Color? backgroundColor;
   final Color? titleColor;
   final Color? splashColor;
@@ -33,7 +33,7 @@ class InkWellComp extends StatelessWidget {
     Key? key,
     this.title,
     this.child,
-    this.onTap,
+    required this.onTap,
     this.backgroundColor,
     this.titleColor,
     this.padding,
@@ -47,7 +47,7 @@ class InkWellComp extends StatelessWidget {
     this.decorationDotted,
     this.splashColor,
     this.highlightColor,
-    this.isTransparent = false,
+    this.isTransparent = true,
   }) : super(key: key);
 
   @override
@@ -67,9 +67,13 @@ class InkWellComp extends StatelessWidget {
         child: InkWell(
           splashColor: isTransparent! ? Colors.transparent : null,
           highlightColor: isTransparent! ? Colors.transparent : null,
-          onTap: onTap,
+          onTap: () {
+            Future.delayed(const Duration(milliseconds: 70), () {
+              onTap.call();
+            });
+          },
           borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),
-          child:  Container(
+          child: Container(
             padding: padding ?? EdgeInsets.all(paddingAll ?? 8),
             child: child ??
                 Text(

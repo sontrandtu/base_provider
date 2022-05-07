@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:achitecture_weup/common/core/sys/base_response.dart';
+import 'package:achitecture_weup/common/core/model_base/base_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 class BaseRepository {

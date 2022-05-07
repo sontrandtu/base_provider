@@ -1,4 +1,4 @@
-// TODO : call api loi thi dung lai
+// call api loi thi dung lai
 extension ObjectExtension on dynamic {
   bool _isNotNull() {
     return this != null;
@@ -11,7 +11,7 @@ extension ObjectExtension on dynamic {
   bool _isNotNullBlank() {
     if (this != null) {
       if (this is String) {
-        return this.toString().trim().isNotEmpty;
+        return toString().trim().isNotEmpty;
       }
       return false;
     }

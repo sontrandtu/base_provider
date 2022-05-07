@@ -34,6 +34,18 @@ class BaseErrorDialog extends StatelessWidget {
         content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
         insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         actions: [
+          showCancel ?? true
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    mCancel?.call();
+                  },
+                  child: Text(
+                    textButtonCancel ?? 'Hủy',
+                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                  ),
+                )
+              : const SizedBox(),
           showConfirm ?? true
               ? TextButton(
                   onPressed: () {
@@ -43,18 +55,6 @@ class BaseErrorDialog extends StatelessWidget {
                   child: Text(
                     textButtonConfirm ?? 'Đồng ý',
                     style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                  ),
-                )
-              : const SizedBox(),
-          showCancel ?? true
-              ? TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    mCancel?.call();
-                  },
-                  child: Text(
-                    textButtonCancel ?? 'Hủy',
-                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
                   ),
                 )
               : const SizedBox(),

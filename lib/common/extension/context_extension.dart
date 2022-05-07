@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum MessageType { error, success }
 
 extension ContextExtension on BuildContext {
-  hideKeyboard() {
+  void hideKeyboard() {
     FocusScope.of(this).requestFocus(FocusNode());
   }
 

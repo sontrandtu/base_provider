@@ -36,7 +36,7 @@ class TextButtonComp extends StatelessWidget {
       width: widthValue,
       height: heightValue,
       child: TextButton(
-        onPressed: status != Status.waiting ? onPressed : null,
+        onPressed: status != Status.loading ? onPressed : null,
         child: child ??
             Text(
               title ?? '',
@@ -48,6 +48,7 @@ class TextButtonComp extends StatelessWidget {
               padding: padding ??
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               primary: primaryColor,
+              textStyle : style ?? appStyle.textTheme.headline4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

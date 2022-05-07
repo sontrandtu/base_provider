@@ -6,6 +6,8 @@ part of 'service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _Service implements Service {
   _Service(this._dio, {this.baseUrl});
 
@@ -14,9 +16,10 @@ class _Service implements Service {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<Post>>> getAllPost() async {
+  Future<HttpResponse<List<Post>?>> getAllPost(m) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(m);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
@@ -25,8 +28,8 @@ class _Service implements Service {
                 .compose(_dio.options, '/accounts',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => Post.fromJson(i as Map<String, dynamic>))
+    var value = _result.data
+        ?.map((dynamic i) => Post.fromJson(i as Map<String, dynamic>))
         .toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;

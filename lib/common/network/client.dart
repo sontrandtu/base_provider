@@ -23,6 +23,7 @@ class Client {
         receiveTimeout: _RECEIVE_TIMEOUT,
         headers: {'id': '-1'},
         contentType: _CONTENT_TYPE));
+
     _dio?.interceptors.add(InterceptorsWrapper(onResponse: (response, handler) {
       _dio = null;
       return handler.next(response);

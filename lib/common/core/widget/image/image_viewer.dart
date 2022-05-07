@@ -2,7 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class StorageImageComp extends StatelessWidget {
+enum TypeImageViewer {
+  assets,
+  storage
+}
+
+class ImageViewer extends StatelessWidget {
   final double width;
   final double height;
   final String url;
@@ -10,8 +15,9 @@ class StorageImageComp extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final BoxFit? boxFit;
   final Color? color;
+  final TypeImageViewer type;
 
-  const StorageImageComp({
+  const ImageViewer({
     Key? key,
     required this.url,
     required this.width,
@@ -20,6 +26,7 @@ class StorageImageComp extends StatelessWidget {
     this.padding,
     this.boxFit,
     this.color,
+    this.type = TypeImageViewer.assets,
   }) : super(key: key);
 
   @override
@@ -31,7 +38,10 @@ class StorageImageComp extends StatelessWidget {
         height: height,
         padding: padding,
         decoration: BoxDecoration(color: color),
-        child: Image.file(
+        child: type == TypeImageViewer.assets ? Image.asset(
+          url,
+          fit: boxFit ?? BoxFit.contain,
+        ) : Image.file(
           File(url),
           fit: boxFit ?? BoxFit.contain,
         ),

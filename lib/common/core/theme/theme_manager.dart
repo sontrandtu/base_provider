@@ -20,6 +20,7 @@ class ThemeManager {
     splashColor: ColorResource.colorSplash,
     highlightColor: ColorResource.colorHighLight,
     primarySwatch: ColorResource.primarySwatchMaterial,
+    scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Babylon',
     textTheme: const TextTheme(
       headline6: TextStyle(
@@ -81,6 +82,7 @@ class ThemeManager {
         ),
       ),
     ),
+    scaffoldBackgroundColor: Colors.grey[850],
     fontFamily: 'Babylon',
     textTheme: const TextTheme(
       headline6: TextStyle(
@@ -107,6 +109,7 @@ class ThemeManager {
       bodyText2: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 14),
+
     ),
   );
 }

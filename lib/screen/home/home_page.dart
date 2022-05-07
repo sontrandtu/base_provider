@@ -346,7 +346,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   }
 
   @override
-  HomeViewModel init() => HomeViewModel();
+  HomeViewModel get init => HomeViewModel();
 }
 
 class A {

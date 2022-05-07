@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 abstract class StatelessProvider<VM extends BaseViewModel> extends StatelessWidget {
-  VM get viewModel => Provider.of(context, listen: false);
+  VM get viewModel => Provider.of(navigator.currentContext!, listen: false);
 
   const StatelessProvider({Key? key}) : super(key: key);
 }

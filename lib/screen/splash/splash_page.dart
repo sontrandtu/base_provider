@@ -15,7 +15,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
 
   @override
-  SplashViewModel init() => splashViewModel;
+  SplashViewModel get init => splashViewModel;
 
   @override
   Widget build(BuildContext context) {

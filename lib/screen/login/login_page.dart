@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   @override
-  LoginViewModel init() => loginViewModel;
+  LoginViewModel get init => loginViewModel;
 
   @override
   Widget build(BuildContext context) {

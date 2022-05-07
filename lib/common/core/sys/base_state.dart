@@ -17,11 +17,11 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
   // RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
-  VM init();
+  VM get init;
 
   @override
   void initState() {
-    _viewModel = init();
+    _viewModel = init;
 
     super.initState();
 

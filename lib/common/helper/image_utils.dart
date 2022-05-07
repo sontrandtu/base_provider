@@ -1,6 +1,7 @@
+import 'dart:io' as io;
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io' as io;
+import 'img_crop.dart';
 
 enum PickImageType { image, video }
 
@@ -16,10 +17,16 @@ class ImageUtils {
     bool isSizeMax = FileUtils.imgSize(rawFile);
 
     if (!isSizeMax) {
-      if (!hasCrop) {}
+      if (!hasCrop) {
+        return _image.path;
+      } else {
+        final _path = await ImgCrop.instance().cropFile(_image.path);
+        return _path;
+      }
     } else {
       return null;
     }
+
   }
 
   Future<dynamic> pick({PickImageType type = PickImageType.image}) async {

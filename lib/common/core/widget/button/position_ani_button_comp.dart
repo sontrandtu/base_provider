@@ -20,7 +20,7 @@ class PositionAniButtonComp extends StatefulWidget {
     this.height = 60,
     this.width = 160,
     this.shadowDegree = ShadowDegree.light,
-    this.duration = 70,
+    this.duration = 1000,
     this.borderRadius = 16,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
   void initState() {
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 100),
+      duration: Duration(milliseconds: widget.duration),
       value: 1,
     );
 
@@ -100,8 +100,7 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
             AnimatedBuilder(
                 animation: animation,
                 builder: (BuildContext context, Widget? cachedChild) {
-                  return AnimatedPositioned(
-                    duration: Duration(milliseconds: 50),
+                  return Positioned(
                     bottom: animation.value,
                     child: Container(
                       height: height,

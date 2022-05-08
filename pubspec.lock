@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.4.1"
-  animated_button:
-    dependency: "direct main"
-    description:
-      name: animated_button
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   archive:
     dependency: transitive
     description:
@@ -999,13 +992,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-  spring_button:
-    dependency: "direct main"
-    description:
-      name: spring_button
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   sqflite:
     dependency: transitive
     description:

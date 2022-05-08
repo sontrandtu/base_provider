@@ -1,13 +1,10 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
-import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spring_button/spring_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -318,38 +315,21 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
-                  AnimatedButton(
-                    child: Text(
-                      'Simple button',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-              SpringButton(
-                SpringButtonType.OnlyScale,
-                Container(color:Colors.red,child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('abc'),
-                )),
-                onTapDown: (_) {} ,
-                onLongPress: () {},
-                onLongPressEnd: (_) {},
-              ),
               ScaleAniButtonComp(
                     onPressed: () async {
                       urlImage = await viewModel.appNavigator
                           .bottomSheetDialog(const PickImgBottomSheetDialog());
                       setState(() {});
                     },
-                    child: const Text(
-                      'Simple button',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      color: Colors.blue,
+                      child: const Text(
+                        'Simple button',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),

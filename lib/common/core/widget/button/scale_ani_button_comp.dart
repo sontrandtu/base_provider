@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 class ScaleAniButtonComp extends StatefulWidget {
   final GestureTapCallback onPressed;
   final bool enabled;
+  final bool isElevation;
   final Widget child;
   final Color color;
   final double borderRadius;
-  final int duration;
   final double elevation;
-  final EdgeInsetsGeometry? padding;
-  final bool isElevation;
   final double scaleBegin, scaleEnd;
+  final double? width, height;
+  final int duration;
+  final EdgeInsetsGeometry? padding;
 
   const ScaleAniButtonComp({
     Key? key,
@@ -28,6 +29,8 @@ class ScaleAniButtonComp extends StatefulWidget {
     this.isElevation = true,
     this.scaleBegin = 0.8,
     this.scaleEnd = 1,
+    this.width,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -66,13 +69,12 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp>
     super.dispose();
   }
 
-
   void _pressed(_) {
     animationController.value = 0;
   }
 
   void _unPressedOnTapUp(_) {
-     animationController.forward();
+    animationController.forward();
   }
 
   Future<void> _unPressed() async {
@@ -81,20 +83,19 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animation,
-      builder: (BuildContext context, Widget? cachedChild) {
-        return Transform.scale(
-          scale: animation.value,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            child: widget.child,
-            onTapDown: widget.enabled ? _pressed : null,
-            onTapUp: widget.enabled ? _unPressedOnTapUp : null,
-            onTapCancel: widget.enabled ? _unPressed : null,
-          ),
-        );
-      },
+    return GestureDetector(
+      child: AnimatedBuilder(
+        animation: animation,
+        builder: (BuildContext context, Widget? cachedChild) {
+          return Transform.scale(
+            scale: animation.value,
+            child: widget.child
+          );
+        },
+      ),
+      onTapDown: widget.enabled ? _pressed : null,
+      onTapUp: widget.enabled ? _unPressedOnTapUp : null,
+      onTapCancel: widget.enabled ? _unPressed : null,
     );
   }
 }

@@ -79,7 +79,7 @@ class _FormAlbumState extends State<FormAlbum> {
                   .toList()
             ] else ...[
               _LayoutImage(
-                child: Center(child: Text('3 ' + KeyLanguage.images.tl)),
+                child: Center(child: Text('${_items.length} ' + KeyLanguage.images.tl)),
                 hasMargin: _items.isNotEmpty ? true : false,
                 isRoot: true,
               ),

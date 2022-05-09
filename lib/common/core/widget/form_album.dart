@@ -53,6 +53,7 @@ class _FormAlbumState extends State<FormAlbum> {
                   _genAssetEntity(_items);
                 });
               }
+              widget.onChanged.call(_items);
             },
             child: _LayoutImage(
               child: const Icon(Icons.image),
@@ -74,6 +75,7 @@ class _FormAlbumState extends State<FormAlbum> {
                             _items.removeWhere((item) => item['id'] == e['id']);
                             _genAssetEntity(_items);
                           });
+                          widget.onChanged.call(_items);
                         },
                       ))
                   .toList()
@@ -90,7 +92,7 @@ class _FormAlbumState extends State<FormAlbum> {
     );
   }
 
-  _genAssetEntity(List inputs) {
+  void _genAssetEntity(List inputs) {
     _assetEntities = [];
     for (var element in inputs) {
       _assetEntities!.add(AssetEntity(
@@ -109,6 +111,7 @@ class _LayoutImage extends StatelessWidget {
   final VoidCallback? onDelete;
   final bool hasMargin;
   final bool isRoot;
+  final Color? color;
 
   const _LayoutImage({
     Key? key,
@@ -117,6 +120,7 @@ class _LayoutImage extends StatelessWidget {
     this.hasMargin = true,
     this.onDelete,
     this.isRoot = false,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -133,7 +137,7 @@ class _LayoutImage extends StatelessWidget {
                 height: 70,
                 width: 70,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(.2),
+                  color: color ?? Colors.grey.withOpacity(.2),
                 ),
                 child: child,
               ),

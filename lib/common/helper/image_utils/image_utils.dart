@@ -33,14 +33,11 @@ class ImageUtils {
     bool isMax = await FileUtils.checkSize(rawFile);
 
     if (!isMax) {
-      if (!hasCrop) {
-        return _image.path;
-      }
+      if (!hasCrop) return _image.path;
       final _path = await ImgCrop.instance().cropFile(_image.path);
       return _path;
     }
     return null;
-
   }
 
   // static Future<dynamic> pick(
@@ -93,7 +90,7 @@ class ImageUtils {
           });
         }
       }
-      if(!empty(_multi)) {
+      if (!empty(_multi)) {
         _multi.last['isLast'] = 1;
       }
       return _multi;

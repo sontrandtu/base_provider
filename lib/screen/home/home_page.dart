@@ -1,6 +1,7 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
 import 'package:achitecture_weup/common/core/widget/form_album.dart';
+import 'package:achitecture_weup/common/core/widget/form_number.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
@@ -44,7 +45,17 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  FormAlbum(onChanged: (val) {}),
+                  FormAlbum(
+                    onChanged: (val) {},
+                  ),
+                  FormNumber(
+                    value: 5,
+                    onChanged: (int value) {
+                      print('value......$value');
+                    },
+                    max: 10,
+                    min: 1,
+                  ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',

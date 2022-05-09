@@ -4,3 +4,4 @@ export 'integer_extension.dart';
 export 'object_ext.dart';
 export 'string_extension.dart';
 export 'text_styles_extension.dart';
+export 'file_extension.dart';

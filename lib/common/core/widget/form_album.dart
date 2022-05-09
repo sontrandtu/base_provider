@@ -65,7 +65,7 @@ class _FormAlbumState extends State<FormAlbum> {
             if (_items.length <= 2) ...[
               ..._items
                   .map<Widget>((e) => _LayoutImage(
-                        child: ImageViewer('${e['path']}', boxFit: BoxFit.fill),
+                        child: ImageViewer('${e['path']}', fit: BoxFit.fill),
                         hasMargin: e['isLast'] != null && e['isLast'] == 1
                             ? false
                             : true,

@@ -50,11 +50,12 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ),
                   FormNumber(
                     value: 5,
-                    onChanged: (int value) {
-                      print('value......$value');
-                    },
+                    onChanged: (int value) {},
                     max: 10,
                     min: 1,
+                  ),
+                  const ImageViewer(
+                    'https://imageonline.co/image.jpg',
                   ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',

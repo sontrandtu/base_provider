@@ -14,7 +14,7 @@ class ImageUtils {
     final XFile? _image = await _p.pickImage(source: ImageSource.gallery);
 
     final rawFile = io.File(_image!.path);
-    bool isSizeMax = FileUtils.imgSize(rawFile);
+    bool isSizeMax = FileUtils.size(rawFile);
 
     if (!isSizeMax) {
       if (!hasCrop) {

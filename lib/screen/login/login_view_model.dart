@@ -22,8 +22,8 @@ class LoginViewModel extends BaseViewModel {
 
 
   void login() async {
-    setStatus(Status.loading);
-    await delay(500);
+    setStatus(Status.waiting);
+    await delay(1000);
 
     // if (await getConnection(reconnect: login)) return;
     //

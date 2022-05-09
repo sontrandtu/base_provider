@@ -98,4 +98,43 @@ If generate key has error "[ERROR] easy localization: Source path does not exist
 
 "flutter pub run easy_localization:generate -S assets/translations -f keys -o key_language.g.dart"
 
+## Provider READ CONTEXT
+    **DON'T** call [read] inside build if the value is used only for events:
+
+    Widget build(BuildContext context) {
+    // counter is used only for the onPressed of RaisedButton
+        final counter = context.read<Counter>();
+
+        return RaisedButton(
+        onPressed: () => counter.increment(),
+     );
+    }
+
+    **CONSIDER** calling [read] inside event handlers:
+
+    Widget build(BuildContext context) {
+      return RaisedButton(
+        onPressed: () {
+          // as performant as the previous solution, but resilient to refactoring
+          context.read<Counter>().increment(),
+        },
+      );
+    }
+
+    **DON'T** use [read] for creating widgets with a value that never changes
+    ```dart
+    Widget build(BuildContext context) {
+      // using read because we only use a value that never changes.
+      final model = context.read<Model>();
+      return Text('${model.valueThatNeverChanges}');
+    }
+
+    **CONSIDER** using [select] for filtering unwanted rebuilds
+    ```dart
+    Widget build(BuildContext context) {
+      // Using select to listen only to the value that used
+      final valueThatNeverChanges = context.select((Model model) => model.valueThatNeverChanges);
+      return Text('$valueThatNeverChanges');
+    }
+
 

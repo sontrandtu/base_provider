@@ -85,7 +85,10 @@ abstract class BaseViewModel extends ChangeNotifier {
       appNavigator.dialog(BaseErrorDialog(
         content: HttpConstant.CONNECT_ERROR,
         textButtonConfirm: 'Thử lại',
-        mConfirm: reconnect ?? appNavigator.back,
+        mConfirm: () {
+          setStatus(Status.loading);
+          reconnect ?? appNavigator.back();
+        },
         mCancel: appNavigator.back,
       ));
       setStatus(Status.error);

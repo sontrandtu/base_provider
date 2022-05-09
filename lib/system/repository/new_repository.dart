@@ -3,7 +3,7 @@ import 'package:achitecture_weup/common/network/client.dart';
 import 'package:achitecture_weup/system/model/post.dart';
 import 'package:flutter/foundation.dart';
 
-class NewRepository extends BaseRepository {
+class NewRepository {
   NewRepository._internal();
 
   static NewRepository get instance => NewRepository._internal();

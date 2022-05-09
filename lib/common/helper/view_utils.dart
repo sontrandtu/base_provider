@@ -25,15 +25,17 @@ class ViewUtils {
   static double get height =>
       MediaQuery.of(navigator.currentContext!).size.height;
 
-  static double get heightAppBar => 24;
+  static double get heightStatusBar =>
+      MediaQuery.of(navigator.currentContext!).padding.top;
 
   static double get paddingBase => 12;
 
   static void toast(dynamic msg) => Fluttertoast.showToast(
-      msg: msg.toString(),
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: ColorResource.primary,
-      textColor: ColorResource.textBody,
-      fontSize: 16.0);
+        msg: msg.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: ColorResource.primary,
+        textColor: ColorResource.textBody,
+        fontSize: 16.0,
+      );
 }

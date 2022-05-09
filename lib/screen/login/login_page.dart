@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   @override
-  LoginViewModel init() => loginViewModel;
+  LoginViewModel get init => loginViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,9 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
             SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                height: height - ViewUtils.heightAppBar,
+                height: height - ViewUtils.heightStatusBar,
                 width: width,
-                constraints: BoxConstraints(maxHeight: height - ViewUtils.heightAppBar),
+                constraints: BoxConstraints(maxHeight: height - ViewUtils.heightStatusBar),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

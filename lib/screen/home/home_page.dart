@@ -1,6 +1,5 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
@@ -303,8 +302,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ),
                   PositionAniButtonComp(
                     onPressed: () {
-                      viewModel.appNavigator
-                          .bottomSheetDialog(const PickImgBottomSheetDialog());
                     },
                     child: const Text(
                       'Simple button',
@@ -318,18 +315,21 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
-                  ScaleAniButtonComp(
+              ScaleAniButtonComp(
                     onPressed: () async {
                       urlImage = await viewModel.appNavigator
                           .bottomSheetDialog(const PickImgBottomSheetDialog());
                       setState(() {});
                     },
-                    child: const Text(
-                      'Simple button',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      color: Colors.blue,
+                      child: const Text(
+                        'Simple button',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
@@ -348,7 +348,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   }
 
   @override
-  HomeViewModel init() => HomeViewModel();
+  HomeViewModel get init => HomeViewModel();
 }
 
 class A {

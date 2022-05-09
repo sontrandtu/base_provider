@@ -74,24 +74,6 @@ class _MultipleSelectBottomSheetState extends State<MultipleSelectBottomSheet> {
                   )
                 ],
               ),
-              // AnimatedSwitcher(
-              //   duration: const Duration(milliseconds: 300),
-              //   reverseDuration: const Duration(milliseconds: 200),
-              //   transitionBuilder: (child, anim) => SizeTransition(
-              //     sizeFactor: isShowSearch
-              //         ? Tween<double>(begin: 1.5, end: 1).animate(anim)
-              //         : Tween<double>(begin: 0, end: 1).animate(anim),
-              //     child: child,
-              //   ),
-              //   child: isShowSearch
-              //       ? Container(
-              //           key: const ValueKey('widgetSelected'),
-              //           child: const TextField(),
-              //         )
-              //       : Container(
-              //           key: const ValueKey('widgetDefault'),
-              //         ),
-              // ),
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),

@@ -1,6 +1,4 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StepperFix extends StatefulWidget {
@@ -17,7 +15,6 @@ class _StepperFixState extends State<StepperFix> {
 
   @override
   Widget build(BuildContext context) {
-    print('BuildContextBuildContext.......$current');
     return Scaffold(
       appBar: AppBarComp(
         title: 'Stepper',
@@ -34,8 +31,8 @@ class _StepperFixState extends State<StepperFix> {
       ),
       bottomSheet: Container(
         height: 50,
-        padding: EdgeInsets.symmetric(
-            vertical: 6, horizontal: ViewUtils.paddingBase),
+        padding: const EdgeInsets.symmetric(
+            vertical: 6, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

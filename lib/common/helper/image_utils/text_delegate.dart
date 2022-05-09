@@ -33,13 +33,13 @@ class AssetPickerTextDelegateVN extends AssetPickerTextDelegate {
   String get select => 'Select';
 
   @override
-  String get emptyList => 'Danh sách trống';
+  String get emptyList => 'Chưa có dữ liệu';
 
   @override
   String get unSupportedAssetType => 'Unsupported HEIC asset type.';
 
   @override
-  String get unableToAccessAll => 'Unable to access all assets on the device';
+  String get unableToAccessAll => 'Không thể truy cập tất cả nội dung trên thiết bị';
 
   @override
   String get viewingLimitedAssetsTip =>

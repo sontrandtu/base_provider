@@ -5,7 +5,6 @@ import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-
 enum TypeImageViewer { assets, storage, network }
 
 class ImageViewer extends StatelessWidget {
@@ -30,6 +29,7 @@ class ImageViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (empty(url)) return const SizedBox.shrink();
     TypeImageViewer type = TypeImageViewer.assets;
     RegExp regExp = RegExp(r'^\/(storage|data)[^\.]');
     if (regExp.hasMatch(url)) {
@@ -41,7 +41,8 @@ class ImageViewer extends StatelessWidget {
     }
     return InkWellComp(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(url)));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => _ViewImage(url)));
       },
       child: ClipRRect(
         borderRadius: borderRadius ?? BorderRadius.circular(0),
@@ -84,13 +85,17 @@ class ImageViewer extends StatelessWidget {
 
 class _ViewImage extends StatelessWidget {
   final String url;
-  const _ViewImage(this.url,{Key? key}) : super(key: key);
+
+  const _ViewImage(this.url, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print_r(url);
     return Scaffold(
-      appBar: AppBarComp(title: _getName(url), onLeading: () {},),
+      appBar: AppBarComp(
+        title: _getName(url),
+        onLeading: () {},
+      ),
       body: PhotoView(
         imageProvider: NetworkImage(url),
         enablePanAlways: true,
@@ -102,7 +107,7 @@ class _ViewImage extends StatelessWidget {
               value: progress == null
                   ? null
                   : progress.cumulativeBytesLoaded /
-                  progress.expectedTotalBytes!,
+                      progress.expectedTotalBytes!,
             ),
           ),
         ),
@@ -111,14 +116,13 @@ class _ViewImage extends StatelessWidget {
         maxScale: PhotoViewComputedScale.covered * 1.8,
         initialScale: PhotoViewComputedScale.contained,
         basePosition: Alignment.center,
-
       ),
     );
   }
 
   String _getName(String input) {
     final regExp = RegExp(r'\/\w+\.(jpg|png|jpge|gif)');
-    if(input.lastIndexOf(regExp) != -1) {
+    if (input.lastIndexOf(regExp) != -1) {
       return input.substring(input.lastIndexOf(regExp) + 1);
     }
     return input;

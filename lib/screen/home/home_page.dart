@@ -55,7 +55,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     min: 1,
                   ),
                   const ImageViewer(
-                    'https://imageonline.co/image.jpg',
+                    '',
                   ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',

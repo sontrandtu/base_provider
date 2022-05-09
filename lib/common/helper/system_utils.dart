@@ -26,7 +26,7 @@ void print_r(dynamic input) {
 
 bool empty(dynamic input, [bool hasZero = false]) {
   if (input == null) return true;
-  if (input is String && input.isEmpty) return false;
+  if (input is String && input != '') return false;
 
   if (input is num) {
     if (input == 0 || input == .0 && !hasZero) return false;

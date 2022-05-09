@@ -3,7 +3,6 @@ export 'page_manager/page_manager.dart';
 
 export 'sys/api_response.dart';
 export 'sys/base_refresh_controller.dart';
-export 'sys/base_repository.dart';
 export 'sys/base_function.dart';
 export 'model_base/base_response.dart';
 export 'model_base/option_dropdown.dart';

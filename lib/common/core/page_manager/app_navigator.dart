@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 /*
@@ -53,17 +55,12 @@ class AppNavigator {
           arguments: arguments);
 
   /*
-  * Close Dialog, bottomsheet
-  * */
-  Future<dynamic> pop([dynamic result]) async =>
-      Navigator.pop(_context, result);
-
-  /*
   * Close dialog, page,...
   *
   * Safe when [page histories] is empty
   * */
   void back({dynamic result}) async {
-    if (await Navigator.maybePop(_context)) Navigator.pop(_context, result);
+    log(result.toString());
+    if (Navigator.canPop(_context)) Navigator.pop(_context, result);
   }
 }

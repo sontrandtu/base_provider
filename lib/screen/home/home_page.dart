@@ -1,5 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
@@ -103,8 +104,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ElevatedButtonComp(
                     title: 'Time Picker Material',
                     onPressed: () async {
-                      DateTime? a =
-                          await viewModel.appNavigator.bottomSheetDialog(
+                      DateTime? a = await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
                     },
@@ -118,8 +118,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     value: value.valueSwitch,
                     onChanged: value.changeSwitch,
                     side: const BorderSide(width: 1),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                   ),
                   RadioCustomComp<String>(
                     value: value.radioValue1,
@@ -191,33 +190,27 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                         widgetDefault: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Tennis',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
                             ),
                           ),
                         ),
                         widgetSelected: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: ColorResource.primarySwatch),
+                            border: Border.all(color: ColorResource.primarySwatch),
                             color: ColorResource.primarySwatch,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Tennis',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.white),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
                             ),
                           ),
                         ),
@@ -228,33 +221,27 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                         widgetDefault: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Base Ball',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
                             ),
                           ),
                         ),
                         widgetSelected: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: ColorResource.primarySwatch),
+                            border: Border.all(color: ColorResource.primarySwatch),
                             color: ColorResource.primarySwatch,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Base Ball',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.white),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
                             ),
                           ),
                         ),
@@ -265,33 +252,27 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                         widgetDefault: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Colors.grey.withOpacity(0.5)),
+                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Swim',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.grey.withOpacity(0.5)),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
                             ),
                           ),
                         ),
                         widgetSelected: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: ColorResource.primarySwatch),
+                            border: Border.all(color: ColorResource.primarySwatch),
                             color: ColorResource.primarySwatch,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                             child: Text(
                               'Swim',
-                              style: appStyle.textTheme.bodyText2!
-                                  .apply(color: Colors.white),
+                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
                             ),
                           ),
                         ),
@@ -305,7 +286,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   PositionAniButtonComp(
                     onPressed: () async {
                       final result = await ImageUtils.multiply(context);
-                    print('result--- $result');
+                      print('result--- $result');
                     },
                     child: const Text(
                       'Simple button1111',
@@ -319,10 +300,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
-              ScaleAniButtonComp(
+                  ScaleAniButtonComp(
                     onPressed: () async {
-                      urlImage = await viewModel.appNavigator
-                          .bottomSheetDialog(const PickImgBottomSheetDialog());
+                      urlImage =
+                          await viewModel.appNavigator.bottomSheetDialog(const PickImgBottomSheetDialog());
                       setState(() {});
                     },
                     child: Container(
@@ -342,6 +323,13 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     onChange: value.onChangeMultiple,
                     listItems: value.listMultipleData,
                   ),
+
+                  TextButtonComp(
+                    title: 'Open dialog',
+                    onPressed: () => showDialog(
+                        builder: (context) => CustomDialog(title: 'Thống báo', description: 'Thông báo',onConfirm: ()=> viewModel.appNavigator.back()),
+                        context: context),
+                  )
                 ],
               ),
             ),

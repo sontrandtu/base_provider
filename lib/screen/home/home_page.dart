@@ -1,5 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
@@ -19,6 +20,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   String groupRadio = 'e';
 
   ScrollController scrollController = ScrollController();
+  List<String>? _paths;
 
   @override
   void initState() {
@@ -301,10 +303,12 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     height: 16,
                   ),
                   PositionAniButtonComp(
-                    onPressed: () {
+                    onPressed: () async {
+                      final result = await ImageUtils.multiply(context);
+                    print('result--- $result');
                     },
                     child: const Text(
-                      'Simple button',
+                      'Simple button1111',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -322,7 +326,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       setState(() {});
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       color: Colors.blue,
                       child: const Text(
                         'Simple button',

@@ -77,6 +77,7 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
   Widget build(BuildContext context) {
     double height = widget.height - 4;
     return GestureDetector(
+      onTap: widget.onPressed,
       child: SizedBox(
         width: widget.width,
         height: widget.height,

@@ -3,7 +3,7 @@ import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-ThemeData appStyle = Theme.of(navigator.currentContext!);
+ThemeData appStyle = Theme.of(Application.navigator.currentContext!);
 
 class ThemeManager {
   ThemeManager._internal();

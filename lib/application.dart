@@ -5,12 +5,12 @@ import 'package:achitecture_weup/common/core/theme/theme_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'common/helper/constant.dart';
 
-final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
+import 'common/helper/constant.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
+  static final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) => Consumer<ThemeViewModel>(

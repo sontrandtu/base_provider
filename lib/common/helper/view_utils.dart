@@ -14,19 +14,19 @@ class ViewUtils {
       Container(color: ColorResource.divider, width: 1, height: h ?? 15);
 
   static Future<void>? changeLanguage(Locale locale, {BuildContext? context}) =>
-      navigator.currentContext?.setLocale(locale);
+      Application.navigator.currentContext?.setLocale(locale);
 
   static Locale? getLocale({BuildContext? context}) =>
-      navigator.currentContext?.locale;
+      Application.navigator.currentContext?.locale;
 
   static double get width =>
-      MediaQuery.of(navigator.currentContext!).size.width;
+      MediaQuery.of(Application.navigator.currentContext!).size.width;
 
   static double get height =>
-      MediaQuery.of(navigator.currentContext!).size.height;
+      MediaQuery.of(Application.navigator.currentContext!).size.height;
 
   static double get heightStatusBar =>
-      MediaQuery.of(navigator.currentContext!).padding.top;
+      MediaQuery.of(Application.navigator.currentContext!).padding.top;
 
   static double get paddingBase => 12;
 

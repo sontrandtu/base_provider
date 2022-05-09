@@ -25,7 +25,7 @@ class PermissionConfig {
         return false;
       case PermissionStatus.permanentlyDenied:
         showDialog(
-            context: navigator.currentContext!,
+            context: Application.navigator.currentContext!,
             builder: (context) =>
                 PermissionDialog(title: title, content: content));
         return false;

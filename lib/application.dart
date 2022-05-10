@@ -14,7 +14,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Consumer<ThemeViewModel>(
-        builder: (context, value, child) => MaterialApp(
+        builder: (_, value, __) => MaterialApp(
           navigatorKey: navigator,
           debugShowCheckedModeBanner: false,
           title: AppConstant.APP_NAME,

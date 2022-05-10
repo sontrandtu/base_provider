@@ -24,7 +24,8 @@ dependencies:
   #d
   dotted_decoration: ^2.0.0
   #e
-  easy_localization: ^3.0.0
+  easy_localization:
+    git: https://github.com/manhtai831/easy_localization
 
   #f
   flutter_svg: ^0.23.0
@@ -50,7 +51,6 @@ dependencies:
 
   #p
   pull_to_refresh: ^2.0.0
-  pretty_dio_logger: ^1.1.1
   provider: ^6.0.0
   path_provider: ^2.0.9
   permission_handler: ^8.3.0
@@ -82,6 +82,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   retrofit_generator: ^4.0.1
   build_runner: ^2.1.7
+  pretty_dio_logger: ^1.1.1
 
 flutter:
 

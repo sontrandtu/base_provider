@@ -15,7 +15,7 @@ Reset:   \x1B[0m*/
 
 void showLog(Object message) {
   if (kDebugMode) {
-    print('\x1B[34m$message\x1B[0m');
+    print('\x1B[34m[WEUP-APP] $message\x1B[0m');
   }
 }
 
@@ -25,12 +25,18 @@ void showError(Object? message) {
 
 void showWarning(Object message) {
   if (kDebugMode) {
-    print('\x1B[33m$message\x1B[0m');
+    print('\x1B[33m[WEUP-APP] $message\x1B[0m');
+  }
+}
+
+void showLogState(Object message) {
+  if (kDebugMode) {
+    print('\x1B[36m[WEUP-APP] $message\x1B[0m');
   }
 }
 
 void showDioLog(Object message) {
   if (kDebugMode) {
-    print('\x1B[35m$message\x1B[0m');
+    print('\x1B[35m[WEUP-APP] $message\x1B[0m');
   }
 }

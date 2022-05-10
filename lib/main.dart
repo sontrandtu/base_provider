@@ -5,7 +5,6 @@ import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'application.dart';
@@ -35,13 +34,16 @@ Future<void> main() async {
         fallbackLocale: const Locale('vi', 'VN'),
         startLocale: const Locale('vi', 'VN'),
         useOnlyLangCode: true,
+        logEnable: true,
         supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
         path: 'assets/translations',
         child: const Application(),
       ),
     ),
   );
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
+  // SystemChrome.setSystemUIOverlayStyle(
+  //     SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark,statusBarBrightness: Brightness.dark));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
 }
 
 Future<void> _installFirebase() async {

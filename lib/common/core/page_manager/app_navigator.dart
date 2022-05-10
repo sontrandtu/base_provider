@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 class AppNavigator {
   late BuildContext _context;
 
+  double get width => MediaQuery.of(_context).size.width;
+
+  double get height => MediaQuery.of(_context).size.height;
+
   void setBuildContext(BuildContext? ctx) => _context = ctx!;
 
   /*
@@ -16,13 +20,12 @@ class AppNavigator {
   * */
   Future<dynamic> dialog(Widget dialog, {dynamic arguments, bool? barrierDismissible}) async {
     log('OPEN DIALOG ${dialog.runtimeType} ${dialog.hashCode}', name: 'WEUP-APP');
-    return    await showDialog(
+    return await showDialog(
         context: _context,
         builder: (context) => dialog,
         barrierDismissible: barrierDismissible ?? false,
         routeSettings: RouteSettings(arguments: arguments));
   }
-
 
   /*
   * Hiển thị bottomSheet

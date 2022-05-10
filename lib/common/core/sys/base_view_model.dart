@@ -17,8 +17,6 @@ abstract class BaseViewModel extends ChangeNotifier {
 
   AppNavigator? _appNavigator = AppNavigator();
 
-  /// ---------------------------------------------------
-
   /*
   * [AppNavigator] thực hiện các navigation bên trong ViewModel
   * */
@@ -39,8 +37,6 @@ abstract class BaseViewModel extends ChangeNotifier {
   @Deprecated('Sử dụng [getConnection({Function? reconnect})] thay vì [isConnecting], '
       'trường này không hỗ trợ thực hiện lại request khi mất kết nối')
   Future<bool> get isConnecting async => await getConnection();
-
-  /// -----------------------------------------------------
 
   /*
   * Arguments từ page trước
@@ -143,7 +139,9 @@ abstract class BaseViewModel extends ChangeNotifier {
   }
 
   /*
+  * Luôn sử dụng update để thông báo thay đổi dữ liệu. [update] sẽ an toàn hơn [notifyListeners]
   *
+  * Không sử dụng thuần [notifyListeners]
   * */
   void update() {
     if (_mounted) notifyListeners();

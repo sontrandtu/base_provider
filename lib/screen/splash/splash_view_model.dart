@@ -15,6 +15,7 @@ class SplashViewModel extends BaseViewModel {
 
   @override
   void onViewCreated() {
+    super.onViewCreated();
     appNavigator.pushReplacementNamed(RoutePath.LOGIN,arguments: {'SplashViewModel args': runtimeType.toString()});
   }
 }

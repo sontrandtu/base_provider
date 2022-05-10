@@ -1,5 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/core/widget/form_album.dart';
 import 'package:achitecture_weup/common/core/widget/form_number.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
@@ -57,7 +58,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     max: 10,
                     min: 1,
                   ),
-                  ImageViewer(url: urlImage, width: 100, height: 100),
+                  ImageViewer(urlImage, width: 100, height: 100),
 
                   const ImageViewer(
                     '',
@@ -114,8 +115,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ElevatedButtonComp(
                     title: 'Time Picker Material',
                     onPressed: () async {
-                      DateTime? a =
-                          await viewModel.appNavigator.bottomSheetDialog(
+                      DateTime? a = await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
                     },
@@ -129,8 +129,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     value: value.valueSwitch,
                     onChanged: value.changeSwitch,
                     side: const BorderSide(width: 1),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                   ),
                   RadioCustomComp<String>(
                     value: value.radioValue1,
@@ -348,10 +347,11 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   TextButtonComp(
                       title: 'Open step fix',
                       onPressed: () => viewModel.appNavigator.pushNamed(RoutePath.STEPPER_FIX, arguments: [
-                        LoginPage(),
-                        SplashPage(),
-                        LoginPage(),
-                          ]))
+                            LoginPage(),
+                            SplashPage(),
+                            LoginPage(),
+                          ])),
+                  TextButtonComp(title: 'Open step fix', onPressed: () => loginViewModel.login())
                 ],
               ),
             ),

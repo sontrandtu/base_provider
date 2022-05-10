@@ -5,6 +5,8 @@ import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
+import 'package:achitecture_weup/screen/login/login_page.dart';
+import 'package:achitecture_weup/screen/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,6 +42,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
         builder: (context, value, child) => Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 12),
               controller: scrollController,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +55,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     type: TypeImageViewer.storage,
                   ),
                   ImageViewer(url: urlImage, width: 100, height: 100),
+
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -327,9 +331,19 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   TextButtonComp(
                     title: 'Open dialog',
                     onPressed: () => showDialog(
-                        builder: (context) => CustomDialog(title: 'Thống báo', description: 'Thông báo',onConfirm: ()=> viewModel.appNavigator.back()),
+                        builder: (context) => CustomDialog(
+                            title: 'Thống báo',
+                            description: 'Thông báo',
+                            onConfirm: () => viewModel.appNavigator.back()),
                         context: context),
-                  )
+                  ),
+                  TextButtonComp(
+                      title: 'Open step fix',
+                      onPressed: () => viewModel.appNavigator.pushNamed(RoutePath.STEPPER_FIX, arguments: [
+                        LoginPage(),
+                        SplashPage(),
+                        LoginPage(),
+                          ]))
                 ],
               ),
             ),

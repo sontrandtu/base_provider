@@ -28,8 +28,6 @@ class ViewUtils {
   static double get heightStatusBar =>
       MediaQuery.of(Application.navigator.currentContext!).padding.top;
 
-  static double get paddingBase => 12;
-
   static void toast(dynamic msg) => Fluttertoast.showToast(
         msg: msg.toString(),
         toastLength: Toast.LENGTH_SHORT,

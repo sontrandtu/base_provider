@@ -1,6 +1,4 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StepperFix extends StatefulWidget {
@@ -33,31 +31,30 @@ class _StepperFixState extends State<StepperFix> {
         // child: SizedBox(),
       ),
       bottomSheet: Container(
-        height: 50,
-        padding: EdgeInsets.symmetric(
-            vertical: 6, horizontal: ViewUtils.paddingBase),
+        padding: const EdgeInsets.symmetric(
+            vertical: 6, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            if (current != 0)
-              TextButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor)),
-                onPressed: () {
-                  if (current < 1) {
-                    current = 0;
-                  } else {
-                    current--;
-                  }
-                  setState(() {});
-                },
-                child: Text(
-                  'Pre',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: Colors.white),
+
+              Visibility(
+                visible: current != 0,
+                child: TextButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor)),
+                  onPressed: () {
+                    if (current < 1) {
+                      current = 0;
+                    } else {
+                      current--;
+                    }
+                    setState(() {});
+                  },
+                  child: Text(
+                    'Pre',
+                    style: appStyle.textTheme.bodyText1?.apply(color: Colors.white),
+                  ),
                 ),
               ),
             ElevatedButtonComp(

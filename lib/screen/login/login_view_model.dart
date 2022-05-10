@@ -17,7 +17,8 @@ class LoginViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
     print(getArguments());
-    setStatus(Status.success);
+    print('build ${runtimeType}');
+    // setStatus(Status.success);
   }
 
 

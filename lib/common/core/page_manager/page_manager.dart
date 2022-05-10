@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:achitecture_weup/common/core/page_manager/push_page_builder.dart';
 import 'package:achitecture_weup/common/core/page_manager/route_path.dart';
+import 'package:achitecture_weup/common/core/widget/stepper/stepper_fix.dart';
 import 'package:achitecture_weup/common/core/widget/undefined_layout.dart';
 import 'package:achitecture_weup/screen/home/home_page.dart';
 import 'package:achitecture_weup/screen/login/login_page.dart';
@@ -21,6 +22,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       break;
     case RoutePath.HOME:
       page = const HomePage();
+      break;
+ case RoutePath.STEPPER_FIX:
+      page = StepperFix(items: settings.arguments as List<Widget>);
       break;
     default:
       page =  UndefinedLayout(name: settings.name,);

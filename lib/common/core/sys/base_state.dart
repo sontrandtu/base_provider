@@ -4,17 +4,16 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
-    extends State<T> {
+abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
   VM? _viewModel;
-  double _width = 0;
-  double _height = 0;
+  double? _width = 0;
+  double? _height = 0;
 
   VM get viewModel => _viewModel!;
 
-  double get width => _width;
+  double get width => _width!;
 
-  double get height => _height;
+  double get height => _height!;
 
   // RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
@@ -26,17 +25,16 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
 
     super.initState();
 
-    log('$VM was installed', name: 'WEUP-APP-${DateTime.now()}');
+    log('$VM was installed', name: 'WEUP-APP');
+
     _viewModel?.initialData();
 
-    WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => _viewModel?.onViewCreated());
+    WidgetsBinding.instance?.addPostFrameCallback((_) => _viewModel?.onViewCreated());
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    log('didChangeDependencies', name: 'WEUP-APP-${DateTime.now()}');
 
     appStyle = Theme.of(context);
 
@@ -51,6 +49,8 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel>
   void dispose() {
     _viewModel?.onDispose();
     _viewModel = null;
+    _width = null;
+    _height = null;
 
     log('$VM was closed', name: 'WEUP-APP');
 

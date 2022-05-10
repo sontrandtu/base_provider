@@ -22,6 +22,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RoutePath.HOME:
       page = const HomePage();
       break;
+ case RoutePath.STEPPER_FIX:
+      page = Container();
+      break;
     default:
       page =  UndefinedLayout(name: settings.name,);
       break;

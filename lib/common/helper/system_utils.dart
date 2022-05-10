@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'dart:io' as io;
 
 // ignore: non_constant_identifier_names
 void print_r(dynamic input) {

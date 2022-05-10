@@ -13,13 +13,16 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+    print(getArguments());
+    print('build ${runtimeType}');
+    setStatus(Status.success);
   }
 
 
   void login() async {
     setStatus(Status.waiting);
     await delay(1000);
-
+print('login');
     // if (await getConnection(reconnect: login)) return;
     //
     // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});

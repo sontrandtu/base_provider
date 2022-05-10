@@ -14,7 +14,6 @@ class LoginViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
     print(getArguments());
-    print('build ${runtimeType}');
     setStatus(Status.success);
   }
 
@@ -31,7 +30,7 @@ print('login');
 
     setStatus(Status.success);
 
-    appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
+    // appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {

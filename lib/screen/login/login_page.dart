@@ -23,9 +23,9 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginViewModel>(
-      builder: (_, provider, __) => DropKeyboard(
-        status: provider.status,
+    return ChangeNotifierProvider.value(
+      value: viewModel,
+      builder: (_, __) => MainLayout<LoginViewModel>(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.white,

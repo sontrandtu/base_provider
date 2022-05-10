@@ -5,12 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorComp extends StatelessWidget {
-  const IndicatorComp({Key? key}) : super(key: key);
+  const IndicatorComp({Key? key, this.status}) : super(key: key);
+  final Status? status;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorResource.textBody.withOpacity(0.03),
+      color: status == Status.loading ? Colors.white : ColorResource.textBody.withOpacity(0.05),
       child: Center(
         child: Platform.isAndroid
             ? const CircularProgressIndicator(color: ColorResource.primary)

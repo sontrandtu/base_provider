@@ -13,4 +13,5 @@ class KeyLanguage{
   static const String questionImageGallery = 'questionImageGallery';
   static const String setting = 'setting';
   static const String language = 'language';
+  static const String images = 'images';
 }

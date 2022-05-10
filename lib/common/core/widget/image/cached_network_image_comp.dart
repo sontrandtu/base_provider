@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CachedNetworkImageComp extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final String url;
   final String borderStyle;
   final Widget? widgetPlaceHolder, widgetError;
@@ -13,12 +13,13 @@ class CachedNetworkImageComp extends StatelessWidget {
   final String? resourceErrorImage;
   final double? borderRadius;
   final int? placeholderDuration;
+  final BoxFit fit;
 
   const CachedNetworkImageComp({
     Key? key,
     required this.url,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.borderStyle = 'all',
     this.widgetPlaceHolder,
     this.backgroundColor,
@@ -28,6 +29,7 @@ class CachedNetworkImageComp extends StatelessWidget {
     this.widgetError,
     this.borderRadius,
     this.placeholderDuration,
+    this.fit = BoxFit.contain,
   }) : super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class CachedNetworkImageComp extends StatelessWidget {
         // fadeOutDuration: Duration(microseconds: placeholderDuration ?? 600),
         // fadeInDuration: Duration(microseconds: placeholderDuration ?? 300),
         imageUrl: url,
+        fit: fit,
         placeholder: (_, __) => Container(
           width: width,
           height: height,

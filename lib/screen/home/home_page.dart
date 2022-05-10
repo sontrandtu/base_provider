@@ -1,6 +1,7 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
+import 'package:achitecture_weup/common/core/widget/form_album.dart';
+import 'package:achitecture_weup/common/core/widget/form_number.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
@@ -23,7 +24,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
   String groupRadio = 'e';
 
   ScrollController scrollController = ScrollController();
-  List<String>? _paths;
 
   @override
   void initState() {
@@ -48,14 +48,20 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageViewer(
-                    url: urlImage,
-                    width: 100,
-                    height: 100,
-                    type: TypeImageViewer.storage,
+                  FormAlbum(
+                    onChanged: (val) {},
+                  ),
+                  FormNumber(
+                    value: 5,
+                    onChanged: (int value) {},
+                    max: 10,
+                    min: 1,
                   ),
                   ImageViewer(url: urlImage, width: 100, height: 100),
 
+                  const ImageViewer(
+                    '',
+                  ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -108,7 +114,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ElevatedButtonComp(
                     title: 'Time Picker Material',
                     onPressed: () async {
-                      DateTime? a = await viewModel.appNavigator.bottomSheetDialog(
+                      DateTime? a =
+                          await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
                     },
@@ -122,7 +129,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     value: value.valueSwitch,
                     onChanged: value.changeSwitch,
                     side: const BorderSide(width: 1),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                   ),
                   RadioCustomComp<String>(
                     value: value.radioValue1,

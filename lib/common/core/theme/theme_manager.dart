@@ -76,6 +76,7 @@ class ThemeManager {
         ),
       ),
     ),
+
     scaffoldBackgroundColor: Colors.grey[850],
     fontFamily: 'Babylon',
     textTheme: const TextTheme(

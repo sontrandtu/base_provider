@@ -45,38 +45,23 @@ class _FormNumberState extends State<FormNumber> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-            child:
-                widget.child != null ? widget.child! : const SizedBox.shrink()),
+        Expanded(child: widget.child != null ? widget.child! : const SizedBox.shrink()),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _actionWidget(
+            _Action(
               icon: Icons.exposure_minus_1,
-              onChanged: () {
-                if (_valueNotifier.value > widget.min) {
-                  _valueNotifier.value--;
-                  widget.onChanged(_valueNotifier.value);
-                }
-              },
+              onChanged: _onMinus,
             ),
             const SizedBox(width: 8),
             ValueListenableBuilder<int>(
               valueListenable: _valueNotifier,
-              builder: (_, val, __) {
-                return Text('$val');
-              },
+              builder: (_, val, __) => Text('$val'),
             ),
             const SizedBox(width: 8),
-            _actionWidget(
+            _Action(
               icon: Icons.exposure_plus_1,
-              onChanged: () {
-                if (_valueNotifier.value >= widget.min &&
-                    _valueNotifier.value < widget.max) {
-                  _valueNotifier.value++;
-                  widget.onChanged(_valueNotifier.value);
-                }
-              },
+              onChanged: _onAdd,
             ),
           ],
         )
@@ -84,7 +69,29 @@ class _FormNumberState extends State<FormNumber> {
     );
   }
 
-  Widget _actionWidget({required IconData icon, VoidCallback? onChanged}) {
+  void _onMinus() {
+    if (_valueNotifier.value > widget.min) {
+      _valueNotifier.value--;
+      widget.onChanged(_valueNotifier.value);
+    }
+  }
+
+  void _onAdd() {
+    if (_valueNotifier.value >= widget.min && _valueNotifier.value < widget.max) {
+      _valueNotifier.value++;
+      widget.onChanged(_valueNotifier.value);
+    }
+  }
+}
+
+class _Action extends StatelessWidget {
+  final VoidCallback? onChanged;
+  final IconData icon;
+
+  const _Action({Key? key, this.onChanged, required this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
         onTap: onChanged,
         child: Container(

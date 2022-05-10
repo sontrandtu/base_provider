@@ -71,6 +71,10 @@ class _FormAlbumState extends State<FormAlbum> {
                             : true,
                         isRoot: false,
                         onDelete: () {
+
+
+
+
                           setState(() {
                             _items.removeWhere((item) => item['id'] == e['id']);
                             _genAssetEntity(_items);
@@ -148,9 +152,6 @@ class _LayoutImage extends StatelessWidget {
                 top: 0,
                 child: InkWell(
                   onTap: onDelete,
-                  // backgroundColor: Colors.white,
-                  // borderRadiusAll: 50,
-                  // padding: EdgeInsets.all(2),
                   child: Container(
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(

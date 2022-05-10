@@ -1,5 +1,7 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/page_manager/push_page_builder.dart';
+import 'package:achitecture_weup/common/core/page_manager/route_path.dart';
+import 'package:achitecture_weup/common/core/widget/undefined_layout.dart';
 import 'package:achitecture_weup/screen/home/home_page.dart';
 import 'package:achitecture_weup/screen/list_todo/list_todo_page.dart';
 import 'package:achitecture_weup/screen/login/login_page.dart';
@@ -20,8 +22,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RoutePath.HOME:
       page = const HomePage();
       break;
-    case RoutePath.TODO_LIST:
-      page = const ListTodoPage();
+    case RoutePath.STEPPER_FIX:
+      page = Container();
+      break;
+    case RoutePath.INTRODUCE:
+      page = const IntroducePage();
       break;
     default:
       page = UndefinedLayout(

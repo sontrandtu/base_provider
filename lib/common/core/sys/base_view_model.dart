@@ -66,6 +66,10 @@ abstract class BaseViewModel extends ChangeNotifier {
   @mustCallSuper
   void onViewCreated() => _mounted = true;
 
+  void setMounted(bool mounted){
+
+  }
+
   /*
   * Hỗ trợ nhanh delay một khoảng thời gian,
   * thường được sử dụng trong môi trường dev

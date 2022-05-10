@@ -30,7 +30,7 @@ class ImageUtils {
     );
 
     final rawFile = io.File(_image!.path);
-    bool isMax = await FileUtils.checkSize(rawFile);
+    bool isMax = await FileUtils().checkSize(rawFile);
 
     if (!isMax) {
       if (!hasCrop) return _image.path;

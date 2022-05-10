@@ -2,7 +2,7 @@ import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:flutter/material.dart';
 import 'package:achitecture_weup/common/extension/app_extension.dart';
 
-class CustomDialog extends StatefulWidget {
+class CustomDialog extends StatelessWidget {
   final String title;
   final dynamic description;
   final String? cancelText;
@@ -16,23 +16,18 @@ class CustomDialog extends StatefulWidget {
 
   const CustomDialog(
       {required this.title,
-      required this.description,
-      this.onConfirm,
-      this.isAccept = true,
-       this.confirmText,
-       this.cancelText,
-      this.isCancel = false,
-      this.onCancel,
-      this.isClose = false,
-      this.textAlign,
-      Key? key})
+        required this.description,
+        this.onConfirm,
+        this.isAccept = true,
+        this.confirmText,
+        this.cancelText,
+        this.isCancel = false,
+        this.onCancel,
+        this.isClose = false,
+        this.textAlign,
+        Key? key})
       : super(key: key);
 
-  @override
-  _CustomDialogState createState() => _CustomDialogState();
-}
-
-class _CustomDialogState extends State<CustomDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -47,7 +42,7 @@ class _CustomDialogState extends State<CustomDialog> {
         children: [
           const SizedBox(height: 12),
           Visibility(
-            visible: widget.isClose,
+            visible: isClose,
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: Align(
@@ -60,19 +55,19 @@ class _CustomDialogState extends State<CustomDialog> {
           ),
           Center(
             child: Text(
-              widget.title.toUpperCase(),
+              title.toUpperCase(),
               textAlign: TextAlign.center,
               // style:,
             ),
           ),
           Container(
             padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 22),
-            child: widget.description is Widget ? widget.description : Text(
-              widget.description,
+            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 22),
+            child: description is Widget ? description : Text(
+              description,
               style: const TextStyle(
                 fontSize: 14,fontWeight: FontWeight.w600,),
-              textAlign: widget.textAlign ?? TextAlign.center,
+              textAlign: textAlign ?? TextAlign.center,
             ),
           ),
           ViewUtils.divider(),
@@ -83,13 +78,13 @@ class _CustomDialogState extends State<CustomDialog> {
                   height: 41,
                   decoration: const BoxDecoration(
                     borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(15)),
+                    BorderRadius.only(bottomRight: Radius.circular(15)),
                   ),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: widget.onCancel,
-                    child: Center(child: Text(widget.cancelText ?? 'Hủy'.tl)),
+                    onTap: onCancel,
+                    child: Center(child: Text(cancelText ?? 'Hủy'.tl)),
                   ),
                 ),
               ),
@@ -103,13 +98,13 @@ class _CustomDialogState extends State<CustomDialog> {
                   height: 41,
                   decoration: const BoxDecoration(
                     borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(15)),
+                    BorderRadius.only(bottomLeft: Radius.circular(15)),
                   ),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: widget.onConfirm,
-                    child: Center(child: Text(widget.confirmText ?? 'Đồng ý'.tl)),
+                    onTap: onConfirm,
+                    child: Center(child: Text(confirmText ?? 'Đồng ý'.tl)),
                   ),
                 ),
               ),

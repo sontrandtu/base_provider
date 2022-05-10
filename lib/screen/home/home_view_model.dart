@@ -101,24 +101,7 @@ class HomeViewModel extends BaseViewModel {
     log('LENGHT ${listASelected.length}');
   }
 
-  void viewImage() async {}
-
-  void download() async {
-    // setStatus(Status.waiting);
-    final String? path = await FileUtils().download(
-        'https://www.eurofound.europa.eu/sites/default/files/ef_publication/field_ef_document/ef1710en.pdf',
-        onProcess: (val) {});
-    // setStatus(Status.success);
-    if (path == '') return;
-    if (path != '') {
-      appNavigator.dialog(CustomDialog(
-        title: 'title',
-        description: 'description',
-        onConfirm: () {},
-        onCancel: () {
-          appNavigator.back();
-        },
-      ));
-    }
+  void nextPage() async {
+    Navigator.push(Application.navigator.currentContext!, MaterialPageRoute(builder: (context) => const PaymentPage(),));
   }
 }

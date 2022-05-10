@@ -22,8 +22,8 @@ class ImageViewer extends StatefulWidget {
   const ImageViewer(
     this.url, {
     Key? key,
-    this.width = 100,
-    this.height = 100,
+    this.width = 70,
+    this.height = 70,
     this.borderRadius,
     this.padding,
     this.fit = BoxFit.contain,
@@ -60,18 +60,24 @@ class _ImageViewerState extends State<ImageViewer> {
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
-          width: widget.width,
-          height: widget.height,
           padding: widget.padding,
           decoration: BoxDecoration(color: widget.color),
-          child: _ImageWidget(widget.url, type: type),
+          child: _ImageWidget(
+            widget.url,
+            type: type,
+            fit: widget.fit,
+            width: widget.width,
+            height: widget.height,
+          ),
         ),
       ),
     );
   }
 
   void _onTap() {
-    if(widget.hasViewImage) Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(widget.url, type: type)));
+    if (widget.hasViewImage) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(widget.url, type: type)));
+    }
   }
 }
 
@@ -79,8 +85,11 @@ class _ImageWidget extends StatelessWidget {
   final String url;
   final BoxFit fit;
   final TypeImageViewer type;
+  final double? width;
+  final double? height;
 
-  const _ImageWidget(this.url, {Key? key, required this.type, this.fit = BoxFit.contain}) : super(key: key);
+  const _ImageWidget(this.url, {Key? key, required this.type, this.fit = BoxFit.contain, this.width, this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +97,7 @@ class _ImageWidget extends StatelessWidget {
       case TypeImageViewer.network:
         return CachedNetworkImageComp(url: url, fit: fit);
       case TypeImageViewer.storage:
-        return Image.file(File(url), fit: fit);
+        return Image.file(File(url), fit: fit, width: width, height: height);
       default:
         return Image.asset(url, fit: fit);
     }

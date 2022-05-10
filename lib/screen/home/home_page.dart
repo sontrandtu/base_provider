@@ -295,9 +295,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     height: 16,
                   ),
                   PositionAniButtonComp(
-                    onPressed: () async {
-                      final result = await ImageUtils.multiply(context);
-                    },
+                    onPressed: value.nextPage,
                     child: const Text(
                       'Simple button1111',
                       style: TextStyle(

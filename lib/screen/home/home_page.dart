@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
@@ -61,7 +63,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ImageViewer(urlImage, width: 100, height: 100),
 
                   const ImageViewer(
-                    '',
+                    'assets/images/1.jpg',
+                  ),
+                  const ImageViewer(
+                    'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
                   ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
@@ -115,7 +120,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ElevatedButtonComp(
                     title: 'Time Picker Material',
                     onPressed: () async {
-                      DateTime? a = await viewModel.appNavigator.bottomSheetDialog(
+                      DateTime? a =
+                          await viewModel.appNavigator.bottomSheetDialog(
                         const CupertinoPickerDialog(),
                       );
                     },
@@ -124,173 +130,181 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     title: 'Change language',
                     onPressed: viewModel.changLanguage,
                   ),
-
-                  CheckBoxComp(
-                    value: value.valueSwitch,
-                    onChanged: value.changeSwitch,
-                    side: const BorderSide(width: 1),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                  ),
-                  RadioCustomComp<String>(
-                    value: value.radioValue1,
-                    groupValue: value.groupRadio,
-                    onChanged: value.changeRadio,
-                    widgetDefault: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                    widgetSelected: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                  // CheckBoxComp(
+                  //   value: value.valueSwitch,
+                  //   onChanged: value.changeSwitch,
+                  //   side: const BorderSide(width: 1),
+                  //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  // ),
+                  // RadioCustomComp<String>(
+                  //   value: value.radioValue1,
+                  //   groupValue: value.groupRadio,
+                  //   onChanged: value.changeRadio,
+                  //   widgetDefault: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.grey.withOpacity(0.5),
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.male_rounded,
+                  //         color: Colors.blue,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   widgetSelected: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.blue,
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.male_rounded,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // RadioCustomComp<String>(
+                  //   value: value.radioValue2,
+                  //   groupValue: value.groupRadio,
+                  //   onChanged: value.changeRadio,
+                  //   widgetDefault: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.grey.withOpacity(0.5),
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.female_rounded,
+                  //         color: Colors.pinkAccent,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   widgetSelected: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.pinkAccent,
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.female_rounded,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Wrap(
+                  //   children: [
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_1,
+                  //       onChanged: value.changeSwitch1,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Tennis',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Tennis',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_2,
+                  //       onChanged: value.changeSwitch2,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Base Ball',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Base Ball',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_3,
+                  //       onChanged: value.changeSwitch3,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Swim',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Swim',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(
+                    height: 100,
+                    child: BottomBarFabComp(
+                      onChangeTab: (int value) => log('RRRR $value'),
+                      body: Container(
                         color: Colors.blue,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
+                      onPressedFAB: () {},
                     ),
                   ),
-                  RadioCustomComp<String>(
-                    value: value.radioValue2,
-                    groupValue: value.groupRadio,
-                    onChanged: value.changeRadio,
-                    widgetDefault: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.female_rounded,
-                          color: Colors.pinkAccent,
-                        ),
-                      ),
-                    ),
-                    widgetSelected: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.pinkAccent,
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.female_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Wrap(
-                    children: [
-                      CheckBoxCustomComp(
-                        value: value.val_1,
-                        onChanged: value.changeSwitch1,
-                        widgetDefault: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Tennis',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
-                            ),
-                          ),
-                        ),
-                        widgetSelected: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: ColorResource.primarySwatch),
-                            color: ColorResource.primarySwatch,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Tennis',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      CheckBoxCustomComp(
-                        value: value.val_2,
-                        onChanged: value.changeSwitch2,
-                        widgetDefault: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Base Ball',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
-                            ),
-                          ),
-                        ),
-                        widgetSelected: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: ColorResource.primarySwatch),
-                            color: ColorResource.primarySwatch,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Base Ball',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      CheckBoxCustomComp(
-                        value: value.val_3,
-                        onChanged: value.changeSwitch3,
-                        widgetDefault: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.withOpacity(0.5)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Swim',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
-                            ),
-                          ),
-                        ),
-                        widgetSelected: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: ColorResource.primarySwatch),
-                            color: ColorResource.primarySwatch,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                            child: Text(
-                              'Swim',
-                              style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 100, child: BottomBarFabComp()),
                   const SizedBox(
                     height: 16,
                   ),
@@ -313,8 +327,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ),
                   ScaleAniButtonComp(
                     onPressed: () async {
-                      urlImage =
-                          await viewModel.appNavigator.bottomSheetDialog(const PickImgBottomSheetDialog());
+                      urlImage = await viewModel.appNavigator
+                          .bottomSheetDialog(const PickImgBottomSheetDialog());
                       setState(() {});
                     },
                     child: Container(
@@ -346,12 +360,15 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   ),
                   TextButtonComp(
                       title: 'Open step fix',
-                      onPressed: () => viewModel.appNavigator.pushNamed(RoutePath.STEPPER_FIX, arguments: [
+                      onPressed: () => viewModel.appNavigator
+                              .pushNamed(RoutePath.STEPPER_FIX, arguments: [
                             LoginPage(),
                             SplashPage(),
                             LoginPage(),
                           ])),
-                  TextButtonComp(title: 'Open step fix', onPressed: () => loginViewModel.login())
+                  TextButtonComp(
+                      title: 'Open step fix',
+                      onPressed: () => loginViewModel.login())
                 ],
               ),
             ),

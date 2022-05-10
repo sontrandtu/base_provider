@@ -39,7 +39,8 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                 padding: const EdgeInsets.all(16.0),
                 height: height - ViewUtils.heightStatusBar,
                 width: width,
-                constraints: BoxConstraints(maxHeight: height - ViewUtils.heightStatusBar),
+                constraints: BoxConstraints(
+                    maxHeight: height - ViewUtils.heightStatusBar),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,12 +77,18 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(KeyLanguage.askUsername.tl, style: appStyle.textTheme.bodyText1),
+                        Text(KeyLanguage.askUsername.tl,
+                            style: appStyle.textTheme.bodyText1),
                         InkWellComp(
-                          onTap: viewModel.register,
+                          onTap: () {
+                            int a =0;
+                            a++;
+                            viewModel.register;
+                          },
                           backgroundColor: Colors.transparent,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8),
                             child: Text(
                               KeyLanguage.registerNow.tl,
                               style: appStyle.textTheme.bodyText2?.apply(

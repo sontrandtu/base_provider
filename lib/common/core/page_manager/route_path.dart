@@ -3,4 +3,5 @@ class RoutePath {
   static const String LOGIN = '/login';
   static const String HOME = '/home';
   static const String STEPPER_FIX = '/StepperFix';
+  static const String INTRODUCE = '/INTRODUCE';
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/helper/constant.dart';
@@ -12,6 +14,11 @@ class ThemeViewModel extends ChangeNotifier {
 
   ThemeViewModel() {
     _mode = getInitMode;
+    // appStyle = getThemeData;
+    // log('ABC $getBrightness');
+    // // SystemChrome.setSystemUIOverlayStyle(
+    // //     SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
+
   }
 
   Future<void> toggleMode() async {
@@ -20,7 +27,7 @@ class ThemeViewModel extends ChangeNotifier {
     appStyle = getThemeData;
 
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
+        SystemUiOverlayStyle(statusBarIconBrightness: getBrightness));
 
     String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 

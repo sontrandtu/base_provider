@@ -44,6 +44,8 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.8.5
   image_cropper: ^2.0.2
+  introduction_screen: ^3.0.2
+
   #o
   overflow_view: ^0.3.1
 

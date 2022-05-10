@@ -71,6 +71,10 @@ class _FormAlbumState extends State<FormAlbum> {
                             : true,
                         isRoot: false,
                         onDelete: () {
+
+
+
+
                           setState(() {
                             _items.removeWhere((item) => item['id'] == e['id']);
                             _genAssetEntity(_items);

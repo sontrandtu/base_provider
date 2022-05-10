@@ -24,6 +24,9 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
  await HiveStorage.install();
 
+  // SystemChrome.setSystemUIOverlayStyle(
+  //     SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
+
   runApp(
     MultiProvider(
       providers: [
@@ -41,7 +44,7 @@ Future<void> main() async {
       ),
     ),
   );
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
 }
 
 Future<void> _installFirebase() async {

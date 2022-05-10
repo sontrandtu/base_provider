@@ -24,8 +24,7 @@ dependencies:
   #d
   dotted_decoration: ^2.0.0
   #e
-  easy_localization:
-    git: https://github.com/manhtai831/easy_localization
+  easy_localization: ^3.0.0
 
   #f
   flutter_svg: ^0.23.0
@@ -55,10 +54,8 @@ dependencies:
   provider: ^6.0.0
   path_provider: ^2.0.9
   permission_handler: ^8.3.0
-  photo_view:
-    git:
-      url: https://github.com/bluefireteam/photo_view
-      ref: master
+  photo_view: ^0.13.0
+
   #r
   retrofit: 3.0.1
 
@@ -73,6 +70,14 @@ dependencies:
 
   #w
   wechat_assets_picker: ^7.2.0
+
+dependency_overrides:
+
+  easy_localization:
+    path: dependencies/easy_localization
+
+  photo_view:
+    path: dependencies/photo_view-master
 
 
 dev_dependencies:
@@ -94,19 +99,19 @@ flutter:
     - assets/fonts/
     - assets/translations/
 
-#  fonts:
-#    - family: Babylon
-#      fonts:
-#        - asset: assets/fonts/baloo_bhai2_bold.ttf
-#          weight: 900
-#        - asset: assets/fonts/baloo_bhai2_medium.ttf
-#          weight: 600
-#        - asset: assets/fonts/baloo_bhai2_regular.ttf
-#          weight: 400
-#  flutter_icons:
-#    android: true
-#    ios: true
-#    image_path: "assets/icons/launcher_icon.png"
+  #  fonts:
+  #    - family: Babylon
+  #      fonts:
+  #        - asset: assets/fonts/baloo_bhai2_bold.ttf
+  #          weight: 900
+  #        - asset: assets/fonts/baloo_bhai2_medium.ttf
+  #          weight: 600
+  #        - asset: assets/fonts/baloo_bhai2_regular.ttf
+  #          weight: 400
+  #  flutter_icons:
+  #    android: true
+  #    ios: true
+  #    image_path: "assets/icons/launcher_icon.png"
   #  Change icon:
   #  - flutter pub get
   #  - flutter pub run flutter_launcher_icons:main

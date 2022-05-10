@@ -5,7 +5,7 @@ import 'package:achitecture_weup/common/local_storage/app_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ThemeViewModel extends BaseViewModel {
+class ThemeViewModel extends ChangeNotifier {
   late ThemeMode _mode;
 
   ThemeMode get mode => _mode;

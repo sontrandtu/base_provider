@@ -86,6 +86,8 @@ class HomeViewModel extends BaseViewModel {
     for (var element in listA) {
       listMultipleData.add(OptionMultipleSelect<A>(title: element.hovaTen ?? '', data: element));
     }
+    log('initData');
+
   }
 
   void onChangeMultiple(List<OptionMultipleSelect<A>> listValue) {

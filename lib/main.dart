@@ -14,7 +14,7 @@ import 'common/local_storage/hive_storage.dart';
 import 'common/module/firebase_module.dart';
 
 final SplashViewModel splashViewModel = SplashViewModel();
-final LoginViewModel loginViewModel = LoginViewModel();
+ final LoginViewModel loginViewModel = LoginViewModel();
 final ThemeViewModel themeViewModel = ThemeViewModel();
 
 Future<void> main() async {

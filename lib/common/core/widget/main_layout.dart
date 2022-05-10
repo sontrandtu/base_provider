@@ -42,10 +42,12 @@ class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
       children: [
         child,
         Consumer<T>(
-          builder: (context, value, child) => Visibility(
-            visible: value.status == Status.loading || value.status == Status.waiting,
-            child: IndicatorComp(status: value.status),
-          ),
+          builder: (context, value, child) {
+            if (value.status == Status.errorInit) return Container(color: Colors.white);
+            return Visibility(
+                visible: value.status == Status.loading || value.status == Status.waiting,
+                child: IndicatorComp(status: value.status));
+          },
         ),
       ],
     );

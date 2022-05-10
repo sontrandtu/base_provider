@@ -8,7 +8,6 @@ import 'package:achitecture_weup/screen/login/components/language_layout.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,9 +22,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: viewModel,
-      builder: (_, __) => MainLayout<LoginViewModel>(
+    return MainLayout<LoginViewModel>(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Colors.white,
@@ -100,7 +97,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
             const Positioned(top: 0, right: 0, child: LanguageLayout())
           ],
         ),
-      ),
+
     );
   }
 }

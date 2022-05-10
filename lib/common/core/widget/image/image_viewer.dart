@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
@@ -30,20 +31,9 @@ class ImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (empty(url)) return const SizedBox.shrink();
-    TypeImageViewer type = TypeImageViewer.assets;
-    RegExp regExp = RegExp(r'^\/(storage|data)[^\.]');
-    if (regExp.hasMatch(url)) {
-      type = TypeImageViewer.storage;
-    } else if (url.isValidUrl) {
-      type = TypeImageViewer.network;
-    } else {
-      type = TypeImageViewer.assets;
-    }
+
     return InkWellComp(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => _ViewImage(url)));
-      },
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(url))),
       child: ClipRRect(
         borderRadius: borderRadius ?? BorderRadius.circular(0),
         child: Container(
@@ -51,35 +41,33 @@ class ImageViewer extends StatelessWidget {
           height: height,
           padding: padding,
           decoration: BoxDecoration(color: color),
-          child: _imgWidget(type),
+          child: _imgWidget(),
         ),
       ),
     );
   }
 
-  Widget _imgWidget(TypeImageViewer type) {
-    if (type == TypeImageViewer.network) {
-      return CachedNetworkImageComp(
-        url: url,
-        width: width,
-        height: height,
-        fit: fit,
-      );
-    } else if (type == TypeImageViewer.storage) {
-      return Image.file(
-        File(url),
-        fit: fit,
-        height: height,
-        width: width,
-      );
-    } else {
-      return Image.asset(
-        url,
-        fit: fit,
-        height: height,
-        width: width,
-      );
+  Widget _imgWidget() {
+    switch (_type) {
+      case TypeImageViewer.assets:
+        return CachedNetworkImageComp(url: url, width: width, height: height, fit: fit);
+      case TypeImageViewer.storage:
+        return CachedNetworkImageComp(url: url, width: width, height: height, fit: fit);
+      case TypeImageViewer.network:
+        return Image.file(File(url), fit: fit, height: height, width: width);
+      default:
+        return const SizedBox();
     }
+  }
+
+  TypeImageViewer get _type {
+    RegExp regExp = RegExp(r'^\/(storage|data)[^\.]');
+
+    if (regExp.hasMatch(url)) return TypeImageViewer.storage;
+
+    if (url.isValidUrl) return TypeImageViewer.network;
+
+    return TypeImageViewer.assets;
   }
 }
 
@@ -104,10 +92,7 @@ class _ViewImage extends StatelessWidget {
             width: 20.0,
             height: 20.0,
             child: CircularProgressIndicator(
-              value: progress == null
-                  ? null
-                  : progress.cumulativeBytesLoaded /
-                      progress.expectedTotalBytes!,
+              value: progress == null ? null : progress.cumulativeBytesLoaded / progress.expectedTotalBytes!,
             ),
           ),
         ),

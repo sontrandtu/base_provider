@@ -12,11 +12,10 @@ class IndicatorComp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: status == Status.loading ? Colors.white : ColorResource.textBody.withOpacity(0.05),
-      child: Center(
-        child: Platform.isAndroid
-            ? const CircularProgressIndicator(color: ColorResource.primary)
-            : const CupertinoActivityIndicator(),
-      ),
+      alignment: Alignment.center,
+      child: Platform.isAndroid
+          ? const CircularProgressIndicator(color: ColorResource.primary)
+          : const CupertinoActivityIndicator(color: ColorResource.primary),
     );
   }
 }

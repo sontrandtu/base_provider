@@ -103,7 +103,10 @@ abstract class BaseViewModel extends ChangeNotifier {
   /*
   * Thay đổi lại trạng thái của giao diện
   * */
-  void setStatus(Status s) => _status = s;
+  void setStatus(Status s) {
+    _status = s;
+    update();
+  }
 
   void _setRouteSetting(RouteSettings? rs) => _settings = rs;
 

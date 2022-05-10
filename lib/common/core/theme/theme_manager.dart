@@ -22,6 +22,7 @@ class ThemeManager {
     primarySwatch: ColorResource.primarySwatchMaterial,
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Babylon',
+
     textTheme: const TextTheme(
       headline6: TextStyle(
           fontWeight: FontWeight.w600,

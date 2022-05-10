@@ -256,10 +256,12 @@ packages:
   easy_localization:
     dependency: "direct main"
     description:
-      name: easy_localization
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "4b8a1615588b8b032ace0200e782375472740553"
+      url: "https://github.com/manhtai831/easy_localization"
+    source: git
+    version: "3.0.1"
   easy_logger:
     dependency: transitive
     description:
@@ -822,9 +824,11 @@ packages:
   photo_view:
     dependency: "direct main"
     description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "23063d535909027b8e198c2cffa83bf8f0480c96"
+      url: "https://github.com/bluefireteam/photo_view"
+    source: git
     version: "0.13.0"
   platform:
     dependency: transitive
@@ -848,7 +852,7 @@ packages:
     source: hosted
     version: "1.5.0"
   pretty_dio_logger:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: pretty_dio_logger
       url: "https://pub.dartlang.org"
@@ -1110,7 +1114,7 @@ packages:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.1.50"
+    version: "20.1.52"
   syncfusion_flutter_datepicker:
     dependency: "direct main"
     description:
@@ -1118,6 +1122,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "20.1.50"
+  syncfusion_flutter_pdf:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_pdf
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
+  syncfusion_flutter_pdfviewer:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_pdfviewer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
+  syncfusion_pdfviewer_macos:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
+  syncfusion_pdfviewer_platform_interface:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
+  syncfusion_pdfviewer_web:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
+  syncfusion_pdfviewer_windows:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.1.52-beta"
   synchronized:
     dependency: transitive
     description:

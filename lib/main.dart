@@ -5,7 +5,6 @@ import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'application.dart';
@@ -14,7 +13,7 @@ import 'common/local_storage/hive_storage.dart';
 import 'common/module/firebase_module.dart';
 
 final SplashViewModel splashViewModel = SplashViewModel();
- final LoginViewModel loginViewModel = LoginViewModel();
+final LoginViewModel loginViewModel = LoginViewModel();
 final ThemeViewModel themeViewModel = ThemeViewModel();
 
 Future<void> main() async {
@@ -23,9 +22,6 @@ Future<void> main() async {
   // await _installFirebase();
   HttpOverrides.global = MyHttpOverrides();
  await HiveStorage.install();
-
-  // SystemChrome.setSystemUIOverlayStyle(
-  //     SystemUiOverlayStyle(statusBarBrightness: Brightness.light));
 
   runApp(
     MultiProvider(
@@ -38,12 +34,15 @@ Future<void> main() async {
         fallbackLocale: const Locale('vi', 'VN'),
         startLocale: const Locale('vi', 'VN'),
         useOnlyLangCode: true,
+        logEnable: true,
         supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
         path: 'assets/translations',
         child: const Application(),
       ),
     ),
   );
+  // SystemChrome.setSystemUIOverlayStyle(
+  //     SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark,statusBarBrightness: Brightness.dark));
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
 }
 

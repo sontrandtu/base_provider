@@ -1,5 +1,4 @@
 
-import 'package:achitecture_weup/common/core/widget/drop_keyboard.dart';
 import 'package:flutter/material.dart';
 
 class UndefinedLayout extends StatelessWidget {
@@ -8,10 +7,6 @@ class UndefinedLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropKeyboard(
-      child: Column(children: [
-        Text(name ?? ''),
-      ]),
-    );
+    return Center(child: Text(name ?? ''));
   }
 }

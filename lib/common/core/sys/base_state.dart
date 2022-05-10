@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +23,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     super.initState();
 
-    log('$VM was installed', name: 'WEUP-APP');
+    showLogState('$VM was installed');
 
     _viewModel?.initialData();
 
@@ -52,7 +50,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
     _width = null;
     _height = null;
 
-    log('$VM was closed', name: 'WEUP-APP');
+    showLogState('$VM was closed');
 
     super.dispose();
   }

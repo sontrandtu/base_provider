@@ -13,8 +13,6 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
-    print(getArguments());
-    print('build ${runtimeType}');
     setStatus(Status.success);
   }
 
@@ -22,7 +20,6 @@ class LoginViewModel extends BaseViewModel {
   void login() async {
     setStatus(Status.waiting);
     await delay(1000);
-print('login');
     // if (await getConnection(reconnect: login)) return;
     //
     // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
@@ -35,7 +32,6 @@ print('login');
   }
 
   void register() {
-    print(getArguments());
     appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
   }
 

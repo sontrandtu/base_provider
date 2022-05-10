@@ -12,6 +12,9 @@ class ThemeViewModel extends BaseViewModel {
 
   ThemeViewModel() {
     _mode = getInitMode;
+    showLog(isLightMode);
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
   }
 
   Future<void> toggleMode() async {

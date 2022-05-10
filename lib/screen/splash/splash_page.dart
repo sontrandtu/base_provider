@@ -19,10 +19,8 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: viewModel,
-      child:  MainLayout<SplashViewModel>( child: Container(),
-      ),
+    return MainLayout<SplashViewModel>( child: Container(),
+
     );
   }
 }

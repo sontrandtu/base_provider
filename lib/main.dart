@@ -35,13 +35,16 @@ Future<void> main() async {
         fallbackLocale: const Locale('vi', 'VN'),
         startLocale: const Locale('vi', 'VN'),
         useOnlyLangCode: true,
+        logEnable: true,
         supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
         path: 'assets/translations',
         child: const Application(),
       ),
     ),
   );
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
+  // SystemChrome.setSystemUIOverlayStyle(
+  //     SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark,statusBarBrightness: Brightness.dark));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarBrightness: Brightness.light));
 }
 
 Future<void> _installFirebase() async {

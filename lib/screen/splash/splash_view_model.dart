@@ -9,7 +9,6 @@ class SplashViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
     await delay(1000);
-    print(runtimeType);
     setStatus(Status.success);
   }
 

@@ -249,10 +249,12 @@ packages:
   easy_localization:
     dependency: "direct main"
     description:
-      name: easy_localization
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "4b8a1615588b8b032ace0200e782375472740553"
+      url: "https://github.com/manhtai831/easy_localization"
+    source: git
+    version: "3.0.1"
   easy_logger:
     dependency: transitive
     description:
@@ -834,7 +836,7 @@ packages:
     source: hosted
     version: "1.5.0"
   pretty_dio_logger:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: pretty_dio_logger
       url: "https://pub.dartlang.org"

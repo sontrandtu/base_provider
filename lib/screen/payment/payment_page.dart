@@ -12,8 +12,8 @@ class Payment extends StatelessWidget {
         onLeading: () {},
       ),
       body: const ImageViewer(
-        // 'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
-        'assets/images/pdf.png',
+        'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
+        // 'assets/images/pdf.png',
         hasViewImage: true,
       ),
     );

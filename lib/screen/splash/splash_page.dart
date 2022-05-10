@@ -21,8 +21,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: viewModel,
-      child: Consumer<SplashViewModel>(
-        builder: (_, provider, __) => DropKeyboard(status: provider.status, child: Container()),
+      child:  MainLayout<SplashViewModel>( child: Container(),
       ),
     );
   }

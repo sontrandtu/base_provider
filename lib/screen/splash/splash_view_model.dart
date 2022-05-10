@@ -9,11 +9,13 @@ class SplashViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
     await delay(1000);
+    print(runtimeType);
     setStatus(Status.success);
   }
 
   @override
   void onViewCreated() {
+    super.onViewCreated();
     appNavigator.pushReplacementNamed(RoutePath.LOGIN,arguments: {'SplashViewModel args': runtimeType.toString()});
   }
 }

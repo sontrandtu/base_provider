@@ -7,6 +7,8 @@ import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseViewModel extends ChangeNotifier {
+  bool _mounted = false;
+
   Status _status = Status.loading;
 
   RouteSettings? _settings;
@@ -14,8 +16,6 @@ abstract class BaseViewModel extends ChangeNotifier {
   // BuildContext? _context;
 
   AppNavigator? _appNavigator = AppNavigator();
-
-  /// ---------------------------------------------------
 
   /*
   * [AppNavigator] thực hiện các navigation bên trong ViewModel
@@ -37,8 +37,6 @@ abstract class BaseViewModel extends ChangeNotifier {
   @Deprecated('Sử dụng [getConnection({Function? reconnect})] thay vì [isConnecting], '
       'trường này không hỗ trợ thực hiện lại request khi mất kết nối')
   Future<bool> get isConnecting async => await getConnection();
-
-  /// -----------------------------------------------------
 
   /*
   * Arguments từ page trước
@@ -65,7 +63,8 @@ abstract class BaseViewModel extends ChangeNotifier {
   * Hàm được recommend thực thi liên quan đến navigation:
   * dialog, push page, buttonsheet,...
   * */
-  void onViewCreated() {}
+  @mustCallSuper
+  void onViewCreated() => _mounted = true;
 
   /*
   * Hỗ trợ nhanh delay một khoảng thời gian,
@@ -142,7 +141,14 @@ abstract class BaseViewModel extends ChangeNotifier {
     ViewUtils.toast(msg);
   }
 
-  void update() => notifyListeners();
+  /*
+  * Luôn sử dụng update để thông báo thay đổi dữ liệu. [update] sẽ an toàn hơn [notifyListeners]
+  *
+  * Không sử dụng thuần [notifyListeners]
+  * */
+  void update() {
+    if (_mounted) notifyListeners();
+  }
 
   @mustCallSuper
   void onDispose() {

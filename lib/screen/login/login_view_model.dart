@@ -3,10 +3,7 @@ import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
-import 'package:achitecture_weup/system/model/post.dart';
-import 'package:achitecture_weup/system/repository/new_repository.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 class LoginViewModel extends BaseViewModel {
   final userController = TextEditingController();
@@ -24,7 +21,7 @@ class LoginViewModel extends BaseViewModel {
   void login() async {
     setStatus(Status.waiting);
     await delay(1000);
-
+print('login');
     // if (await getConnection(reconnect: login)) return;
     //
     // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});

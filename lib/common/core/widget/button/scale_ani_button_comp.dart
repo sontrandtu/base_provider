@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:flutter/material.dart';
 
 class ScaleAniButtonComp extends StatefulWidget {

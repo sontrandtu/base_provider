@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/model_base/option_multiple_select.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
@@ -7,6 +8,7 @@ import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/screen/home/home_page.dart';
+import 'package:achitecture_weup/screen/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeArgs {
@@ -89,6 +91,7 @@ class HomeViewModel extends BaseViewModel {
     for (var element in listA) {
       listMultipleData.add(OptionMultipleSelect<A>(title: element.hovaTen ?? '', data: element));
     }
+    log('initData ');
   }
 
   void onChangeMultiple(List<OptionMultipleSelect<A>> listValue) {
@@ -99,16 +102,15 @@ class HomeViewModel extends BaseViewModel {
     log('LENGHT ${listASelected.length}');
   }
 
-  void viewImage() async {
-  }
+  void viewImage() async {}
 
   void download() async {
-    setStatus(Status.waiting);
+    // setStatus(Status.waiting);
     final String? path = await FileUtils().download(
         'https://www.eurofound.europa.eu/sites/default/files/ef_publication/field_ef_document/ef1710en.pdf',
         onProcess: (val) {});
-    setStatus(Status.success);
-    if (path == null || path == '') return;
+    // setStatus(Status.success);
+    if (path == '') return;
     if (path != '') {
       appNavigator.dialog(CustomDialog(
         title: 'title',

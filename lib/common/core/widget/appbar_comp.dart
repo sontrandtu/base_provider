@@ -1,3 +1,4 @@
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,10 +34,7 @@ class AppBarComp extends PreferredSize {
     this.iconLeading,
     this.onLeading,
     this.bottom,
-  }) : super(
-            key: key,
-            preferredSize: const Size(double.infinity, kToolbarHeight),
-            child: Container());
+  }) : super(key: key, preferredSize: const Size(double.infinity, kToolbarHeight), child: Container());
 
   @override
   Size get preferredSize => const Size(double.infinity, kToolbarHeight);
@@ -48,26 +46,27 @@ class AppBarComp extends PreferredSize {
             ? title
             : Text(
                 title,
-                style: style ??
-                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                style: style ?? const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                 overflow: TextOverflow.ellipsis,
               ),
         flexibleSpace: flexibleSpace ?? Container(),
         backgroundColor: backgroundColor,
-        elevation: 0,
-        centerTitle: true,
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
         leading: iconLeading ??
-            (onLeading != null ? IconButtonComp(
+            IconButtonComp(
               icon: Icons.arrow_back_rounded,
               size: 26,
               color: Colors.white,
-              onPress: () => onLeading?.call() ?? Navigator.pop(context),
+              onPress: () => _onBackPress(context),
               splashRadius: 26,
-            ) : const SizedBox()),
+            ),
         iconTheme: IconThemeData(color: colorIcon),
         actions: action,
         bottom: bottom,
       );
+
+  void _onBackPress(BuildContext context) {
+    if (onLeading == null) Navigator.pop(context);
+
+    onLeading?.call();
+  }
 }

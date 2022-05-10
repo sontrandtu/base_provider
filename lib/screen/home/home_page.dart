@@ -6,6 +6,7 @@ import 'package:achitecture_weup/common/core/widget/form_number.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
+import 'package:achitecture_weup/screen/home/components/item_todo.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
 import 'package:achitecture_weup/screen/login/login_page.dart';
 import 'package:achitecture_weup/screen/splash/splash_page.dart';
@@ -350,7 +351,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                             const SplashPage(),
                             const LoginPage(),
                           ])),
-                  TextButtonComp(title: 'Open step fix', onPressed: () => loginViewModel.login())
+                  TextButtonComp(title: 'To todo list page', onPressed: () =>viewModel.appNavigator.pushNamed(RoutePath.TODO_LIST)),
+
                 ],
               ),
             ),
@@ -362,6 +364,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
 
   @override
   HomeViewModel get init => HomeViewModel();
+
+
 }
 
 class A {

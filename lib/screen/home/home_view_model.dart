@@ -30,6 +30,8 @@ class HomeViewModel extends BaseViewModel {
   List<A> listASelected = [];
   List<OptionMultipleSelect<A>> listMultipleData = [];
 
+
+
   @override
   Future<void> initialData() async {
     initData();

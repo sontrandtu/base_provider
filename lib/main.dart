@@ -17,11 +17,11 @@ final LoginViewModel loginViewModel = LoginViewModel();
 final ThemeViewModel themeViewModel = ThemeViewModel();
 
 Future<void> main() async {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   // await _installFirebase();
-  HttpOverrides.global = MyHttpOverrides();
- await HiveStorage.install();
+  await HiveStorage.install();
 
   runApp(
     MultiProvider(

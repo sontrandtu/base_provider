@@ -1,5 +1,4 @@
 
-import 'package:achitecture_weup/common/core/widget/main_layout.dart';
 import 'package:flutter/material.dart';
 
 class UndefinedLayout extends StatelessWidget {

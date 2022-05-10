@@ -297,7 +297,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   PositionAniButtonComp(
                     onPressed: () async {
                       final result = await ImageUtils.multiply(context);
-                      print('result--- $result');
                     },
                     child: const Text(
                       'Simple button1111',
@@ -347,9 +346,9 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   TextButtonComp(
                       title: 'Open step fix',
                       onPressed: () => viewModel.appNavigator.pushNamed(RoutePath.STEPPER_FIX, arguments: [
-                            LoginPage(),
-                            SplashPage(),
-                            LoginPage(),
+                            const LoginPage(),
+                            const SplashPage(),
+                            const LoginPage(),
                           ])),
                   TextButtonComp(title: 'Open step fix', onPressed: () => loginViewModel.login())
                 ],

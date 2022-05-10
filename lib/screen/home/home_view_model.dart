@@ -32,7 +32,6 @@ class HomeViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
-    print(getArguments());
     initData();
 
     language = ViewUtils.getLocale()?.languageCode;

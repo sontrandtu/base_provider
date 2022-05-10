@@ -31,5 +31,5 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   }
   showLogState('Page: $page | RoutePath: ${settings.name} ');
 
-  return PushPageBuilder.pushPageBuilder(settings, page);
+  return PushPageBuilder.pushCupertinoPageBuilder(settings, page);
 }

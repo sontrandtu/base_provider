@@ -1,7 +1,10 @@
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:flutter/material.dart';
+
 
 class ListTodoViewModel extends BaseViewModel {
+  GlobalKey<AnimatedListState> keyList = GlobalKey<AnimatedListState>();
   List<String> animatedList = [
     'Item 1',
     'Item 2',
@@ -16,11 +19,11 @@ class ListTodoViewModel extends BaseViewModel {
 
   void insert() {
     animatedList.add('New Item ${animatedList.length}');
-    update();
+    keyList.currentState!.insertItem(animatedList.length - 2);
+
   }
 
   void remove() {
     animatedList.removeLast();
-    update();
   }
 }

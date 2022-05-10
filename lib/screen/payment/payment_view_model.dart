@@ -1,12 +1,15 @@
+import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
-
+import 'package:flutter/cupertino.dart';
 class PaymentViewModel extends BaseViewModel {
 
-  void changeAlbum(List<Map<String, dynamic>> inputs) {
+  BuildContext get ctx => Application.navigator.currentContext!;
 
-  }
+  void changeAlbum(List<Map<String, dynamic>> inputs) {}
+
+  void selectImages() async {}
 
   void download() async {
     // setStatus(Status.waiting);

@@ -27,16 +27,16 @@ class AssetPickerTextDelegateVN extends AssetPickerTextDelegate {
   String get original => 'Origin';
 
   @override
-  String get preview => 'Preview';
+  String get preview => 'Xem trước';
 
   @override
-  String get select => 'Select';
+  String get select => 'Chọn';
 
   @override
   String get emptyList => 'Chưa có dữ liệu';
 
   @override
-  String get unSupportedAssetType => 'Unsupported HEIC asset type.';
+  String get unSupportedAssetType => 'Loại HEIC không được hỗ trợ.';
 
   @override
   String get unableToAccessAll => 'Không thể truy cập tất cả nội dung trên thiết bị';
@@ -60,7 +60,7 @@ class AssetPickerTextDelegateVN extends AssetPickerTextDelegate {
   String get accessLimitedAssets => 'Tiếp tục với quyền truy cập hạn chế';
 
   @override
-  String get accessiblePathName => 'Accessible assets';
+  String get accessiblePathName => 'Nội dung có thể truy cập';
 
   @override
   String get sTypeAudioLabel => 'Audio';
@@ -78,20 +78,20 @@ class AssetPickerTextDelegateVN extends AssetPickerTextDelegate {
   String get sActionPlayHint => 'play';
 
   @override
-  String get sActionPreviewHint => 'preview';
+  String get sActionPreviewHint => 'xem trước';
 
   @override
-  String get sActionSelectHint => 'select';
+  String get sActionSelectHint => 'chọn';
 
   @override
   String get sActionSwitchPathLabel => 'switch path';
 
   @override
-  String get sActionUseCameraHint => 'use camera';
+  String get sActionUseCameraHint => 'sử dụng camera';
 
   @override
-  String get sNameDurationLabel => 'duration';
+  String get sNameDurationLabel => 'trễ';
 
   @override
-  String get sUnitAssetCountLabel => 'count';
+  String get sUnitAssetCountLabel => 'số lượng';
 }

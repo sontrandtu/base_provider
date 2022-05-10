@@ -43,7 +43,19 @@ class _PaymentLayout extends StatelessWidget {
               hasViewImage: true,
             ),
             const SizedBox(height: 20),
+
             FormAlbum(onChanged: model.changeAlbum),
+            const SizedBox(height: 20),
+
+            PositionAniButtonComp(
+              onPressed: model.selectImages,
+              child: const Text(
+                'View',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         );
       },

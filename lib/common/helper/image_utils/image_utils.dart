@@ -1,8 +1,10 @@
 import 'dart:io' as io;
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:achitecture_weup/common/helper/image_utils/text_delegate.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'img_crop.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -17,11 +19,7 @@ enum PickImageType {
 class ImageUtils {
   static final _picker = ImagePicker();
 
-  static Future<dynamic> pickImage(
-      {bool hasCrop = false,
-      double? width,
-      double? height,
-      int? imageQuality}) async {
+  static Future<dynamic> pickImage({bool hasCrop = false, double? width, double? height, int? imageQuality}) async {
     final XFile? _image = await _picker.pickImage(
       source: ImageSource.gallery,
       maxWidth: width,
@@ -60,9 +58,11 @@ class ImageUtils {
     int gridCount = 4,
     ThumbnailSize? previewThumbnailSize,
     RequestType type = RequestType.common,
-    List<AssetEntity>? selectedAssets,
+    List<AssetEntity>? values,
     bool isMap = true,
   }) async {
+    // final selectedImages = await AssetPicker.pickAssets(context, pickerConfig: AssetPickerTextDelegateVN());
+
     final _multi = <Map<String, dynamic>>[];
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
@@ -73,7 +73,16 @@ class ImageUtils {
         gridCount: gridCount,
         previewThumbnailSize: previewThumbnailSize,
         requestType: type,
-        selectedAssets: selectedAssets,
+        selectedAssets: values,
+        // specialPickerType: SpecialPickerType.
+        // specialItemPosition: SpecialItemPosition.append,
+        // specialItemBuilder:
+        // filterOptions: FilterOptionGroup(containsLivePhotos: ),
+        // themeColor: appStyle.primaryColor,
+        // gridThumbnailSize:
+        // pickerTheme: ThemeData(
+          // appBarTheme: AppBarTheme(color: appStyle.primaryColor, iconTheme: IconThemeData(color: Colors.white))
+        // ),
       ),
     );
     if (isMap) {

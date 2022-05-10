@@ -3,9 +3,8 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 
-part 'view_detail_image.dart';
+import 'view_image.dart';
 
 enum TypeImageViewer { none, assets, storage, network }
 
@@ -57,6 +56,7 @@ class _ImageViewerState extends State<ImageViewer> {
     if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox.shrink();
     return InkWellComp(
       onTap: _onTap,
+      padding: EdgeInsets.zero,
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
@@ -76,7 +76,7 @@ class _ImageViewerState extends State<ImageViewer> {
 
   void _onTap() {
     if (widget.hasViewImage) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(widget.url, type: type)));
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
     }
   }
 }
@@ -95,11 +95,11 @@ class _ImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (type) {
       case TypeImageViewer.network:
-        return CachedNetworkImageComp(url: url, fit: fit);
+        return CachedNetworkImageComp(url: url, fit: fit, width: width, height: height);
       case TypeImageViewer.storage:
         return Image.file(File(url), fit: fit, width: width, height: height);
       default:
-        return Image.asset(url, fit: fit);
+        return Image.asset(url, fit: fit, width: width, height: height);
     }
   }
 }

@@ -3,13 +3,21 @@ import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 
+import 'image/view_image.dart';
+
 class FormAlbum extends StatefulWidget {
   final ValueChanged<List<Map<String, dynamic>>> onChanged;
-  const FormAlbum({Key? key, required this.onChanged}) : super(key: key);
+
+  const FormAlbum({
+    Key? key,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   State<FormAlbum> createState() => _FormAlbumState();
@@ -19,6 +27,7 @@ class _FormAlbumState extends State<FormAlbum> {
   late List<Map<String, dynamic>> _items;
 
   late List<AssetEntity>? _assetEntities;
+  int maxLength = 3;
 
   @override
   void initState() {
@@ -38,23 +47,11 @@ class _FormAlbumState extends State<FormAlbum> {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: _items.isEmpty ? MainAxisAlignment.center : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           InkWell(
-            onTap: () async {
-              final result = await ImageUtils.multiply(
-                context,
-                selectedAssets: _assetEntities,
-              );
-              if (!empty(result)) {
-                setState(() {
-                  _items = result;
-                  _genAssetEntity(_items);
-                });
-              }
-              widget.onChanged.call(_items);
-            },
+            onTap: _onSelect,
             child: _LayoutImage(
               child: const Icon(Icons.image),
               hasMargin: _items.isNotEmpty ? true : false,
@@ -62,34 +59,66 @@ class _FormAlbumState extends State<FormAlbum> {
             ),
           ),
           if (!empty(_items)) ...[
-            if (_items.length <= 2) ...[
-              ..._items
-                  .map<Widget>((e) => _LayoutImage(
-                        child: ImageViewer('${e['path']}', fit: BoxFit.fill),
-                        hasMargin: e['isLast'] != null && e['isLast'] == 1
-                            ? false
-                            : true,
-                        isRoot: false,
-                        onDelete: () {
-                          setState(() {
-                            _items.removeWhere((item) => item['id'] == e['id']);
-                            _genAssetEntity(_items);
-                          });
-                          widget.onChanged.call(_items);
-                        },
-                      ))
-                  .toList()
-            ] else ...[
-              _LayoutImage(
-                child: Center(child: Text('${_items.length} ' + KeyLanguage.images.tl)),
-                hasMargin: _items.isNotEmpty ? true : false,
-                isRoot: true,
+            Expanded(
+              child: SizedBox(
+                height: 70,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: List<Widget>.generate(
+                      (_items.length > maxLength ? maxLength : _items.length),
+                      (index) => _LayoutImage(
+                            child: ImageViewer('${_items[index]['path']}', fit: BoxFit.fill, hasViewImage: true),
+                            hasMargin: _items[index]['isLast'] != null && _items[index]['isLast'] == 1 ? false : true,
+                            isRoot: false,
+                            onDelete: _onDelete,
+                          ))
+                    ..add(
+                      _items.length > maxLength
+                          ? _LayoutImage(
+                              onTap: () {
+                                _onViewMore(_items);
+                              },
+                              child: Text(
+                                KeyLanguage.viewMore.tl,
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                              hasMargin: _items.isNotEmpty ? true : false,
+                              isRoot: true,
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                ),
               ),
-            ],
+            ), // else
           ],
         ],
       ),
     );
+  }
+
+  void _onViewMore(List items) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => ViewImage(items, type: TypeImageViewer.storage)));
+
+  void _onSelect() async {
+    final result = await ImageUtils.multiply(
+      context,
+      values: _assetEntities,
+    );
+    if (!empty(result)) {
+      setState(() {
+        _items = result;
+        _genAssetEntity(_items);
+      });
+    }
+    widget.onChanged.call(_items);
+  }
+
+  void _onDelete() {
+    setState(() {
+      _items.removeWhere((item) => item['id'] == _items.first['id']);
+      _genAssetEntity(_items);
+    });
+    widget.onChanged.call(_items);
   }
 
   void _genAssetEntity(List inputs) {
@@ -136,6 +165,7 @@ class _LayoutImage extends StatelessWidget {
               child: Container(
                 height: 70,
                 width: 70,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: color ?? Colors.grey.withOpacity(.2),
                 ),
@@ -150,9 +180,7 @@ class _LayoutImage extends StatelessWidget {
                   onTap: onDelete,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
                     child: const Icon(
                       Icons.delete,
                       size: 16,

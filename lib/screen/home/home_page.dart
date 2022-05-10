@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
@@ -297,13 +299,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       body: Container(
                         color: Colors.blue,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
+                      onPressedFAB: (){},
                     ),
                   ),
                   RadioCustomComp<String>(
@@ -434,7 +430,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 100, child: BottomBarFabComp()),
+
                   const SizedBox(
                     height: 16,
                   ),

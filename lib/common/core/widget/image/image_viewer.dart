@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/extension/object_ext.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
-import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+part 'view_detail_image.dart';
 
 enum TypeImageViewer { assets, storage, network }
 
-class ImageViewer extends StatelessWidget {
+class ImageViewer extends StatefulWidget {
   final String url;
   final double width;
   final double height;
@@ -15,6 +16,8 @@ class ImageViewer extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final BoxFit fit;
   final Color? color;
+  final bool hasViewImage;
+  final String? title;
 
   const ImageViewer(
     this.url, {
@@ -25,39 +28,78 @@ class ImageViewer extends StatelessWidget {
     this.padding,
     this.fit = BoxFit.contain,
     this.color,
+    this.hasViewImage = false,
+    this.title,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    if (empty(url)) return const SizedBox.shrink();
-    TypeImageViewer type = TypeImageViewer.assets;
+  State<ImageViewer> createState() => _ImageViewerState();
+}
+
+class _ImageViewerState extends State<ImageViewer> {
+  late TypeImageViewer type;
+
+  @override
+  void initState() {
     RegExp regExp = RegExp(r'^\/(storage|data)[^\.]');
-    if (regExp.hasMatch(url)) {
+    if (regExp.hasMatch(widget.url)) {
       type = TypeImageViewer.storage;
-    } else if (url.isValidUrl) {
+    } else if (widget.url.isValidUrl) {
       type = TypeImageViewer.network;
     } else {
       type = TypeImageViewer.assets;
     }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.url.isNotNullBlank) return const SizedBox.shrink();
     return InkWellComp(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => _ViewImage(url)));
-      },
+      onTap: onTap,
       child: ClipRRect(
-        borderRadius: borderRadius ?? BorderRadius.circular(0),
+        borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
-          width: width,
-          height: height,
-          padding: padding,
-          decoration: BoxDecoration(color: color),
-          child: _imgWidget(type),
+          width: widget.width,
+          height: widget.height,
+          padding: widget.padding,
+          decoration: BoxDecoration(color: widget.color),
+          child: _ImageWidget(
+            widget.url,
+            type: type,
+            fit: widget.fit,
+            width: widget.width,
+            height: widget.height,
+          ),
         ),
       ),
     );
   }
 
-  Widget _imgWidget(TypeImageViewer type) {
+  void onTap() {
+    if (!widget.hasViewImage) return;
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => _ViewImage(widget.url, type: type)));
+  }
+}
+
+class _ImageWidget extends StatelessWidget {
+  final String url;
+  final TypeImageViewer type;
+  final double width;
+  final double height;
+  final BoxFit fit;
+
+  const _ImageWidget(
+    this.url, {
+    Key? key,
+    required this.type,
+    this.width = 100,
+    this.height = 100,
+    this.fit = BoxFit.contain,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     if (type == TypeImageViewer.network) {
       return CachedNetworkImageComp(
         url: url,
@@ -72,59 +114,12 @@ class ImageViewer extends StatelessWidget {
         height: height,
         width: width,
       );
-    } else {
-      return Image.asset(
-        url,
-        fit: fit,
-        height: height,
-        width: width,
-      );
     }
-  }
-}
-
-class _ViewImage extends StatelessWidget {
-  final String url;
-
-  const _ViewImage(this.url, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    print_r(url);
-    return Scaffold(
-      appBar: AppBarComp(
-        title: _getName(url),
-        onLeading: () {},
-      ),
-      body: PhotoView(
-        imageProvider: NetworkImage(url),
-        enablePanAlways: true,
-        loadingBuilder: (context, progress) => Center(
-          child: SizedBox(
-            width: 20.0,
-            height: 20.0,
-            child: CircularProgressIndicator(
-              value: progress == null
-                  ? null
-                  : progress.cumulativeBytesLoaded /
-                      progress.expectedTotalBytes!,
-            ),
-          ),
-        ),
-        enableRotation: true,
-        minScale: PhotoViewComputedScale.contained * 0.8,
-        maxScale: PhotoViewComputedScale.covered * 1.8,
-        initialScale: PhotoViewComputedScale.contained,
-        basePosition: Alignment.center,
-      ),
+    return Image.asset(
+      url,
+      fit: fit,
+      height: height,
+      width: width,
     );
-  }
-
-  String _getName(String input) {
-    final regExp = RegExp(r'\/\w+\.(jpg|png|jpge|gif)');
-    if (input.lastIndexOf(regExp) != -1) {
-      return input.substring(input.lastIndexOf(regExp) + 1);
-    }
-    return input;
   }
 }

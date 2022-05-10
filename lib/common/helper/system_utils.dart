@@ -1,3 +1,4 @@
+import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io' as io;
 
@@ -36,4 +37,9 @@ bool empty(dynamic input, [bool hasZero = false]) {
 
   if (input is Map && input.isNotEmpty) return false;
   return true;
+}
+
+
+void openFile(BuildContext context, String url) {
+  FileUtils().open(context, url: url);
 }

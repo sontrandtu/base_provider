@@ -11,6 +11,8 @@
   "imageGallery": "Thư viện",
   "questionCamera":"Ứng dụng cần quyền truy cập vào máy ảnh",
   "questionImageGallery": "Ứng dụng cần quyền truy cập vào thư viện ảnh",
+  "storage": "Kho lưu trữ",
+  "questionStorage": "Ứng dụng cần quyền truy cập vào kho lưu trữ",
   "setting": "Cài đặt",
   "images": "ảnh"
 }

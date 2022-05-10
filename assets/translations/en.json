@@ -11,6 +11,8 @@
   "imageGallery": "Image gallery",
   "questionCamera": "The app needs access to the camera",
   "questionImageGallery": "The app needs access to the photo gallery",
+  "storage": "Storage",
+  "questionStorage": "The app needs access to the storage",
   "setting": "Setting",
   "images": "images"
 }

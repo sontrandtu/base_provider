@@ -13,6 +13,7 @@ class AppBarComp extends PreferredSize {
   final double? elevation;
   final bool? isLight;
   final bool? isLeading;
+  final bool? centerTitle;
   final Widget? flexibleSpace;
   final Widget? iconLeading;
   final Function? onLeading;
@@ -33,6 +34,7 @@ class AppBarComp extends PreferredSize {
     this.flexibleSpace,
     this.iconLeading,
     this.onLeading,
+    this.centerTitle,
     this.bottom,
   }) : super(key: key, preferredSize: const Size(double.infinity, kToolbarHeight), child: Container());
 
@@ -60,6 +62,7 @@ class AppBarComp extends PreferredSize {
               splashRadius: 26,
             ),
         iconTheme: IconThemeData(color: colorIcon),
+        centerTitle: centerTitle,
         actions: action,
         bottom: bottom,
       );

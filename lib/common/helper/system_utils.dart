@@ -39,6 +39,6 @@ bool empty(dynamic input, [bool hasZero = false]) {
 }
 
 
-void openFile(BuildContext context, String url) {
-  FileUtils().open(context, url: url);
+Future<void> openFile(BuildContext context, {required String url}) async {
+  return FileUtils().open(context, url: url);
 }

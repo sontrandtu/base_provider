@@ -16,7 +16,7 @@ class _PaymentPageState extends BaseState<PaymentPage, PaymentViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarComp(title: 'App', onLeading: () {}),
+      appBar: AppBarComp(title: 'App'),
       body: ChangeNotifierProvider.value(
         value: viewModel,
         child: const _PaymentLayout(),

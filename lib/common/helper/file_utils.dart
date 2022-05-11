@@ -36,7 +36,7 @@ class FileUtils {
 
   Future<String>? download(String url, {ValueChanged<num>? onProcess}) async {
     if (url == '') return '';
-    final bool res = await PermissionConfig.instance.requestPermission(
+    final bool res = await PermissionConfig.instance.request(
       permission: Permission.storage,
       title: KeyLanguage.questionStorage.tl,
       content: KeyLanguage.questionStorage.tl,

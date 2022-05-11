@@ -21,7 +21,7 @@ class PickImgBottomSheetDialog extends StatelessWidget {
             title: Text(KeyLanguage.camera.tl),
             onTap: () async {
               bool checkPermission =
-                  await PermissionConfig.instance.requestPermission(
+                  await PermissionConfig.instance.request(
                 permission: Permission.camera,
                 title: KeyLanguage.camera.tl,
                 content: KeyLanguage.questionCamera.tl,
@@ -42,7 +42,7 @@ class PickImgBottomSheetDialog extends StatelessWidget {
             title: Text(KeyLanguage.imageGallery.tl),
             onTap: () async {
               bool checkPermission =
-                  await PermissionConfig.instance.requestPermission(
+                  await PermissionConfig.instance.request(
                 permission: Permission.photos,
                 title: KeyLanguage.imageGallery.tl,
                 content: KeyLanguage.questionImageGallery.tl,

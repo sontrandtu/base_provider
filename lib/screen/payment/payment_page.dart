@@ -48,7 +48,7 @@ class _PaymentLayout extends StatelessWidget {
             const SizedBox(height: 20),
 
             PositionAniButtonComp(
-              onPressed: model.selectImages,
+              onPressed: model.requests,
               child: const Text(
                 'View',
                 style: TextStyle(

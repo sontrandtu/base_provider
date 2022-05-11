@@ -239,6 +239,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
+  dots_indicator:
+    dependency: transitive
+    description:
+      name: dots_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   dotted_decoration:
     dependency: "direct main"
     description:
@@ -249,11 +256,9 @@ packages:
   easy_localization:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "4b8a1615588b8b032ace0200e782375472740553"
-      url: "https://github.com/manhtai831/easy_localization"
-    source: git
+      path: "dependencies/easy_localization"
+      relative: true
+    source: path
     version: "3.0.1"
   easy_logger:
     dependency: transitive
@@ -604,6 +609,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  introduction_screen:
+    dependency: "direct main"
+    description:
+      name: introduction_screen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   io:
     dependency: transitive
     description:
@@ -810,11 +822,9 @@ packages:
   photo_view:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "23063d535909027b8e198c2cffa83bf8f0480c96"
-      url: "https://github.com/bluefireteam/photo_view"
-    source: git
+      path: "dependencies/photo_view-master"
+      relative: true
+    source: path
     version: "0.13.0"
   platform:
     dependency: transitive

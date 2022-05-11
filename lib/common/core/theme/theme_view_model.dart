@@ -12,9 +12,7 @@ class ThemeViewModel extends BaseViewModel {
 
   ThemeViewModel() {
     _mode = getInitMode;
-    showLog(isLightMode);
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
+    setUiOverlay();
   }
 
   Future<void> toggleMode() async {
@@ -22,14 +20,18 @@ class ThemeViewModel extends BaseViewModel {
 
     appStyle = getThemeData;
 
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
+    setUiOverlay();
 
     String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 
     await HiveStorage.putValue(HiveKey.themeKey, saveTheme);
 
     notifyListeners();
+  }
+
+  void setUiOverlay() {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
   }
 
   bool get isLightMode => _mode == ThemeMode.light;

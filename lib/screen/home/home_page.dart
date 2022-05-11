@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
@@ -6,6 +8,7 @@ import 'package:achitecture_weup/common/core/widget/form_number.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/main.dart';
+import 'package:achitecture_weup/screen/home/components/item_todo.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
 import 'package:achitecture_weup/screen/login/login_page.dart';
 import 'package:achitecture_weup/screen/splash/splash_page.dart';
@@ -124,42 +127,179 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                     title: 'Change language',
                     onPressed: viewModel.changLanguage,
                   ),
-
-                  CheckBoxComp(
-                    value: value.valueSwitch,
-                    onChanged: value.changeSwitch,
-                    side: const BorderSide(width: 1),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                  ),
-                  RadioCustomComp<String>(
-                    value: value.radioValue1,
-                    groupValue: value.groupRadio,
-                    onChanged: value.changeRadio,
-                    widgetDefault: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.withOpacity(0.5),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                    widgetSelected: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                  // CheckBoxComp(
+                  //   value: value.valueSwitch,
+                  //   onChanged: value.changeSwitch,
+                  //   side: const BorderSide(width: 1),
+                  //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  // ),
+                  // RadioCustomComp<String>(
+                  //   value: value.radioValue1,
+                  //   groupValue: value.groupRadio,
+                  //   onChanged: value.changeRadio,
+                  //   widgetDefault: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.grey.withOpacity(0.5),
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.male_rounded,
+                  //         color: Colors.blue,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   widgetSelected: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.blue,
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.male_rounded,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // RadioCustomComp<String>(
+                  //   value: value.radioValue2,
+                  //   groupValue: value.groupRadio,
+                  //   onChanged: value.changeRadio,
+                  //   widgetDefault: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.grey.withOpacity(0.5),
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.female_rounded,
+                  //         color: Colors.pinkAccent,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   widgetSelected: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Colors.pinkAccent,
+                  //     ),
+                  //     child: const Padding(
+                  //       padding: EdgeInsets.all(8.0),
+                  //       child: Icon(
+                  //         Icons.female_rounded,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Wrap(
+                  //   children: [
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_1,
+                  //       onChanged: value.changeSwitch1,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Tennis',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Tennis',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_2,
+                  //       onChanged: value.changeSwitch2,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Base Ball',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Base Ball',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     CheckBoxCustomComp(
+                  //       value: value.val_3,
+                  //       onChanged: value.changeSwitch3,
+                  //       widgetDefault: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Swim',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.grey.withOpacity(0.5)),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       widgetSelected: Container(
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(8),
+                  //           border: Border.all(color: ColorResource.primarySwatch),
+                  //           color: ColorResource.primarySwatch,
+                  //         ),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                  //           child: Text(
+                  //             'Swim',
+                  //             style: appStyle.textTheme.bodyText2!.apply(color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(
+                    height: 100,
+                    child: BottomBarFabComp(
+                      onChangeTab: (int value) => log('RRRR $value'),
+                      body: Container(
                         color: Colors.blue,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.male_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
+                      onPressedFAB: (){},
                     ),
                   ),
                   RadioCustomComp<String>(
@@ -290,7 +430,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 100, child: BottomBarFabComp()),
+
                   const SizedBox(
                     height: 16,
                   ),
@@ -348,7 +488,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                             const SplashPage(),
                             const LoginPage(),
                           ])),
-                  TextButtonComp(title: 'Open step fix', onPressed: () => loginViewModel.login())
+                  TextButtonComp(title: 'To todo list page', onPressed: () =>viewModel.appNavigator.pushNamed(RoutePath.TODO_LIST)),
+
                 ],
               ),
             ),
@@ -360,6 +501,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
 
   @override
   HomeViewModel get init => HomeViewModel();
+
+
 }
 
 class A {

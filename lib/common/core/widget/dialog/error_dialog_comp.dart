@@ -30,7 +30,8 @@ class BaseErrorDialog extends StatelessWidget {
       onWillPop: () async => false,
       child: AlertDialog(
         title: Text(title ?? 'Thông báo',
-            style: appStyle.textTheme.headline3?.apply(color: ColorResource.primary)),
+            style: appStyle.textTheme.headline3
+                ?.apply(color: ColorResource.primary)),
         content: Text(content ?? '', style: appStyle.textTheme.bodyText1),
         insetPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         actions: [
@@ -42,7 +43,8 @@ class BaseErrorDialog extends StatelessWidget {
                   },
                   child: Text(
                     textButtonCancel ?? 'Hủy',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 16),
                   ),
                 )
               : const SizedBox(),
@@ -54,7 +56,8 @@ class BaseErrorDialog extends StatelessWidget {
                   },
                   child: Text(
                     textButtonConfirm ?? 'Đồng ý',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 16),
                   ),
                 )
               : const SizedBox(),

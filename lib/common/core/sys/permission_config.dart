@@ -43,7 +43,6 @@ class PermissionConfig {
         _result = false;
       }
     }).then((value) {
-      showLog('message: $value');
       if (_requestTitle.isNotEmpty) {
         showDialog(
             context: Application.navigator.currentContext!,

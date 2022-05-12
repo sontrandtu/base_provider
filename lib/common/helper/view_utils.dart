@@ -4,6 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+enum ToastMode {
+  none,
+  success,
+  error,
+}
+
 class ViewUtils {
   static void hideKeyboard({BuildContext? context}) =>
       FocusScope.of(context!).unfocus();
@@ -28,12 +34,23 @@ class ViewUtils {
   static double get heightStatusBar =>
       MediaQuery.of(Application.navigator.currentContext!).padding.top;
 
-  static void toast(dynamic msg) => Fluttertoast.showToast(
-        msg: msg.toString(),
+  static void toast(String msg, {ToastMode mode = ToastMode.none, double fontSize = 16.0}) => Fluttertoast.showToast(
+        msg: msg,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        backgroundColor: ColorResource.primary,
+        backgroundColor: _getToastColor(mode),
         textColor: ColorResource.textBody,
-        fontSize: 16.0,
+        fontSize: fontSize,
       );
+
+  static Color _getToastColor(ToastMode mode) {
+    switch(mode) {
+      case ToastMode.success:
+        return Colors.green;
+      case ToastMode.error:
+        return Colors.red;
+      default:
+        return ColorResource.primary;
+    }
+  }
 }

@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         applicationId "vn.weupgroup.achitecture_weup.achitecture_weup"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

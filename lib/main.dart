@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/widget/camera/camera_viewer.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
+import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,7 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   // await _installFirebase();
   await HiveStorage.install();
+  cameras = await availableCameras();
 
   runApp(
     MultiProvider(

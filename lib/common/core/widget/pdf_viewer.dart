@@ -46,6 +46,8 @@ class _PDFViewerState extends State<PDFViewer> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        key: UniqueKey(),
         appBar: AppBarComp(
           title: hasData ? widget.url.fileName() : '',
           centerTitle: false,

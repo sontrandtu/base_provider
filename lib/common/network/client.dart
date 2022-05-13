@@ -1,11 +1,13 @@
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
+import 'package:achitecture_weup/common/extension/string_extension.dart';
+import 'package:achitecture_weup/common/local_storage/local_storage.dart';
 import 'package:achitecture_weup/common/network/service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Client {
-  static String _BASE_URL = 'https://dominhduong.weuptech.vn/cms/api/v1';
+  static String _BASE_URL = 'https://jsonplaceholder.typicode.com';
   static const int _CONNECT_TIMEOUT = 20000;
   static const int _RECEIVE_TIMEOUT = 20000;
   static const String _CONTENT_TYPE = 'application/json';
@@ -24,13 +26,9 @@ class Client {
         headers: {'id': '-1'},
         contentType: _CONTENT_TYPE));
 
-    _dio?.interceptors.add(InterceptorsWrapper(onResponse: (response, handler) {
-      _dio = null;
-      return handler.next(response);
-    }, onError: (error, handler) {
-      _dio = null;
-      return handler.next(error);
-    }));
+    _dio?.interceptors.add(InterceptorsWrapper(
+        onRequest: _onRequestCache, onResponse: _onResponseCache, onError: _onErrorCache));
+
     if (kDebugMode) {
       _dio?.interceptors.add(PrettyDioLogger(
           logPrint: _logPrint,
@@ -52,5 +50,20 @@ class Client {
 
   static void _logPrint(v) {
     showDioLog(v);
+  }
+
+  static void _onRequestCache(RequestOptions options, RequestInterceptorHandler handler) async {
+
+    handler.next(options);
+  }
+
+  static void _onResponseCache(Response response, ResponseInterceptorHandler handler) {
+    _dio = null;
+    handler.next(response);
+  }
+
+  static void _onErrorCache(DioError error, ErrorInterceptorHandler handler) {
+    _dio = null;
+    handler.next(error);
   }
 }

@@ -3,6 +3,7 @@ import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
+import 'package:achitecture_weup/system/repository/new_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginViewModel extends BaseViewModel {
@@ -13,11 +14,17 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+    fetchData();
     setStatus(Status.success);
   }
 
+  @override
+  Future<void> fetchData() async {
+    await NewRepository.instance.getAllPost();
+  }
 
   void login() async {
+    await NewRepository.instance.getAllPost();
     setStatus(Status.waiting);
     await delay(1000);
     // if (await getConnection(reconnect: login)) return;
@@ -28,7 +35,7 @@ class LoginViewModel extends BaseViewModel {
 
     setStatus(Status.success);
 
-    appNavigator.pushNamed(RoutePath.HOME,arguments: {'dynamic argument': 'OK'});
+    // appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {
@@ -56,5 +63,9 @@ class LoginViewModel extends BaseViewModel {
       return;
     }
     ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
+  }
+
+  clearCache() {
+
   }
 }

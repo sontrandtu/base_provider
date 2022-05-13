@@ -24,7 +24,7 @@ class ThemeViewModel extends BaseViewModel {
 
     String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 
-    await HiveStorage.putValue(HiveKey.themeKey, saveTheme);
+    await LocalStorage.put(LocalKey.themeKey, saveTheme);
 
     notifyListeners();
   }
@@ -39,7 +39,7 @@ class ThemeViewModel extends BaseViewModel {
   ThemeMode get getThemeMode => isLightMode ? ThemeMode.dark : ThemeMode.light;
 
   ThemeMode get getInitMode =>
-      HiveStorage.getValue(HiveKey.themeKey, defaultValue: ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT
+      LocalStorage.get(LocalKey.themeKey, ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT
           ? ThemeMode.light
           : ThemeMode.dark;
 

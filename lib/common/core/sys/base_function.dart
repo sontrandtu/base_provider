@@ -13,7 +13,7 @@ Cyan:    \x1B[36m
 White:   \x1B[37m
 Reset:   \x1B[0m*/
 
-void showLog(Object message) {
+void showLog(dynamic message) {
   if (kDebugMode) {
     print('\x1B[34m[WEUP-APP] $message\x1B[0m');
   }

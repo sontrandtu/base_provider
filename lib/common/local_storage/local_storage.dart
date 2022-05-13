@@ -60,5 +60,5 @@ class LocalStorage {
 }
 
 class StorageKey {
-  static const String themeKey = 'light';
+  static const String THEME = 'theme';
 }

@@ -1,7 +1,7 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
-import 'package:achitecture_weup/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
   VM? _viewModel;
@@ -13,8 +13,6 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
   double get width => _width!;
 
   double get height => _height!;
-
-  // RouteSettings? get routeSetting => ModalRoute.of(context)?.settings;
 
   VM get init;
 
@@ -53,7 +51,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     showLogState('$VM was closed');
 
-    themeViewModel.setUiOverlay();
+    context.read<ThemeViewModel>().setUiOverlay();
 
     super.dispose();
   }

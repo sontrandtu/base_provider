@@ -11,40 +11,36 @@ class ThemeViewModel extends BaseViewModel {
   ThemeMode get mode => _mode;
 
   ThemeViewModel() {
-    _mode = getInitMode;
+    _mode = initMode();
     setUiOverlay();
   }
 
   Future<void> toggleMode() async {
-    _mode = getThemeMode;
+    _changMode();
 
-    appStyle = getThemeData;
+    _changeThemeData();
 
     setUiOverlay();
 
     String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 
-    await LocalStorage.put(StorageKey.themeKey, saveTheme);
+    await LocalStorage.put(StorageKey.THEME, saveTheme);
 
-    notifyListeners();
+    update();
   }
 
-  void setUiOverlay() {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: getBrightness));
-  }
+  bool get isLightMode =>
+      LocalStorage.get(StorageKey.THEME, ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT;
 
-  bool get isLightMode => _mode == ThemeMode.light;
+  ThemeMode initMode() => _mode = isLightMode ? ThemeMode.light : ThemeMode.dark;
 
-  ThemeMode get getThemeMode => isLightMode ? ThemeMode.dark : ThemeMode.light;
+  Brightness get brightness => isLightMode ? Brightness.dark : Brightness.light;
 
-  ThemeMode get getInitMode =>
-      LocalStorage.get(StorageKey.themeKey, ThemeModeConstant.LIGHT) == ThemeModeConstant.LIGHT
-          ? ThemeMode.light
-          : ThemeMode.dark;
+  void setUiOverlay() => SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: brightness));
 
-  ThemeData get getThemeData =>
-      isLightMode ? ThemeManager.instance.lightTheme : ThemeManager.instance.darkTheme;
+  void _changMode() => _mode = isLightMode ? ThemeMode.dark : ThemeMode.light;
 
-  Brightness get getBrightness => isLightMode ? Brightness.dark : Brightness.light;
+  void _changeThemeData() =>
+      appStyle = isLightMode ? ThemeManager.instance.lightTheme : ThemeManager.instance.darkTheme;
 }

@@ -10,7 +10,6 @@ import 'common/core/theme/theme_view_model.dart';
 import 'common/local_storage/local_storage.dart';
 import 'common/module/firebase_module.dart';
 
-final ThemeViewModel themeViewModel = ThemeViewModel();
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -22,7 +21,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: themeViewModel),
+        ChangeNotifierProvider(create: (_) => ThemeViewModel()),
       ],
       child: EasyLocalization(
         fallbackLocale: const Locale('vi', 'VN'),

@@ -88,7 +88,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   // ),
                   TextButtonComp(
                     title: 'Change Theme',
-                    onPressed: () => context.read<ThemeViewModel>().toggleMode(),
+                    onPressed: () => themeViewModel.toggleMode(),
                   ),
                   // ElevatedButtonComp(
                   //   title: 'Date Picker',

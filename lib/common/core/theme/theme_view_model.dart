@@ -18,15 +18,16 @@ class ThemeViewModel extends BaseViewModel {
   Future<void> toggleMode() async {
     _changMode();
 
+    String saveTheme = _mode == ThemeMode.light ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
+
+    await LocalStorage.put(StorageKey.THEME, saveTheme);
+
     _changeThemeData();
 
     setUiOverlay();
 
-    String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 
-    await LocalStorage.put(StorageKey.THEME, saveTheme);
-
-    update();
+    notifyListeners();
   }
 
   bool get isLightMode =>

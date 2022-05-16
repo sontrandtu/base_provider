@@ -24,9 +24,9 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void login() async {
-    await NewRepository.instance.getAllPost();
+    // await NewRepository.instance.getAllPost();
     setStatus(Status.waiting);
-    await delay(1000);
+    // await delay(1000);
     // if (await getConnection(reconnect: login)) return;
     //
     // ApiResponse<List<Post>> response = await compute(NewRepository.instance.getAllPost,<String,dynamic>{});
@@ -35,7 +35,7 @@ class LoginViewModel extends BaseViewModel {
 
     setStatus(Status.success);
 
-    // appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'});
+    appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {

@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 *
 * */
 class AppNavigator {
-  late BuildContext _context;
+  late BuildContext context;
 
-  double get width => MediaQuery.of(_context).size.width;
+  double get width => MediaQuery.of(context).size.width;
 
-  double get height => MediaQuery.of(_context).size.height;
+  double get height => MediaQuery.of(context).size.height;
 
-  void setBuildContext(BuildContext? ctx) => _context = ctx!;
+  void setBuildContext(BuildContext? ctx) => context = ctx!;
 
   /*
   * Hiển thị dialog
@@ -21,7 +21,7 @@ class AppNavigator {
   Future<dynamic> dialog(Widget dialog, {dynamic arguments, bool? barrierDismissible}) async {
     log('OPEN DIALOG ${dialog.runtimeType} ${dialog.hashCode}', name: 'WEUP-APP');
     return await showDialog(
-        context: _context,
+        context: context,
         builder: (context) => dialog,
         barrierDismissible: barrierDismissible ?? false,
         routeSettings: RouteSettings(arguments: arguments));
@@ -31,26 +31,54 @@ class AppNavigator {
   * Hiển thị bottomSheet
   * */
   Future<dynamic> bottomSheetDialog(Widget dialog, {dynamic arguments}) async => await showModalBottomSheet(
-      context: _context, builder: (context) => dialog, routeSettings: RouteSettings(arguments: arguments));
+      context: context, builder: (context) => dialog, routeSettings: RouteSettings(arguments: arguments));
 
   /*
   * Navigate to new page with [RouteName]
   * */
-  Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushNamed(_context, routeName, arguments: arguments);
+  Future<dynamic> pushNamed(
+    String routeName, {
+    Map<String, dynamic>? params,
+    dynamic arguments,
+  }) async {
+    if (params != null) {
+      final uri = Uri(path: routeName, queryParameters: params);
+      routeName = uri.toString();
+    }
+    await Navigator.pushNamed(context, routeName, arguments: arguments);
+  }
 
   /*
   * Navigate to new page with [RouteName] and replace [current page]
   * */
-  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments, dynamic result}) async =>
-      await Navigator.pushReplacementNamed(_context, routeName, arguments: arguments, result: result);
+  Future<dynamic> pushReplacementNamed(
+    String routeName, {
+    Map<String, dynamic>? params,
+    dynamic arguments,
+    dynamic result,
+  }) async {
+    if (params != null) {
+      final uri = Uri(path: routeName, queryParameters: params);
+      routeName = uri.toString();
+    }
+    await Navigator.pushReplacementNamed(context, routeName, arguments: arguments, result: result);
+  }
 
   /*
   * Navigate to new page with [RouteName] and replace all util pages
   * */
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushNamedAndRemoveUntil(_context, routeName, (Route<dynamic> route) => false,
-          arguments: arguments);
+  Future<dynamic> pushNamedAndRemoveUntil(
+    String routeName, {
+    Map<String, dynamic>? params,
+    dynamic arguments,
+  }) async {
+    if (params != null) {
+      final uri = Uri(path: routeName, queryParameters: params);
+      routeName = uri.toString();
+    }
+    await Navigator.pushNamedAndRemoveUntil(context, routeName, (Route<dynamic> route) => false,
+        arguments: arguments);
+  }
 
   /*
   * Close dialog, page,...
@@ -59,6 +87,6 @@ class AppNavigator {
   * */
   void back({dynamic result}) async {
     log(result.toString(), name: 'WEUP-APP');
-    if (Navigator.canPop(_context)) Navigator.pop(_context, result);
+    if (Navigator.canPop(context)) Navigator.pop(context, result);
   }
 }

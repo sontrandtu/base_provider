@@ -32,7 +32,12 @@ abstract class BaseViewModel extends ChangeNotifier {
   /*
   * Route hiện tại
   * */
-  String? get currentRoute => _settings?.name;
+  String? get currentRoute => _settings?.name?.split('?').firstOrNull;
+
+  /*
+  * Route kèm parameter
+  * */
+  String? get originalRoute => _settings?.name;
 
   @Deprecated('Sử dụng [getConnection({Function? reconnect})] thay vì [isConnecting], '
       'trường này không hỗ trợ thực hiện lại request khi mất kết nối')
@@ -42,6 +47,11 @@ abstract class BaseViewModel extends ChangeNotifier {
   * Arguments từ page trước
   * */
   dynamic getArguments() => _settings?.arguments;
+
+  /*
+  * Parameter từ page trước
+  * */
+  Map<String, dynamic>? getParameter() => Uri.tryParse(originalRoute ?? '')?.queryParameters;
 
   /*
   * Hàm được chạy đầu tiên ngay sau khi chuyển page
@@ -66,9 +76,7 @@ abstract class BaseViewModel extends ChangeNotifier {
   @mustCallSuper
   void onViewCreated() => _mounted = true;
 
-  void setMounted(bool mounted){
-
-  }
+  void setMounted(bool mounted) {}
 
   /*
   * Hỗ trợ nhanh delay một khoảng thời gian,
@@ -119,7 +127,7 @@ abstract class BaseViewModel extends ChangeNotifier {
     // _context = ctx;
 
     _appNavigator?.setBuildContext(ctx);
-
+    _mounted = true;
     _setRouteSetting(ModalRoute.of(ctx!)?.settings);
   }
 

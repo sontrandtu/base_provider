@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:achitecture_weup/application.dart';
+import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/model_base/option_multiple_select.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
@@ -39,6 +40,10 @@ class HomeViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+
+    showLog(currentRoute);
+    showLog(getArguments());
+    showLog(Uri.parse(currentRoute ?? '').queryParameters);
     initData();
 
     language = ViewUtils.getLocale()?.languageCode;

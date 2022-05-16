@@ -2,6 +2,7 @@ import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
 import 'package:achitecture_weup/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> extends State<T> {
   VM? _viewModel;
@@ -28,7 +29,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     _viewModel?.initialData();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) => _viewModel?.onViewCreated());
+    SchedulerBinding.instance.addPostFrameCallback((_) => _viewModel?.onViewCreated());
   }
 
   @override

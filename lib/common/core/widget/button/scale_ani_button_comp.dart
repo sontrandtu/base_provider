@@ -70,11 +70,14 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp>
     animationController.value = 0;
   }
 
-  void _unPressedOnTapUp(_) {
+  Future<void> _unPressedOnTapUp(_) async {
     animationController.forward();
+    await _unPressed();
   }
 
   Future<void> _unPressed() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    widget.onPressed.call();
     animationController.value = 1;
   }
 

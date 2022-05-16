@@ -451,6 +451,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
+
                   ScaleAniButtonComp(
                     onPressed: () async {
                       urlImage =

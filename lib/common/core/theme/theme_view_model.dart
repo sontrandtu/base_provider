@@ -35,7 +35,7 @@ class ThemeViewModel extends BaseViewModel {
 
   ThemeMode initMode() => _mode = isLightMode ? ThemeMode.light : ThemeMode.dark;
 
-  Brightness get brightness => isLightMode ? Brightness.dark : Brightness.light;
+  Brightness get brightness => _mode == ThemeMode.light ? Brightness.dark : Brightness.light;
 
   void setUiOverlay() => SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: brightness));

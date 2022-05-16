@@ -1,5 +1,4 @@
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
-import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/local_storage/local_storage.dart';
 import 'package:achitecture_weup/common/network/service.dart';
 import 'package:dio/dio.dart';
@@ -53,7 +52,7 @@ class Client {
   }
 
   static void _onRequestCache(RequestOptions options, RequestInterceptorHandler handler) async {
-
+    // LocalStorage.put('key', 'data');
     handler.next(options);
   }
 
@@ -61,6 +60,7 @@ class Client {
     _dio = null;
     handler.next(response);
   }
+
 
   static void _onErrorCache(DioError error, ErrorInterceptorHandler handler) {
     _dio = null;

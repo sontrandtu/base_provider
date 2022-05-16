@@ -1,5 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     showLogState('$VM was closed');
 
-    context.read<ThemeViewModel>().setUiOverlay();
+    themeViewModel.setUiOverlay();
 
     super.dispose();
   }

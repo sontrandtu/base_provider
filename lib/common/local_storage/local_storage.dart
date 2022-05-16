@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalStorage {
   static const String boxName = 'local.data';
@@ -10,15 +9,13 @@ class LocalStorage {
   static Box box = Hive.box(boxName);
   static Box boxCache = Hive.box(cache);
 
-  static Future<void> install() async {
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
+  static Future<void> ensureInitialized() async {
+    await Hive.initFlutter();
     await Hive.openBox(boxName);
     await Hive.openBox(cache);
   }
 
   static Future<void> put(String key, dynamic value) async {
-
     switch (value) {
       case String:
       case double:

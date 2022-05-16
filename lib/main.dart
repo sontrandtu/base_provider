@@ -3,25 +3,27 @@ import 'dart:io';
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'application.dart';
 import 'common/core/theme/theme_view_model.dart';
 import 'common/local_storage/local_storage.dart';
 import 'common/module/firebase_module.dart';
-
+ThemeViewModel themeViewModel = ThemeViewModel();
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   // await _installFirebase();
-  await LocalStorage.install();
+
+
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeViewModel()),
+        ChangeNotifierProvider(create: (_) => themeViewModel),
       ],
       child: EasyLocalization(
         fallbackLocale: const Locale('vi', 'VN'),

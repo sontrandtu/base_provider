@@ -16,7 +16,7 @@ class _Service implements Service {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<Post>?>> getAllPost(m) async {
+  Future<HttpResponse<List<Post>?>> getAllComments(m) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(m);
@@ -25,7 +25,7 @@ class _Service implements Service {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<Post>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/accounts',
+                .compose(_dio.options, '/comments',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data

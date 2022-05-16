@@ -96,7 +96,7 @@ class EasyLocalization extends StatefulWidget {
     if (!logEnable)
       logger = EasyLogger(
           name: '🌎 Easy Localization',
-          enableBuildModes: logEnable ? [] : const <BuildMode>[BuildMode.profile, BuildMode.debug]);
+          enableBuildModes: !logEnable ? [] : const <BuildMode>[BuildMode.profile, BuildMode.debug]);
     EasyLocalization.logger.debug('Start');
   }
 

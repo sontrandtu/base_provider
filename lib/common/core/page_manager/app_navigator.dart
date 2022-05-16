@@ -42,8 +42,8 @@ class AppNavigator {
   /*
   * Navigate to new page with [RouteName] and replace [current page]
   * */
-  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments}) async =>
-      await Navigator.pushReplacementNamed(_context, routeName, arguments: arguments);
+  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments, dynamic result}) async =>
+      await Navigator.pushReplacementNamed(_context, routeName, arguments: arguments, result: result);
 
   /*
   * Navigate to new page with [RouteName] and replace all util pages

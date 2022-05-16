@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
+import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,6 +20,10 @@ extension StringExtension on String {
     final String nonUnicodeQuery = query.trim().toLowerCase().convertToUnsigned;
     return nonUnicode.contains(nonUnicodeQuery);
   }
+
+  String get toMd5 => md5.convert(utf8.encode(this)).toString();
+
+  String get toSha256 => sha256.convert(utf8.encode(this)).toString();
 
   String? get extractTraceId {
     final regex = RegExp(r'[a-z0-9]+\.(?:html)$');
@@ -79,7 +85,8 @@ extension StringExtension on String {
     return this;
   }
 
-  String get toUpperCaseLetter => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toUpperCaseFirst).join(' ');
+  String get toUpperCaseLetter =>
+      replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toUpperCaseFirst).join(' ');
 
   String get hidePhoneNumber {
     var phone = this;
@@ -142,7 +149,8 @@ extension StringExtension on String {
 
   String get allInCaps => toUpperCase();
 
-  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
+  String get capitalizeFirstOfEach =>
+      replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
 
   DateTime convertToDateTime({required String pattern}) {
     try {

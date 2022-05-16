@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
@@ -14,17 +15,21 @@ class ApiResponse<T> {
 }
 
 extension FutureExtensions<T> on Future<HttpResponse<T?>> {
-  Future<ApiResponse<T>> wrap() async {
+  FutureOr<ApiResponse<T>> wrap() async {
     try {
       HttpResponse httpResponse = await this;
 
-      final String? okMessage = httpResponse.response.data['message'];
-      final int? okErrorCode = httpResponse.response.data['error'];
+      final responseData = httpResponse.response.data;
 
-      return Future.value(ApiResponse(
-          code: okErrorCode ?? httpResponse.response.statusCode,
-          message: okMessage,
-          data: httpResponse.data));
+      String okMessage = 'Thành công';
+      int okErrorCode = 0;
+
+      if (responseData is Map<String, dynamic>) {
+        okMessage = responseData['message'];
+        okErrorCode = responseData['error'];
+      }
+
+      return Future.value(ApiResponse(code: okErrorCode, message: okMessage, data: httpResponse.data));
     } catch (error) {
       showError(error);
       if (error is DioError) {

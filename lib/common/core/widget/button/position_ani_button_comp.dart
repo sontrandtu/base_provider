@@ -59,11 +59,14 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
     animationController.value = 0;
   }
 
-  void _unPressedOnTapUp(_) {
+  Future<void> _unPressedOnTapUp(_) async {
     animationController.forward();
+   await _unPressed();
   }
 
-  void _unPressed() {
+  Future<void> _unPressed() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    widget.onPressed.call();
     animationController.value = 4;
   }
 
@@ -77,7 +80,6 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
   Widget build(BuildContext context) {
     double height = widget.height - 4;
     return GestureDetector(
-      onTap: widget.onPressed,
       child: SizedBox(
         width: widget.width,
         height: widget.height,

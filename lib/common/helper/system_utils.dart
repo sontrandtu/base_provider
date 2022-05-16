@@ -24,20 +24,21 @@ void print_r(dynamic input) {
   }
 }
 
-bool empty(dynamic input, [bool hasZero = false]) {
-  if (input == null) return true;
-  if (input is String && input != '') return false;
-
-  if (input is num) {
-    if (input == 0 || input == .0 && !hasZero) return false;
-    return true;
+bool empty([dynamic data, bool hasZero = false]) {
+  if (data != null) {
+    if ((data is Map || data is List) && data.length == 0) return true;
+    if ((data is Map || data is Iterable) && data.isEmpty) return true;
+    if (data is bool) return !data;
+    if ((data is String || data is num) && (data == '0' || data == 0)) {
+      if (hasZero) {
+        return false;
+      }
+      return true;
+    }
+    if (data.toString().isNotEmpty)  return false;
   }
-  if (input is List && input.isNotEmpty) return false;
-
-  if (input is Map && input.isNotEmpty) return false;
   return true;
 }
-
 
 Future<void> openFile(BuildContext context, {required String url}) async {
   return FileUtils().open(context, url: url);

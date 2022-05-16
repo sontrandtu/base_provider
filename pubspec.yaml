@@ -22,6 +22,7 @@ dependencies:
   carousel_slider: ^4.1.1
   crypto: ^3.0.2
 
+  camera: ^0.9.4+24
   #d
   dotted_decoration: ^2.0.0
   #e

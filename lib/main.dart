@@ -17,8 +17,7 @@ Future<void> main() async {
   await LocalStorage.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   // await _installFirebase();
-
-
+  cameras = await availableCameras();
 
   runApp(
     MultiProvider(

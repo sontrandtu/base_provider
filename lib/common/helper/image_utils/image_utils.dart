@@ -1,11 +1,12 @@
 import 'dart:io' as io;
-import 'package:achitecture_weup/common/core/app_core.dart';
+import 'package:achitecture_weup/common/core/sys/permission_config.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:achitecture_weup/common/helper/image_utils/text_delegate.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'img_crop.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -17,39 +18,45 @@ enum PickImageType {
 }
 
 class ImageUtils {
+  ImageUtils._();
   static final _picker = ImagePicker();
 
-  static Future<dynamic> pickImage({bool hasCrop = false, double? width, double? height, int? imageQuality}) async {
+  static Future<String>? selectImage({bool hasCrop = false, double? width, double? height, int? imageQuality, ImageSource source = ImageSource.gallery}) async {
+    bool request = await PermissionConfig.instance.request(
+        permission: Permission.camera,
+        title: 'Thông báo',
+        content: 'Bạn cần cấp quyền truy cập vào ${source == ImageSource.camera ? 'Camera' : 'Thư viện'}');
+    if(!request) '';
     final XFile? _image = await _picker.pickImage(
-      source: ImageSource.gallery,
+      source: source,
       maxWidth: width,
       maxHeight: height,
       imageQuality: imageQuality,
     );
+    if (_image == null) return '';
 
-    final rawFile = io.File(_image!.path);
+    final rawFile = io.File(_image.path);
     bool isMax = await FileUtils().checkSize(rawFile);
 
     if (!isMax) {
       if (!hasCrop) return _image.path;
       final _path = await ImgCrop.instance().cropFile(_image.path);
-      return _path;
+      return _path!;
     }
-    return null;
+    return '';
   }
 
-  // static Future<dynamic> pick(
-  //     {PickImageType type = PickImageType.image}) async {
-  //   if (type == PickImageType.image) {
-  //     final XFile? _image =
-  //         await _picker.pickImage(source: ImageSource.gallery);
-  //     return _image!.path;
-  //   } else {
-  //     final XFile? _video =
-  //         await _picker.pickVideo(source: ImageSource.gallery);
-  //     return _video!.path;
-  //   }
-  // }
+  static Future<String>? pick(
+      {ImageSource source = ImageSource.camera, CameraDevice preferredCameraDevice = CameraDevice.rear}) async {
+    bool request = await PermissionConfig.instance.request(
+        permission: Permission.camera,
+        title: 'Thông báo',
+        content: 'Bạn cần cấp quyền truy cập vào ${source == ImageSource.camera ? 'Camera' : 'Thư viện'}');
+    if (!request) return '';
+    final XFile? _file = await _picker.pickVideo(source: source, preferredCameraDevice: preferredCameraDevice);
+    if (_file == null) return '';
+    return _file.path;
+  }
 
   static Future<dynamic>? multiply(
     BuildContext context, {
@@ -61,9 +68,9 @@ class ImageUtils {
     List<AssetEntity>? values,
     bool isMap = true,
   }) async {
-    // final selectedImages = await AssetPicker.pickAssets(context, pickerConfig: AssetPickerTextDelegateVN());
-
-    final _multi = <Map<String, dynamic>>[];
+    final PermissionState state = await AssetPicker.permissionCheck();
+    if(state != PermissionState.authorized) return;
+    final _data = <Map<String, dynamic>>[];
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
       pickerConfig: AssetPickerConfig(
@@ -74,22 +81,13 @@ class ImageUtils {
         previewThumbnailSize: previewThumbnailSize,
         requestType: type,
         selectedAssets: values,
-        // specialPickerType: SpecialPickerType.
-        // specialItemPosition: SpecialItemPosition.append,
-        // specialItemBuilder:
-        // filterOptions: FilterOptionGroup(containsLivePhotos: ),
-        // themeColor: appStyle.primaryColor,
-        // gridThumbnailSize:
-        // pickerTheme: ThemeData(
-          // appBarTheme: AppBarTheme(color: appStyle.primaryColor, iconTheme: IconThemeData(color: Colors.white))
-        // ),
       ),
     );
     if (isMap) {
       if (result != null && result.isNotEmpty) {
         for (var element in result) {
           final res = await element.file;
-          _multi.add({
+          _data.add({
             'id': element.id,
             'title': element.title,
             'path': res!.path,
@@ -99,10 +97,10 @@ class ImageUtils {
           });
         }
       }
-      if (!empty(_multi)) {
-        _multi.last['isLast'] = 1;
+      if (!empty(_data)) {
+        _data.last['isLast'] = 1;
       }
-      return _multi;
+      return _data;
     }
     return result;
   }

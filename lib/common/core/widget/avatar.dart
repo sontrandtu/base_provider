@@ -24,7 +24,12 @@ class _AvatarState extends State<Avatar> {
   late String _image;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
+    _initAvatar();
+    super.didChangeDependencies();
+  }
+
+  void _initAvatar() {
     _first = (!empty(widget.fullName))
         ? (widget.fullName.split(' ').isNotEmpty ? widget.fullName.trim().split(' ').last[0] : widget.fullName)
         : '';
@@ -76,7 +81,6 @@ class _AvatarState extends State<Avatar> {
         );
       }
     }
-    super.initState();
   }
 
   @override
@@ -91,22 +95,20 @@ class _AvatarState extends State<Avatar> {
             aspectRatio: 1.0,
             child: _imageWidget ??
                 Container(
-                  color: (empty(_image)) ? _color : null,
+                  color: (!empty(_image)) ? _color : null,
                   child: Center(
-                    child: Builder(builder: (_) {
-                      if (!empty(_image)) {
-                        return ImageViewer(_image, width: widget.width, fit: BoxFit.cover, height: widget.width);
-                      }
-                      return Text(
-                        _first.toUpperCase(),
-                        style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),
-                      );
-                    }),
+                    child: !empty(_image)
+                        ? ImageViewer(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
+                        : Text(
+                            _first.toUpperCase(),
+                            style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),
+                          ),
                   ),
                 ),
           )),
     );
   }
+
   Color _convertColor(String firstText) {
     switch (firstText.toUpperCase()) {
       case 'Q':
@@ -176,4 +178,3 @@ class _AvatarState extends State<Avatar> {
     }
   }
 }
-

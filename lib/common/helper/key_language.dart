@@ -16,4 +16,5 @@ class KeyLanguage{
   static const String language = 'language';
   static const String images = 'images';
   static const String viewMore = 'viewMore';
+  static const String copied = 'copied';
 }

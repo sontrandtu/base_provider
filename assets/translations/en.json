@@ -15,6 +15,6 @@
   "questionStorage": "The app needs access to the storage",
   "setting": "Setting",
   "images": "images",
-  "viewMore": "View more"
-
+  "viewMore": "View more",
+  "copied": "Copied"
 }

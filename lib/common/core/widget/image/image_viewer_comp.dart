@@ -8,7 +8,7 @@ import 'view_image.dart';
 
 enum TypeImageViewer { none, assets, storage, network }
 
-class ImageViewer extends StatefulWidget {
+class ImageViewerComp extends StatefulWidget {
   final String url;
   final double width;
   final double height;
@@ -18,7 +18,7 @@ class ImageViewer extends StatefulWidget {
   final Color? color;
   final bool hasViewImage;
 
-  const ImageViewer(
+  const ImageViewerComp(
     this.url, {
     Key? key,
     this.width = 70,
@@ -31,10 +31,10 @@ class ImageViewer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ImageViewer> createState() => _ImageViewerState();
+  State<ImageViewerComp> createState() => _ImageViewerCompState();
 }
 
-class _ImageViewerState extends State<ImageViewer> {
+class _ImageViewerCompState extends State<ImageViewerComp> {
   late TypeImageViewer type;
 
   @override

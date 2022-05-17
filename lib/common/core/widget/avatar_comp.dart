@@ -1,21 +1,21 @@
-import 'package:achitecture_weup/common/core/widget/image/image_viewer.dart';
+import 'package:achitecture_weup/common/core/widget/image/image_viewer_comp.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
 
-class Avatar extends StatefulWidget {
+class AvatarComp extends StatefulWidget {
   final String fullName;
   final dynamic image;
   final double width;
   final double? radius;
   final Color? color;
 
-  const Avatar(this.fullName, {this.image, this.width = 40, this.radius, this.color, Key? key}) : super(key: key);
+  const AvatarComp(this.fullName, {this.image, this.width = 40, this.radius, this.color, Key? key}) : super(key: key);
 
   @override
-  State<Avatar> createState() => _AvatarState();
+  State<AvatarComp> createState() => _AvatarCompState();
 }
 
-class _AvatarState extends State<Avatar> {
+class _AvatarCompState extends State<AvatarComp> {
   Widget? _imageWidget;
   late String _first;
   late Color _color;
@@ -53,7 +53,7 @@ class _AvatarState extends State<Avatar> {
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
-                    child: Avatar(
+                    child: AvatarComp(
                       '',
                       image: _images[0],
                       width: widget.width * ((_images.length > 2) ? 0.55 : 0.65),
@@ -67,7 +67,7 @@ class _AvatarState extends State<Avatar> {
                       decoration: BoxDecoration(
                           color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
-                      child: Avatar('', image: _images[0], width: widget.width * 0.4))),
+                      child: AvatarComp('', image: _images[0], width: widget.width * 0.4))),
             Positioned(
                 bottom: 0,
                 left: 0,
@@ -76,7 +76,7 @@ class _AvatarState extends State<Avatar> {
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
-                    child: Avatar('', image: _images[1], width: widget.width * 0.65))),
+                    child: AvatarComp('', image: _images[1], width: widget.width * 0.65))),
           ],
         );
       }
@@ -98,7 +98,7 @@ class _AvatarState extends State<Avatar> {
                   color: (!empty(_image)) ? _color : null,
                   child: Center(
                     child: !empty(_image)
-                        ? ImageViewer(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
+                        ? ImageViewerComp(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
                         : Text(
                             _first.toUpperCase(),
                             style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),

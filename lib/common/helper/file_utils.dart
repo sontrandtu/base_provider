@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/permission_config.dart';
-import 'package:achitecture_weup/common/core/widget/pdf_viewer.dart';
+import 'package:achitecture_weup/common/core/widget/pdf_viewer_comp.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/key_language.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class FileUtils {
   }
 
   void open(BuildContext context, {required String url}) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => PDFViewer(url)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => PDFViewerComp(url)));
   }
 
   Future<String>? download(String url, {ValueChanged<num>? onProcess}) async {

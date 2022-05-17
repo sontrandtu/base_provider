@@ -70,6 +70,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   shimmer: ^2.0.0
   syncfusion_flutter_pdfviewer: ^20.1.52-beta
+
   #u
   url_launcher: ^6.0.20
 

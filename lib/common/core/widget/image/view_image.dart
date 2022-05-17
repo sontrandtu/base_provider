@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-import 'image_viewer.dart';
+import 'image_viewer_comp.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 class ViewImage extends StatelessWidget {

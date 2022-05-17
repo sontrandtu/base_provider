@@ -67,7 +67,7 @@ class _FormAlbumState extends State<FormAlbum> {
                   children: List<Widget>.generate(
                       (_items.length > maxLength ? maxLength : _items.length),
                       (index) => _LayoutImage(
-                            child: ImageViewer('${_items[index]['path']}', fit: BoxFit.fill, hasViewImage: true),
+                            child: ImageViewerComp('${_items[index]['path']}', fit: BoxFit.fill, hasViewImage: true),
                             hasMargin: _items[index]['isLast'] != null && _items[index]['isLast'] == 1 ? false : true,
                             isRoot: false,
                             onDelete: _onDelete,

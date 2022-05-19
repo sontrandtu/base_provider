@@ -26,7 +26,7 @@ extension FutureExtensions<T> on Future<HttpResponse<T?>> {
 
       if (responseData is Map<String, dynamic>) {
         okMessage = responseData['message'];
-        okErrorCode = responseData['error'];
+       if(responseData['error'] != null)okErrorCode = responseData['error'] is String ? int.tryParse(responseData['error'].toString()) : responseData['error'];
       }
 
       return Future.value(ApiResponse(code: okErrorCode, message: okMessage, data: httpResponse.data));

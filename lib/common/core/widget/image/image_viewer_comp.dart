@@ -36,26 +36,41 @@ class ImageViewerComp extends StatefulWidget {
 
 class _ImageViewerCompState extends State<ImageViewerComp> {
   late TypeImageViewer type;
+  late String _url;
 
   @override
   void initState() {
-    if (widget.url.isStorage()) {
-      type = TypeImageViewer.storage;
-    } else if (widget.url.isValidUrl) {
-      type = TypeImageViewer.network;
-    } else if (widget.url.isAssets()) {
-      type = TypeImageViewer.assets;
-    } else {
-      type = TypeImageViewer.none;
-    }
+    _url = widget.url;
+    _checkType();
     super.initState();
   }
 
   @override
+  void didUpdateWidget(covariant ImageViewerComp oldWidget) {
+    if(oldWidget.url != widget.url) {
+      _url = widget.url;
+      _checkType();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _checkType() {
+    if (_url.isStorage()) {
+      type = TypeImageViewer.storage;
+    } else if (_url.isValidUrl) {
+      type = TypeImageViewer.network;
+    } else if (_url.isAssets()) {
+      type = TypeImageViewer.assets;
+    } else {
+      type = TypeImageViewer.none;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox.shrink();
-    return InkWellComp(
-      onTap:  widget.hasViewImage ? _onTap : null,
+    if (empty(widget.url) || type == TypeImageViewer.none) return const Text('no img');
+    return InkWell(
+      onTap: widget.hasViewImage ? _onTap : null,
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
@@ -74,7 +89,6 @@ class _ImageViewerCompState extends State<ImageViewerComp> {
   }
 
   void _onTap() => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
-
 }
 
 class _ImageWidget extends StatelessWidget {

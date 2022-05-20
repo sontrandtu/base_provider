@@ -68,7 +68,7 @@ class _ImageViewerCompState extends State<ImageViewerComp> {
 
   @override
   Widget build(BuildContext context) {
-    if (empty(widget.url) || type == TypeImageViewer.none) return const Text('no img');
+    if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox();
     return InkWell(
       onTap: widget.hasViewImage ? _onTap : null,
       child: ClipRRect(

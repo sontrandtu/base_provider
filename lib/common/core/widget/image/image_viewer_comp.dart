@@ -55,8 +55,7 @@ class _ImageViewerCompState extends State<ImageViewerComp> {
   Widget build(BuildContext context) {
     if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox.shrink();
     return InkWellComp(
-      onTap: _onTap,
-      padding: EdgeInsets.zero,
+      onTap:  widget.hasViewImage ? _onTap : null,
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
@@ -74,11 +73,8 @@ class _ImageViewerCompState extends State<ImageViewerComp> {
     );
   }
 
-  void _onTap() {
-    if (widget.hasViewImage) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
-    }
-  }
+  void _onTap() => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
+
 }
 
 class _ImageWidget extends StatelessWidget {

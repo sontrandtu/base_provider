@@ -43,8 +43,7 @@ class TextFieldComp extends StatefulWidget {
     Key? key,
     this.prefixIcon,
     this.suffixIcon,
-    this.inputType,
-    this.isInvisiblePassword = false,
+    this.inputType, 
     this.editingController,
     this.hint,
     this.onChange,
@@ -82,7 +81,7 @@ class TextFieldComp extends StatefulWidget {
     this.enabledBorder,
     this.focusedBorder,
     this.isUnderLine = false,
-    this.labelStyle,
+    this.labelStyle, this.isInvisiblePassword,
   }) : super(key: key);
 
   @override
@@ -115,7 +114,7 @@ class _TextFieldCompState extends State<TextFieldComp> {
         obscureText: obscureText,
         onChanged: (String value) => widget.onChange,
         validator: (value) => widget.onValidator?.call(value),
-        onEditingComplete: () => widget.onComplete,
+        // onEditingComplete: () => widget.onComplete,
         onTap: () => widget.onTap,
         onFieldSubmitted: (value) => (value) => widget.onFieldSubmitted?.call(value),
         autovalidateMode: AutovalidateMode.onUserInteraction,

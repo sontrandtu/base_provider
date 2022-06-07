@@ -2,26 +2,32 @@ import 'package:flutter/material.dart';
 
 class PositionAniButtonComp extends StatefulWidget {
   final GestureTapCallback onPressed;
-  final bool enabled;
-  final Widget child;
+  final bool isEnabled;
+  final Widget? child;
   final Color color;
   final double height;
   final double width;
   final double borderRadius;
   final int duration;
   final ShadowDegree shadowDegree;
+  final String? title;
+  final Color? colorTitle;
+  final TextStyle? styleTitle;
 
   const PositionAniButtonComp({
     Key? key,
-    required this.child,
+    this.child,
     required this.onPressed,
-    this.enabled = true,
+    this.isEnabled = true,
     this.color = Colors.blue,
     this.height = 60,
     this.width = 160,
     this.shadowDegree = ShadowDegree.light,
     this.duration = 1000,
     this.borderRadius = 16,
+    this.title,
+    this.colorTitle,
+    this.styleTitle,
   }) : super(key: key);
 
   @override
@@ -61,12 +67,12 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
 
   Future<void> _unPressedOnTapUp(_) async {
     animationController.forward();
-   await _unPressed();
+    await Future.delayed(const Duration(milliseconds: 100));
+    widget.onPressed.call();
+    animationController.value = 1;
   }
 
   Future<void> _unPressed() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    widget.onPressed.call();
     animationController.value = 4;
   }
 
@@ -91,7 +97,7 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
                 height: height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                  color: widget.enabled
+                  color: widget.isEnabled
                       ? darken(widget.color, widget.shadowDegree)
                       : darken(Colors.grey, widget.shadowDegree),
                   borderRadius: BorderRadius.all(
@@ -109,7 +115,7 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
                       height: height,
                       width: widget.width,
                       decoration: BoxDecoration(
-                        color: widget.enabled ? widget.color : Colors.grey,
+                        color: widget.isEnabled ? widget.color : Colors.grey,
                         borderRadius: BorderRadius.all(
                           Radius.circular(widget.borderRadius),
                         ),
@@ -123,9 +129,9 @@ class _PositionAniButtonCompState extends State<PositionAniButtonComp>
           ],
         ),
       ),
-      onTapDown: widget.enabled ? _pressed : null,
-      onTapUp: widget.enabled ? _unPressedOnTapUp : null,
-      onTapCancel: widget.enabled ? _unPressed : null,
+      onTapDown: widget.isEnabled ? _pressed : null,
+      onTapUp: widget.isEnabled ? _unPressedOnTapUp : null,
+      onTapCancel: widget.isEnabled ? _unPressed : null,
     );
   }
 

@@ -9,7 +9,9 @@ class Avatar extends StatefulWidget {
   final double? radius;
   final Color? color;
 
-  const Avatar(this.fullName, {this.image, this.width = 40, this.radius, this.color, Key? key}) : super(key: key);
+  const Avatar(this.fullName,
+      {this.image, this.width = 40, this.radius, this.color, Key? key})
+      : super(key: key);
 
   @override
   State<Avatar> createState() => _AvatarState();
@@ -26,13 +28,16 @@ class _AvatarState extends State<Avatar> {
   @override
   void initState() {
     _first = (!empty(widget.fullName))
-        ? (widget.fullName.split(' ').isNotEmpty ? widget.fullName.trim().split(' ').last[0] : widget.fullName)
+        ? (widget.fullName.split(' ').isNotEmpty
+            ? widget.fullName.trim().split(' ').last[0]
+            : widget.fullName)
         : '';
     _color = widget.color ?? _convertColor(_first);
     _fontSize = widget.width / 2;
     _image = !empty(widget.image) && widget.image is String ? widget.image : '';
     if (!empty(widget.image) && (widget.image is Map || widget.image is List)) {
-      _images = (widget.image is Map) ? widget.image.values.toList() : widget.image;
+      _images =
+          (widget.image is Map) ? widget.image.values.toList() : widget.image;
       if (_images.length == 1) {
         _image = !empty(_images[0]) ? _images[0] : '';
       } else {
@@ -47,11 +52,13 @@ class _AvatarState extends State<Avatar> {
                     padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(widget.radius ?? widget.width))),
                     child: Avatar(
                       '',
                       image: _images[0],
-                      width: widget.width * ((_images.length > 2) ? 0.55 : 0.65),
+                      width:
+                          widget.width * ((_images.length > 2) ? 0.55 : 0.65),
                     ))),
             if (_images.length > 2)
               Positioned(
@@ -61,8 +68,10 @@ class _AvatarState extends State<Avatar> {
                       padding: const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                           color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
-                      child: Avatar('', image: _images[0], width: widget.width * 0.4))),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(widget.radius ?? widget.width))),
+                      child: Avatar('',
+                          image: _images[0], width: widget.width * 0.4))),
             Positioned(
                 bottom: 0,
                 left: 0,
@@ -70,8 +79,10 @@ class _AvatarState extends State<Avatar> {
                     padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
-                    child: Avatar('', image: _images[1], width: widget.width * 0.65))),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(widget.radius ?? widget.width))),
+                    child: Avatar('',
+                        image: _images[1], width: widget.width * 0.65))),
           ],
         );
       }
@@ -83,7 +94,8 @@ class _AvatarState extends State<Avatar> {
   Widget build(BuildContext context) {
     if (_imageWidget != null) return _imageWidget!;
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? (widget.width))),
+      borderRadius:
+          BorderRadius.all(Radius.circular(widget.radius ?? (widget.width))),
       child: SizedBox(
           width: widget.width,
           height: widget.width,
@@ -95,11 +107,17 @@ class _AvatarState extends State<Avatar> {
                   child: Center(
                     child: Builder(builder: (_) {
                       if (!empty(_image)) {
-                        return ImageViewer(_image, width: widget.width, fit: BoxFit.cover, height: widget.width);
+                        return ImageViewer(_image,
+                            width: widget.width,
+                            fit: BoxFit.cover,
+                            height: widget.width);
                       }
                       return Text(
                         _first.toUpperCase(),
-                        style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: _fontSize,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
                       );
                     }),
                   ),
@@ -107,6 +125,7 @@ class _AvatarState extends State<Avatar> {
           )),
     );
   }
+
   Color _convertColor(String firstText) {
     switch (firstText.toUpperCase()) {
       case 'Q':
@@ -176,4 +195,3 @@ class _AvatarState extends State<Avatar> {
     }
   }
 }
-

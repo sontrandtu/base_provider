@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/avatar.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/core/widget/form_album.dart';
 import 'package:achitecture_weup/common/core/widget/form_number.dart';
@@ -55,6 +56,8 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  TextFieldComp(),
+                  TextFieldComp(),
                   FormAlbum(
                     onChanged: (val) {},
                   ),
@@ -506,7 +509,10 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                             const LoginPage(),
                           ])),
                   TextButtonComp(title: 'To todo list page', onPressed: () =>viewModel.appNavigator.pushNamed(RoutePath.TODO_LIST)),
-
+                  Avatar('Trường'),
+                  Avatar('Tùng'),
+                  Avatar('Tài'),
+                  Avatar('Tuấn'),
                 ],
               ),
             ),

@@ -1,33 +1,42 @@
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 class ScaleAniButtonComp extends StatefulWidget {
   final GestureTapCallback onPressed;
-  final bool enabled;
+  final bool isEnabled;
   final bool isElevation;
-  final Widget child;
-  final Color color;
+  final Widget? child;
+  final Color bgColor;
+  final Color? colorTitle;
   final double borderRadius;
   final double elevation;
   final double scaleBegin, scaleEnd;
   final double? width, height;
   final int duration;
   final EdgeInsetsGeometry? padding;
+  final String? title;
+  final bool isFit;
+  final TextStyle? styleTitle;
 
   const ScaleAniButtonComp({
     Key? key,
-    required this.child,
+    this.child,
     required this.onPressed,
-    this.enabled = true,
-    this.color = Colors.blue,
+    this.isEnabled = true,
+    this.bgColor = Colors.blue,
     this.duration = 1000,
     this.borderRadius = 16,
     this.elevation = 4,
     this.padding,
     this.isElevation = true,
-    this.scaleBegin = 0.8,
+    this.scaleBegin = 0.95,
     this.scaleEnd = 1,
     this.width,
     this.height,
+    this.colorTitle,
+    this.title,
+    this.isFit = false,
+    this.styleTitle,
   }) : super(key: key);
 
   @override
@@ -72,12 +81,12 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp>
 
   Future<void> _unPressedOnTapUp(_) async {
     animationController.forward();
-    await _unPressed();
+    await Future.delayed(const Duration(milliseconds: 100));
+    widget.onPressed.call();
+    animationController.value = 1;
   }
 
   Future<void> _unPressed() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    widget.onPressed.call();
     animationController.value = 1;
   }
 
@@ -89,13 +98,34 @@ class _ScaleAniButtonCompState extends State<ScaleAniButtonComp>
         builder: (BuildContext context, Widget? cachedChild) {
           return Transform.scale(
             scale: animation.value,
-            child: widget.child
+            child: widget.child ??
+                Container(
+                  decoration: BoxDecoration(
+                    color: !widget.isEnabled
+                        ? widget.bgColor
+                        : Colors.grey.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                  ),
+                  padding: widget.padding,
+                  width: !widget.isFit ? widget.width ?? double.infinity : null,
+                  height: !widget.isFit ? widget.height ?? 62 : null,
+                  alignment: !widget.isFit ? Alignment.center : null,
+                  child: Text(
+                    widget.title ?? '',
+                    style: widget.styleTitle ??
+                        appStyle.textTheme.headline4?.copyWith(
+                          color: !widget.isEnabled
+                              ? widget.colorTitle ?? Colors.black
+                              : Colors.grey.withOpacity(0.5),
+                        ),
+                  ),
+                ),
           );
         },
       ),
-      onTapDown: widget.enabled ? _pressed : null,
-      onTapUp: widget.enabled ? _unPressedOnTapUp : null,
-      onTapCancel: widget.enabled ? _unPressed : null,
+      onTapDown: widget.isEnabled ? _pressed : null,
+      onTapUp: widget.isEnabled ? _unPressedOnTapUp : null,
+      onTapCancel: widget.isEnabled ? _unPressed : null,
     );
   }
 }

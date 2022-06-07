@@ -1,23 +1,21 @@
-import 'package:achitecture_weup/common/core/widget/image/image_viewer.dart';
+import 'package:achitecture_weup/common/core/widget/image/image_viewer_comp.dart';
 import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
 
-class Avatar extends StatefulWidget {
+class AvatarComp extends StatefulWidget {
   final String fullName;
   final dynamic image;
   final double width;
   final double? radius;
   final Color? color;
 
-  const Avatar(this.fullName,
-      {this.image, this.width = 40, this.radius, this.color, Key? key})
-      : super(key: key);
+  const AvatarComp(this.fullName, {this.image, this.width = 40, this.radius, this.color, Key? key}) : super(key: key);
 
   @override
-  State<Avatar> createState() => _AvatarState();
+  State<AvatarComp> createState() => _AvatarCompState();
 }
 
-class _AvatarState extends State<Avatar> {
+class _AvatarCompState extends State<AvatarComp> {
   Widget? _imageWidget;
   late String _first;
   late Color _color;
@@ -26,18 +24,20 @@ class _AvatarState extends State<Avatar> {
   late String _image;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
+    _initAvatar();
+    super.didChangeDependencies();
+  }
+
+  void _initAvatar() {
     _first = (!empty(widget.fullName))
-        ? (widget.fullName.split(' ').isNotEmpty
-            ? widget.fullName.trim().split(' ').last[0]
-            : widget.fullName)
+        ? (widget.fullName.split(' ').isNotEmpty ? widget.fullName.trim().split(' ').last[0] : widget.fullName)
         : '';
     _color = widget.color ?? _convertColor(_first);
     _fontSize = widget.width / 2;
     _image = !empty(widget.image) && widget.image is String ? widget.image : '';
     if (!empty(widget.image) && (widget.image is Map || widget.image is List)) {
-      _images =
-          (widget.image is Map) ? widget.image.values.toList() : widget.image;
+      _images = (widget.image is Map) ? widget.image.values.toList() : widget.image;
       if (_images.length == 1) {
         _image = !empty(_images[0]) ? _images[0] : '';
       } else {
@@ -52,13 +52,11 @@ class _AvatarState extends State<Avatar> {
                     padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(widget.radius ?? widget.width))),
-                    child: Avatar(
+                        borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
+                    child: AvatarComp(
                       '',
                       image: _images[0],
-                      width:
-                          widget.width * ((_images.length > 2) ? 0.55 : 0.65),
+                      width: widget.width * ((_images.length > 2) ? 0.55 : 0.65),
                     ))),
             if (_images.length > 2)
               Positioned(
@@ -68,10 +66,8 @@ class _AvatarState extends State<Avatar> {
                       padding: const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                           color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(widget.radius ?? widget.width))),
-                      child: Avatar('',
-                          image: _images[0], width: widget.width * 0.4))),
+                          borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
+                      child: AvatarComp('', image: _images[0], width: widget.width * 0.4))),
             Positioned(
                 bottom: 0,
                 left: 0,
@@ -79,23 +75,19 @@ class _AvatarState extends State<Avatar> {
                     padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(widget.radius ?? widget.width))),
-                    child: Avatar('',
-                        image: _images[1], width: widget.width * 0.65))),
+                        borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? widget.width))),
+                    child: AvatarComp('', image: _images[1], width: widget.width * 0.65))),
           ],
         );
       }
     }
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     if (_imageWidget != null) return _imageWidget!;
     return ClipRRect(
-      borderRadius:
-          BorderRadius.all(Radius.circular(widget.radius ?? (widget.width))),
+      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? (widget.width))),
       child: SizedBox(
           width: widget.width,
           height: widget.width,
@@ -103,23 +95,14 @@ class _AvatarState extends State<Avatar> {
             aspectRatio: 1.0,
             child: _imageWidget ??
                 Container(
-                  color: (empty(_image)) ? _color : null,
+                  color: (!empty(_image)) ? _color : null,
                   child: Center(
-                    child: Builder(builder: (_) {
-                      if (!empty(_image)) {
-                        return ImageViewer(_image,
-                            width: widget.width,
-                            fit: BoxFit.cover,
-                            height: widget.width);
-                      }
-                      return Text(
-                        _first.toUpperCase(),
-                        style: TextStyle(
-                            fontSize: _fontSize,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                      );
-                    }),
+                    child: !empty(_image)
+                        ? ImageViewerComp(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
+                        : Text(
+                            _first.toUpperCase(),
+                            style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),
+                          ),
                   ),
                 ),
           )),

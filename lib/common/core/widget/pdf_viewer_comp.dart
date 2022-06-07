@@ -6,18 +6,18 @@ import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io' as io;
 
-class PDFViewer extends StatefulWidget {
+class PDFViewerComp extends StatefulWidget {
   final String url;
   final bool hideRotation;
   final bool hideSearch;
 
-  const PDFViewer(this.url, {Key? key, this.hideRotation = false, this.hideSearch = false}) : super(key: key);
+  const PDFViewerComp(this.url, {Key? key, this.hideRotation = false, this.hideSearch = false}) : super(key: key);
 
   @override
-  State<PDFViewer> createState() => _PDFViewerState();
+  State<PDFViewerComp> createState() => _PDFViewerCompState();
 }
 
-class _PDFViewerState extends State<PDFViewer> {
+class _PDFViewerCompState extends State<PDFViewerComp> {
   late final GlobalKey<SfPdfViewerState> _pdfViewerKey;
   bool hasData = false;
   late PdfViewerController? controller;

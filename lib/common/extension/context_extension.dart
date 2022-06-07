@@ -1,4 +1,8 @@
+import 'package:achitecture_weup/common/extension/string_extension.dart';
+import 'package:achitecture_weup/common/helper/app_common.dart';
+import 'package:achitecture_weup/common/helper/view_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 enum MessageType { error, success }
 
@@ -21,6 +25,21 @@ extension ContextExtension on BuildContext {
         .textTheme
         .bodyText1!
         .copyWith(fontWeight: FontWeight.normal, color: color);
+  }
+
+  Future<void> copyText(
+      String text, {
+        bool showToast = true,
+        VoidCallback? callback,
+      }) {
+
+    var data = ClipboardData(text: text);
+    return Clipboard.setData(data).then((_) {
+      if (showToast) {
+        ViewUtils.toast(KeyLanguage.copied.tl + ': ' + text);
+      }
+      callback?.call();
+    }).catchError((_) {});
   }
 }
 

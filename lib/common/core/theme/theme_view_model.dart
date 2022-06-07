@@ -18,15 +18,16 @@ class ThemeViewModel extends BaseViewModel {
   Future<void> toggleMode() async {
     _changMode();
 
+    String saveTheme = _mode == ThemeMode.light ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
+
+    await LocalStorage.put(StorageKey.THEME, saveTheme);
+
     _changeThemeData();
 
     setUiOverlay();
 
-    String saveTheme = isLightMode ? ThemeModeConstant.LIGHT : ThemeModeConstant.DARK;
 
-    await LocalStorage.put(StorageKey.THEME, saveTheme);
-
-    update();
+    notifyListeners();
   }
 
   bool get isLightMode =>
@@ -34,7 +35,7 @@ class ThemeViewModel extends BaseViewModel {
 
   ThemeMode initMode() => _mode = isLightMode ? ThemeMode.light : ThemeMode.dark;
 
-  Brightness get brightness => isLightMode ? Brightness.dark : Brightness.light;
+  Brightness get brightness => _mode == ThemeMode.light ? Brightness.dark : Brightness.light;
 
   void setUiOverlay() => SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: brightness));

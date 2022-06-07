@@ -85,8 +85,7 @@ extension StringExtension on String {
     return this;
   }
 
-  String get toUpperCaseLetter =>
-      replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toUpperCaseFirst).join(' ');
+  String get toUpperCaseLetter => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toUpperCaseFirst).join(' ');
 
   String get hidePhoneNumber {
     var phone = this;
@@ -149,8 +148,7 @@ extension StringExtension on String {
 
   String get allInCaps => toUpperCase();
 
-  String get capitalizeFirstOfEach =>
-      replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
+  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.inCaps).join(" ");
 
   DateTime convertToDateTime({required String pattern}) {
     try {
@@ -181,4 +179,12 @@ extension StringExtension on String {
   bool isStorage() => RegExp(r'^\/(storage|data)[^\.]').hasMatch(this);
 
   bool isAssets() => RegExp(r'^assets\/').hasMatch(this);
+
+  bool get isOfficeFile =>
+      endsWith('.doc') ||
+      endsWith('.docx') ||
+      endsWith('.xls') ||
+      endsWith('.xlsx') ||
+      endsWith('.ppt') ||
+      endsWith('.pptx');
 }

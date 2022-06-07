@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/sys/base_state.dart';
-import 'package:achitecture_weup/common/core/widget/avatar.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/core/widget/form_album.dart';
 import 'package:achitecture_weup/common/core/widget/form_number.dart';
@@ -56,22 +55,6 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TextFieldComp(),
-                  TextFieldComp(),
-                  FormAlbum(
-                    onChanged: (val) {},
-                  ),
-                  FormNumber(
-                    value: 5,
-                    onChanged: (int value) {},
-                    max: 10,
-                    min: 1,
-                  ),
-                  ImageViewer(urlImage, width: 100, height: 100),
-
-                  const ImageViewer(
-                    '',
-                  ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -91,7 +74,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   // ),
                   TextButtonComp(
                     title: 'Change Theme',
-                    onPressed: () => context.read<ThemeViewModel>().toggleMode(),
+                    onPressed: () => themeViewModel.toggleMode(),
                   ),
                   // ElevatedButtonComp(
                   //   title: 'Date Picker',
@@ -454,6 +437,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   const SizedBox(
                     height: 16,
                   ),
+
                   ScaleAniButtonComp(
                     onPressed: () async {
                       urlImage =
@@ -509,10 +493,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                             const LoginPage(),
                           ])),
                   TextButtonComp(title: 'To todo list page', onPressed: () =>viewModel.appNavigator.pushNamed(RoutePath.TODO_LIST)),
-                  Avatar('Trường'),
-                  Avatar('Tùng'),
-                  Avatar('Tài'),
-                  Avatar('Tuấn'),
+
                 ],
               ),
             ),

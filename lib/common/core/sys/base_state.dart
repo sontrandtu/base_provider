@@ -29,7 +29,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     _viewModel?.initialData();
 
-    SchedulerBinding.instance.addPostFrameCallback((_) => _viewModel?.onViewCreated());
+    SchedulerBinding.instance!.addPostFrameCallback((_) => _viewModel?.onViewCreated());
   }
 
   @override

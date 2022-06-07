@@ -65,13 +65,6 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                       borderRadius: 4,
                       onPressed: viewModel.login,
                     ),
-                    ElevatedButtonComp(
-                      title: 'Clear cache',
-                      widthValue: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      borderRadius: 4,
-                      onPressed: viewModel.clearCache,
-                    ),
                     const Expanded(child: SizedBox()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

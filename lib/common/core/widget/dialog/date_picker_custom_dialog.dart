@@ -65,10 +65,10 @@ class DatePickerComp extends StatelessWidget {
           /// value = List<PickerDateRange> Type = DateRangePickerSelectionMode.multipleRange
           Navigator.pop(context, value);
         },
-        onCancel: () {
-          Navigator.pop(context);
-        },
+        onCancel: () => _onPop(context),
       ),
     );
   }
+
+  void _onPop(BuildContext context) => Navigator.of(context).pop();
 }

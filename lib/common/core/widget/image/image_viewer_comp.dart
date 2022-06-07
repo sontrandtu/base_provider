@@ -8,7 +8,7 @@ import 'view_image.dart';
 
 enum TypeImageViewer { none, assets, storage, network }
 
-class ImageViewer extends StatefulWidget {
+class ImageViewerComp extends StatefulWidget {
   final String url;
   final double width;
   final double height;
@@ -18,7 +18,7 @@ class ImageViewer extends StatefulWidget {
   final Color? color;
   final bool hasViewImage;
 
-  const ImageViewer(
+  const ImageViewerComp(
     this.url, {
     Key? key,
     this.width = 70,
@@ -31,32 +31,46 @@ class ImageViewer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ImageViewer> createState() => _ImageViewerState();
+  State<ImageViewerComp> createState() => _ImageViewerCompState();
 }
 
-class _ImageViewerState extends State<ImageViewer> {
+class _ImageViewerCompState extends State<ImageViewerComp> {
   late TypeImageViewer type;
+  late String _url;
 
   @override
   void initState() {
-    if (widget.url.isStorage()) {
-      type = TypeImageViewer.storage;
-    } else if (widget.url.isValidUrl) {
-      type = TypeImageViewer.network;
-    } else if (widget.url.isAssets()) {
-      type = TypeImageViewer.assets;
-    } else {
-      type = TypeImageViewer.none;
-    }
+    _url = widget.url;
+    _checkType();
     super.initState();
   }
 
   @override
+  void didUpdateWidget(covariant ImageViewerComp oldWidget) {
+    if(oldWidget.url != widget.url) {
+      _url = widget.url;
+      _checkType();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _checkType() {
+    if (_url.isStorage()) {
+      type = TypeImageViewer.storage;
+    } else if (_url.isValidUrl) {
+      type = TypeImageViewer.network;
+    } else if (_url.isAssets()) {
+      type = TypeImageViewer.assets;
+    } else {
+      type = TypeImageViewer.none;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox.shrink();
-    return InkWellComp(
-      onTap: _onTap,
-      padding: EdgeInsets.zero,
+    if (empty(widget.url) || type == TypeImageViewer.none) return const SizedBox();
+    return InkWell(
+      onTap: widget.hasViewImage ? _onTap : null,
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
         child: Container(
@@ -74,11 +88,7 @@ class _ImageViewerState extends State<ImageViewer> {
     );
   }
 
-  void _onTap() {
-    if (widget.hasViewImage) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
-    }
-  }
+  void _onTap() => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewImage(widget.url, type: type)));
 }
 
 class _ImageWidget extends StatelessWidget {

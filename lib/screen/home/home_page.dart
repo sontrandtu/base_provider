@@ -55,20 +55,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  FormAlbum(
-                    onChanged: (val) {},
-                  ),
-                  FormNumber(
-                    value: 5,
-                    onChanged: (int value) {},
-                    max: 10,
-                    min: 1,
-                  ),
-                  ImageViewer(urlImage, width: 100, height: 100),
 
-                  const ImageViewer(
-                    '',
-                  ),
                   // const SliderComp(images: [
                   //   'https://www.daophatngaynay.com/vn/files/images/quy1-2010/1119828829096493_456282371.jpg',
                   //   'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
@@ -295,16 +282,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
                   //     ),
                   //   ],
                   // ),
-                  SizedBox(
-                    height: 100,
-                    child: BottomBarFabComp(
-                      onChangeTab: (int value) => log('RRRR $value'),
-                      body: Container(
-                        color: Colors.blue,
-                      ),
-                      onPressedFAB: (){},
-                    ),
-                  ),
+
                   RadioCustomComp<String>(
                     value: value.radioValue2,
                     groupValue: value.groupRadio,

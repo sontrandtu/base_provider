@@ -23,22 +23,25 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
   void initState() {
     _viewModel = init;
 
+
+    Future.delayed(Duration.zero, () => _viewModel?.onViewCreated());
+
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      showLogState('$VM was installed ${DateTime.now()}');
+
+      _viewModel?.setBuildContext(context);
+
+      _viewModel?.initialData();
+    });
     super.initState();
-
-    showLogState('$VM was installed');
-
-    _viewModel?.initialData();
-
-    SchedulerBinding.instance!.addPostFrameCallback((_) => _viewModel?.onViewCreated());
   }
+
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     appStyle = Theme.of(context);
-
-    _viewModel?.setBuildContext(context);
 
     _width = MediaQuery.of(context).size.width;
 

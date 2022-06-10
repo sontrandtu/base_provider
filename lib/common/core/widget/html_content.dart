@@ -77,7 +77,6 @@ class HtmlComp extends StatelessWidget {
     }
     li{
       font-size: 14px;
-      line-height: 1.3em;
       margin: 10px 0;
     }
     code {
@@ -385,15 +384,46 @@ class HtmlComp extends StatelessWidget {
     .media{
         width: 100%;
         display: flex;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
     .media > div{
+        display: flex;
         width: 100%;
     }
     .media > div > div{
         display: flex;
-        margin: 0;
-        padding: 0;
-        flex-direction: column;
+        width: 100%;
+    }
+    h1 {
+        font-size: 2em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
+    }
+    h2 {
+        font-size: 1.5em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
+    }
+    h3 {
+        font-size: 1.3em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
+    }
+    h4 {
+        font-size: 1em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
+    }
+    h5 {
+        font-size: 0.8em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
+    }
+    h6 {
+        font-size: 0.7em;
+        line-height: 1.2em;
+        margin: 0 0 10px 0;
     }
     </style>""";
 }

@@ -13,7 +13,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
   switch (routeName) {
     case RoutePath.INITIAL:
-      page = const SplashPage();
+      page = const HomePage();
       break;
     case RoutePath.LOGIN:
       page = const LoginPage();

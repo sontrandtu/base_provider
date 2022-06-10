@@ -47,6 +47,7 @@ class HomeViewModel extends BaseViewModel {
     initData();
 
     language = ViewUtils.getLocale()?.languageCode;
+    setStatus(Status.success);
   }
 
   Future<void> changLanguage() async {

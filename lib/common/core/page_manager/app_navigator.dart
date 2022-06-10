@@ -19,12 +19,31 @@ class AppNavigator {
   * Hiển thị dialog
   * */
   Future<dynamic> dialog(Widget dialog, {dynamic arguments, bool? barrierDismissible}) async {
-    log('OPEN DIALOG ${dialog.runtimeType} ${dialog.hashCode}', name: 'WEUP-APP');
-    return await showDialog(
-        context: context,
-        builder: (context) => dialog,
-        barrierDismissible: barrierDismissible ?? false,
-        routeSettings: RouteSettings(arguments: arguments));
+    return await showGeneralDialog(
+      context: context,
+      transitionDuration: Duration(
+          milliseconds: ModalRoute.of(context)?.isCurrent == true ? 300 : 500),
+      transitionBuilder: (context, _animation, _secondaryAnimation, _child) {
+        return ScaleTransition(
+          child: _child,
+          scale: Tween<double>(
+              end: 1,
+              begin: ModalRoute.of(context)?.isCurrent == true ? 1.3 : 0)
+              .animate(
+            CurvedAnimation(
+              parent: _animation,
+              curve: const Interval(0.5, 1.00, curve: Curves.linear),
+            ),
+          ),
+        );
+      },
+      barrierDismissible: barrierDismissible ?? true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      routeSettings: RouteSettings(arguments: arguments),
+      pageBuilder: (_animation, _secondaryAnimation, _child) {
+        return dialog;
+      },
+    );
   }
 
   /*

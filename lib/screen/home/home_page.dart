@@ -1,6 +1,5 @@
 import 'package:achitecture_weup/common/core/widget/ani_appbar_title_comp.dart';
 import 'package:achitecture_weup/screen/home/home_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +30,7 @@ class _HomePageState extends BaseState<HomePage, HomeViewModel> {
     return ChangeNotifierProvider.value(
       value: viewModel,
       builder: (context, child) => Consumer<HomeViewModel>(
-        builder: (context, value, child) => Scaffold(
+        builder: (context, value, child) => const Scaffold(
           body: SafeArea(
             child: AniAppBarTitle(),
           ),

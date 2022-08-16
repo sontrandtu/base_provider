@@ -1,6 +1,5 @@
 import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/state/base_view_model.dart';
-import 'package:achitecture_weup/common/core/sys/permission_config.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:flutter/cupertino.dart';

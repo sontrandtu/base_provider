@@ -1,16 +1,15 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/widget/input/outline_input.dart';
 import 'package:achitecture_weup/common/core/widget/input/underline_input.dart';
-import '../../common/core/state/base_state.dart';
-
 import 'package:achitecture_weup/common/extension/app_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
-import 'package:achitecture_weup/main.dart';
 import 'package:achitecture_weup/screen/login/components/language_layout.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/core/state/base_state.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -33,9 +32,9 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
             SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                height: height - ViewUtils.heightStatusBar,
-                width: width,
-                constraints: BoxConstraints(maxHeight: height - ViewUtils.heightStatusBar),
+                height: ViewUtils.height - ViewUtils.heightStatusBar,
+                width: ViewUtils.width,
+                constraints: BoxConstraints(maxHeight: ViewUtils.height - ViewUtils.heightStatusBar),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -43,10 +42,13 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     CachedNetworkImageComp(
                         url:
                             'https://cockpit.axenu.com/api/cockpit/image/?token=ad5bf77cc0fb358931a4247452fcea&w=300&h=300&o=true&m=fitToHeight&src=/storage/uploads/2020/02/13/5e454de6a6d7bXtEn7sJS_400x400.png',
-                        width: width / 2.5,
-                        height: width / 2.5),
+                        width: ViewUtils.width / 2.5,
+                        height: ViewUtils.width / 2.5),
                     const SizedBox(height: 32),
-                    OutlineInput(labelText: 'User Name',obscureText: true,),
+                    const OutlineInput(
+                      labelText: 'User Name',
+                      obscureText: true,
+                    ),
 
                     // TextFieldComp(
                     //   editingController: viewModel.userController,
@@ -54,7 +56,11 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     //   hint: KeyLanguage.userName.tl,
                     //   isBorder: true,
                     // ),
-                    const SizedBox(height: 16),   UnderlineInput(labelText: 'Password',obscureText: true,),
+                    const SizedBox(height: 16),
+                    const UnderlineInput(
+                      labelText: 'Password',
+                      obscureText: true,
+                    ),
                     // TextFieldComp(
                     //   editingController: viewModel.passwordController,
                     //   onValidator: (s) => viewModel.validator(s, 1),

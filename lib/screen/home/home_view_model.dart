@@ -2,11 +2,7 @@ import 'dart:developer';
 
 import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/model_base/option_multiple_select.dart';
 import 'package:achitecture_weup/common/core/state/base_view_model.dart';
-import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
-import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/screen/home/home_page.dart';
 import 'package:achitecture_weup/screen/payment/payment_page.dart';

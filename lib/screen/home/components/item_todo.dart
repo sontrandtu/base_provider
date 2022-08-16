@@ -11,7 +11,7 @@ class ItemTodo extends StatelessWidget {
     return ScaleTransition(
       scale: animation!,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
         child: Text(s ?? ''),
       ),

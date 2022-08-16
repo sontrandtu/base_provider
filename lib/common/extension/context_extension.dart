@@ -1,6 +1,5 @@
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
-import 'package:achitecture_weup/common/helper/view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

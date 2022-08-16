@@ -1,7 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/state/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
 import 'package:flutter/cupertino.dart';
 

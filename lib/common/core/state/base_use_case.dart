@@ -1,5 +1,4 @@
 import 'package:achitecture_weup/common/core/sys/api_response.dart';
-import 'package:achitecture_weup/common/helper/constant.dart';
 
 import '../sys/exception/app_exception/validate_exception.dart';
 

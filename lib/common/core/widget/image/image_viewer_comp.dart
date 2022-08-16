@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:achitecture_weup/common/extension/string_extension.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../../helper/system_utils.dart';
@@ -116,12 +115,12 @@ class ImageViewer extends StatelessWidget {
         MaterialPageRoute(builder: (_) => ViewImage(ImageData(urls: urls ?? [url], index: index ?? 0))));
   }
 
-  Future<bool> _checkNetWorkImage(String? url) async {
-    try {
-      var response = await Dio().get(url ?? '');
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
-  }
+  // Future<bool> _checkNetWorkImage(String? url) async {
+  //   try {
+  //     var response = await Dio().get(url ?? '');
+  //     return response.statusCode == 200;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
 }

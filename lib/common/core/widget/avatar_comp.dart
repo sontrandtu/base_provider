@@ -1,6 +1,7 @@
 import 'package:achitecture_weup/common/core/widget/image/image_viewer_comp.dart';
-import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/material.dart';
+
+import '../sys/base_function.dart';
 
 class AvatarComp extends StatefulWidget {
   final String fullName;

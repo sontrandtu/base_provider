@@ -40,3 +40,32 @@ void showDioLog(Object message) {
     print('\x1B[35m[WEUP-APP] $message\x1B[0m');
   }
 }
+
+void printR(dynamic input) {
+  if (input != null) return;
+
+  if (input is String || input is num) return debugPrint('$input');
+
+  if (input is Map) {
+    input.forEach((k, v) {
+      debugPrint('${k.runtimeType} - ${v.runtimeType}: $k - $v');
+    });
+    return;
+  }
+
+  if (input is List) {
+    for (var e in input) {
+      debugPrint('${e.runtimeType}: $e');
+    }
+  }
+}
+
+bool systemIsEmpty([dynamic data, bool hasZero = false]) {
+  if (data == null) return true;
+  if ((data is Map || data is List) && data.length == 0) return true;
+  if ((data is Map || data is Iterable) && data.isEmpty) return true;
+  if (data is bool) return !data;
+  if ((data is String || data is num) && (data == '0' || data == 0)) return hasZero;
+
+  return data.toString().isEmpty;
+}

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../helper/system_utils.dart';
+import '../../sys/base_function.dart';
 import 'cached_network_image_comp.dart';
 import 'svg_comp.dart';
 import 'view_image.dart';

@@ -2,11 +2,11 @@ import 'dart:io' as io;
 import 'package:achitecture_weup/common/core/sys/permission_config.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
 import 'package:achitecture_weup/common/helper/image_utils/text_delegate.dart';
-import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../core/sys/base_function.dart';
 import 'img_crop.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 

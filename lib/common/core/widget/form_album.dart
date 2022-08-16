@@ -1,7 +1,6 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/helper/image_utils/image_utils.dart';
-import 'package:achitecture_weup/common/helper/system_utils.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';

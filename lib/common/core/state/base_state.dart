@@ -33,9 +33,8 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     _viewModel?.setMounted(false);
 
-
     _viewModel?.setStatus(Status.loading);
-    // ModalRoute.of(context)!.settings;
+
     _viewModel?.setBuildContext(context);
 
     _viewModel?.init();
@@ -64,8 +63,6 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    _viewModel?.setFlagLifecycle(Lifecycle.DID_CHANGE_DEPENDENCIES);
 
     appStyle = Theme.of(context);
   }

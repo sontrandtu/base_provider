@@ -11,7 +11,7 @@ class CachedNetworkImageComp extends StatelessWidget {
   final double borderWidth;
   final Color borderColor;
   final String? resourceErrorImage;
-  final double? borderRadius;
+  final BorderRadius? borderRadius;
   final int? placeholderDuration;
   final BoxFit fit;
 
@@ -35,7 +35,7 @@ class CachedNetworkImageComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 0),
+      borderRadius: borderRadius ?? BorderRadius.zero,
       child: CachedNetworkImage(
         // fadeOutDuration: Duration(microseconds: placeholderDuration ?? 600),
         // fadeInDuration: Duration(microseconds: placeholderDuration ?? 300),

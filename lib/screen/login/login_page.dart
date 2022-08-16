@@ -1,5 +1,8 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/base_state.dart';
+import 'package:achitecture_weup/common/core/widget/input/outline_input.dart';
+import 'package:achitecture_weup/common/core/widget/input/underline_input.dart';
+import '../../common/core/state/base_state.dart';
+
 import 'package:achitecture_weup/common/extension/app_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
@@ -43,20 +46,22 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                         width: width / 2.5,
                         height: width / 2.5),
                     const SizedBox(height: 32),
-                    TextFieldComp(
-                      editingController: viewModel.userController,
-                      onValidator: (s) => viewModel.validator(s, 0),
-                      hint: KeyLanguage.userName.tl,
-                      isBorder: true,
-                    ),
-                    const SizedBox(height: 16),
-                    TextFieldComp(
-                      editingController: viewModel.passwordController,
-                      onValidator: (s) => viewModel.validator(s, 1),
-                      hint: KeyLanguage.password.tl,
-                      isInvisiblePassword: true,
-                      isBorder: true,
-                    ),
+                    OutlineInput(labelText: 'User Name',obscureText: true,),
+
+                    // TextFieldComp(
+                    //   editingController: viewModel.userController,
+                    //   onValidator: (s) => viewModel.validator(s, 0),
+                    //   hint: KeyLanguage.userName.tl,
+                    //   isBorder: true,
+                    // ),
+                    const SizedBox(height: 16),   UnderlineInput(labelText: 'Password',obscureText: true,),
+                    // TextFieldComp(
+                    //   editingController: viewModel.passwordController,
+                    //   onValidator: (s) => viewModel.validator(s, 1),
+                    //   hint: KeyLanguage.password.tl,
+                    //   isInvisiblePassword: true,
+                    //   isBorder: true,
+                    // ),
                     const SizedBox(height: 32),
                     ElevatedButtonComp(
                       title: KeyLanguage.login.tl,

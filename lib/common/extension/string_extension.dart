@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:achitecture_weup/common/core/sys/base_function.dart';
+import 'package:achitecture_weup/common/core/translate/translator_extension.dart';
 import 'package:crypto/crypto.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -13,7 +14,7 @@ String getRandomString(int length) =>
     String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
 
 extension StringExtension on String {
-  String get tl => this.tr();
+  String get tl => tr;
 
   bool search(String query) {
     final String nonUnicode = toLowerCase().convertToUnsigned;
@@ -36,10 +37,11 @@ extension StringExtension on String {
   }
 
   bool get isValidUrl {
-    final regex = RegExp(r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$");
-    return regex.hasMatch(this);
+    final regex = RegExp(r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:,.;]*)?");
+    // return Uri.parse(this).hasAbsolutePath;
+    return (Uri.tryParse(this)?.hasAbsolutePath ?? false) || regex.hasMatch(this);
+    // return this.startsWith(r'http(s)?:\/\/)');
   }
-
   bool get isMarvelTekLink {
     return contains(RegExp(r"^(?:http(s)?:\/\/)?[\w]*\.?htx.marveltek.dev"));
   }
@@ -175,10 +177,13 @@ extension StringExtension on String {
     if (!isValidUrl) return this;
     return substring(lastIndexOf('/') + 1);
   }
+  bool isStorage() => RegExp(r'^\/(storage|data|private/var/mobile)[^\.]').hasMatch(this);
 
-  bool isStorage() => RegExp(r'^\/(storage|data)[^\.]').hasMatch(this);
+  bool isAssetsPng() => RegExp(r'^assets\/').hasMatch(this) && endsWith('.png');
 
-  bool isAssets() => RegExp(r'^assets\/').hasMatch(this);
+  bool isAssetsSvg() => startsWith('assets') && endsWith('.svg');
+
+  bool isAssets() => startsWith('assets');
 
   bool get isOfficeFile =>
       endsWith('.doc') ||

@@ -1,9 +1,8 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/common/core/state/base_view_model.dart';
 import 'package:achitecture_weup/common/extension/string_extension.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/resource/enum_resource.dart';
-import 'package:achitecture_weup/system/repository/new_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginViewModel extends BaseViewModel {
@@ -20,7 +19,6 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> fetchData() async {
-    await NewRepository.instance.getAllPost();
   }
 
   void login() async {
@@ -35,7 +33,7 @@ class LoginViewModel extends BaseViewModel {
 
     setStatus(Status.success);
 
-    appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'},params: {'data':'String'});
+    // appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'},params: {'data':'String'});
   }
 
   void register() {
@@ -58,11 +56,7 @@ class LoginViewModel extends BaseViewModel {
   changeSwitch(bool value) {
     currentLanguage = value;
     update();
-    if (currentLanguage) {
-      ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
-      return;
-    }
-    ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
+
   }
 
   clearCache() {

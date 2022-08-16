@@ -1,9 +1,9 @@
 import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/base_state.dart';
 import 'package:achitecture_weup/common/core/widget/form_album.dart';
 import 'package:achitecture_weup/screen/payment/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../common/core/state/base_state.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _PaymentLayout extends StatelessWidget {
       builder: (context, model, child) {
         return ListView(
           children: [
-             const ImageViewerComp(
+             const ImageViewer(
               'https://hoithanh.com/wp-content/uploads/2015/07/b7433357-de29-4381-9cd4-9c2b8882f4c0.jpg',
               // 'assets/images/pdf.png',
               hasViewImage: true,

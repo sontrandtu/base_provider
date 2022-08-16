@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class InkWellComp extends StatelessWidget {
   final String? title;
   final Widget? child;
-  final Function() onTap;
+  final Function()? onTap;
   final Color? backgroundColor;
   final Color? titleColor;
   final Color? splashColor;
@@ -69,7 +69,7 @@ class InkWellComp extends StatelessWidget {
           highlightColor: isTransparent! ? Colors.transparent : null,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 70), () {
-              onTap.call();
+              onTap?.call();
             });
           },
           borderRadius: BorderRadius.circular(borderRadiusAll ?? 0),

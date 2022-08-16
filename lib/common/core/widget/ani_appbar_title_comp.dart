@@ -31,7 +31,7 @@ class _BodyIntroCourseV2Comp extends State<AniAppBarTitle> with TickerProviderSt
     _opacityTween2 = Tween<double>(begin: 1, end: 0).animate(_animationController2);
 
     controller.addListener(_listener);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       RenderBox box = globalKey.currentContext?.findRenderObject() as RenderBox;
       Offset position = box.localToGlobal(Offset.zero);
 

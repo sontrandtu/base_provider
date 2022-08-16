@@ -1,4 +1,4 @@
-import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/common/core/state/base_view_model.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:flutter/material.dart';
 

@@ -4,15 +4,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalStorage {
   static const String boxName = 'local.data';
-  static const String cache = 'network_cache.data';
 
   static Box box = Hive.box(boxName);
-  static Box boxCache = Hive.box(cache);
 
   static Future<void> ensureInitialized() async {
     await Hive.initFlutter();
     await Hive.openBox(boxName);
-    await Hive.openBox(cache);
   }
 
   static Future<void> put(String key, dynamic value) async {
@@ -29,10 +26,10 @@ class LocalStorage {
     }
   }
 
-  static dynamic get(String key, [dynamic defaultValue]) {
+  static dynamic get<T>(String key, [dynamic defaultValue]) {
     if (!isExist(key)) return defaultValue;
 
-    switch (defaultValue) {
+    switch (T) {
       case String:
       case double:
       case bool:
@@ -57,5 +54,6 @@ class LocalStorage {
 }
 
 class StorageKey {
-  static const String THEME = 'theme';
+  static const String THEME = 'THEME';
+  static const String LANGUAGE = 'LANGUAGE';
 }

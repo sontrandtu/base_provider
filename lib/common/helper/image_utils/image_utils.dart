@@ -97,7 +97,7 @@ class ImageUtils {
           });
         }
       }
-      if (!empty(_data)) {
+      if (!systemIsEmpty(_data)) {
         _data.last['isLast'] = 1;
       }
       return _data;

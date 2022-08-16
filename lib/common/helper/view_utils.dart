@@ -1,6 +1,5 @@
 import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -19,11 +18,6 @@ class ViewUtils {
   static Widget verticalDivider({double? h}) =>
       Container(color: ColorResource.divider, width: 1, height: h ?? 15);
 
-  static Future<void>? changeLanguage(Locale locale, {BuildContext? context}) =>
-      Application.navigator.currentContext?.setLocale(locale);
-
-  static Locale? getLocale({BuildContext? context}) =>
-      Application.navigator.currentContext?.locale;
 
   static double get width =>
       MediaQuery.of(Application.navigator.currentContext!).size.width;

@@ -1,127 +1,118 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
+import 'package:flutter/services.dart';
 
+import '../button/icon_button_comp.dart';
 import 'image_viewer_comp.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 
-class ViewImage extends StatelessWidget {
-  final dynamic image;
-  final TypeImageViewer type;
+class ImageData {
+  List<String> urls;
+  int index;
 
-  const ViewImage(this.image, {Key? key, required this.type}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: [
-          image is List
-              ? _ImageGallery(image, type: type)
-              : _DefaultView(image, type: type),
-          const SafeArea(child: BackButton(color: Colors.white)),
-        ],
-      ),
-    );
-  }
+  ImageData({this.urls = const [], this.index = 0});
 }
 
-class _DefaultView extends StatelessWidget {
-  final String image;
-  final TypeImageViewer type;
+class ViewImage extends StatefulWidget {
+  final ImageData data;
+  final bool? isVisibleSend;
+  final Function()? onSend;
 
-  const _DefaultView(this.image, {Key? key, required this.type}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return PhotoView(
-      imageProvider: _imageProvider(image, type),
-      enablePanAlways: true,
-      loadingBuilder: (context, progress) => Center(
-        child: Container(
-          color: const Color.fromRGBO(0, 0, 0, 0.8),
-          child: const Center(
-            child: CircularProgressIndicator(
-              // value: progress == null
-              //     ? null
-              //     : progress.cumulativeBytesLoaded /
-              //     (progress.expectedTotalBytes ??
-              //         progress.cumulativeBytesLoaded),
-            ),
-          ),
-        ),
-      ),
-      // enableRotation: true,
-      minScale: PhotoViewComputedScale.contained * 0.8,
-      maxScale: PhotoViewComputedScale.covered * 1.8,
-      initialScale: PhotoViewComputedScale.contained,
-      basePosition: Alignment.center,
-    );
-  }
-}
-
-
-class _ImageGallery extends StatefulWidget {
-  final List<Map<String, dynamic>> images;
-  final TypeImageViewer type;
-
-  const _ImageGallery(this.images, {Key? key, required this.type}) : super(key: key);
+  const ViewImage(this.data, {Key? key, this.isVisibleSend, this.onSend}) : super(key: key);
 
   @override
-  State<_ImageGallery> createState() => _ImageGalleryState();
+  State<ViewImage> createState() => _ViewImageState();
 }
 
-class _ImageGalleryState extends State<_ImageGallery> {
-
-  late int current;
+class _ViewImageState extends State<ViewImage> {
   late PageController pageController;
+  int indexValue = 0;
 
   @override
   void initState() {
-    current = 0;
-    pageController = PageController(initialPage: current);
+    pageController = PageController(initialPage: widget.data.index);
+    indexValue = widget.data.index + 1;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        PhotoViewGallery.builder(
-          scrollPhysics: const BouncingScrollPhysics(),
-          builder: (BuildContext context, int index) {
-            return PhotoViewGalleryPageOptions(
-              imageProvider: _imageProvider(widget.images[index]['path'], widget.type),
-              initialScale: PhotoViewComputedScale.contained * 0.8,
-              // heroAttributes: PhotoViewHeroAttributes(tag: galleryItems[index].id),
-            );
-          },
-          itemCount: widget.images.length,
-          loadingBuilder: (context, event) => const CircularProgressIndicator(),
-          // backgroundDecoration: widget.backgroundDecoration,
-          pageController: pageController,
-          onPageChanged: _onPageChanged,
+    return Material(
+      color: Colors.black,
+      child: Stack(alignment: Alignment.topCenter, children: [
+        AppBar(
+          toolbarOpacity: 0,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          backgroundColor: Colors.transparent,
         ),
-      ],
+        Positioned.fill(child: pageViewImage),
+        Positioned(
+          left: 0,
+          child: SafeArea(
+            child: Container(
+              margin: const EdgeInsets.only(top: 6, left: 6),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: IconButtonComp(
+                icon: Icons.arrow_back_ios_rounded,
+                color: Colors.white,
+                size: 20,
+                onPress: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+        ),
+        Visibility(
+          visible: widget.data.urls.length > 1,
+          child: Positioned(
+            top: 24,
+            child: SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                alignment: Alignment.center,
+                child: Text(
+                  '${(indexValue).toString()}/${widget.data.urls.length}',
+                  style: const TextStyle(fontSize: 16, color: Colors.white, height: 1),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 
-  void _onPageChanged(int index) {}
+  Widget get pageViewImage {
+    return PageView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return InteractiveViewer(
+          minScale: 0.5,
+          maxScale: 10,
+          child: ImageViewer(
+            widget.data.urls[index],
+            fit: BoxFit.contain,
+          ),
+        );
+      },
+      itemCount: widget.data.urls.length,
+      controller: pageController,
+      onPageChanged: _onPageChanged,
+    );
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      indexValue = index + 1;
+    });
+  }
 
   @override
   void dispose() {
     pageController.dispose();
     super.dispose();
   }
-}
-
-
-ImageProvider _imageProvider(String url, TypeImageViewer type) {
-  if (type == TypeImageViewer.network) {
-    return NetworkImage(url);
-  } else if (type == TypeImageViewer.storage) {
-    return FileImage(File(url));
-  }
-  return ExactAssetImage(url);
 }

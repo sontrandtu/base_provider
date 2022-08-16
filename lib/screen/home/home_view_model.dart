@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/core/app_core.dart';
 import 'package:achitecture_weup/common/core/model_base/option_multiple_select.dart';
-import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
+import 'package:achitecture_weup/common/core/state/base_view_model.dart';
 import 'package:achitecture_weup/common/core/widget/dialog/custom_dialog.dart';
 import 'package:achitecture_weup/common/helper/app_common.dart';
 import 'package:achitecture_weup/common/helper/file_utils.dart';
@@ -46,23 +46,15 @@ class HomeViewModel extends BaseViewModel {
     showLog(Uri.parse(currentRoute ?? '').queryParameters);
     initData();
 
-    language = ViewUtils.getLocale()?.languageCode;
     setStatus(Status.success);
   }
 
   Future<void> changLanguage() async {
-    if (ViewUtils.getLocale()?.languageCode == LanguageCodeConstant.VI) {
-      ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN));
-      setLanguage();
-      return;
-    }
-    ViewUtils.changeLanguage(const Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI));
-    setLanguage();
+
   }
 
   void setLanguage() {
-    language = ViewUtils.getLocale()?.languageCode;
-    notifyListeners();
+
   }
 
   void changeSwitch(bool? value) {

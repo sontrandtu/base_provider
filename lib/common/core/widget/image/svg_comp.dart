@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SvgComp extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final String url;
   final BorderRadius? borderRadius;
   final EdgeInsetsGeometry? padding;
@@ -14,8 +14,8 @@ class SvgComp extends StatelessWidget {
   const SvgComp({
     Key? key,
     required this.url,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.borderRadius,
     this.padding,
     this.boxFit,

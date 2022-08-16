@@ -1,27 +1,58 @@
-import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/sys/base_view_model.dart';
-import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/core/widget/appbar_comp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../resource/enum_resource.dart';
+import '../state/base_view_model.dart';
+import 'indicator_comp.dart';
+
 class MainLayout<T extends BaseViewModel> extends StatelessWidget {
-  const MainLayout({this.appBar, this.mustSafeView = true, required this.child, this.onClick, Key? key})
-      : super(key: key);
+  const MainLayout({
+    this.appBar,
+    this.mustSafeView = true,
+    required this.child,
+    this.radius = 32,
+    this.onClick,
+    this.backgroundColor,
+    Key? key,
+    this.resizeToAvoidBottomInset,
+    this.endDrawer,
+    this.scaffoldKey,
+    this.onEndDrawerChanged,
+  }) : super(key: key);
   final Widget child;
+  final Widget? endDrawer;
   final PreferredSizeWidget? appBar;
-  final Function? onClick;
+  final Function()? onClick;
   final bool? mustSafeView;
+  final bool? resizeToAvoidBottomInset;
+  final double radius;
+  final Color? backgroundColor;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final DrawerCallback? onEndDrawerChanged;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _onBackgroundPress(context),
       child: Scaffold(
+        key: scaffoldKey,
         extendBody: true,
         appBar: appBar,
+        backgroundColor: backgroundColor,
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        endDrawer: endDrawer,
+        onEndDrawerChanged: onEndDrawerChanged,
         body: mustSafeView == true
-            ? SafeArea(child: _BodyLayout<T>(child: child))
-            : _BodyLayout<T>(child: child),
+            ? SafeArea(
+                child: _BodyLayout<T>(
+                child: child,
+                radius: radius,
+              ))
+            : _BodyLayout<T>(
+                child: child,
+                radius: radius,
+              ),
       ),
     );
   }
@@ -33,23 +64,37 @@ class MainLayout<T extends BaseViewModel> extends StatelessWidget {
 }
 
 class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
-  const _BodyLayout({Key? key, required this.child}) : super(key: key);
+  const _BodyLayout({Key? key, required this.child, required this.radius}) : super(key: key);
   final Widget child;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        child,
-        Consumer<T>(
-          builder: (context, value, child) {
-            if (value.status == Status.errorInit) return Container(color: Colors.white);
-            return Visibility(
-                visible: value.status == Status.loading || value.status == Status.waiting,
-                child: IndicatorComp(status: value.status));
-          },
+        Positioned(top: 0, left: 0, right: 0, bottom: 0, child: child),
+        Positioned.fill(
+          child: Consumer<T>(
+            builder: (context, value, child) {
+              if (value.status == Status.firstIssue) {
+                return Scaffold(extendBody: true, appBar: AppBarComp(height: 0));
+              }
+              if (value.status == Status.error) return const SizedBox();
+
+              bool condition = value.status == Status.loading || value.status == Status.waiting;
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                transitionBuilder: _buildTransition,
+                child: condition ? IndicatorComp(status: value.status) : const SizedBox(),
+              );
+            },
+          ),
         ),
       ],
     );
+  }
+
+  Widget _buildTransition(Widget child, Animation<double> animation) {
+    return FadeTransition(opacity: animation, child: child);
   }
 }

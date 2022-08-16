@@ -30,16 +30,16 @@ class _AvatarCompState extends State<AvatarComp> {
   }
 
   void _initAvatar() {
-    _first = (!empty(widget.fullName))
+    _first = (!systemIsEmpty(widget.fullName))
         ? (widget.fullName.split(' ').isNotEmpty ? widget.fullName.trim().split(' ').last[0] : widget.fullName)
         : '';
     _color = widget.color ?? _convertColor(_first);
     _fontSize = widget.width / 2;
-    _image = !empty(widget.image) && widget.image is String ? widget.image : '';
-    if (!empty(widget.image) && (widget.image is Map || widget.image is List)) {
+    _image = !systemIsEmpty(widget.image) && widget.image is String ? widget.image : '';
+    if (!systemIsEmpty(widget.image) && (widget.image is Map || widget.image is List)) {
       _images = (widget.image is Map) ? widget.image.values.toList() : widget.image;
       if (_images.length == 1) {
-        _image = !empty(_images[0]) ? _images[0] : '';
+        _image = !systemIsEmpty(_images[0]) ? _images[0] : '';
       } else {
         _imageWidget = Stack(
           alignment: Alignment.bottomRight,
@@ -95,10 +95,10 @@ class _AvatarCompState extends State<AvatarComp> {
             aspectRatio: 1.0,
             child: _imageWidget ??
                 Container(
-                  color: (!empty(_image)) ? _color : null,
+                  color: (!systemIsEmpty(_image)) ? _color : null,
                   child: Center(
-                    child: !empty(_image)
-                        ? ImageViewerComp(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
+                    child: !systemIsEmpty(_image)
+                        ? ImageViewer(_image, width: widget.width, fit: BoxFit.cover, height: widget.width)
                         : Text(
                             _first.toUpperCase(),
                             style: TextStyle(fontSize: _fontSize, fontWeight: FontWeight.w600, color: Colors.white),

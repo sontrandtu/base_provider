@@ -9,7 +9,9 @@ ThemeData appStyle = Theme.of(Application.navigator.currentContext!);
 class ThemeManager {
   ThemeManager._internal();
 
-  static ThemeManager get instance => ThemeManager._internal();
+  static final ThemeManager _instance = ThemeManager._internal();
+
+  factory ThemeManager()=> _instance;
 
   ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,

@@ -12,13 +12,13 @@ enum Status {
   * */
   waiting,
   /*
-  * [Status.errorInit] sự kiện được xảy ra lần đầu tiên khi vào một màn hình
-  * nhưng các request đầu tiên đó bị lỗi
-  * */
-  errorInit,
-  /*
   * [Status.error] sự kiện được xảy ra khi request của [Status.waiting]
   * không thành công
   * */
   error,
+  /*
+  * [Status.error] sự kiện được xảy ra khi request của [Status.waiting]
+  * không thành công
+  * */
+  firstIssue,
 }

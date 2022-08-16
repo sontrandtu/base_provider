@@ -39,7 +39,7 @@ class _SliderCompState extends State<SliderComp> {
                 url: widget.images[index],
                 width: 355,
                 height: 160,
-                borderRadius: 8,
+                borderRadius: BorderRadius.circular(8),
               );
             },
             options: CarouselOptions(

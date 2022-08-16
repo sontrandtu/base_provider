@@ -58,7 +58,7 @@ class _FormAlbumState extends State<FormAlbum> {
               isRoot: true,
             ),
           ),
-          if (!empty(_items)) ...[
+          if (!systemIsEmpty(_items)) ...[
             Expanded(
               child: SizedBox(
                 height: 70,
@@ -67,7 +67,7 @@ class _FormAlbumState extends State<FormAlbum> {
                   children: List<Widget>.generate(
                       (_items.length > maxLength ? maxLength : _items.length),
                       (index) => _LayoutImage(
-                            child: ImageViewerComp('${_items[index]['path']}', fit: BoxFit.fill, hasViewImage: true),
+                            child: ImageViewer('${_items[index]['path']}', fit: BoxFit.fill, hasViewImage: true),
                             hasMargin: _items[index]['isLast'] != null && _items[index]['isLast'] == 1 ? false : true,
                             isRoot: false,
                             onDelete: _onDelete,
@@ -97,14 +97,14 @@ class _FormAlbumState extends State<FormAlbum> {
   }
 
   void _onViewMore(List items) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => ViewImage(items, type: TypeImageViewer.storage)));
+      .push(MaterialPageRoute(builder: (context) => ViewImage(ImageData(urls: []))));
 
   void _onSelect() async {
     final result = await ImageUtils.multiply(
       context,
       values: _assetEntities,
     );
-    if (!empty(result)) {
+    if (!systemIsEmpty(result)) {
       setState(() {
         _items = result;
         _genAssetEntity(_items);

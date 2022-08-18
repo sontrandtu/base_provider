@@ -1,5 +1,5 @@
 name: data
-description: A starting point for Dart libraries or applications.
+description: Tần data của application
 version: 1.0.0
 publish_to: none
 # homepage: https://www.example.com
@@ -9,9 +9,6 @@ environment:
 
 
 dependencies:
-  flutter:
-    sdk: flutter
-
   domain:
     path: ../domain
 

@@ -1,8 +1,7 @@
-import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/state/base_view_model.dart';
-import 'package:achitecture_weup/common/extension/string_extension.dart';
-import 'package:achitecture_weup/common/resource/enum_resource.dart';
+import 'package:extensions/extensions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:state/state.dart';
+import 'package:widgets/widgets.dart';
 
 class LoginViewModel extends BaseViewModel {
   final userController = TextEditingController();
@@ -18,6 +17,7 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> fetchData() async {
+
   }
 
   void login() async {
@@ -36,7 +36,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void register() {
-    appNavigator.dialog(const BaseErrorDialog(content: 'Cảm ơn bạn đã chọn đăng ký', showCancel: false));
+    appNavigator.dialog(const CustomDialog(description: 'Cảm ơn bạn đã chọn đăng ký',title: 'Thông báo'));
   }
 
   String? validator(String s, index) {

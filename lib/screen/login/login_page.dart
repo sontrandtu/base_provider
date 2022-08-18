@@ -1,15 +1,14 @@
-import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/widget/input/outline_input.dart';
-import 'package:achitecture_weup/common/core/widget/input/underline_input.dart';
-import 'package:achitecture_weup/common/extension/app_extension.dart';
-import 'package:achitecture_weup/common/helper/app_common.dart';
+import 'package:achitecture_weup/common/core/main_layout.dart';
+import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/helper/view_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/screen/login/components/language_layout.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:state/state.dart';
+import 'package:widgets/widgets.dart';
 
-import '../../common/core/state/base_state.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -70,7 +69,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     // ),
                     const SizedBox(height: 32),
                     ElevatedButtonComp(
-                      title: KeyLanguage.login.tl,
+                      title: 'KeyLanguage.login.tr',
                       widthValue: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       borderRadius: 4,
@@ -80,14 +79,14 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(KeyLanguage.askUsername.tl, style: appStyle.textTheme.bodyText1),
+                        Text('KeyLanguage.askUsername.tl', style: appStyle.textTheme.bodyText1),
                         InkWellComp(
                           onTap: viewModel.register,
                           backgroundColor: Colors.transparent,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                             child: Text(
-                              KeyLanguage.registerNow.tl,
+                              'KeyLanguage.registerNow.tl',
                               style: appStyle.textTheme.bodyText2?.apply(
                                   decoration: TextDecoration.underline,
                                   fontStyle: FontStyle.italic,

@@ -2,10 +2,10 @@ import 'package:achitecture_weup/common/core/page_manager/page_manager.dart';
 import 'package:achitecture_weup/common/core/page_manager/route_path.dart';
 import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
 import 'package:achitecture_weup/common/core/theme/theme_view_model.dart';
-import 'package:achitecture_weup/common/core/translate/translator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:translator/translator.dart';
 
 import 'common/helper/constant.dart';
 

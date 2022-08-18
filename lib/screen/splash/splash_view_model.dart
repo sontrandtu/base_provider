@@ -1,6 +1,6 @@
-import 'package:achitecture_weup/common/core/app_core.dart';
-import 'package:achitecture_weup/common/core/state/base_view_model.dart';
-import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:state/state.dart';
+
+import '../../common/core/page_manager/route_path.dart';
 
 class SplashViewModel extends BaseViewModel {
 

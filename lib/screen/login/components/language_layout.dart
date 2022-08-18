@@ -1,8 +1,8 @@
 import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
-import 'package:achitecture_weup/common/core/widget/button/cupertino_swtich_comp.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:widgets/widgets.dart';
 
 class LanguageLayout extends StatelessWidget {
   const LanguageLayout({Key? key}) : super(key: key);

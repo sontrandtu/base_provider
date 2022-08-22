@@ -1,5 +1,5 @@
 name: data
-description: Tần data của application
+description: Tầng data của application
 version: 1.0.0
 publish_to: none
 # homepage: https://www.example.com
@@ -11,9 +11,12 @@ environment:
 dependencies:
   domain:
     path: ../domain
+  request_cache_manager:
+    path: ./dependencies/request-cache-manager
 
 
 
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
+

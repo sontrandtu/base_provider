@@ -9,21 +9,14 @@ class HttpConstant {
   static const String FORBIDDEN = 'Truy cập bị hạn chế. Vui lòng thử lại sau';
   static const String TOKEN_EXPIRED = 'Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại';
 
-  static const int CONNECT_TIMEOUT = 20000;
-  static const int RECEIVE_TIMEOUT = 20000;
-  static const String CONTENT_TYPE = 'application/json';
-
   static const String BASE_URL = 'https://api.weuptech.vn';
-  // static const String BASE_URL = 'http://192.168.1.24:5000';
 
   static const String BASE_URL_APP = 'https://app.weuptech.vn';
-  // static const String BASE_URL_APP = 'http://192.168.1.24:5000';
 
   static const String BASE_URL_FIREBASE = 'https://fcm.googleapis.com';
 
   static const String URL_MEDIA = 'https://app.weuptech.vn/media/files/';
 
-  //static const String URL_MEDIA = 'http://192.168.1.40:8100/media/files/';
 
   static const String BASE_IMAGE_URL = 'https://app.weuptech.vn/media/images/';
 }

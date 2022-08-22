@@ -16,11 +16,11 @@ class InterceptorMemory extends InterceptorBase {
     print('----------- Request Memory ----------------');
 
     if (forceReplace ?? false) return handler.next(options);
-
-    CacheModel? cache = RequestCacheManager().get(options.path);
-    if (cache != null) {
-      return handler.resolve(Response(requestOptions: options, data: jsonDecode(cache.data)));
-    }
+    //
+    // CacheModel? cache = RequestCacheManager().get(options.path);
+    // if (cache != null) {
+    //   return handler.resolve(Response(requestOptions: options, data: jsonDecode(cache.data)));
+    // }
 
     return handler.next(options);
   }
@@ -30,14 +30,15 @@ class InterceptorMemory extends InterceptorBase {
     print('----------- Response Memory - ${e.statusCode} ----------------');
 
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
-
+    String key =
+        e.requestOptions.path + '-' + e.requestOptions.method + '-' + e.requestOptions.headers.toString();
     RequestCacheManager().put(
         CacheModel(
-            e.requestOptions.path,
+            key,
             maxAgeSecond ?? DateTime.now().add(Duration(minutes: 1)).millisecondsSinceEpoch ~/ 1000,
             jsonEncode(e.data)),
         forceReplace: forceReplace);
-
+print(key);
     return handler.next(e);
   }
 

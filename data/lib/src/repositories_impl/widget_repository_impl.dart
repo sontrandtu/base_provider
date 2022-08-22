@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:data/src/common/constants.dart';
+import 'package:data/src/common/dio_extensiton.dart';
+import 'package:data/src/network/api_paths.dart';
 import 'package:data/src/network/client_builder.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
+import 'package:request_cache_manager/request_cache_manager.dart';
 
 class WidgetRepositoryImpl implements WidgetRepository {
   WidgetRepositoryImpl._internal();
@@ -14,53 +18,75 @@ class WidgetRepositoryImpl implements WidgetRepository {
   @override
   Future<dynamic> getShareApp() async {
     final _queryParameters = <String, dynamic>{};
-    final _data = FormData.fromMap({
-      'phone': '0987654321',
-      'password': '123456',
-      'files': [File('path/file.ok'), File('path/file.ok')]
-    });
-
-    _queryParameters.removeWhere((key, value) => value == null);
+    final _data = {
+      'phone': '0943574556',
+      'password': '19022001',
+      'file': [File('./ic_search.png')]
+    };
 
     return await ClientBuilder()
         .addCacheMemory()
-        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
-        .build()
-        .request(
-          '/v1/login',
-          queryParameters: _queryParameters,
-          data: _data,
-          options: Options(method: 'POST'),
-        );
+        .withConverter(fromJson: (json) => ApiModel.fromJson(json, (json) => UserDetailModel.fromJson(json)))
+        .request<ApiModel<UserDetailModel>>('/v1/login',
+            method: Method.POST, dataType: DataType.FORM_DATA, params: _queryParameters, bodies: _data)
+        .wrap();
   }
+
   @override
-  Future saveFile() async{
+  Future saveFile() async {
     final _queryParameters = <String, dynamic>{};
     final _data = FormData.fromMap({
-      'file': MultipartFile.fromFileSync('./ic_search.png')
+      'file': [MultipartFile.fromFileSync('./ic_search.png'), MultipartFile.fromFileSync('./ic_search.png')]
     });
 
     _queryParameters.removeWhere((key, value) => value == null);
 
     return await ClientBuilder()
-    .addBaseUrl('https://app.weuptech.vn')
+        .addBaseUrl('https://app.weuptech.vn')
         .addCacheMemory()
-        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
+        .withConverter<ApiModel>(
+            fromJson: (json) => ApiModel.fromJson(
+                  json,
+                ))
         .build()
-        .request(
-      '/api/media',
-      queryParameters: _queryParameters,
-      data: _data,
-      options: Options(method: 'POST'),
-    );
+        .post('/api/media', queryParameters: _queryParameters, data: _data);
+  }
+
+  @override
+  Future addFeeling() async {
+    final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
+    final bodies = {
+      'images': ['123', '123'],
+      'content': 'Bài học hay'
+    };
+    return await ClientBuilder()
+        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
+        .request<ApiModel>(ApiPaths.ADD_FEELING, method: Method.POST, paths: paths, bodies: bodies)
+        .wrap();
+  }
+
+  @override
+  Future getAllFeeling() async {
+    final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
+    return await ClientBuilder()
+        .addCacheMemory()
+        .withConverter<ApiModel<List<FeelingModel>>>(
+            fromJson: (json) => ApiModel.fromJson(
+                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))
+        .request<ApiModel<List<FeelingModel>>>(ApiPaths.FEELINGS, paths: paths)
+        .wrap();
   }
 }
 
 main() async {
   var i;
   do {
-    var response = await WidgetRepositoryImpl().saveFile();
+    ApiModel<List<FeelingModel>> response = await WidgetRepositoryImpl().getAllFeeling();
     print(response.runtimeType);
+    response.data?.forEach((element) {
+      print(element.id);
+    });
+    print(RequestCacheManager().get('/v1/lesson-contact-comment/1654649615pa1g8zjyf79v-GET-{token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjA5NDM1NzQ1NTYifQ.LrOc2ZA-vE_vuQm-J8bjxPMQF7C8AkLyqnhVZiPEXuE, id: 1660546372487t40li80k3}'));
     i = stdin.readLineSync();
   } while (i == '0');
 }

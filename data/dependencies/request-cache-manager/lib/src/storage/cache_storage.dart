@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 
 class CacheStorage {
-
   static const String boxName = 'local.cache';
 
   static Box box = Hive.box(boxName);
@@ -22,8 +21,8 @@ class CacheStorage {
       case double:
       case bool:
       case int:
-      await box.put(key, value);
-      break;
+        await box.put(key, value);
+        break;
       default:
         await box.put(key, jsonEncode(value));
         break;
@@ -53,7 +52,9 @@ class CacheStorage {
     await box.delete(key);
   }
 
-  static Future<void> clearData() async {}
+  static Future<void> clearData() async {
+    box.clear();
+  }
 }
 
 class StorageKey {

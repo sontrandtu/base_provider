@@ -9,7 +9,7 @@ class UserDetailModel {
   String? address;
   String? gender;
   String? createdAt;
-  String? updatedAt;
+  int? updatedAt;
 
   String? password;
   String? confirmPassword;
@@ -78,5 +78,10 @@ class UserDetailModel {
     data['message'] = message;
     data['problem_ids'] = problemIds;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'id: $id, name: $name';
   }
 }

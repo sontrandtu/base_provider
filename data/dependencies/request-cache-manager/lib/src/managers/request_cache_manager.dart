@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+
 import '../models/cache_model.dart';
 import 'i_request_cache.dart';
 
@@ -25,7 +26,7 @@ class RequestCacheManager implements IRequestCache {
 
   @override
   void remove(String key) {
-    caches.removeWhere((element) => element.key == key);
+    caches.removeWhere((element) => element.key.contains(key));
   }
 
   @override
@@ -39,5 +40,6 @@ class RequestCacheManager implements IRequestCache {
 
   int get now => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-
+  @override
+  void clearAll() => caches.clear();
 }

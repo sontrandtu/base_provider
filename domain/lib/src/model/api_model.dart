@@ -9,7 +9,7 @@ class ApiModel<T> {
 
   ApiModel({this.code, this.message,this.data});
 
-  ApiModel.fromJson(Map<String, dynamic> json, [T Function(Map<String, dynamic> json)? cast]) {
+  ApiModel.fromJson(Map<String, dynamic> json, [T Function(dynamic data)? cast]) {
     code = json['code'];
     message = json['message'];
     if (json['data'] != null) data = cast?.call(json['data']) ?? json['data'];
@@ -19,6 +19,7 @@ class ApiModel<T> {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['code'] = code;
     data['message'] = message;
+    data['data']= jsonEncode(data);
     return data;
   }
 

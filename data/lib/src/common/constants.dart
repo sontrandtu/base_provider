@@ -49,3 +49,19 @@ class CodeConstant {
   static const int ACCOUNT_INACTIVE = -5;
   static const int SERVER_ERROR = -99;
 }
+
+class Method {
+  static const String GET = 'GET';
+  static const String POST = 'POST';
+  static const String PUT = 'PUT';
+  static const String PATCH = 'PATCH';
+  static const String DELETE = 'DELETE';
+
+}
+
+class DataType {
+  static const String JSON = 'JSON';
+  static const String FORM_DATA = 'FORM_DATA';
+
+
+}

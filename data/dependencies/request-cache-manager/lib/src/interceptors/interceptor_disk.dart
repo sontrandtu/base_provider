@@ -17,10 +17,10 @@ class InterceptorDisk extends InterceptorBase {
 
     if(forceReplace ?? false) return handler.next(options);
 
-    CacheModel? cache = RequestCacheDiskManager().get(options.path);
-    if (cache != null) {
-      return handler.resolve(Response(requestOptions: options, data: jsonDecode(cache.data)));
-    }
+    // CacheModel? cache = RequestCacheDiskManager().get(options.path);
+    // if (cache != null) {
+    //   return handler.resolve(Response(requestOptions: options, data: jsonDecode(cache.data)));
+    // }
     return handler.next(options);
   }
 

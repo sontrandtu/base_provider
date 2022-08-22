@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
-
-
 abstract class HttpBuilder {
   HttpBuilder addBaseUrl(String? baseUrl);
 
@@ -26,7 +24,12 @@ abstract class HttpBuilder {
 
   HttpBuilder withConverter<T>({T Function(Map<String, dynamic> json) fromJson});
 
-  HttpBuilder request({String? path, String? method, Map<String,dynamic>? body, FormData? form,Map<String,dynamic>? queryParameters});
+  Future<Response<T>> request<T>(String path,
+      {String? method,
+      String? dataType,
+      dynamic bodies,
+      Map<String, dynamic>? paths,
+      Map<String, dynamic>? params});
 
   Dio build();
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
+
 import '../managers/request_cache_manager.dart';
 import '../models/cache_model.dart';
 import 'interceptor_base.dart';
@@ -19,7 +21,7 @@ class InterceptorConverter<T> extends InterceptorBase {
     CacheModel? cache = RequestCacheManager().get(options.path);
     if (cache != null) {
       return handler.resolve(Response(
-          requestOptions: options, data: /*fromJson?.call(jsonDecode(cache.data)) ?? */jsonDecode(cache.data)));
+          requestOptions: options, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
     }
 
     return handler.next(options);
@@ -30,18 +32,26 @@ class InterceptorConverter<T> extends InterceptorBase {
     print('----------- Response Converter ----------------');
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
 
-    return handler.next(Response(data: /*fromJson?.call(e.data) ??*/ e.data, requestOptions: e.requestOptions));
+    return handler.next(Response(data: fromJson?.call(e.data) ?? e.data, requestOptions: e.requestOptions));
   }
 
-/*  @override
+  @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     print('----------- DioError Converter - ${err.response?.statusCode} ----------------');
-    int? code = err.response?.statusCode;
-    String? msg = err.response?.statusMessage;
+
+    print(err);
+
+    int? code = err.response?.data['code'] ?? err.response?.statusCode ?? -1;
+    String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? 'Đã có lỗi xảy ra';
+
+    if (err.type == DioErrorType.connectTimeout ||
+        err.type == DioErrorType.sendTimeout ||
+        err.type == DioErrorType.receiveTimeout) msg = 'Hết thời gian kết nối';
+
     Map<String, dynamic> responseData = {"code": code, "message": msg};
 
     return handler.resolve(Response(
         requestOptions: err.requestOptions,
-        data: fromJson?.call(err.response?.data ?? responseData) ?? err.response?.data ?? responseData));
-  }*/
+        data: fromJson?.call(responseData) ?? err.response?.data ?? responseData));
+  }
 }

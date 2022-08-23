@@ -1,6 +1,6 @@
-import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
 import 'package:achitecture_weup/common/helper/view_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/login/components/language_layout.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 import 'package:widgets/widgets.dart';
 
-import '../../common/core/page_layout.dart';
+import '../../common/page_layout.dart';
 
 
 class LoginPage extends StatefulWidget {

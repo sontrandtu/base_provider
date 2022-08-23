@@ -1,10 +1,8 @@
-import 'package:achitecture_weup/application.dart';
-import 'package:achitecture_weup/common/core/config/app_config.dart';
-import 'package:achitecture_weup/common/core/page_manager/route_path.dart';
-import 'package:achitecture_weup/common/helper/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:state/state.dart';
 import 'package:widgets/widgets.dart';
+
+import '../config/app_config.dart';
+import '../page_manager/route_path.dart';
 
 
 class HandleHttpException {

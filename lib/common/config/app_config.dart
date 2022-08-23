@@ -1,5 +1,6 @@
-import 'package:achitecture_weup/common/core/config/app_config_base.dart';
 import 'package:flutter/services.dart';
+
+import 'app_config_base.dart';
 
 class AppConfig extends AppConfigBase {
   factory AppConfig() => _i;

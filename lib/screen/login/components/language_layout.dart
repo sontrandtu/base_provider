@@ -1,4 +1,4 @@
-import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
+import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

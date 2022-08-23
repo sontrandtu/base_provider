@@ -1,4 +1,4 @@
-import 'package:achitecture_weup/common/core/page_layout.dart';
+import 'package:achitecture_weup/common/page_layout.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

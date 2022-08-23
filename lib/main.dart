@@ -1,11 +1,11 @@
 import 'dart:io';
 
+import 'package:achitecture_weup/common/theme/theme_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:storage/storage.dart';
 
 import 'application.dart';
-import 'common/core/theme/theme_view_model.dart';
 
 ThemeViewModel themeViewModel = ThemeViewModel();
 

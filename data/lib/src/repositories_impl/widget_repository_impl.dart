@@ -6,7 +6,6 @@ import 'package:data/src/network/api_paths.dart';
 import 'package:data/src/network/client_builder.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
-import 'package:request_cache_manager/request_cache_manager.dart';
 
 class WidgetRepositoryImpl implements WidgetRepository {
   WidgetRepositoryImpl._internal();
@@ -66,10 +65,10 @@ class WidgetRepositoryImpl implements WidgetRepository {
   }
 
   @override
-  Future getAllFeeling() async {
+  Future<ApiModel<List<FeelingModel>?>> getAllFeeling() async {
     final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
     return await ClientBuilder()
-        .addCacheDisk()
+        .addCacheMemory()
         .withConverter<ApiModel<List<FeelingModel>>>(
             fromJson: (json) => ApiModel.fromJson(
                 json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))
@@ -77,4 +76,3 @@ class WidgetRepositoryImpl implements WidgetRepository {
         .wrap();
   }
 }
-

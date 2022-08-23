@@ -53,34 +53,6 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   * */
   Future<void> delay(int millis) async => await Future.delayed(Duration(milliseconds: millis));
 
-  Future<bool> get isConnecting async => await getConnection();
-
-  /*
-  * Kiểm tra connect internet, thường được kiểm tra 1 lần trước
-  * khi thực hiện các request
-  * */
-  Future<bool> getConnection({Function()? reconnect}) async {
-    if (kIsWeb) return false;
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      return !(result.isNotEmpty && result[0].rawAddress.isNotEmpty);
-    } on SocketException catch (_) {
-      // appNavigator.dialog(BaseErrorDialog(
-      //   content: HttpConstant.CONNECT_ERROR,
-      //   textButtonConfirm: 'Thử lại',
-      //   mConfirm: () {
-      //     setStatus(Status.loading);
-      //     reconnect ?? appNavigator.back();
-      //   },
-      //   mCancel: appNavigator.back,
-      // ));
-
-      setStatus(Status.error);
-
-      return true;
-    }
-  }
-
   /*
   * Thay đổi lại trạng thái của giao diện
   * */
@@ -101,7 +73,7 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   }
 
   bool checkStatus(dynamic value, {bool isShowDialog = true}) {
-    if (/*value.err?.code == CodeConstant.OK*/ false) return false;
+    if (value.code == 200) return false;
 
     // HandleHttpException(code: value.err?.code, appNavigator: appNavigator).catchError();
 
@@ -113,40 +85,15 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
 
     if (!isShowDialog) return true;
 
-    // setErrorMessage(value.err?.message.tl, ToastMode.error);
+    setErrorMessage(value.message.tl);
 
     return true;
-  }
-
-  bool isNull(dynamic value, {bool isInitial = true}) {
-    if (value == null) {
-      setStatus(Status.success);
-    }
-    return value == null;
-  }
-
-  bool isEmpty(dynamic value) {
-    if (value is List) {
-      return value.isEmpty;
-    } else {
-      return value == '';
-    }
-  }
-
-  bool isNullOrEmpty(dynamic data) {
-    if (isNull(data) || isEmpty(data)) {
-      setStatus(Status.success);
-    }
-    return isNull(data) || isEmpty(data);
   }
 
   /*
   * Thực hiện show dialog khi có lỗi xảy ra
   * */
-  void setErrorMessage(
-    dynamic msg,
-    /* [ToastMode mode = ToastMode.error]*/
-  ) {
+  void setErrorMessage(dynamic msg) {
     // appNavigator.dialog(BaseErrorDialog(
     //   content: msg,
     //   showCancel: false,

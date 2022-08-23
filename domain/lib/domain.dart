@@ -10,4 +10,4 @@ export 'src/model/feeling_model.dart';
 
 
 export 'src/repository/widget_repository.dart';
-export 'src/use_case/verify_otp_register_use_case.dart';
+export 'src/use_case/get_all_feeling_use_case.dart';

@@ -32,8 +32,8 @@ Future<void> showLocalData() async {
   CacheStorage.delete(i ?? '');
 }
 
-Future<void> getAllFelling() async {
-  ApiModel<List<FeelingModel>> response = await WidgetRepositoryImpl().getAllFeeling();
+Future<void> getAllFelling() async{
+  ApiModel<List<FeelingModel>?> response = await WidgetRepositoryImpl().getAllFeeling();
   print(response.runtimeType);
   print(response);
 }

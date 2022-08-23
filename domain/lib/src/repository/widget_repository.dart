@@ -1,3 +1,5 @@
+import 'package:domain/domain.dart';
+
 abstract class WidgetRepository {
   Future<dynamic> getShareApp();
 
@@ -5,5 +7,5 @@ abstract class WidgetRepository {
 
   Future<dynamic> addFeeling();
 
-  Future<dynamic> getAllFeeling();
+  Future<ApiModel<List<FeelingModel>?>> getAllFeeling();
 }

@@ -7,7 +7,7 @@ class FeelingModel {
   String? contactAvatar;
   String? content;
   List<String>? images;
-  Null? video;
+  String? video;
   int? timeVideo;
   String? updatedAt;
   String? createdAt;

@@ -9,6 +9,9 @@ environment:
 
 
 dependencies:
+  flutter:
+    sdk: flutter
+
   domain:
     path: ../domain
   request_cache_manager:

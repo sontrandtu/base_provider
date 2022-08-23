@@ -1,4 +1,3 @@
-
 class HttpConstant {
   static const String CONNECT_ERROR = 'Không có kết nối. Vui lòng thử lại sau';
   static const String UNKNOWN = 'Đã có lỗi xảy ra. Vui lòng thử lại sau';
@@ -16,7 +15,6 @@ class HttpConstant {
   static const String BASE_URL_FIREBASE = 'https://fcm.googleapis.com';
 
   static const String URL_MEDIA = 'https://app.weuptech.vn/media/files/';
-
 
   static const String BASE_IMAGE_URL = 'https://app.weuptech.vn/media/images/';
 }
@@ -49,12 +47,9 @@ class Method {
   static const String PUT = 'PUT';
   static const String PATCH = 'PATCH';
   static const String DELETE = 'DELETE';
-
 }
 
 class DataType {
   static const String JSON = 'JSON';
   static const String FORM_DATA = 'FORM_DATA';
-
-
 }

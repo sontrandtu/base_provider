@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:data/src/common/constants.dart';
+import 'package:data/src/common/header_config.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
@@ -9,13 +10,13 @@ import '../builders/http_builder.dart';
 
 class ClientBuilder extends HttpBuilder {
   late Dio _dio;
+  late PrettyDioLogger? _logger;
+  late BasicInterceptor? _basicInterceptor;
   final bool _isDebugMode = true;
   final String _baseUrl = 'https://api.weuptech.vn';
-  final int _connectTimeout = 20000;
-  final int _receiveTimeout = 20000;
-  final int _sendTimeout = 20000;
-  PrettyDioLogger? _logger;
-  BasicInterceptor? _basicInterceptor;
+  final int _connectTimeout = 10000;
+  final int _receiveTimeout = 10000;
+  final int _sendTimeout = 10000;
 
   ClientBuilder() {
     _logger ??= PrettyDioLogger(
@@ -29,11 +30,7 @@ class ClientBuilder extends HttpBuilder {
 
     _dio = Dio(BaseOptions(
         baseUrl: _baseUrl,
-        headers: {
-          'token':
-              'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjA5NDM1NzQ1NTYifQ.LrOc2ZA-vE_vuQm-J8bjxPMQF7C8AkLyqnhVZiPEXuE',
-          'id': '1660546372487t40li80k3'
-        },
+        headers: HeaderConfig().getHeaders(),
         connectTimeout: _connectTimeout,
         receiveTimeout: _receiveTimeout,
         sendTimeout: _sendTimeout))
@@ -76,6 +73,7 @@ class ClientBuilder extends HttpBuilder {
     return this;
   }
 
+  @Deprecated('Do not use this function. Default header is HeaderConfig().getHeader()')
   @override
   HttpBuilder addDefaultHeaders(Map<String, dynamic> header) {
     _dio.options.headers = header;

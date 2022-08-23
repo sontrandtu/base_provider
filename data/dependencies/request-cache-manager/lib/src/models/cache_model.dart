@@ -16,7 +16,7 @@ class CacheModel extends BaseModel{
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['key'] = key;
-    data['userId'] = userId;
+    data['user_id'] = userId;
     data['age'] = age;
     data['data'] = this.data;
     return data;
@@ -28,7 +28,7 @@ class CacheModel extends BaseModel{
     map['key'] = key;
     map['age'] = age;
     map['data'] = data;
-    map['userId'] = userId;
+    map['user_id'] = userId;
     return map.toString();
   }
 

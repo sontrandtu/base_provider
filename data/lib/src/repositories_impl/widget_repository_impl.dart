@@ -43,7 +43,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
 
     return await ClientBuilder()
         .addBaseUrl('https://app.weuptech.vn')
-        .addCacheMemory()
+        .addCacheDisk()
         .withConverter<ApiModel>(
             fromJson: (json) => ApiModel.fromJson(
                   json,
@@ -69,7 +69,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
   Future getAllFeeling() async {
     final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
     return await ClientBuilder()
-        .addCacheMemory()
+        .addCacheDisk()
         .withConverter<ApiModel<List<FeelingModel>>>(
             fromJson: (json) => ApiModel.fromJson(
                 json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))

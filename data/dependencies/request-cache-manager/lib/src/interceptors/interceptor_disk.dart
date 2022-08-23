@@ -15,7 +15,7 @@ class InterceptorDisk extends InterceptorBase {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print('----------- Request Disk ----------------');
 
-    if(forceReplace ?? false) return handler.next(options);
+    if (forceReplace ?? false) return handler.next(options);
 
     // CacheModel? cache = RequestCacheDiskManager().get(options.path);
     // if (cache != null) {
@@ -27,11 +27,12 @@ class InterceptorDisk extends InterceptorBase {
   @override
   void onResponse(Response e, ResponseInterceptorHandler handler) {
     print('----------- Response Disk ----------------');
-    if(e.statusCode != HttpStatus.ok) return handler.next(e);
-
+    if (e.statusCode != HttpStatus.ok) return handler.next(e);
+    String key = e.requestOptions.path;
+    print('KEY: $key');
     RequestCacheDiskManager().put(
         CacheModel(
-            e.requestOptions.path,
+            key,
             maxAgeSecond ?? DateTime.now().add(Duration(minutes: 1)).millisecondsSinceEpoch ~/ 1000,
             jsonEncode(e.data)),
         forceReplace: forceReplace);

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
+// import 'package:path_provider/path_provider.dart';
 
 class CacheStorage {
   static const String boxName = 'local.cache';
@@ -9,10 +10,14 @@ class CacheStorage {
   static Box box = Hive.box(boxName);
   static CollectionBox? collectionBox;
 
+
   static Future<void> ensureInitialized() async {
+    // Directory appDocDir = await getApplicationDocumentsDirectory();
+    // String appDocPath = appDocDir.path;
     Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
     Hive.init(dir.path);
-    await Hive.openBox(boxName);
+    await Hive.openBox(boxName );
+
   }
 
   static Future<void> put(String key, dynamic value, {bool isEncode = false}) async {
@@ -48,8 +53,16 @@ class CacheStorage {
   }
 
   static Future<void> delete(String key) async {
-    if (!isExist(key)) return;
-    await box.delete(key);
+
+    box.keys.forEach((element) {
+      if (key.contains(element)) box.delete(element);
+    });
+  }
+  static Future<void> show() async {
+
+    print(box.keys);
+    print(box.values);
+
   }
 
   static Future<void> clearData() async {

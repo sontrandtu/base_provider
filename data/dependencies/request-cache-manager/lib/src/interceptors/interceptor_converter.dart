@@ -15,10 +15,19 @@ class InterceptorConverter<T> extends InterceptorBase {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print('----------- Request Converter ----------------');
+    String key = options.path;
+    switch (options.method) {
+      case 'POST':
+      case 'PUT':
+      case 'PATCH':
+      case 'DELETE':
+        RequestCacheManager().remove(key);
+    }
 
     if (forceReplace ?? false) return handler.next(options);
 
-    CacheModel? cache = RequestCacheManager().get(options.path);
+    print('KEY Converter: $key');
+    CacheModel? cache = RequestCacheManager().get(key);
     if (cache != null) {
       return handler.resolve(Response(
           requestOptions: options, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
@@ -30,6 +39,17 @@ class InterceptorConverter<T> extends InterceptorBase {
   @override
   void onResponse(Response e, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
+
+    if (e.statusCode == HttpStatus.notModified) {
+      String key = e.requestOptions.path;
+      CacheModel? cache = RequestCacheManager().get(key);
+      if (cache != null) {
+        return handler.resolve(Response(
+            requestOptions: e.requestOptions,
+            data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
+      }
+    }
+
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
 
     return handler.next(Response(data: fromJson?.call(e.data) ?? e.data, requestOptions: e.requestOptions));

@@ -13,7 +13,7 @@ class RequestCacheDiskManager implements IRequestCache {
   Future<void> put(CacheModel cache, {bool? forceReplace = false}) async {
     var data = CacheStorage.get<CacheModel>(cache.key);
     if (data == null) return await CacheStorage.put(cache.key, cache);
-    if (forceReplace!) return await CacheStorage.put(cache.key, cache);
+    if (forceReplace ?? false) return await CacheStorage.put(cache.key, cache);
 
     int maxAge = data['age'];
     if (data != null && maxAge > now) return;

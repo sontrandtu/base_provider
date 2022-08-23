@@ -9,3 +9,4 @@ export 'src/interceptors/interceptor_base.dart';
 export 'src/interceptors/basic_interceptor.dart';
 
 export 'src/managers/request_cache_manager.dart';
+export 'src/storage/cache_storage.dart';

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:request_cache_manager/src/managers/request_cache_disk_manager.dart';
 
 import '../models/cache_model.dart';
 import 'i_request_cache.dart';
@@ -26,13 +27,14 @@ class RequestCacheManager implements IRequestCache {
 
   @override
   void remove(String key) {
-    caches.removeWhere((element) => element.key.contains(key));
+    caches.removeWhere((element) => key.contains(element.key));
+    RequestCacheDiskManager().remove(key);
   }
 
   @override
   CacheModel? get(String key) {
     CacheModel? model = caches.singleWhereOrNull((element) => element.key == key);
-    if (model == null) return model;
+    if (model == null) return RequestCacheDiskManager().get(key);
     if (model.age > now) return model;
     remove(key);
     return null;

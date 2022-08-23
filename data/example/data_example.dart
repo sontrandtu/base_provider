@@ -5,15 +5,41 @@ import 'package:domain/domain.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 main() async {
+  await CacheStorage.ensureInitialized();
   var i;
   do {
-    ApiModel<List<FeelingModel>> response = await WidgetRepositoryImpl().getAllFeeling();
-    print(response.runtimeType);
-    print(response);
-    response.data?.forEach((element) {
-      print(element.id);
-    });
-    print(RequestCacheManager().get('/v1/lesson-contact-comment/1654649615pa1g8zjyf79v-GET-{token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjA5NDM1NzQ1NTYifQ.LrOc2ZA-vE_vuQm-J8bjxPMQF7C8AkLyqnhVZiPEXuE, id: 1660546372487t40li80k3}'));
+    print('Nhập 1 để xem danh sách: ');
+    print('Nhập 2 để thêm: ');
+    print('Nhập 3 để xóa tài nguyên: ');
+    print('Nhập 4 để xem tài nguyên: ');
+    print('Lựa chọn: ');
+
     i = stdin.readLineSync();
-  } while (i == '0');
+    if (int.parse(i) == 1) await getAllFelling();
+    if (int.parse(i) == 2) await addFelling();
+    if (int.parse(i) == 3) await showLocalData();
+    if (int.parse(i) == 4) await showAllLocalData();
+  } while (int.parse(i) > 0);
+}
+
+showAllLocalData() {
+  CacheStorage.show();
+}
+
+Future<void> showLocalData() async {
+  print('Nhập key để xóa: ');
+  var i = stdin.readLineSync();
+  CacheStorage.delete(i ?? '');
+}
+
+Future<void> getAllFelling() async {
+  ApiModel<List<FeelingModel>> response = await WidgetRepositoryImpl().getAllFeeling();
+  print(response.runtimeType);
+  print(response);
+}
+
+Future<void> addFelling() async {
+  ApiModel response = await WidgetRepositoryImpl().addFeeling();
+  print(response.runtimeType);
+  print(response);
 }

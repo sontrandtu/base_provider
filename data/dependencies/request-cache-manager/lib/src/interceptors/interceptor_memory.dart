@@ -30,15 +30,13 @@ class InterceptorMemory extends InterceptorBase {
     print('----------- Response Memory - ${e.statusCode} ----------------');
 
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
-    String key =
-        e.requestOptions.path + '-' + e.requestOptions.method + '-' + e.requestOptions.headers.toString();
+    String key = e.requestOptions.path;
     RequestCacheManager().put(
         CacheModel(
             key,
             maxAgeSecond ?? DateTime.now().add(Duration(minutes: 1)).millisecondsSinceEpoch ~/ 1000,
             jsonEncode(e.data)),
         forceReplace: forceReplace);
-print(key);
     return handler.next(e);
   }
 

@@ -65,14 +65,13 @@ class InterceptorConverter<T> extends InterceptorBase {
     if (err.error is SocketException) {
       print('Đang chờ mạng');
       late StreamSubscription subscription;
-      final completer = Completer<Response>();
 
-      subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
         if (result == ConnectivityResult.none) return;
         subscription.cancel();
         print('Đã có mạng và request');
-        completer.complete(
-          dio?.request(
+
+          await dio?.request(
             err.requestOptions.path,
             data: err.requestOptions.data,
             queryParameters: err.requestOptions.queryParameters,
@@ -83,13 +82,11 @@ class InterceptorConverter<T> extends InterceptorBase {
               receiveTimeout:  err.requestOptions.receiveTimeout,
 
             ),
-          ),
+
         );
       });
 
-      return handler.resolve(Response(
-          requestOptions: err.requestOptions,
-          data: fromJson?.call((await completer.future).data) ?? err.response?.data ?? (await completer.future).data));
+      return ;
     }
     print('Thoát kết nối mạng');
     int? code = err.response?.data['code'] ?? err.response?.statusCode ?? -1;

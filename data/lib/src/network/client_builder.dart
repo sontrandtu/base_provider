@@ -10,8 +10,8 @@ import '../builders/http_builder.dart';
 
 class ClientBuilder extends HttpBuilder {
   late Dio _dio;
-  late PrettyDioLogger? _logger;
-  late BasicInterceptor? _basicInterceptor;
+  PrettyDioLogger? _logger;
+  BasicInterceptor? _basicInterceptor;
   final bool _isDebugMode = true;
   final String _baseUrl = 'https://api.weuptech.vn';
   final int _connectTimeout = 10000;
@@ -130,7 +130,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder withConverter<T>({T Function(Map<String, dynamic> json)? fromJson}) {
-    _dio.interceptors.add(InterceptorConverter<T>(fromJson: fromJson));
+    _dio.interceptors.add(InterceptorConverter<T>(fromJson: fromJson,dio: _dio));
     return this;
   }
 

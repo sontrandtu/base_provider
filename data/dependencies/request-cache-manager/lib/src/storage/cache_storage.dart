@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
-// import 'package:path_provider/path_provider.dart';
 
 class CacheStorage {
   static const String boxName = 'local.cache';
@@ -12,8 +11,6 @@ class CacheStorage {
 
 
   static Future<void> ensureInitialized() async {
-    // Directory appDocDir = await getApplicationDocumentsDirectory();
-    // String appDocPath = appDocDir.path;
     Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
     Hive.init(dir.path);
     await Hive.openBox(boxName );

@@ -10,8 +10,7 @@ class ColorResource {
   static const Color divider = Color(0xFFEFEFEF);
 
   static MaterialColor primarySwatchMaterial =
-      customMaterialColor(primarySwatch);
-  static const Color primarySwatch = Color(0xFF0A1F72);
+      customMaterialColor(primary);
 
   static Color colorSplash = primarySwatchMaterial.withAlpha(100);
   static Color colorHighLight = primarySwatchMaterial.withAlpha(50);

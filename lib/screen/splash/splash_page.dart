@@ -1,9 +1,9 @@
+import 'package:achitecture_weup/common/core/page_layout.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 
-import '../../common/core/main_layout.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: viewModel,
-      child: MainLayout<SplashViewModel>(
+      child: PageLayout<SplashViewModel>(
         child: Container(),
       ),
     );

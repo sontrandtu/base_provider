@@ -24,9 +24,9 @@ class HandleHttpException {
 
   void _tokenExpired() {
     AppConfig().unAuthenticate();
-    Navigator.pop(Application.navigator.currentContext!);
+    appNavigator?.pop();
     appNavigator?.pushNamedAndRemoveUntil(RoutePath.LOGIN);
     appNavigator?.popUntil(RoutePath.LOGIN);
-    appNavigator?.dialog(const CustomDialog(description: HttpConstant.TOKEN_EXPIRED, title: 'Thông báo'));
+    appNavigator?.dialog(const CustomDialog(description: 'HttpConstant.TOKEN_EXPIRED', title: 'Thông báo'));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:achitecture_weup/common/core/main_layout.dart';
 import 'package:achitecture_weup/common/core/theme/theme_manager.dart';
 import 'package:achitecture_weup/common/helper/view_utils.dart';
 import 'package:achitecture_weup/common/resource/app_resource.dart';
@@ -8,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 import 'package:widgets/widgets.dart';
+
+import '../../common/core/page_layout.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: viewModel,
-      child: MainLayout<LoginViewModel>(
+      child: PageLayout<LoginViewModel>(
         child: Stack(
           children: [
             SingleChildScrollView(

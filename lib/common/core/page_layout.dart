@@ -1,13 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 import 'package:widgets/widgets.dart';
 
-
-
-class MainLayout<T extends BaseViewModel> extends StatelessWidget {
-  const MainLayout({
+class PageLayout<T extends BaseViewModel> extends StatelessWidget {
+  const PageLayout({
     this.appBar,
     this.mustSafeView = true,
     required this.child,
@@ -44,15 +41,8 @@ class MainLayout<T extends BaseViewModel> extends StatelessWidget {
         endDrawer: endDrawer,
         onEndDrawerChanged: onEndDrawerChanged,
         body: mustSafeView == true
-            ? SafeArea(
-                child: _BodyLayout<T>(
-                child: child,
-                radius: radius,
-              ))
-            : _BodyLayout<T>(
-                child: child,
-                radius: radius,
-              ),
+            ? SafeArea(child: _BodyLayout<T>(child: child, radius: radius))
+            : _BodyLayout<T>(child: child, radius: radius),
       ),
     );
   }
@@ -85,7 +75,7 @@ class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 transitionBuilder: _buildTransition,
-                child: condition ? IndicatorComp() : const SizedBox(),
+                child: condition ? const IndicatorComp() : const SizedBox(),
               );
             },
           ),

@@ -85,6 +85,5 @@ class WidgetRepositoryImpl implements WidgetRepository {
             fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
         .request<ApiModel<List<PostModel>>>('/posts')
         .wrap();
-
   }
 }

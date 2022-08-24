@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:data/src/common/constants.dart';
 import 'package:data/src/common/header_config.dart';
 import 'package:dio/dio.dart';
+import 'package:domain/domain.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
@@ -129,11 +130,17 @@ class ClientBuilder extends HttpBuilder {
   *  Luôn gọi đến converter để parse json sang object hoặc lấy từ cache, hoặc lấy json thuần
   * */
   @override
-  HttpBuilder withConverter<T>({T Function(Map<String, dynamic> json)? fromJson}) {
+  HttpBuilder withConverter<T>({T Function(dynamic json)? fromJson}) {
     _dio.interceptors.add(InterceptorConverter<T>(fromJson: fromJson,dio: _dio));
+
     return this;
   }
 
+  @override
+  HttpBuilder withConverterRestful<T>({T Function(dynamic json)? fromJson}) {
+    _dio.interceptors.add(InterceptorConverterRestful<T>(fromJson: fromJson,dio: _dio));
+    return this;
+  }
   /*
   *  Xây dựng lên đối tượng dio
   * */
@@ -187,6 +194,40 @@ class ClientBuilder extends HttpBuilder {
         _data = bodies;
     }
 
-    return await _dio.request(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
+    return await _dio.request<T>(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
+  }  @override
+  Future<Response<T>> requestRestful<T>(String path,
+      {String? method,
+      String? dataType = DataType.FORM_DATA,
+      dynamic bodies,
+      Map<String, dynamic>? paths,
+      Map<String, dynamic>? params}) async {
+    paths?.forEach((key, value) => path = path.replaceAll('{$key}', value.toString()));
+
+    bodies ??= <String, dynamic>{};
+
+    bodies?.removeWhere((key, value) => value == null);
+
+    params?.removeWhere((key, value) => value == null);
+
+    dynamic _data;
+
+    switch (dataType) {
+      case DataType.FORM_DATA:
+        bodies.forEach((key, value) {
+          if (value is List<File>) value = value.map((e) => MultipartFile.fromFileSync(e.path)).toList();
+          if (value is File) value = MultipartFile.fromFileSync(value.path);
+        });
+        _data = FormData.fromMap(bodies);
+        break;
+      case DataType.JSON:
+        _data = bodies;
+        break;
+      default:
+        _data = bodies;
+    }
+
+    return await _dio.request<T>(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
   }
+
 }

@@ -2,18 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:domain/domain.dart';
 
-import '../common/constants.dart';
-import '../common/dio_retry_connect.dart';
-import '../managers/request_cache_manager.dart';
-import '../models/cache_model.dart';
-import 'interceptor_base.dart';
+import '../../common/constants.dart';
+import '../../managers/request_cache_manager.dart';
+import '../../models/cache_model.dart';
+import '../interceptor_base.dart';
 
-class InterceptorConverter<T> extends InterceptorBase {
+class InterceptorConverterRestful<T> extends InterceptorBase {
   final T Function(dynamic json)? fromJson;
   final Dio? dio;
 
-  InterceptorConverter({this.dio, this.fromJson});
+  InterceptorConverterRestful({this.dio, this.fromJson});
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -30,10 +30,14 @@ class InterceptorConverter<T> extends InterceptorBase {
     if (forceReplace ?? false) return handler.next(options);
 
     print('KEY Converter: $key');
+
     CacheModel? cache = RequestCacheManager().get(key);
+
     if (cache != null) {
-      return handler.resolve(Response(
-          requestOptions: options, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
+      ApiModel api = ApiModel<T>(
+          code: CodeConstant.OK, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data));
+
+      return handler.resolve(Response(requestOptions: options, data: api));
     }
 
     return handler.next(options);
@@ -43,32 +47,29 @@ class InterceptorConverter<T> extends InterceptorBase {
   void onResponse(Response e, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
 
-
     if (e.statusCode == HttpStatus.notModified) {
       String key = e.requestOptions.path;
       CacheModel? cache = RequestCacheManager().get(key);
       if (cache != null) {
-
-
-        return handler.resolve(Response(
-            requestOptions: e.requestOptions,
-            data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
+        ApiModel api = ApiModel<T>(
+            code: CodeConstant.OK, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data));
+        return handler.resolve(Response(requestOptions: e.requestOptions, data: api));
       }
     }
 
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
 
-    return handler.next(Response(data: fromJson?.call(e.data) ?? e.data, requestOptions: e.requestOptions));
+    ApiModel api = ApiModel<T>(code: CodeConstant.OK, data: fromJson?.call(e.data) ?? e.data);
+
+    return handler.next(Response<ApiModel?>(data: api, requestOptions: e.requestOptions));
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     print('----------- DioError Converter - ${err.response?.statusCode} ----------------');
 
-
     int? code = err.response?.data['code'] ?? err.response?.statusCode ?? CodeConstant.UNKNOWN;
     String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? HttpConstant.UNKNOWN;
-
 
     if (err.error is SocketException) {
       code = CodeConstant.CONNECT_ERROR;
@@ -87,10 +88,8 @@ class InterceptorConverter<T> extends InterceptorBase {
       msg = HttpConstant.TIME_OUT;
     }
 
-    Map<String, dynamic> responseData = {"code": code, "message": msg};
+    ApiModel api = ApiModel<T>(code: code, message: msg);
 
-    return handler.resolve(Response(
-        requestOptions: err.requestOptions,
-        data: fromJson?.call(responseData) ?? err.response?.data ?? responseData));
+    return handler.resolve(Response(requestOptions: err.requestOptions, data: api));
   }
 }

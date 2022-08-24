@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:domain/domain.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 abstract class HttpBuilder {
@@ -22,9 +23,18 @@ abstract class HttpBuilder {
 
   HttpBuilder addCacheDisk({int? ageSeconds, bool? forceReplace});
 
-  HttpBuilder withConverter<T>({T Function(Map<String, dynamic> json) fromJson});
+  HttpBuilder withConverter<T>({T Function(dynamic json)? fromJson});
+
+  HttpBuilder withConverterRestful<T>({T Function(dynamic json)? fromJson});
 
   Future<Response<T>> request<T>(String path,
+      {String? method,
+      String? dataType,
+      dynamic bodies,
+      Map<String, dynamic>? paths,
+      Map<String, dynamic>? params});
+
+ Future<Response<T>> requestRestful<T>(String path,
       {String? method,
       String? dataType,
       dynamic bodies,

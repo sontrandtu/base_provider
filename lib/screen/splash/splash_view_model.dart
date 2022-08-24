@@ -12,8 +12,8 @@ class SplashViewModel extends BaseViewModel {
   Future<void> fetchData() async {
     if (await isConnecting) return;
     await delay(1000);
-    ApiModel<List<FeelingModel>?> response =
-        await GetAllFeelingUseCase(repository: WidgetRepositoryImpl()).invoke();
+    ApiModel<List<PostModel>?> response =
+        await GetAllPostUseCase(repository: WidgetRepositoryImpl()).invoke();
     print(response);
     if (checkStatus(ApiModel(code: CodeConstant.OK, message: HttpConstant.UNKNOWN))) return;
     setStatus(Status.success);

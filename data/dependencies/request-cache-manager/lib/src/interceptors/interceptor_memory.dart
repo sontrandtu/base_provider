@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 
 import '../managers/request_cache_manager.dart';
@@ -31,10 +32,18 @@ class InterceptorMemory extends InterceptorBase {
 
     if (e.statusCode != HttpStatus.ok) return handler.next(e);
     String key = e.requestOptions.path;
+    List<String>? cacheControl = e.headers['cache-control'];
+
+    String? maxAge =
+        cacheControl?.singleWhereOrNull((element) => element.split('=').firstOrNull == 'max-age');
+    int? maxAgeValue = int.tryParse(maxAge?.split('=').lastOrNull ?? '');
+
+    print(DateTime.now().add(Duration(seconds: maxAgeValue ?? 60)).millisecondsSinceEpoch ~/ 1000);
     RequestCacheManager().put(
         CacheModel(
             key,
-            maxAgeSecond ?? DateTime.now().add(Duration(minutes: 1)).millisecondsSinceEpoch ~/ 1000,
+            maxAgeSecond ??
+                DateTime.now().add(Duration(seconds: maxAgeValue ?? 60)).millisecondsSinceEpoch ~/ 1000,
             jsonEncode(e.data)),
         forceReplace: forceReplace);
     return handler.next(e);

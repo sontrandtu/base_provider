@@ -7,6 +7,7 @@ export 'src/interceptors/interceptor_disk.dart';
 export 'src/interceptors/interceptor_memory.dart';
 export 'src/interceptors/interceptor_base.dart';
 export 'src/interceptors/basic_interceptor.dart';
+export 'src/interceptors/restful/interceptor_converter_restful.dart';
 
 export 'src/managers/request_cache_manager.dart';
 export 'src/storage/cache_storage.dart';

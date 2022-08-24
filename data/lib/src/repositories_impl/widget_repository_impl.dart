@@ -71,8 +71,20 @@ class WidgetRepositoryImpl implements WidgetRepository {
         .addCacheMemory()
         .withConverter<ApiModel<List<FeelingModel>>>(
             fromJson: (json) => ApiModel.fromJson(
-                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))
+                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)) .toList()))
         .request<ApiModel<List<FeelingModel>>>(ApiPaths.FEELINGS, paths: paths)
         .wrap();
+  }
+
+  @override
+  Future<ApiModel<List<PostModel>?>> getAllPost() async {
+    return  await ClientBuilder()
+        .addBaseUrl('https://jsonplaceholder.typicode.com')
+        .addCacheMemory()
+        .withConverterRestful<List<PostModel>>(
+            fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
+        .request<ApiModel<List<PostModel>>>('/posts')
+        .wrap();
+
   }
 }

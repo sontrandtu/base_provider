@@ -16,6 +16,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  domain:
+    path: ../../../domain
+
 
 dev_dependencies:
   lints: ^1.0.0

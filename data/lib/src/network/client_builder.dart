@@ -187,6 +187,6 @@ class ClientBuilder extends HttpBuilder {
         _data = bodies;
     }
 
-    return await _dio.request(path, queryParameters: params, data: _data, options: Options(method: method));
+    return await _dio.request(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
   }
 }

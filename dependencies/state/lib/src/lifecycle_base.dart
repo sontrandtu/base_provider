@@ -9,7 +9,7 @@ class Lifecycle {
   static const String DISPOSE = 'dispose';
 }
 
-abstract class LifecycleBase {
+mixin LifecycleBase {
   bool mounted = false;
 
   TickerProvider? _vsync;

@@ -21,4 +21,9 @@ enum Status {
   * không thành công
   * */
   firstIssue,
+  /*
+  * [Status.error] sự kiện được xảy ra khi request của [Status.waiting]
+  * không thành công
+  * */
+  connection,
 }

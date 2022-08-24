@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class OutlinedButtonComp extends StatelessWidget {
-  final String? title;
-  final Widget? child;
+  final dynamic title;
   final Function()? onPressed;
   final EdgeInsetsGeometry? padding;
   final TextStyle? style;
   final bool? isEnable;
   final double? borderRadius;
-  final double? widthValue;
-  final double? heightValue;
+  final double? width;
+  final double? height;
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
   final Color? colorBorder;
@@ -17,10 +16,9 @@ class OutlinedButtonComp extends StatelessWidget {
   const OutlinedButtonComp({
     Key? key,
     this.title,
-    this.child,
     this.style,
-    this.widthValue,
-    this.heightValue,
+    this.width,
+    this.height,
     this.onPressed,
     this.padding,
     this.isEnable = true,
@@ -33,22 +31,23 @@ class OutlinedButtonComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widthValue,
-      height: heightValue,
+      width: width,
+      height: height,
       child: OutlinedButton(
         onPressed: isEnable! ? onPressed : null,
-        child: child ??
-            Text(
-              title ?? '',
-              style: style ?? Theme.of(context).textTheme.headline4,
-            ),
+        child: title is Widget
+            ? title
+            : Text(
+                title ?? '',
+                style: style ?? Theme.of(context).textTheme.headline4,
+              ),
         style: buttonStyle ??
             OutlinedButton.styleFrom(
               padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              side: BorderSide(color: colorBorder ?? Colors.blue),
+              side: BorderSide(color: colorBorder ?? Theme.of(context).primaryColor),
               primary: primaryColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 0),
+                borderRadius: BorderRadius.circular(borderRadius ?? 4),
               ),
             ),
       ),

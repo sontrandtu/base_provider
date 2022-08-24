@@ -1,25 +1,21 @@
 import 'dart:io';
 
-import 'package:achitecture_weup/common/theme/theme_view_model.dart';
+import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:request_cache_manager/request_cache_manager.dart';
 import 'package:storage/storage.dart';
 
 import 'application.dart';
 
-ThemeViewModel themeViewModel = ThemeViewModel();
-
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await LocalStorage.ensureInitialized();
+  await CacheStorage.ensureInitialized();
+
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => themeViewModel),
-      ],
-      child:const Application(),
-    ),
+    const Application(),
   );
 }
 

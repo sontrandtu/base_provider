@@ -28,13 +28,17 @@ class LocalStorage {
 
   static dynamic get<T>(String key, [dynamic defaultValue]) {
     if (!isExist(key)) return defaultValue;
+    String? value = box.get(key, defaultValue: defaultValue);
 
     switch (T) {
       case String:
+        return value;
       case double:
+        return double.tryParse(value ?? '');
       case bool:
+        return bool.fromEnvironment(value ?? '');
       case int:
-        return box.get(key, defaultValue: defaultValue);
+        return int.tryParse(value ?? '');
       default:
         return jsonDecode(box.get(key));
     }

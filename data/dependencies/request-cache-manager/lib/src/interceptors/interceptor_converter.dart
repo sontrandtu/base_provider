@@ -1,10 +1,10 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
+import '../common/constants.dart';
+import '../common/dio_retry_connect.dart';
 import '../managers/request_cache_manager.dart';
 import '../models/cache_model.dart';
 import 'interceptor_base.dart';
@@ -59,42 +59,29 @@ class InterceptorConverter<T> extends InterceptorBase {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler)async {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
     print('----------- DioError Converter - ${err.response?.statusCode} ----------------');
 
+    int? code = err.response?.data['code'] ?? err.response?.statusCode ?? CodeConstant.UNKNOWN;
+    String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? HttpConstant.UNKNOWN;
+
+
     if (err.error is SocketException) {
-      print('Đang chờ mạng');
-      late StreamSubscription subscription;
+      code = CodeConstant.CONNECT_ERROR;
+      msg = HttpConstant.CONNECT_ERROR;
 
-      subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
-        if (result == ConnectivityResult.none) return;
-        subscription.cancel();
-        print('Đã có mạng và request');
-
-          await dio?.request(
-            err.requestOptions.path,
-            data: err.requestOptions.data,
-            queryParameters: err.requestOptions.queryParameters,
-            options: Options(
-              method: err.requestOptions.method,
-              headers: err.requestOptions.headers,
-              sendTimeout: err.requestOptions.sendTimeout,
-              receiveTimeout:  err.requestOptions.receiveTimeout,
-
-            ),
-
-        );
-      });
-
-      return ;
+      // Response response = await DioRetryConnect(dio: dio, err: err).onRetry();
+      // return handler.resolve(response);
     }
-    print('Thoát kết nối mạng');
-    int? code = err.response?.data['code'] ?? err.response?.statusCode ?? -1;
-    String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? 'Đã có lỗi xảy ra';
 
-    if (err.type == DioErrorType.connectTimeout ||
-        err.type == DioErrorType.sendTimeout ||
-        err.type == DioErrorType.receiveTimeout) msg = 'Hết thời gian kết nối';
+    bool isConnectTimeout = err.type == DioErrorType.connectTimeout;
+    bool isSendTimeout = err.type == DioErrorType.sendTimeout;
+    bool isReceiveTimeout = err.type == DioErrorType.receiveTimeout;
+
+    if (isConnectTimeout || isSendTimeout || isReceiveTimeout) {
+      code = CodeConstant.TIME_OUT;
+      msg = HttpConstant.TIME_OUT;
+    }
 
     Map<String, dynamic> responseData = {"code": code, "message": msg};
 

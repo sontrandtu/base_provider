@@ -44,5 +44,8 @@ class RequestCacheManager implements IRequestCache {
   int get now => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
   @override
-  void clearAll() => caches.clear();
+  void clearAll() {
+    caches.clear();
+    // RequestCacheManager().clearAll();
+  }
 }

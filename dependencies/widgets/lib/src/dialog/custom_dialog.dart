@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
 class CustomDialog extends StatelessWidget {
-  final String title;
+  final String? title;
   final dynamic description;
   final String? cancelText;
   final String? confirmText;
@@ -14,7 +14,7 @@ class CustomDialog extends StatelessWidget {
   final TextAlign? textAlign;
 
   const CustomDialog(
-      {required this.title,
+      {this.title,
       required this.description,
       this.onConfirm,
       this.isAccept = true,
@@ -54,7 +54,7 @@ class CustomDialog extends StatelessWidget {
           ),
           Center(
             child: Text(
-              title.toUpperCase(),
+              title??'Thông báo',
               textAlign: TextAlign.center,
               // style:,
             ),

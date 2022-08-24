@@ -1,15 +1,19 @@
-import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:state/state.dart';
 
 class SplashViewModel extends BaseViewModel {
   @override
   Future<void> initialData() async {
+    await fetchData();
+
+  }
+
+  @override
+  Future<void> fetchData() async {
+    if (await isConnecting) return;
     await delay(1000);
+    if (checkStatus(ApiModel(code: CodeConstant.OK, message: HttpConstant.UNKNOWN))) return;
     setStatus(Status.success);
-    // appNavigator
-    //     .pushReplacementNamed(RoutePath.LOGIN, arguments: {'SplashViewModel args': runtimeType.toString()});
-    //
-    WidgetRepositoryImpl().getAllFeeling();
   }
 }

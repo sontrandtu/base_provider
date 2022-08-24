@@ -25,6 +25,7 @@ export 'src/dialog/custom_dialog.dart';
 export 'src/dialog/date_picker_custom_dialog.dart';
 ///D
 export 'src/dropdown_comp.dart';
+export 'src/error_layout.dart';
 ///H
 export 'src/html_content.dart';
 ///I
@@ -38,6 +39,7 @@ export 'src/input/outline_input.dart';
 export 'src/input/underline_input.dart';
 ///M
 export 'src/multiple_select.dart';
+export 'src/no_connect_layout.dart';
 ///R
 export 'src/radio/radio_comp.dart';
 export 'src/radio/radio_custom_comp.dart';

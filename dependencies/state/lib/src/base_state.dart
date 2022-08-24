@@ -32,12 +32,12 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     _viewModel?.init();
 
-    Future.delayed(Duration.zero, () => _viewModel?.onViewCreated());
+    // Future.delayed(Duration.zero, () => _viewModel?.onViewCreated());
 
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       log('$VM was installed ${DateTime.now()}');
 
-      _viewModel?.setFlagLifecycle(Lifecycle.FRAME_CALL_BACK);
+      // _viewModel?.setFlagLifecycle(Lifecycle.FRAME_CALL_BACK);
 
       _viewModel?.setMounted(mounted);
 
@@ -46,16 +46,10 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
       _viewModel?.setFlagLifecycle(Lifecycle.INIT);
 
       await _viewModel?.initialData();
-
-      _viewModel?.setFlagLifecycle(Lifecycle.BUILD);
+      // await Future.delayed(Duration(milliseconds: 500));
+      // _viewModel?.setFlagLifecycle(Lifecycle.BUILD);
     });
-
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override

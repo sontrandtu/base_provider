@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:state/src/constants.dart';
 import 'package:state/src/status.dart';
+import 'package:widgets/widgets.dart';
 
 import 'app_navigator.dart';
 import 'lifecycle_base.dart';
@@ -72,20 +74,54 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
     appNavigator.setBuildContext(ctx);
   }
 
+  Future<bool> get isConnecting async => await getConnection();
+
+  /*
+  * Kiểm tra connect internet, thường được kiểm tra 1 lần trước
+  * khi thực hiện các request
+  * */
+  Future<bool> getConnection({Function()? reconnect}) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      return !(result.isNotEmpty && result[0].rawAddress.isNotEmpty);
+    } on SocketException catch (_) {
+      // appNavigator.dialog(BaseErrorDialog(
+      //   content: HttpConstant.CONNECT_ERROR,
+      //   textButtonConfirm: 'Thử lại',
+      //   mConfirm: () {
+      //     setStatus(Status.loading);
+      //     reconnect ?? appNavigator.back();
+      //   },
+      //   mCancel: appNavigator.back,
+      // ));
+      _status = Status.connection;
+
+      if (flagLifecycle == Lifecycle.BUILD) _status = Status.error;
+      update();
+
+      return true;
+    }
+  }
+
   bool checkStatus(dynamic value, {bool isShowDialog = true}) {
-    if (value.code == 200) return false;
+    if (value.code == CodeConstant.OK) return false;
 
     // HandleHttpException(code: value.err?.code, appNavigator: appNavigator).catchError();
 
     // if (value.err?.code == CodeConstant.INVALID_SIGN) return true;
 
-    if (flagLifecycle == Lifecycle.INIT) setStatus(Status.firstIssue);
+    if (flagLifecycle == Lifecycle.INIT) {
+      _status = Status.firstIssue;
+      if (value.code == CodeConstant.CONNECT_ERROR) _status = Status.connection;
+    }
 
-    if (flagLifecycle == Lifecycle.BUILD) setStatus(Status.error);
+    if (flagLifecycle == Lifecycle.BUILD) _status = Status.error;
+
+    update();
 
     if (!isShowDialog) return true;
 
-    setErrorMessage(value.message.tl);
+    setErrorMessage(value.message);
 
     return true;
   }
@@ -94,11 +130,11 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   * Thực hiện show dialog khi có lỗi xảy ra
   * */
   void setErrorMessage(dynamic msg) {
-    // appNavigator.dialog(BaseErrorDialog(
-    //   content: msg,
-    //   showCancel: false,
-    //   mConfirm: _onConfirm,
-    // ));
+    appNavigator.dialog(CustomDialog(
+      description: msg,
+
+      onConfirm: _onConfirm,
+    ));
     // ViewUtils.toast(msg, mode: mode);
   }
 

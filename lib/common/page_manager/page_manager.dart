@@ -5,32 +5,39 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets/widgets.dart';
 
-import 'push_page_builder.dart';
 import 'route_path.dart';
 
+Map<String, WidgetBuilder> routes = {
+  RoutePath.INITIAL: (_) => SplashPage(),
+  RoutePath.LOGIN: (_) => LoginPage(),
+};
+
 Route<dynamic> generateRoute(RouteSettings settings) {
-  Widget page;
   String? routeName = settings.name?.split('?').first;
 
-  switch (routeName) {
-    case RoutePath.INITIAL:
-      page = const SplashPage();
-      break;
-    case RoutePath.LOGIN:
-      page = const LoginPage();
-      break;
+  // switch (routeName) {
+  //   case RoutePath.INITIAL:
+  //     page = SplashPage();
+  //     break;
+  //   case RoutePath.LOGIN:
+  //     page = LoginPage();
+  //     break;
+  //
+  //   case RoutePath.TODO_LIST:
+  //     page = Container();
+  //     break;
+  //
+  //   default:
+  //     page = UndefinedLayout(
+  //       name: settings.name,
+  //     );
+  //     break;
+  // }
+  showLogState('Page: $routeName | RoutePath: ${settings.name} ');
 
-    case RoutePath.TODO_LIST:
-      page = Container();
-      break;
+  // return CupertinoPageRoute(builder:  (_) =>  page, settings: settings);
+  return CupertinoPageRoute(
+      builder: routes[routeName] ?? (_) => UndefinedLayout(name: settings.name), settings: settings);
 
-    default:
-      page = UndefinedLayout(
-        name: settings.name,
-      );
-      break;
-  }
-  showLogState('Page: $page | RoutePath: ${settings.name} ');
-
-  return PushPageBuilder.pushCupertinoPageBuilder(settings, page);
+  // return PushPageBuilder.pushCupertinoPageBuilder(settings, page);
 }

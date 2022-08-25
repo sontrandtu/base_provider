@@ -14,10 +14,11 @@ class Application extends StatefulWidget {
   @override
   State<Application> createState() => _ApplicationState();
 
-  static void update() {
-    BuildContext? context = Application.navigator.currentContext;
+  static void update({BuildContext? buildContext}) {
+    BuildContext? context = buildContext ?? Application.navigator.currentContext;
 
     if (context == null) return;
+
     context.findAncestorStateOfType<_ApplicationState>()?.updateState();
   }
 }
@@ -34,24 +35,24 @@ class _ApplicationState extends State<Application> {
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) =>
+      MaterialApp(
           navigatorKey: Application.navigator,
           scrollBehavior: _NoScrollBehavior(),
           debugShowCheckedModeBanner: false,
           title: AppConstant.APP_NAME,
           locale: Translator().currentLocale,
           supportedLocales: Translator().supports,
-          localizationsDelegates: const [
-            Translator.delegate,
+          theme: ThemeManager().value,
+          localizationsDelegates: [
+            ApplicationLocalizationsDelegate(),
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          theme: ThemeManager().value,
           onGenerateRoute: generateRoute,
           initialRoute: RoutePath.INITIAL,
-
-      );
+        );
 }
 
 class _NoScrollBehavior extends ScrollBehavior {

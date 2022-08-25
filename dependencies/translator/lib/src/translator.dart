@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
@@ -16,9 +17,7 @@ class Translator {
 
   factory Translator() => _translator;
 
-  static Translator? of(BuildContext context) => Localizations.of<Translator>(context, Translator);
-
-  static const LocalizationsDelegate<Translator> delegate = _ApplicationLocalizationsDelegate();
+  Timer? _timer;
 
   Locale? currentLocale;
 
@@ -34,18 +33,16 @@ class Translator {
     setCurrentLocale(languageCode);
   }
 
-  Future<void> changeLanguage(String languageCode) async {
-    setCurrentLocale(languageCode);
-
+  Future<void> load(String languageCode) async {
     languages = en;
     if (languageCode == LanguageCode.VI) languages = vi;
 
-    currentLanguageCode = languageCode;
-
-    await LocalStorage.put(StorageKey.LANGUAGE, languageCode);
+    _timer?.cancel();
+    _timer = Timer(Duration(milliseconds: 500), () => LocalStorage.put(StorageKey.LANGUAGE, languageCode));
   }
 
-  void setCurrentLocale(String languageCode) {
+  void setCurrentLocale(String languageCode) async {
+    load(languageCode);
     currentLocale =
         supports.singleWhereOrNull((element) => element.languageCode == languageCode) ?? defaultLocale;
   }
@@ -56,21 +53,14 @@ class Translator {
   ];
 }
 
-class _ApplicationLocalizationsDelegate extends LocalizationsDelegate<Translator> {
-  const _ApplicationLocalizationsDelegate();
+class ApplicationLocalizationsDelegate extends LocalizationsDelegate<Translator> {
+  @override
+  bool isSupported(Locale locale) =>
+      Translator().supports.map((e) => e.languageCode).contains(locale.languageCode);
 
   @override
-  bool isSupported(Locale locale) {
-    return Translator().supports.map((e) => e.languageCode).contains(locale.languageCode);
-  }
+  Future<Translator> load(Locale locale) async => Translator();
 
   @override
-  Future<Translator> load(Locale locale) async {
-    // await Translator().changeLanguage(locale.languageCode);
-    await Translator().changeLanguage(LanguageCode.VI);
-    return Translator();
-  }
-
-  @override
-  bool shouldReload(LocalizationsDelegate<Translator> old) => false;
+  bool shouldReload(LocalizationsDelegate<Translator> old) => true;
 }

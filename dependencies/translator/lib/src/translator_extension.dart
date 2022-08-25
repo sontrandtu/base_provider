@@ -10,7 +10,7 @@ extension LanguageExtension on String {
     for (var str in args) {
       s = s!.replaceFirst('%s', str);
     }
-    return s!;
+    return this;
   }
 }
 

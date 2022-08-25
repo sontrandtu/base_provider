@@ -6,8 +6,10 @@ import 'package:achitecture_weup/screen/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
+import 'package:translator/translator.dart';
 import 'package:widgets/widgets.dart';
 
+import '../../application.dart';
 import '../../common/page_layout.dart';
 
 
@@ -76,6 +78,8 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                       borderRadius: 4,
                       onPressed: viewModel.login,
                     ),
+                    Text(KeyLanguage.title.tr),
+                    OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
                     const Expanded(child: SizedBox()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -106,5 +110,13 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
         ),
       ),
     );
+  }
+  _changeLanguage() async{
+    Translator().currentLanguageCode == LanguageCode.EN
+        ? Translator().setCurrentLocale(LanguageCode.VI)
+        : Translator().setCurrentLocale(LanguageCode.EN);
+    // setState(() {});
+    // await Future.delayed(Duration(seconds: 1));
+    Application.update();
   }
 }

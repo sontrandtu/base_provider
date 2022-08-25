@@ -1,6 +1,7 @@
 name: request_cache_manager
 description: Cache request
 version: 1.0.0
+publish_to: none
 # homepage: https://www.example.com
 
 environment:

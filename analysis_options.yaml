@@ -3,4 +3,6 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     constant_identifier_names: false
+
+#    prefer_const_constructors là true khi không làm đa ngôn ngữ, false khi làm đa ngôn ngữ
     prefer_const_constructors: false

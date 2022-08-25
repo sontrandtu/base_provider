@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:data/src/common/constants.dart';
 import 'package:data/src/common/header_config.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/domain.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 

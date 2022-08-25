@@ -25,14 +25,13 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      Navigator.pushNamed(context, RoutePath.LOGIN);
-    });
+    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    //   Navigator.pushNamed(context, RoutePath.LOGIN);
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('setstate');
 
     return ChangeNotifierProvider.value(
       value: viewModel,
@@ -46,7 +45,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
             OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
             OutlinedButtonComp(
                 title: 'nexxt page', onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN,arguments: '1 texxt arrgs')),
-            const TextNomalTranslate(),
+            TextNomalTranslate(),
             Text(Translator().currentLanguageCode == LanguageCode.EN
                 ? KeyLanguage.title.tr
                 : 'Translator().currentLanguageCode == LanguageCode.EN'),
@@ -59,16 +58,14 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
 
   void _changeTheme() {
     ThemeManager().setThemeById(ThemeManager().themeId == 1 ? 0 : 1);
-    // ThemeManager().setThemeById(ThemeManager().themeId == 1 ? 0 : 1);
+
   }
 
   _changeLanguage() async {
     Translator().currentLanguageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
-    // setState(() {});
-    // await Future.delayed(Duration(seconds: 1));
-    // Application.update();
-    // setState(() {});
+
+    Application.update();
   }
 }

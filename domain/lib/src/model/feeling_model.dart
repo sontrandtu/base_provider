@@ -42,19 +42,19 @@ class FeelingModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['contact_id'] = this.contactId;
-    data['course_id'] = this.courseId;
-    data['course_lesson_id'] = this.courseLessonId;
-    data['contact_name'] = this.contactName;
-    data['contact_avatar'] = this.contactAvatar;
-    data['content'] = this.content;
-    data['images'] = this.images;
-    data['video'] = this.video;
-    data['time_video'] = this.timeVideo;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['contact_id'] = contactId;
+    data['course_id'] = courseId;
+    data['course_lesson_id'] = courseLessonId;
+    data['contact_name'] = contactName;
+    data['contact_avatar'] = contactAvatar;
+    data['content'] = content;
+    data['images'] = images;
+    data['video'] = video;
+    data['time_video'] = timeVideo;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
     return data;
   }
 }

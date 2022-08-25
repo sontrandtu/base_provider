@@ -33,16 +33,19 @@ class Translator {
     setCurrentLocale(languageCode);
   }
 
-  Future<void> load(String languageCode) async {
+  void load(String languageCode) {
     languages = en;
     if (languageCode == LanguageCode.VI) languages = vi;
+
+    currentLanguageCode = languageCode;
 
     _timer?.cancel();
     _timer = Timer(Duration(milliseconds: 500), () => LocalStorage.put(StorageKey.LANGUAGE, languageCode));
   }
 
-  void setCurrentLocale(String languageCode) async {
+  void setCurrentLocale(String languageCode) {
     load(languageCode);
+
     currentLocale =
         supports.singleWhereOrNull((element) => element.languageCode == languageCode) ?? defaultLocale;
   }

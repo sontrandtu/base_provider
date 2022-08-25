@@ -1,3 +1,4 @@
+import 'package:achitecture_weup/screen/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:translator/translator.dart';
@@ -35,25 +36,25 @@ class _ApplicationState extends State<Application> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      MaterialApp(
-          navigatorKey: Application.navigator,
-          scrollBehavior: _NoScrollBehavior(),
-          debugShowCheckedModeBanner: false,
-          title: AppConstant.APP_NAME,
-          locale: Translator().currentLocale,
-          supportedLocales: Translator().supports,
-          theme: ThemeManager().value,
-          localizationsDelegates: [
-            ApplicationLocalizationsDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          onGenerateRoute: generateRoute,
-          initialRoute: RoutePath.INITIAL,
-        );
+  Widget build(BuildContext context) =>  MaterialApp(
+    navigatorKey: Application.navigator,
+    scrollBehavior: _NoScrollBehavior(),
+    debugShowCheckedModeBanner: false,
+    title: AppConstant.APP_NAME,
+    locale: Translator().currentLocale,
+    supportedLocales: Translator().supports,
+    theme: ThemeManager().value,
+    localizationsDelegates: [
+      ApplicationLocalizationsDelegate(),
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    onGenerateRoute: generateRoute,
+    initialRoute: RoutePath.INITIAL,
+  );
 }
+
 
 class _NoScrollBehavior extends ScrollBehavior {
   @override

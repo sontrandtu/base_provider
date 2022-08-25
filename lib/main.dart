@@ -13,7 +13,7 @@ Future<void> main() async {
   Translator().initialize();
   await CacheStorage.ensureInitialized();
 
-  runApp( const Application());
+  runApp( Application());
 }
 
 class MyHttpOverrides extends HttpOverrides {

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:domain/domain.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 abstract class HttpBuilder {

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../common/constants.dart';
-import '../common/dio_retry_connect.dart';
 import '../managers/request_cache_manager.dart';
 import '../models/cache_model.dart';
 import 'interceptor_base.dart';

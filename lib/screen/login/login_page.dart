@@ -115,8 +115,6 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     Translator().currentLanguageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
-    // setState(() {});
-    // await Future.delayed(Duration(seconds: 1));
     Application.update();
   }
 }

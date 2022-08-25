@@ -14,7 +14,7 @@ Map<String, WidgetBuilder> routes = {
 Route<dynamic> generateRoute(RouteSettings settings) {
   String? routeName = settings.name?.split('?').first;
 
-  showLogState('Page: $routeName | RoutePath: ${settings.name} ');
+  showLogState('Page:${(routes[routeName].toString()).split('=>').last} | RoutePath: ${settings.name} ');
 
   return CupertinoPageRoute(
       builder: routes[routeName] ?? (_) => UndefinedLayout(name: settings.name), settings: settings);

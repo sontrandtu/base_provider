@@ -1,5 +1,5 @@
 import 'package:achitecture_weup/application.dart';
-import 'package:achitecture_weup/common/resource/app_resource.dart';
+import 'package:achitecture_weup/common/resource/color/base_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

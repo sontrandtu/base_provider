@@ -1,5 +1,7 @@
 import 'package:achitecture_weup/application.dart';
+import 'package:achitecture_weup/common/resource/color/base_color.dart';
 import 'package:achitecture_weup/common/theme/extenal_theme.dart';
+import 'package:achitecture_weup/common/theme/theme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:storage/storage.dart';
@@ -13,9 +15,11 @@ class ThemeManager {
 
   factory ThemeManager() => _instance;
 
-  ThemeData? value;
+  ThemeModel? _themeModel;
 
-  int? themeId;
+  ThemeData? get value => _themeModel?.data;
+
+  int get themeId => _themeModel?.id ?? -1;
 
   bool isDarkMode() {
     var brightness = SchedulerBinding.instance!.window.platformBrightness;
@@ -33,9 +37,9 @@ class ThemeManager {
   }
 
   void setThemeById(int id) async {
-    themeId = id;
+    _themeModel = mThemes.singleWhere((element) => element.id == id);
 
-    value = mThemes.singleWhere((element) => element.id == id).data;
+    if (_themeModel?.color != null) ColorResource = _themeModel!.color!;
 
     Application.update();
 

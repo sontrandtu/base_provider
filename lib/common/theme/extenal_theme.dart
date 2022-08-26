@@ -10,7 +10,7 @@ List<ThemeModel> mThemes = [
     id: 0,
     color: BaseColor(),
     data: ThemeData(
-      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
       fontFamily: 'Babylon',
       textTheme: TextTheme(
         headline6: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
@@ -28,7 +28,7 @@ List<ThemeModel> mThemes = [
     id: 1,
     color: DarkColor(),
     data: ThemeData(
-      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
+      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
       fontFamily: 'Babylon',
       textTheme: const TextTheme(
         headline6: TextStyle(fontWeight: FontWeight.w600,fontSize: 14),

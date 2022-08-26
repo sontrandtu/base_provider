@@ -58,7 +58,6 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
 
   void _changeTheme() {
     ThemeManager().setThemeById(ThemeManager().themeId == 1 ? 0 : 1);
-
   }
 
   _changeLanguage() async {

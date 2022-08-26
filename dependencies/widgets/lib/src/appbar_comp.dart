@@ -48,8 +48,8 @@ class AppBarComp extends PreferredSize {
 
   @override
   Widget build(BuildContext context) => AppBar(
-        systemOverlayStyle:
-            systemOverlayStyle ?? (isLight ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark),
+        // systemOverlayStyle:
+        //     systemOverlayStyle ?? (isLight ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark),
         toolbarHeight: height,
         title: title is Widget
             ? title

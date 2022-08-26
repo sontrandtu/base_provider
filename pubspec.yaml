@@ -29,6 +29,12 @@ dependencies:
     path: ./dependencies/state
   widgets:
     path: ./dependencies/widgets
+  image_picker_utils:
+    path: ./dependencies/image_picker_utils
+  firebase_manager:
+    path: ./dependencies/firebase_manager
+  permission_config:
+    path: ./dependencies/permission_config
 
   #c
   cupertino_icons: ^1.0.2
@@ -40,7 +46,6 @@ dependencies:
 
 
   fluttertoast: ^8.0.9
-
 
   #p
   provider: ^6.0.0

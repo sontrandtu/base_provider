@@ -1,21 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-class ImgCrop {
-  ImgCrop._internal();
-
-  factory ImgCrop.instance() {
-    return _instance;
-  }
-
-  static final ImgCrop _instance = ImgCrop._internal();
+class CropManager{
 
   Future<String>? cropFile(String imgPath) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: imgPath,
+
       aspectRatioPresets: [
         CropAspectRatioPreset.square,
         CropAspectRatioPreset.ratio3x2,
@@ -38,11 +29,4 @@ class ImgCrop {
     );
     return croppedFile!.path;
   }
-
-}
-
-class CropUISetting {
-  final String title;
-
-  CropUISetting(this.title);
 }

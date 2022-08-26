@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:achitecture_weup/application.dart';
 import 'package:achitecture_weup/common/page_layout.dart';
 import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_utils/image_picker_utils.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 import 'package:translator/translator.dart';
@@ -21,36 +27,41 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   @override
   SplashViewModel get init => SplashViewModel();
+  File? image;
+  File? finalImage;
 
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-    //   Navigator.pushNamed(context, RoutePath.LOGIN);
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider.value(
       value: viewModel,
       child: PageLayout<SplashViewModel>(
         onReconnect: viewModel.fetchData,
         appBar: AppBarComp(),
-        child: Column(
-          children: [
-            // OutlinedButtonComp(title: 'Call Data', onPressed: viewModel.fetchData),
-            OutlinedButtonComp(title: 'Change theme', onPressed: _changeTheme),
-            OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
-            OutlinedButtonComp(
-                title: 'nexxt page', onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN,arguments: '1 texxt arrgs')),
-            TextNomalTranslate(),
-            Text(Translator().currentLanguageCode == LanguageCode.EN
-                ? KeyLanguage.title.tr
-                : 'Translator().currentLanguageCode == LanguageCode.EN'),
-            Text(Translator().languages.toString()),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // OutlinedButtonComp(title: 'Call Data', onPressed: viewModel.fetchData),
+              OutlinedButtonComp(title: 'Change theme', onPressed: _changeTheme),
+              OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
+              OutlinedButtonComp(title: 'Pick image', onPressed: _pickImage),
+              OutlinedButtonComp(
+                  title: 'nexxt page',
+                  onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs')),
+              TextNomalTranslate(),
+              Text(Translator().currentLanguageCode == LanguageCode.EN
+                  ? KeyLanguage.title.tr
+                  : 'Translator().currentLanguageCode == LanguageCode.EN'),
+              Text(Translator().languages.toString()),
+
+              if (image != null) Image.file(image!),
+              if (finalImage != null) Image.file(finalImage!),
+            ],
+          ),
         ),
       ),
     );
@@ -66,5 +77,12 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
         : Translator().setCurrentLocale(LanguageCode.EN);
 
     Application.update();
+  }
+
+  _pickImage() async {
+    File? file = await FileManager().hasCompress().buildSingle();
+    print('File Properties: ');
+    print(file?.path);
+    print(file?.lengthSync());
   }
 }

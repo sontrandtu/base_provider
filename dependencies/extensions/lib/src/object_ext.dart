@@ -18,9 +18,23 @@ extension ObjectExtension on dynamic {
     return false;
   }
 
-  bool get isNotNull => _isNotNull();
+  bool systemIsEmpty([bool hasZero = false]) {
+    if (this == null) return true;
+    if ((this is Map || this is List) && this.length == 0) return true;
+    if ((this is Map || this is Iterable) && this.isEmpty) return true;
+    if (this is bool) return !this;
+    if ((this is String || this is num) && (this == '0' || this == 0)) return hasZero;
 
-  bool get isNulled => _isNull();
+    return toString().isEmpty;
+  }
 
-  bool get isNotNullBlank => _isNotNullBlank();
+
+
+
+  bool get isEmpty => systemIsEmpty();
+  // bool get isNotNull => _isNotNull();
+  //
+  // bool get isNulled => _isNull();
+  //
+  // bool get isNotNullBlank => _isNotNullBlank();
 }

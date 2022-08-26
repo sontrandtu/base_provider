@@ -12,3 +12,5 @@ export 'src/integer_extension.dart';
 export 'src/object_ext.dart';
 export 'src/string_extension.dart';
 export 'src/text_styles_extension.dart';
+export 'src/count_down.dart';
+

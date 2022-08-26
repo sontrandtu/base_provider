@@ -13,11 +13,6 @@ class ViewUtils {
   static void hideKeyboard({BuildContext? context}) =>
       FocusScope.of(context!).unfocus();
 
-  static Widget divider() => Container(color: ColorResource.divider, height: 1);
-
-  static Widget verticalDivider({double? h}) =>
-      Container(color: ColorResource.divider, width: 1, height: h ?? 15);
-
 
   static double get width =>
       MediaQuery.of(Application.navigator.currentContext!).size.width;

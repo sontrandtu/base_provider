@@ -1,5 +1,4 @@
 import 'package:achitecture_weup/common/helper/view_utils.dart';
-import 'package:achitecture_weup/common/resource/app_resource.dart';
 import 'package:achitecture_weup/common/resource/color/base_color.dart';
 import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/login/components/language_layout.dart';

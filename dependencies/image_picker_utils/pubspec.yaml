@@ -13,10 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  translator:
-    path: ../translator
-  permission_config:
-    path: ../permission_config
 
   image_cropper: ^2.0.2
   image_picker: ^0.8.5

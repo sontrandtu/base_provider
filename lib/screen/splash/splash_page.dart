@@ -78,34 +78,12 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   }
 
   _pickImage() async {
-    VideoManager.builder().hasCompress().build();
-    // File? file =
-    //     await VideoManager.builder().hasCompress().build();
+    // VideoManager.builder().hasCompress().build();
+    File? file =
+        await ImageManager.builder().hasCompress().buildSingle();
     // print('File Properties: ');
     // print(file?.lengthSync());
     // print(file?.lengthSync());
   }
 
-  Future<File?> testCompressAndGetFile(File file, String targetLink) async {
-    print(targetLink);
-    finalImage = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path,
-      targetLink,
-      quality: 5,
-      rotate: 0,
-    );
-    image = file;
-
-    var decodedImage = await decodeImageFromList(file.readAsBytesSync());
-    print('original size: ');
-    print(file.lengthSync() / 1000);
-    print(decodedImage.width);
-    print(decodedImage.height);
-
-    print('Final size: ');
-    print(finalImage!.lengthSync() / 1000);
-    setState(() {});
-
-    return finalImage;
-  }
 }

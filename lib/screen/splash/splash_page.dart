@@ -78,10 +78,11 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   }
 
   _pickImage() async {
-    File? file =
-        await ImageManager.builder().hasCrop(). hasCompress().buildSingle();
-    print('File Properties: ');
-    print(file?.lengthSync());
+    VideoManager.builder().hasCompress().build();
+    // File? file =
+    //     await VideoManager.builder().hasCompress().build();
+    // print('File Properties: ');
+    // print(file?.lengthSync());
     // print(file?.lengthSync());
   }
 

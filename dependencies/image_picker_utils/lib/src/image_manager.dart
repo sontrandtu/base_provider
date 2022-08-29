@@ -96,6 +96,7 @@ class ImageManager {
     }
 
     _files.add(originalFile);
+
     _calSize(_files, logName: 'Total Original Size');
 
     if (_compress == null) return _files.first;
@@ -103,7 +104,9 @@ class ImageManager {
     _compressManager?.addFiles(_files);
 
     List<File?>? files = await _compress?.call();
+
     _calSize(files, logName: 'Total Compress Size');
+
     return files?.first;
   }
 

@@ -7,9 +7,7 @@ import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_utils/image_picker_utils.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
 import 'package:translator/translator.dart';
@@ -80,9 +78,33 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   }
 
   _pickImage() async {
-    File? file = await FileManager().hasCompress().buildSingle();
+    File? file =
+        await ImageManager.builder().hasCrop(). hasCompress().buildSingle();
     print('File Properties: ');
-    print(file?.path);
     print(file?.lengthSync());
+    // print(file?.lengthSync());
+  }
+
+  Future<File?> testCompressAndGetFile(File file, String targetLink) async {
+    print(targetLink);
+    finalImage = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      targetLink,
+      quality: 5,
+      rotate: 0,
+    );
+    image = file;
+
+    var decodedImage = await decodeImageFromList(file.readAsBytesSync());
+    print('original size: ');
+    print(file.lengthSync() / 1000);
+    print(decodedImage.width);
+    print(decodedImage.height);
+
+    print('Final size: ');
+    print(finalImage!.lengthSync() / 1000);
+    setState(() {});
+
+    return finalImage;
   }
 }

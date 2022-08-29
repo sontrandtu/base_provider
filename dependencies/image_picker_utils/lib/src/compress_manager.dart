@@ -6,20 +6,19 @@ import 'package:path_provider/path_provider.dart';
 class CompressManager {
   int _width = 720;
   int _height = 1280;
-  int _quality = 1280;
+  int _quality = 70;
   late List<File> _files;
   late String? _targetLink;
   late Directory _dir;
   late Directory _appDir;
 
-  CompressManager() {
+  CompressManager.builder() {
     _init();
   }
 
   void _init() async {
     _files = [];
     _dir = await getTemporaryDirectory();
-    _appDir = await getApplicationDocumentsDirectory();
   }
 
   CompressManager setMinWidth(int width) {
@@ -47,32 +46,15 @@ class CompressManager {
     return this;
   }
 
-  Future<List<File?>> compressAndGetFile() async {
+  Future<List<File?>> build() async {
     List<File?> response = [];
 
-    // await Future.forEach(_files, (File element) async {
-    //
-    //   File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path, _dir.path + '/tmp.jpg',
-    //       minWidth: _width, minHeight: _height, quality: _quality, rotate: 0);
-    //
-    //   print('File compress property: ');
-    //
-    //   print(element.absolute.path);
-    //   print(file?.path);
-    //   print(file?.lengthSync());
-    //   response.add(file);
-    // });
+    await Future.forEach(_files, (File element) async {
+      File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path, _dir.path + '/tmp_${element.path.split('/').last}',
+          minWidth: _width, minHeight: _height, quality: _quality, rotate: 0);
+      response.add(file);
+    });
 
-    print(_dir.path + '/tmp.jpg');
-    File? file = await FlutterImageCompress.compressAndGetFile(_files[0].absolute.path, _dir.path + '/tmp.jpg',
-        minWidth: _width, minHeight: _height, quality: _quality, rotate: 0);
-
-    print('File compress property: ');
-
-    print(_files[0].absolute.path);
-    print(file?.path);
-    print(file?.lengthSync());
-    response.add(file);
     return response;
   }
 }

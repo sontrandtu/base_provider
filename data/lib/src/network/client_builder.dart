@@ -1,15 +1,12 @@
-import 'dart:io';
-
-import 'package:data/src/common/constants.dart';
 import 'package:data/src/common/header_config.dart';
-import 'package:dio/dio.dart';
+import 'package:data/src/network/dio_builder.dart';
+import 'package:domain/domain.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
-import '../builders/http_builder.dart';
-
 class ClientBuilder extends HttpBuilder {
-  late Dio _dio;
+  Dio? _dio;
+  DioBuilder? _dioBuilder;
   PrettyDioLogger? _logger;
   BasicInterceptor? _basicInterceptor;
   final bool _isDebugMode = true;
@@ -35,6 +32,8 @@ class ClientBuilder extends HttpBuilder {
         receiveTimeout: _receiveTimeout,
         sendTimeout: _sendTimeout))
       ..interceptors.addAll([_logger!, _basicInterceptor!]);
+
+    _dioBuilder = DioBuilder(_dio!);
   }
 
   /*
@@ -42,7 +41,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addBaseUrl(String? baseUrl) {
-    if (baseUrl != null) _dio.options.baseUrl = baseUrl;
+    if (baseUrl != null) _dio?.options.baseUrl = baseUrl;
     return this;
   }
 
@@ -51,7 +50,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addConnectTimeout(int timeout) {
-    _dio.options.connectTimeout = timeout;
+    _dio?.options.connectTimeout = timeout;
     return this;
   }
 
@@ -60,7 +59,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addReceiveTimeout(int timeout) {
-    _dio.options.receiveTimeout = timeout;
+    _dio?.options.receiveTimeout = timeout;
     return this;
   }
 
@@ -69,14 +68,14 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addSendTimeout(int timeout) {
-    _dio.options.sendTimeout = timeout;
+    _dio?.options.sendTimeout = timeout;
     return this;
   }
 
   @Deprecated('Do not use this function. Default header is HeaderConfig().getHeader()')
   @override
   HttpBuilder addDefaultHeaders(Map<String, dynamic> header) {
-    _dio.options.headers = header;
+    _dio?.options.headers = header;
     return this;
   }
 
@@ -85,7 +84,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addHeaders(Map<String, dynamic> header) {
-    _dio.options.headers.addAll(header);
+    _dio?.options.headers.addAll(header);
     return this;
   }
 
@@ -94,7 +93,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder replaceHeaders(Map<String, dynamic> header) {
-    _dio.options.headers = header;
+    _dio?.options.headers = header;
     return this;
   }
 
@@ -103,7 +102,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addInterceptor(Interceptor interceptor) {
-    _dio.interceptors.add(interceptor);
+    _dio?.interceptors.add(interceptor);
     return this;
   }
 
@@ -112,7 +111,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addCacheDisk({int? ageSeconds, bool? forceReplace}) {
-    _dio.interceptors.add(InterceptorDisk(maxAgeSecond: ageSeconds, forceReplace: forceReplace));
+    _dio?.interceptors.add(InterceptorDisk(maxAgeSecond: ageSeconds, forceReplace: forceReplace));
     return this;
   }
 
@@ -121,7 +120,7 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder addCacheMemory({int? ageSeconds, bool? forceReplace}) {
-    _dio.interceptors.add(InterceptorMemory(maxAgeSecond: ageSeconds, forceReplace: forceReplace));
+    _dio?.interceptors.add(InterceptorMemory(maxAgeSecond: ageSeconds, forceReplace: forceReplace));
     return this;
   }
 
@@ -130,22 +129,65 @@ class ClientBuilder extends HttpBuilder {
   * */
   @override
   HttpBuilder withConverter<T>({T Function(dynamic json)? fromJson}) {
-    _dio.interceptors.add(InterceptorConverter<T>(fromJson: fromJson,dio: _dio));
+    _dio?.interceptors.add(InterceptorConverter<T>(fromJson: fromJson, dio: _dio));
 
     return this;
   }
 
   @override
   HttpBuilder withConverterRestful<T>({T Function(dynamic json)? fromJson}) {
-    _dio.interceptors.add(InterceptorConverterRestful<T>(fromJson: fromJson,dio: _dio));
+    _dio?.interceptors.add(InterceptorConverterRestful<T>(fromJson: fromJson, dio: _dio));
     return this;
   }
+
   /*
   *  Xây dựng lên đối tượng dio
   * */
   @override
   Dio build() {
-    return _dio;
+    return _dio ?? Dio();
+  }
+
+  @override
+  HttpBuilder addBody(bodies) {
+    _dioBuilder?.addBody(bodies);
+    return this;
+  }
+
+  @override
+  HttpBuilder addParameters(Map<String, dynamic>? params) {
+    _dioBuilder?.addParameters(params);
+    return this;
+  }
+
+  @override
+  HttpBuilder addPaths(Map<String, dynamic>? paths) {
+    _dioBuilder?.addPaths(paths);
+    return this;
+  }
+
+  @override
+  HttpBuilder removeCacheByKeys(List<String>? keys) {
+    _dioBuilder?.removeCacheByKeys(keys);
+    return this;
+  }
+
+  @override
+  HttpBuilder setDataType(DataType dataType) {
+    _dioBuilder?.setDataType(dataType);
+    return this;
+  }
+
+  @override
+  HttpBuilder setMethod(Method? method) {
+    _dioBuilder?.setMethod(method);
+    return this;
+  }
+
+  @override
+  HttpBuilder setPath(String path) {
+    _dioBuilder?.setPath(path);
+    return this;
   }
 
   /*
@@ -162,71 +204,49 @@ class ClientBuilder extends HttpBuilder {
   *  Method mặc định là GET
   * */
   @override
-  Future<Response<T>> request<T>(String path,
-      {String? method,
-      String? dataType = DataType.FORM_DATA,
-      dynamic bodies,
-      Map<String, dynamic>? paths,
-      Map<String, dynamic>? params}) async {
-    paths?.forEach((key, value) => path = path.replaceAll('{$key}', value.toString()));
-
-    bodies ??= <String, dynamic>{};
-
-    bodies?.removeWhere((key, value) => value == null);
-
-    params?.removeWhere((key, value) => value == null);
-
-    dynamic _data;
-
-    switch (dataType) {
-      case DataType.FORM_DATA:
-        bodies.forEach((key, value) {
-          if (value is List<File>) value = value.map((e) => MultipartFile.fromFileSync(e.path)).toList();
-          if (value is File) value = MultipartFile.fromFileSync(value.path);
-        });
-        _data = FormData.fromMap(bodies);
-        break;
-      case DataType.JSON:
-        _data = bodies;
-        break;
-      default:
-        _data = bodies;
-    }
-
-    return await _dio.request<T>(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
-  }  @override
-  Future<Response<T>> requestRestful<T>(String path,
-      {String? method,
-      String? dataType = DataType.FORM_DATA,
-      dynamic bodies,
-      Map<String, dynamic>? paths,
-      Map<String, dynamic>? params}) async {
-    paths?.forEach((key, value) => path = path.replaceAll('{$key}', value.toString()));
-
-    bodies ??= <String, dynamic>{};
-
-    bodies?.removeWhere((key, value) => value == null);
-
-    params?.removeWhere((key, value) => value == null);
-
-    dynamic _data;
-
-    switch (dataType) {
-      case DataType.FORM_DATA:
-        bodies.forEach((key, value) {
-          if (value is List<File>) value = value.map((e) => MultipartFile.fromFileSync(e.path)).toList();
-          if (value is File) value = MultipartFile.fromFileSync(value.path);
-        });
-        _data = FormData.fromMap(bodies);
-        break;
-      case DataType.JSON:
-        _data = bodies;
-        break;
-      default:
-        _data = bodies;
-    }
-
-    return await _dio.request<T>(path, queryParameters: params, data: _data, options: Options(method: method,extra: {'data':'extra'}));
+  Future<Response<T>> request<T>() async {
+    Response<T> response = await _dioBuilder!.build<T>();
+    _onDestroy();
+    return response;
   }
 
+  void _onDestroy() {
+    _dioBuilder = null;
+    _dio = null;
+  }
+
+  @override
+  Future<ApiModel<T?>> delete<T>() async{
+    ApiModel<T?> response = await _dioBuilder!.delete<T>();
+    _onDestroy();
+    return response;
+  }
+
+  @override
+  Future<ApiModel<T?>> get<T>()async {
+    ApiModel<T?> response = await _dioBuilder!.get<T>();
+    _onDestroy();
+    return response;
+  }
+
+  @override
+  Future<ApiModel<T?>> patch<T>() async{
+    ApiModel<T?> response = await _dioBuilder!.patch<T>();
+    _onDestroy();
+    return response;
+  }
+
+  @override
+  Future<ApiModel<T?>> post<T>() async{
+    ApiModel<T?> response = await _dioBuilder!.post<T>();
+    _onDestroy();
+    return response;
+  }
+
+  @override
+  Future<ApiModel<T?>> put<T>() async{
+    ApiModel<T?> response = await _dioBuilder!.put<T>();
+    _onDestroy();
+    return response;
+  }
 }

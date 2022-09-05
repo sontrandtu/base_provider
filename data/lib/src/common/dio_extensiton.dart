@@ -6,10 +6,10 @@ extension DioExtension<T> on Future<Response<ApiModel<T?>>> {
     Response<ApiModel<T?>> httpResponse = await this;
 
     return httpResponse.data as ApiModel<T?>;
-    try {} catch (error) {
+    /*try {} catch (error) {
       print(error);
 
       return ApiModel(code: -1, message: 'Đã có lỗi');
-    }
+    }*/
   }
 }

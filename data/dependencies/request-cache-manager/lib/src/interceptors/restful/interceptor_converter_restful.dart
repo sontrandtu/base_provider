@@ -44,24 +44,24 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
   }
 
   @override
-  void onResponse(Response e, ResponseInterceptorHandler handler) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
 
-    if (e.statusCode == HttpStatus.notModified) {
-      String key = e.requestOptions.path;
+    if (response.statusCode == HttpStatus.notModified) {
+      String key = response.requestOptions.path;
       CacheModel? cache = RequestCacheManager().get(key);
       if (cache != null) {
         ApiModel api = ApiModel<T>(
             code: CodeConstant.OK, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data));
-        return handler.resolve(Response(requestOptions: e.requestOptions, data: api));
+        return handler.resolve(Response(requestOptions: response.requestOptions, data: api));
       }
     }
 
-    if (e.statusCode != HttpStatus.ok) return handler.next(e);
+    if (response.statusCode != HttpStatus.ok) return handler.next(response);
 
-    ApiModel api = ApiModel<T>(code: CodeConstant.OK, data: fromJson?.call(e.data) ?? e.data);
+    ApiModel api = ApiModel<T>(code: CodeConstant.OK, data: fromJson?.call(response.data) ?? response.data);
 
-    return handler.next(Response<ApiModel?>(data: api, requestOptions: e.requestOptions));
+    return handler.next(Response<ApiModel?>(data: api, requestOptions: response.requestOptions));
   }
 
   @override

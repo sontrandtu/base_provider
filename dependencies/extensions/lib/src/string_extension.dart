@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 String chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random rnd = Random();
@@ -112,11 +112,15 @@ extension StringExtension on String {
     return regex.hasMatch(this);
   }
 
-  Future<void> makePhoneCall() async {
-    if (await canLaunch('tel:$this')) {
-      await launch('tel:$this');
+  Future<void> open() async {
+    String s = '';
+    if (isValidUrl) s = this;
+    if (isValidPhone) s = 'tel:$this';
+
+    if (await canLaunchUrlString(s)) {
+      await launchUrlString(s);
     } else {
-      throw 'Could not launch ${'tel:$this'}';
+      developer.log('Could not launch $s');
     }
   }
 

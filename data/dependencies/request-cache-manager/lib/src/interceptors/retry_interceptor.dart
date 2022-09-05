@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 class RetryInterceptor extends BasicInterceptor {

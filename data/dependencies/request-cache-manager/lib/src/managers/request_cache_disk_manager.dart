@@ -21,8 +21,8 @@ class RequestCacheDiskManager implements IRequestCache {
   }
 
   @override
-  void remove(String key) {
-    CacheStorage.delete(key);
+  Future<void> remove(String key) async{
+    await CacheStorage.delete(key);
   }
 
   @override

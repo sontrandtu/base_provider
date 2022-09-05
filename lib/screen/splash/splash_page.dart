@@ -6,7 +6,6 @@ import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:achitecture_weup/screen/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker_utils/image_picker_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
@@ -79,7 +78,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
 
   _pickImage() async {
     // VideoManager.builder().hasCompress().build();
-    File? file =
+
         await ImageManager.builder().hasCompress().buildSingle();
     // print('File Properties: ');
     // print(file?.lengthSync());

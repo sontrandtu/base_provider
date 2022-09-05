@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:extensions/extensions.dart';
 
 class HtmlComp extends StatelessWidget {
   final String content;
@@ -16,11 +16,7 @@ class HtmlComp extends StatelessWidget {
       data: data,
       tagsList: Html.tags..addAll(["iframe"]),
       onLinkTap: (url, _, __, ___) async {
-        if (await canLaunch(url!)) {
-          await launch(url);
-        } else {
-          throw "Could not launch $url";
-        }
+        url?.open();
       },
       customRender: {
         "table": (RenderContext ctx, Widget child) {

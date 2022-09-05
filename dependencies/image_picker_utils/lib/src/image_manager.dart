@@ -19,7 +19,7 @@ class ImageManager {
   CropManager? _cropManager;
 
   PickSource _pickSource = PickSource.gallery;
-  PickType _pickType = PickType.single;
+  // PickType _pickType = PickType.single;
   PickPurpose _pickPurpose = PickPurpose.normal;
 
   Future<List<File?>> Function()? _compress;
@@ -40,7 +40,7 @@ class ImageManager {
   }
 
   ImageManager setPickType(PickType type) {
-    _pickType = type;
+    // _pickType = type;
     return this;
   }
 

@@ -26,9 +26,9 @@ class RequestCacheManager implements IRequestCache {
   }
 
   @override
-  void remove(String key) {
+  Future<void> remove(String key) async {
     caches.removeWhere((element) => key.contains(element.key));
-    RequestCacheDiskManager().remove(key);
+    await RequestCacheDiskManager().remove(key);
   }
 
   @override

@@ -6,6 +6,6 @@ class TextNomalTranslate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(KeyLanguage.title.tr),);
+    return Text(KeyLanguage.title.tr);
   }
 }

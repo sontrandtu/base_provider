@@ -46,8 +46,7 @@ class CropManager {
         AndroidUiSettings(
             toolbarTitle: 'Cropper',
             toolbarColor: Colors.red,
-            toolbarWidgetColor: Colors.white,
-            lockAspectRatio: true),
+            toolbarWidgetColor: Colors.white),
         IOSUiSettings(
           title: 'Cropper',
         ),

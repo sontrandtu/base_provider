@@ -8,9 +8,7 @@ class CompressManager {
   int _height = 1280;
   int _quality = 70;
   late List<File> _files;
-  late String? _targetLink;
-  late Directory _dir;
-  late Directory _appDir;
+  Directory? _dir;
 
   CompressManager.builder() {
     _init();
@@ -49,8 +47,11 @@ class CompressManager {
   Future<List<File?>> build() async {
     List<File?> response = [];
 
+    _dir ??= await getTemporaryDirectory();
+
     await Future.forEach(_files, (File element) async {
-      File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path, _dir.path + '/tmp_${element.path.split('/').last}',
+      File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path,
+          _dir!.path + '/tmp_${DateTime.now().millisecondsSinceEpoch}_${element.path.split('/').last}',
           minWidth: _width, minHeight: _height, quality: _quality, rotate: 0);
       response.add(file);
     });

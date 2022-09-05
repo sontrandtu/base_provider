@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import 'package:data/src/common/constants.dart';
 import 'package:data/src/common/dio_extensiton.dart';
-import 'package:data/src/network/api_paths.dart';
+import 'package:data/src/config/api_paths.dart';
 import 'package:data/src/network/client_builder.dart';
-import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
+import 'package:request_cache_manager/request_cache_manager.dart';
 
 class WidgetRepositoryImpl implements WidgetRepository {
   WidgetRepositoryImpl._internal();
@@ -26,8 +25,11 @@ class WidgetRepositoryImpl implements WidgetRepository {
     return await ClientBuilder()
         .addCacheMemory()
         .withConverter(fromJson: (json) => ApiModel.fromJson(json, (json) => UserDetailModel.fromJson(json)))
-        .request<ApiModel<UserDetailModel>>('/v1/login',
-            method: Method.POST, dataType: DataType.FORM_DATA, params: _queryParameters, bodies: _data)
+        .setPath('/v1/login')
+        .setDataType(DataType.FORM_DATA)
+        .addParameters(_queryParameters)
+        .addBody(_data)
+        .request<ApiModel<UserDetailModel>>()
         .wrap();
   }
 
@@ -43,10 +45,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
     return await ClientBuilder()
         .addBaseUrl('https://app.weuptech.vn')
         .addCacheDisk()
-        .withConverter<ApiModel>(
-            fromJson: (json) => ApiModel.fromJson(
-                  json,
-                ))
+        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
         .build()
         .post('/api/media', queryParameters: _queryParameters, data: _data);
   }
@@ -60,7 +59,11 @@ class WidgetRepositoryImpl implements WidgetRepository {
     };
     return await ClientBuilder()
         .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
-        .request<ApiModel>(ApiPaths.ADD_FEELING, method: Method.POST, paths: paths, bodies: bodies)
+        .setPath(ApiPaths.ADD_FEELING)
+        .setMethod(Method.POST)
+        .addPaths(paths)
+        .addBody(bodies)
+        .request<ApiModel>()
         .wrap();
   }
 
@@ -71,19 +74,28 @@ class WidgetRepositoryImpl implements WidgetRepository {
         .addCacheMemory()
         .withConverter<ApiModel<List<FeelingModel>>>(
             fromJson: (json) => ApiModel.fromJson(
-                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)) .toList()))
-        .request<ApiModel<List<FeelingModel>>>(ApiPaths.FEELINGS, paths: paths)
+                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))
+        .setPath(ApiPaths.FEELINGS)
+        .addPaths(paths)
+        .request<ApiModel<List<FeelingModel>>>()
         .wrap();
   }
 
   @override
   Future<ApiModel<List<PostModel>?>> getAllPost() async {
-    return  await ClientBuilder()
+    return await ClientBuilder()
         .addBaseUrl('https://jsonplaceholder.typicode.com')
         .addCacheMemory()
         .withConverterRestful<List<PostModel>>(
             fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
-        .request<ApiModel<List<PostModel>>>('/posts')
-        .wrap();
+        .setPath('/posts')
+        .get<List<PostModel>>();
   }
+}
+
+main()async{
+  await CacheStorage.ensureInitialized();
+  ApiModel<List<PostModel>?> response = await WidgetRepositoryImpl().getAllPost();
+  print(response.data?[0].title);
+
 }

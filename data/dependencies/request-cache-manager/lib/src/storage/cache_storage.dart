@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 
 class CacheStorage {
   static const String boxName = 'local.cache';
@@ -11,8 +11,8 @@ class CacheStorage {
   static CollectionBox? collectionBox;
 
   static Future<void> ensureInitialized() async {
-    // Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
-    Directory? dir = await getApplicationDocumentsDirectory();
+    Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
+    // Directory? dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     await Hive.openBox(boxName);
   }
@@ -50,9 +50,7 @@ class CacheStorage {
   }
 
   static Future<void> delete(String key) async {
-    box.keys.forEach((element) {
-      if (key.contains(element)) box.delete(element);
-    });
+    await box.delete(key);
   }
 
   static Future<void> show() async {

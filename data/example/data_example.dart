@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
-import 'package:request_cache_manager/request_cache_manager.dart';
 
 main() async {
   await CacheStorage.ensureInitialized();
@@ -14,7 +13,7 @@ main() async {
     print('Nhập 4 để xem tài nguyên: ');
     print('Lựa chọn: ');
 
-    i = stdin.readLineSync();
+   i = stdin.readLineSync();
     if (int.parse(i) == 1) await getAllFelling();
     if (int.parse(i) == 2) await addFelling();
     if (int.parse(i) == 3) await showLocalData();

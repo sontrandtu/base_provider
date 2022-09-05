@@ -1,5 +1,3 @@
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
 import 'package:state/state.dart';
 
 class SplashViewModel extends BaseViewModel {

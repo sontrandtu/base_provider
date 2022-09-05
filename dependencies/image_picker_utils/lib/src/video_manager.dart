@@ -3,8 +3,6 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_utils/image_picker_utils.dart';
-import 'package:image_picker_utils/src/compress_manager.dart';
-import 'package:image_picker_utils/src/crop_manager.dart';
 import 'package:image_picker_utils/src/video_compress_manager.dart';
 
 class VideoManager {
@@ -15,8 +13,8 @@ class VideoManager {
 
 
   PickSource _pickSource = PickSource.gallery;
-  PickType _pickType = PickType.single;
-  PickPurpose _pickPurpose = PickPurpose.normal;
+  // PickType _pickType = PickType.single;
+  // PickPurpose _pickPurpose = PickPurpose.normal;
 
   Future<VideoEntity?> Function()? _compress;
 
@@ -31,12 +29,12 @@ class VideoManager {
   }
 
   VideoManager setPurpose(PickPurpose purpose) {
-    _pickPurpose = purpose;
+    // _pickPurpose = purpose;
     return this;
   }
 
   VideoManager setPickType(PickType type) {
-    _pickType = type;
+    // _pickType = type;
     return this;
   }
 

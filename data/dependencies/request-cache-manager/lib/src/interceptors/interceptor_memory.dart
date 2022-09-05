@@ -27,12 +27,12 @@ class InterceptorMemory extends InterceptorBase {
   }
 
   @override
-  void onResponse(Response e, ResponseInterceptorHandler handler) {
-    print('----------- Response Memory - ${e.statusCode} ----------------');
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    print('----------- Response Memory - ${response.statusCode} ----------------');
 
-    if (e.statusCode != HttpStatus.ok) return handler.next(e);
-    String key = e.requestOptions.path;
-    List<String>? cacheControl = e.headers['cache-control'];
+    if (response.statusCode != HttpStatus.ok) return handler.next(response);
+    String key = response.requestOptions.path;
+    List<String>? cacheControl = response.headers['cache-control'];
 
     String? maxAge =
         cacheControl?.singleWhereOrNull((element) => element.split('=').firstOrNull == 'max-age');
@@ -44,9 +44,9 @@ class InterceptorMemory extends InterceptorBase {
             key,
             maxAgeSecond ??
                 DateTime.now().add(Duration(seconds: maxAgeValue ?? 60)).millisecondsSinceEpoch ~/ 1000,
-            jsonEncode(e.data)),
+            jsonEncode(response.data)),
         forceReplace: forceReplace);
-    return handler.next(e);
+    return handler.next(response);
   }
 
   @override

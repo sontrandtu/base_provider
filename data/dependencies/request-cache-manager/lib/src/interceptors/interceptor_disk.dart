@@ -26,13 +26,13 @@ class InterceptorDisk extends InterceptorBase {
   }
 
   @override
-  void onResponse(Response e, ResponseInterceptorHandler handler) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('----------- Response Disk ----------------');
-    if (e.statusCode != HttpStatus.ok) return handler.next(e);
-    String key = e.requestOptions.path;
+    if (response.statusCode != HttpStatus.ok) return handler.next(response);
+    String key = response.requestOptions.path;
     print('KEY: $key');
 
-    List<String>? cacheControl = e.headers['cache-control'];
+    List<String>? cacheControl = response.headers['cache-control'];
 
     String? maxAge =
         cacheControl?.singleWhereOrNull((element) => element.split('=').firstOrNull == 'max-age');
@@ -43,9 +43,9 @@ class InterceptorDisk extends InterceptorBase {
             key,
             maxAgeSecond ??
                 DateTime.now().add(Duration(seconds: maxAgeValue ?? 60)).millisecondsSinceEpoch ~/ 1000,
-            jsonEncode(e.data)),
+            jsonEncode(response.data)),
         forceReplace: forceReplace);
 
-    return handler.next(e);
+    return handler.next(response);
   }
 }

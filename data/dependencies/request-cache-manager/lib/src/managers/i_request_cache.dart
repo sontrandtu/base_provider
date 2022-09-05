@@ -5,7 +5,7 @@ abstract class IRequestCache {
 
   CacheModel? get(String key);
 
-  void remove(String key);
+  Future<void> remove(String key);
 
   void clearAll();
 }

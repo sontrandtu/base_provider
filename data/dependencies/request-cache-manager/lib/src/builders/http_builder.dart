@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:domain/domain.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 abstract class HttpBuilder {
@@ -26,19 +26,31 @@ abstract class HttpBuilder {
 
   HttpBuilder withConverterRestful<T>({T Function(dynamic json)? fromJson});
 
-  Future<Response<T>> request<T>(String path,
-      {String? method,
-      String? dataType,
-      dynamic bodies,
-      Map<String, dynamic>? paths,
-      Map<String, dynamic>? params});
+  HttpBuilder setPath(String path);
 
- Future<Response<T>> requestRestful<T>(String path,
-      {String? method,
-      String? dataType,
-      dynamic bodies,
-      Map<String, dynamic>? paths,
-      Map<String, dynamic>? params});
+  HttpBuilder setMethod(Method? method);
+
+  HttpBuilder setDataType(DataType dataType);
+
+  HttpBuilder addBody(dynamic bodies);
+
+  HttpBuilder addParameters(Map<String, dynamic>? params);
+
+  HttpBuilder addPaths(Map<String, dynamic>? paths);
+
+  HttpBuilder removeCacheByKeys(List<String>? keys);
+
+  Future<Response<T>> request<T>();
+
+  Future<ApiModel<T?>> get<T>();
+
+  Future<ApiModel<T?>> post<T>();
+
+  Future<ApiModel<T?>> put<T>();
+
+  Future<ApiModel<T?>> patch<T>();
+
+  Future<ApiModel<T?>> delete<T>();
 
   Dio build();
 }

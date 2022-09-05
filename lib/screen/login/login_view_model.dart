@@ -11,7 +11,6 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
-    print(getArguments());
     fetchData();
     setStatus(Status.success);
   }

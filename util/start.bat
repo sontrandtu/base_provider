@@ -1,7 +1,4 @@
 @echo off
 cd ..
-
-git add .
-git commit -m "update"
-git push
+dart .\util\lib\main.dart
 popd

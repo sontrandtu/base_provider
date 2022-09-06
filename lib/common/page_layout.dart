@@ -1,3 +1,4 @@
+import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
@@ -68,19 +69,21 @@ class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
       children: [
         Positioned.fill(child: child),
         Positioned.fill(
-          child: Consumer<T>(
+          child: Selector<T,Status>(
+
+            selector: (_, p1) => p1.status,
             builder: (context, value, child) {
-              if (value.status == Status.firstIssue) {
+              if (value == Status.firstIssue) {
                 return const Scaffold(extendBody: true, body: ErrorLayout());
               }
-              if (value.status == Status.connection) {
+              if (value == Status.connection) {
                 return Scaffold(extendBody: true, body: NoConnectLayout(onReconnect: onReconnect));
               }
-              if (value.status == Status.success) value.setFlagLifecycle(Lifecycle.BUILD);
-              if (value.status == Status.error) return const SizedBox();
+              if (value == Status.success) context.read<T>().setFlagLifecycle(Lifecycle.BUILD);
+              if (value == Status.error) return const SizedBox();
 
-              bool condition = value.status == Status.loading || value.status == Status.waiting;
-              if (value.status == Status.loading) {
+              bool condition = value == Status.loading || value == Status.waiting;
+              if (value == Status.loading) {
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   transitionBuilder: _buildTransition,

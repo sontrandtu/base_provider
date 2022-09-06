@@ -16,4 +16,8 @@ class SplashViewModel extends BaseViewModel {
     // if (checkStatus(ApiModel(code: CodeConstant.OK, message: HttpConstant.UNKNOWN))) return;
     setStatus(Status.success);
   }
+
+  void test() {
+    notifyListeners();
+  }
 }

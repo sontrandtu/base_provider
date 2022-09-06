@@ -1,12 +1,12 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
+
+/// CODE GENERATE
+
 library image_picker_utils;
 
-export 'src/image_manager.dart';
-export 'src/path_utils.dart';
-export 'src/compress_manager.dart';
-export 'src/video_entity.dart';
-export 'src/video_manager.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export '/src/compress_manager.dart';
+export '/src/crop_manager.dart';
+export '/src/image_manager.dart';
+export '/src/path_utils.dart';
+export '/src/video_compress_manager.dart';
+export '/src/video_entity.dart';
+export '/src/video_manager.dart';

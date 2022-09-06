@@ -15,11 +15,12 @@ class Application extends StatefulWidget {
   State<Application> createState() => _ApplicationState();
 
   static void update({BuildContext? buildContext}) {
+    // _ApplicationState.materialKey.currentState?.setState(() {});
     BuildContext? context = buildContext ?? Application.navigator.currentContext;
 
     if (context == null) return;
 
-    context.findAncestorStateOfType<_ApplicationState>()?.updateState();
+    _ApplicationState.materialKey.currentContext!.findAncestorStateOfType<_ApplicationState>()?.updateState();
   }
 }
 
@@ -28,6 +29,8 @@ class _ApplicationState extends State<Application> {
     if (mounted) setState(() {});
   }
 
+  static final GlobalKey materialKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -35,25 +38,25 @@ class _ApplicationState extends State<Application> {
   }
 
   @override
-  Widget build(BuildContext context) =>  MaterialApp(
-    navigatorKey: Application.navigator,
-    scrollBehavior: _NoScrollBehavior(),
-    debugShowCheckedModeBanner: false,
-    title: AppConstant.APP_NAME,
-    locale: Translator().currentLocale,
-    supportedLocales: Translator().supports,
-    theme: ThemeManager().value,
-    localizationsDelegates: [
-      ApplicationLocalizationsDelegate(),
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    onGenerateRoute: generateRoute,
-    initialRoute: RoutePath.INITIAL,
-  );
+  Widget build(BuildContext context) => MaterialApp(
+        key: materialKey,
+        navigatorKey: Application.navigator,
+        scrollBehavior: _NoScrollBehavior(),
+        debugShowCheckedModeBanner: false,
+        title: AppConstant.APP_NAME,
+        locale: Translator().currentLocale,
+        supportedLocales: Translator().supports,
+        theme: ThemeManager().value,
+        localizationsDelegates: [
+          ApplicationLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        onGenerateRoute: generateRoute,
+        initialRoute: RoutePath.INITIAL,
+      );
 }
-
 
 class _NoScrollBehavior extends ScrollBehavior {
   @override

@@ -37,7 +37,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
   Future saveFile() async {
     final _queryParameters = <String, dynamic>{};
     final _data = FormData.fromMap({
-      'file': [MultipartFile.fromFileSync('./ic_search.png'), MultipartFile.fromFileSync('./ic_search.png')]
+      'file': [File('./ic_search.png'), File('./ic_search.png')]
     });
 
     _queryParameters.removeWhere((key, value) => value == null);
@@ -84,18 +84,20 @@ class WidgetRepositoryImpl implements WidgetRepository {
   @override
   Future<ApiModel<List<PostModel>?>> getAllPost() async {
     return await ClientBuilder()
-        .addBaseUrl('https://jsonplaceholder.typicode.com')
+        // .addBaseUrl('https://jsonplaceholder.typicode.com')
         .addCacheMemory()
         .withConverterRestful<List<PostModel>>(
             fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
-        .setPath('/posts')
+        .setPath('/{id}/books/{bookId}/posts')
+        .removeCacheByKeys([])
+        .addPaths({'id': '123123', 'bookId': '123'})
+        .addBody({'file': []})
         .get<List<PostModel>>();
   }
 }
 
-main()async{
+main() async {
   await CacheStorage.ensureInitialized();
   ApiModel<List<PostModel>?> response = await WidgetRepositoryImpl().getAllPost();
-  print(response.data?[0].title);
-
+  print(response.data);
 }

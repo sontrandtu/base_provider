@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:data/data.dart';
+import 'package:data/src/repositories_impl/widget_repository_impl.dart';
 import 'package:domain/domain.dart';
+import 'package:request_cache_manager/request_cache_manager.dart';
 
 main() async {
   await CacheStorage.ensureInitialized();

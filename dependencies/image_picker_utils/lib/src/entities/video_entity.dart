@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:image_picker_utils/src/entities/image_entity.dart';
+
 class VideoEntity {
   String? path;
   String? title;
@@ -11,11 +13,12 @@ class VideoEntity {
   int? orientation;
 
   /// bytes
-  int? filesize; // filesize
+  int? fileSize; // filesize
   /// microsecond
   double? duration;
   bool? isCancel;
   File? file;
+  ImageEntity? thumbnail;
 
   VideoEntity({
     required this.path,
@@ -24,11 +27,15 @@ class VideoEntity {
     this.width,
     this.height,
     this.orientation,
-    this.filesize,
+    this.fileSize,
     this.duration,
     this.isCancel,
     this.file,
   });
+
+  void setThumbnail(ImageEntity file) {
+    thumbnail = file;
+  }
 
   VideoEntity.fromJson(Map<String, dynamic> json) {
     path = json['path'];
@@ -37,7 +44,7 @@ class VideoEntity {
     width = json['width'];
     height = json['height'];
     orientation = json['orientation'];
-    filesize = json['filesize'];
+    fileSize = json['filesize'];
     duration = double.tryParse('${json['duration']}');
     isCancel = json['isCancel'];
     file = File(path!);
@@ -50,7 +57,7 @@ class VideoEntity {
     width = json['width'];
     height = json['height'];
     orientation = json['orientation'];
-    filesize = json['filesize'];
+    fileSize = json['filesize'];
     duration = double.tryParse('${json['duration']}');
     isCancel = json['isCancel'];
     file = File(path!);
@@ -66,7 +73,7 @@ class VideoEntity {
     if (orientation != null) {
       data['orientation'] = orientation;
     }
-    data['filesize'] = filesize;
+    data['filesize'] = fileSize;
     data['duration'] = duration;
     if (isCancel != null) {
       data['isCancel'] = isCancel;

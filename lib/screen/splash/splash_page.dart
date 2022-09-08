@@ -44,7 +44,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
                   builder: (context, value, child) {
                     return   OutlinedButtonComp(title: 'Change theme', onPressed: _changeTheme);
                   }),
-              // Button.solid(title: 'Change language', onPressed: _changeLanguage),
+              OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
               OutlinedButtonComp(title: 'Pick image', onPressed: _pickImage),
               OutlinedButtonComp(title: 'Notify listener', onPressed: _notifier),
               OutlinedButtonComp(
@@ -73,8 +73,6 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
     Translator().currentLocale?.languageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
-
-    Application.update();
   }
 
   _pickImage() async {

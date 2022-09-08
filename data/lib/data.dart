@@ -1,8 +1,9 @@
 
-/// CODE GENERATE. Last modify: 2022-09-06 13:36:33.413084
+/// CODE GENERATE. Last modify: 2022-09-08 14:31:04.452096
 
 library data;
 
+export '/src/common/data_config.dart';
 export '/src/common/dio_extensiton.dart';
 export '/src/common/header_config.dart';
 export '/src/config/api_paths.dart';

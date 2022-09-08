@@ -23,7 +23,7 @@ class ThemeManager {
   int get themeId => _themeModel?.id ?? -1;
 
   bool isDarkMode() {
-    var brightness = SchedulerBinding.instance!.window.platformBrightness;
+    var brightness = SchedulerBinding.instance.window.platformBrightness;
     return brightness == Brightness.dark;
   }
 
@@ -63,7 +63,7 @@ class ThemeManager {
           headline1: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
           bodyText1: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
           bodyText2: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-button: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          button: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
     ),

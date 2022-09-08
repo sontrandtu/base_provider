@@ -1,5 +1,5 @@
 
-/// CODE GENERATE. Last modify: 2022-09-06 13:36:33.440990
+/// CODE GENERATE. Last modify: 2022-09-08 14:31:04.482166
 
 library domain;
 

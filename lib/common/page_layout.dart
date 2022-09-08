@@ -1,4 +1,3 @@
-import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state/state.dart';
@@ -9,7 +8,7 @@ class PageLayout<T extends BaseViewModel> extends StatelessWidget {
     this.appBar,
     this.mustSafeView = true,
     required this.child,
-    this.radius = 32,
+    this.radius = 0,
     this.onClick,
     this.backgroundColor,
     Key? key,
@@ -44,8 +43,8 @@ class PageLayout<T extends BaseViewModel> extends StatelessWidget {
         // endDrawer: endDrawer,
         // onEndDrawerChanged: onEndDrawerChanged,
         body: mustSafeView == true
-            ? SafeArea(child: _BodyLayout<T>(child: child, radius: radius, onReconnect: onReconnect))
-            : _BodyLayout<T>(child: child, radius: radius, onReconnect: onReconnect),
+            ? SafeArea(child: _BodyLayout<T>(radius: radius, onReconnect: onReconnect, child: child))
+            : _BodyLayout<T>(radius: radius, onReconnect: onReconnect, child: child),
       ),
     );
   }
@@ -69,8 +68,7 @@ class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
       children: [
         Positioned.fill(child: child),
         Positioned.fill(
-          child: Selector<T,Status>(
-
+          child: Selector<T, Status>(
             selector: (_, p1) => p1.status,
             builder: (context, value, child) {
               if (value == Status.firstIssue) {
@@ -88,7 +86,8 @@ class _BodyLayout<T extends BaseViewModel> extends StatelessWidget {
                   duration: const Duration(milliseconds: 200),
                   transitionBuilder: _buildTransition,
                   child: condition
-                      ? Container(alignment: Alignment.center,color: Colors.white, child: const IndicatorComp())
+                      ? Container(
+                          alignment: Alignment.center, color: Colors.white, child: const IndicatorComp())
                       : const SizedBox(),
                 );
               }

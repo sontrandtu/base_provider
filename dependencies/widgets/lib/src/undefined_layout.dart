@@ -7,6 +7,6 @@ class UndefinedLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text(name ?? ''));
+    return Scaffold(body: Center(child: Text('404 Not found')));
   }
 }

@@ -54,7 +54,7 @@ class ThemeManager {
       data: ThemeData(
         appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
         fontFamily: 'Babylon',
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline6: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           headline5: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           headline4: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),

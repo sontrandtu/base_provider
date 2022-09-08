@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:state/src/nav_obs.dart';
 import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:extensions/extensions.dart';
@@ -18,6 +19,7 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> initialData() async {
+    throw ValidateException("lỗi");
     fetchData();
     setStatus(Status.success);
   }

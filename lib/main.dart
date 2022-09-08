@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:achitecture_weup/application.dart';
@@ -14,7 +15,9 @@ Future<void> main() async {
   Translator().initialize();
   ThemeManager().init();
 
-  runApp(const Application());
+  FlutterError.onError = onError;
+
+  runZonedGuarded(() => runApp(const Application()), onZoneError);
 }
 
 class MyHttpOverrides extends HttpOverrides {
@@ -23,4 +26,14 @@ class MyHttpOverrides extends HttpOverrides {
     return super.createHttpClient(context)
       ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
+}
+
+void onError(FlutterErrorDetails details) {
+  print(' FlutterError.onError');
+  print(details);
+}
+
+void onZoneError(Object error, StackTrace stack) {
+  print(' onZoneError');
+  print(error);
 }

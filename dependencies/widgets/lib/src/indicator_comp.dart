@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorComp extends StatelessWidget {
@@ -8,8 +9,9 @@ class IndicatorComp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isAndroid
-        ? CircularProgressIndicator(color: Theme.of(context).primaryColor)
-        : CupertinoActivityIndicator(color: Theme.of(context).primaryColor);
+    if(kIsWeb) return CircularProgressIndicator(color: Theme.of(context).primaryColor);
+    return Platform.isIOS
+        ? CupertinoActivityIndicator(color: Theme.of(context).primaryColor)
+        : CircularProgressIndicator(color: Theme.of(context).primaryColor);
   }
 }

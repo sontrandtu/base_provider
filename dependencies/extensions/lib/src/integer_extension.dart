@@ -60,11 +60,11 @@ extension IntegerExtension on int {
 
     s = this - (h * 3600) - (m * 60);
 
-    String hourLeft = h.toString().length < 2 ? "0" + h.toString() : h.toString();
+    String hourLeft = h.toString().length < 2 ? "0$h" : h.toString();
 
-    String minuteLeft = m.toString().length < 2 ? "0" + m.toString() : m.toString();
+    String minuteLeft = m.toString().length < 2 ? "0$m" : m.toString();
 
-    String secondsLeft = s.toString().length < 2 ? "0" + s.toString() : s.toString();
+    String secondsLeft = s.toString().length < 2 ? "0$s" : s.toString();
 
     String result = "${hourLeft == '00' ? '' : ':'}$minuteLeft:$secondsLeft";
 

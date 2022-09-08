@@ -42,8 +42,7 @@ class ElevatedButtonComp extends StatelessWidget {
                 style: style ?? Theme.of(context).textTheme.headline4?.apply(color: Colors.white)),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
-              padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              primary: (primaryColor ?? Colors.blue).withOpacity(!isEnable! ? 0.5 : 1),
+              padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12), backgroundColor: (primaryColor ?? Colors.blue).withOpacity(!isEnable! ? 0.5 : 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

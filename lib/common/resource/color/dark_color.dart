@@ -7,10 +7,10 @@ class DarkColor extends BaseColor {
   Color get divider => Colors.black;
 
   @override
-  Color get primary => Color(0xFFFF6700);
+  Color get primary => const Color(0xFFFF6700);
 
   @override
-  Color get secondPrimary => Color(0xFF0A1F72);
+  Color get secondPrimary => const Color(0xFF0A1F72);
 
   @override
   Color get textBody => Colors.white;

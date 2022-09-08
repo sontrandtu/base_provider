@@ -112,7 +112,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
     );
   }
   _changeLanguage() async{
-    Translator().currentLanguageCode == LanguageCode.EN
+    Translator().currentLocale?.languageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
     Application.update();

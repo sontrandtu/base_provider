@@ -10,12 +10,12 @@ extension ColorExtension on String? {
 }
 
 class BaseColor {
-  Color primary = Color(0xFF0A1F72);
-  Color secondPrimary = Color(0xFFFF6700);
+  Color primary = const Color(0xFF0A1F72);
+  Color secondPrimary = const Color(0xFFFF6700);
 
-  Color textBody = Color(0xFF666666);
+  Color textBody = const Color(0xFF666666);
 
-  Color divider = Color(0xFFEFEFEF);
+  Color divider = const Color(0xFFEFEFEF);
 
   Color backgroundColor = Colors.white;
 

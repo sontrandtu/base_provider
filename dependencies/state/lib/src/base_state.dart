@@ -34,7 +34,7 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     // Future.delayed(Duration.zero, () => _viewModel?.onViewCreated());
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       log('$VM was installed ${DateTime.now()}');
 
       // _viewModel?.setFlagLifecycle(Lifecycle.FRAME_CALL_BACK);

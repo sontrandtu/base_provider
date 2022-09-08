@@ -35,30 +35,32 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
       child: PageLayout<SplashViewModel>(
         onReconnect: viewModel.fetchData,
         appBar: AppBarComp(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // OutlinedButtonComp(title: 'Call Data', onPressed: viewModel.fetchData),
-              Consumer<SplashViewModel>(
+        child: SelectionArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // OutlinedButtonComp(title: 'Call Data', onPressed: viewModel.fetchData),
+                Consumer<SplashViewModel>(
 
-                  builder: (context, value, child) {
-                    return   OutlinedButtonComp(title: 'Change theme', onPressed: _changeTheme);
-                  }),
-              OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
-              OutlinedButtonComp(title: 'Pick image', onPressed: _pickImage),
-              OutlinedButtonComp(title: 'Notify listener', onPressed: _notifier),
-              OutlinedButtonComp(
-                  title: 'nexxt page',
-                  onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs')),
-               const TextNomalTranslate(),
-              Text(Translator().currentLanguageCode == LanguageCode.EN
-                  ? KeyLanguage.title.tr
-                  : 'Translator().currentLanguageCode == LanguageCode.EN'),
-              Text(Translator().languages.toString()),
+                    builder: (context, value, child) {
+                      return   OutlinedButtonComp(title: 'Change theme', onPressed: _changeTheme);
+                    }),
+                OutlinedButtonComp(title: 'Change language', onPressed: _changeLanguage),
+                OutlinedButtonComp(title: 'Pick image', onPressed: _pickImage),
+                OutlinedButtonComp(title: 'Notify listener', onPressed: _notifier),
+                OutlinedButtonComp(
+                    title: 'nexxt page',
+                    onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs')),
+                 const TextNomalTranslate(),
+                Text(Translator().currentLocale?.languageCode == LanguageCode.EN
+                    ? KeyLanguage.title.tr
+                    : 'Translator().currentLanguageCode == LanguageCode.EN'),
+                Text(Translator().languages.toString()),
 
-              if (image != null) Image.file(image!),
-              if (finalImage != null) Image.file(finalImage!),
-            ],
+                if (image != null) Image.file(image!),
+                if (finalImage != null) Image.file(finalImage!),
+              ],
+            ),
           ),
         ),
       ),
@@ -70,7 +72,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
   }
 
   _changeLanguage() async {
-    Translator().currentLanguageCode == LanguageCode.EN
+    Translator().currentLocale?.languageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
 

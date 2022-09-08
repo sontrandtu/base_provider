@@ -1,5 +1,6 @@
-import 'package:achitecture_weup/common/resource/color/base_color.dart';
 import 'package:flutter/material.dart';
+
+import '../base_color.dart';
 
 class ThemeModel {
   int? id;

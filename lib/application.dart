@@ -14,14 +14,7 @@ class Application extends StatefulWidget {
   @override
   State<Application> createState() => _ApplicationState();
 
-  static void update({BuildContext? buildContext}) {
-    // _ApplicationState.materialKey.currentState?.setState(() {});
-    BuildContext? context = buildContext ?? Application.navigator.currentContext;
 
-    if (context == null) return;
-
-    _ApplicationState.materialKey.currentContext!.findAncestorStateOfType<_ApplicationState>()?.updateState();
-  }
 }
 
 class _ApplicationState extends State<Application> {

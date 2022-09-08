@@ -11,7 +11,6 @@ import 'en.dart';
 import 'translator_extension.dart';
 import 'vi.dart';
 
-typedef OnUpdate = void Function();
 
 class Translator {
   Translator._internal();
@@ -22,7 +21,6 @@ class Translator {
 
   Timer? _timer;
 
-  OnUpdate? _onUpdate;
 
   Locale? currentLocale;
 
@@ -30,8 +28,7 @@ class Translator {
 
   Map<String, dynamic> languages = {};
 
-  void initialize({OnUpdate? onUpdate}) {
-    _onUpdate = onUpdate;
+  void initialize() {
 
     String languageCode = LocalStorage.get(StorageKey.LANGUAGE, '');
 
@@ -54,7 +51,7 @@ class Translator {
 
     currentLocale =
         supports.singleWhereOrNull((element) => element.languageCode == languageCode) ?? defaultLocale;
-    _onUpdate?.call();
+    WidgetsBinding.instance.performReassemble();
   }
 
   List<Locale> supports = [

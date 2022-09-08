@@ -7,8 +7,8 @@ import 'package:widgets/widgets.dart';
 import 'route_path.dart';
 
 Map<String, WidgetBuilder> routes = {
-  RoutePath.INITIAL: (_) =>  SplashPage(),
-  RoutePath.LOGIN: (_) =>  LoginPage(),
+  RoutePath.INITIAL: (_) =>  const SplashPage(),
+  RoutePath.LOGIN: (_) =>  const LoginPage(),
 };
 
 Route<dynamic> generateRoute(RouteSettings settings) {

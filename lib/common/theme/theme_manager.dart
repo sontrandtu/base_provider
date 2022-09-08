@@ -42,7 +42,7 @@ class ThemeManager {
 
     if (_themeModel?.color != null) ColorResource = _themeModel!.color!;
 
-    Application.update();
+    WidgetsBinding.instance.performReassemble();
 
     await LocalStorage.put(StorageKey.THEME, id);
   }

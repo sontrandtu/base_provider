@@ -10,7 +10,7 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await LocalStorage.ensureInitialized();
   await DataConfig.ensureInitialized();
-  Translator().initialize(onUpdate: Application.update);
+  Translator().initialize();
 
   runApp(const Application());
 }

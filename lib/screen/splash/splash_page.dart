@@ -73,6 +73,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
     Translator().currentLocale?.languageCode == LanguageCode.EN
         ? Translator().setCurrentLocale(LanguageCode.VI)
         : Translator().setCurrentLocale(LanguageCode.EN);
+
   }
 
   _pickImage() async {

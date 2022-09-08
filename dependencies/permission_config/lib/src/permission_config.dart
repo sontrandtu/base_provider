@@ -5,7 +5,9 @@ import 'package:permission_handler/permission_handler.dart';
 class PermissionConfig {
   PermissionConfig._internal();
 
-  static PermissionConfig get instance => PermissionConfig._internal();
+  static final PermissionConfig  _instance = PermissionConfig._internal();
+
+  factory PermissionConfig()=> _instance;
 
   // Yêu cầu 1 quyền
   Future<bool> request(

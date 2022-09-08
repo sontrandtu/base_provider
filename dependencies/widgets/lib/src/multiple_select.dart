@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:overflow_view/overflow_view.dart';
 
 import 'bottom_sheet/multiple_selec_bottomsheet.dart';
-import 'ink_well_comp.dart';
+import 'button/ink_well_comp.dart';
 import 'model_base/option_multiple_select.dart';
 
 class MultipleSelectComp<T> extends StatefulWidget {

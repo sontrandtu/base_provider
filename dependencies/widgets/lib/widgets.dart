@@ -3,17 +3,13 @@
 
 library widgets;
 
-export '/src/ani_appbar_title_comp.dart';
 export '/src/appbar_comp.dart';
 export '/src/avatar_comp.dart';
 export '/src/base_responsive.dart';
 export '/src/dropdown_comp.dart';
 export '/src/error_layout.dart';
-export '/src/form_album.dart';
-export '/src/form_number.dart';
 export '/src/html_content.dart';
 export '/src/indicator_comp.dart';
-export '/src/ink_well_comp.dart';
 export '/src/mapviewer_comp.dart';
 export '/src/multiple_select.dart';
 export '/src/no_connect_layout.dart';
@@ -30,6 +26,7 @@ export '/src/button/cupertino_swtich_comp.dart';
 export '/src/button/elevated_button_comp.dart';
 export '/src/button/floating_action_button_comp.dart';
 export '/src/button/icon_button_comp.dart';
+export '/src/button/ink_well_comp.dart';
 export '/src/button/outlined_button_comp.dart';
 export '/src/button/position_ani_button_comp.dart';
 export '/src/button/scale_ani_button_comp.dart';

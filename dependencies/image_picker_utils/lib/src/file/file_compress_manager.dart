@@ -29,5 +29,7 @@ class FileCompressManager extends FileCompressBase {
   }
 
   @override
-  Future<void> extract() async {}
+  Future<void> extract() async {
+    // extractArchiveToDisk(archive, outputPath)
+  }
 }

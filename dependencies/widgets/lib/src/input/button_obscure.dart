@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ink_well_comp.dart';
+import '../button/ink_well_comp.dart';
 
 class ButtonObscure extends StatelessWidget {
   const ButtonObscure({Key? key, this.isObscure, this.onObscureChange}) : super(key: key);

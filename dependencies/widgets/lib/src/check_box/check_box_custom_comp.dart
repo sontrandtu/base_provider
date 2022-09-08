@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widgets/src/ink_well_comp.dart';
+import 'package:widgets/src/button/ink_well_comp.dart';
 
 // ignore: must_be_immutable
 // class CheckBoxCustomComp extends StatefulWidget {

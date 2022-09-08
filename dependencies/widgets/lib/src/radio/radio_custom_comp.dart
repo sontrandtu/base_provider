@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ink_well_comp.dart';
+import '../button/ink_well_comp.dart';
 
 // ignore: must_be_immutable
 class RadioCustomComp<T> extends StatelessWidget {

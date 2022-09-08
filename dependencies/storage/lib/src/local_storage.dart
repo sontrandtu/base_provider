@@ -53,7 +53,7 @@ class LocalStorage {
 
   static Future<void> clearData() async {
     final Box box = Hive.box(boxName);
-    await box.deleteFromDisk();
+    // await box.deleteFromDisk();
   }
 }
 

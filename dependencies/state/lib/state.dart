@@ -8,4 +8,5 @@ export '/src/base_state.dart';
 export '/src/base_view_model.dart';
 export '/src/constants.dart';
 export '/src/lifecycle_base.dart';
+export '/src/nav_obs.dart';
 export '/src/status.dart';

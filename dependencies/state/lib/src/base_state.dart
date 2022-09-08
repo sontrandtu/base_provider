@@ -32,22 +32,15 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     _viewModel?.init();
 
-    // Future.delayed(Duration.zero, () => _viewModel?.onViewCreated());
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       log('$VM was installed ${DateTime.now()}');
-
-      // _viewModel?.setFlagLifecycle(Lifecycle.FRAME_CALL_BACK);
+      _viewModel?.onViewCreated();
 
       _viewModel?.setMounted(mounted);
-
-      _viewModel?.setRouteSetting(ModalRoute.of(context)?.settings);
 
       _viewModel?.setFlagLifecycle(Lifecycle.INIT);
 
       await _viewModel?.initialData();
-      // await Future.delayed(Duration(milliseconds: 500));
-      // _viewModel?.setFlagLifecycle(Lifecycle.BUILD);
     });
     super.initState();
   }

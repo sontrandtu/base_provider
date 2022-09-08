@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:achitecture_weup/application.dart';
+import 'package:state/src/nav_obs.dart';
 import 'package:achitecture_weup/common/page_layout.dart';
 import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:achitecture_weup/common/theme/theme_manager.dart';
@@ -49,7 +50,10 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
               OutlinedButtonComp(title: 'Notify listener', onPressed: _notifier),
               OutlinedButtonComp(
                   title: 'nexxt page',
-                  onPressed: () => Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs')),
+                  onPressed: () async{
+                   await Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs');
+                   showError(LifecycleBase.settings);
+                  }),
                const TextNomalTranslate(),
               Text(Translator().currentLocale?.languageCode == LanguageCode.EN
                   ? KeyLanguage.title.tr

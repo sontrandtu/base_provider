@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:collection/collection.dart';
 class Lifecycle {
   static const String INIT = 'initState';
   static const String FRAME_CALL_BACK = 'addPostFrameCallback';
@@ -14,7 +14,7 @@ mixin LifecycleBase {
 
   TickerProvider? _vsync;
 
-  RouteSettings? settings;
+  static RouteSettings? settings ;
 
   String flagLifecycle = Lifecycle.INIT;
 
@@ -26,10 +26,26 @@ mixin LifecycleBase {
 
   void setTickerProvider(TickerProvider? tp) => _vsync = tp;
 
-  void setRouteSetting(RouteSettings? rs) {
-    mounted = true;
-    settings = rs;
-  }
+
+  /*
+  * Route hiện tại
+  * */
+  String? get currentRoute => settings?.name?.split('?').firstOrNull;
+
+  /*
+  * Route kèm parameter
+  * */
+  String? get originalRoute => settings?.name;
+
+  /*
+  * Arguments từ page trước
+  * */
+  dynamic getArguments() => settings?.arguments;
+
+  /*
+  * Parameter từ page trước
+  * */
+  Map<String, dynamic>? getParameter() => Uri.tryParse(originalRoute ?? '')?.queryParameters;
 
   void setFlagLifecycle(String flag) => flagLifecycle = flag;
 

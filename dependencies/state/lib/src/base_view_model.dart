@@ -21,25 +21,7 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   * */
   Status get status => _status;
 
-  /*
-  * Route hiện tại
-  * */
-  String? get currentRoute => settings?.name?.split('?').firstOrNull;
 
-  /*
-  * Route kèm parameter
-  * */
-  String? get originalRoute => settings?.name;
-
-  /*
-  * Arguments từ page trước
-  * */
-  dynamic getArguments() => settings?.arguments;
-
-  /*
-  * Parameter từ page trước
-  * */
-  Map<String, dynamic>? getParameter() => Uri.tryParse(originalRoute ?? '')?.queryParameters;
 
   /*
   * Hàm dùng để call api ngay sau khi [initialData] được

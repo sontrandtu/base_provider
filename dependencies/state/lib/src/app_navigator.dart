@@ -23,12 +23,12 @@ class AppNavigator {
     return await showGeneralDialog(
       context: _context!,
       transitionDuration: Duration(milliseconds: ModalRoute.of(context)?.isCurrent == true ? 300 : 500),
-      transitionBuilder: (context, _animation, _secondaryAnimation, _child) {
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
         return ScaleTransition(
-          child: _child,
+          child: child,
           scale: Tween<double>(end: 1, begin: ModalRoute.of(context)?.isCurrent == true ? 1.3 : 0).animate(
             CurvedAnimation(
-              parent: _animation,
+              parent: animation,
               curve: const Interval(0.5, 1.00, curve: Curves.linear),
             ),
           ),
@@ -37,7 +37,7 @@ class AppNavigator {
       barrierDismissible: barrierDismissible ?? true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       routeSettings: RouteSettings(arguments: arguments),
-      pageBuilder: (_animation, _secondaryAnimation, _child) {
+      pageBuilder: (animation, secondaryAnimation, child) {
         return dialog;
       },
     );
@@ -69,24 +69,39 @@ class AppNavigator {
   /*
   * Navigate to new page with [RouteName]
   * */
-  Future<dynamic> pushNamed(String routeName, {dynamic arguments}) async {
+  Future<dynamic> pushNamed(String routeName, {dynamic arguments, Map<String, String>? parameters}) async {
     if (_context == null) return;
+    if (parameters != null) {
+      final uri = Uri(path: routeName, queryParameters: parameters);
+      routeName = uri.toString();
+    }
     return await Navigator.pushNamed(_context!, routeName, arguments: arguments);
   }
 
   /*
   * Navigate to new page with [RouteName] and replace [current page]
   * */
-  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments, dynamic result}) async {
+  Future<dynamic> pushReplacementNamed(String routeName,
+      {dynamic arguments, Map<String, String>? parameters, dynamic result}) async {
     if (_context == null) return;
+    if (parameters != null) {
+      final uri = Uri(path: routeName, queryParameters: parameters);
+      routeName = uri.toString();
+    }
+
     return await Navigator.pushReplacementNamed(_context!, routeName, arguments: arguments, result: result);
   }
 
   /*
   * Navigate to new page with [RouteName] and replace all util pages
   * */
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName, {dynamic arguments}) async {
+  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
+      {dynamic arguments, Map<String, String>? parameters}) async {
     if (_context == null) return;
+    if (parameters != null) {
+      final uri = Uri(path: routeName, queryParameters: parameters);
+      routeName = uri.toString();
+    }
     return await Navigator.pushNamedAndRemoveUntil(
       _context!,
       routeName,

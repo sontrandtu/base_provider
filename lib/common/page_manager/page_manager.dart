@@ -1,3 +1,4 @@
+import 'package:achitecture_weup/screen/home/homepage.dart';
 import 'package:achitecture_weup/screen/login/login_page.dart';
 import 'package:achitecture_weup/screen/splash/splash_page.dart';
 import 'package:extensions/extensions.dart';
@@ -9,6 +10,7 @@ import 'route_path.dart';
 Map<String, WidgetBuilder> routes = {
   RoutePath.INITIAL: (_) =>  const SplashPage(),
   RoutePath.LOGIN: (_) =>  const LoginPage(),
+  RoutePath.HOME: (_) =>  const HomePage(),
 };
 
 Route<dynamic> generateRoute(RouteSettings settings) {

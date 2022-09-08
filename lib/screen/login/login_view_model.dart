@@ -1,3 +1,5 @@
+import 'package:state/src/nav_obs.dart';
+import 'package:achitecture_weup/common/page_manager/route_path.dart';
 import 'package:extensions/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:state/state.dart';
@@ -10,15 +12,18 @@ class LoginViewModel extends BaseViewModel {
   String args = '';
 
   @override
+  Future<void> init() async {
+    showError(LifecycleBase.settings);
+  }
+
+  @override
   Future<void> initialData() async {
     fetchData();
     setStatus(Status.success);
   }
 
   @override
-  Future<void> fetchData() async {
-
-  }
+  Future<void> fetchData() async {}
 
   void login() async {
     // await NewRepository.instance.getAllPost();
@@ -32,11 +37,12 @@ class LoginViewModel extends BaseViewModel {
 
     setStatus(Status.success);
 
-    // appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'},params: {'data':'String'});
+    appNavigator.pushNamed(RoutePath.HOME, arguments: {'dynamic argument': 'OK'});
   }
 
   void register() {
-    appNavigator.dialog(const CustomDialog(description: 'Cảm ơn bạn đã chọn đăng ký',title: 'Thông báo'));
+    showError(LifecycleBase.settings);
+    // appNavigator.dialog(const CustomDialog(description: 'Cảm ơn bạn đã chọn đăng ký', title: 'Thông báo'));
   }
 
   String? validator(String s, index) {
@@ -55,10 +61,7 @@ class LoginViewModel extends BaseViewModel {
   changeSwitch(bool value) {
     currentLanguage = value;
     update();
-
   }
 
-  clearCache() {
-
-  }
+  clearCache() {}
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:achitecture_weup/application.dart';
+import 'package:achitecture_weup/common/theme/theme_manager.dart';
 import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:storage/storage.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   await LocalStorage.ensureInitialized();
   await DataConfig.ensureInitialized();
   Translator().initialize();
+  ThemeManager().init();
 
   runApp(const Application());
 }

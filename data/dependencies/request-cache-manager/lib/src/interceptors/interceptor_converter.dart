@@ -35,13 +35,10 @@ class InterceptorConverter<T> extends InterceptorBase {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
 
-
     if (response.statusCode == HttpStatus.notModified) {
       String key = response.requestOptions.path;
       CacheModel? cache = RequestCacheManager().get(key);
       if (cache != null) {
-
-
         return handler.resolve(Response(
             requestOptions: response.requestOptions,
             data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data)));
@@ -50,17 +47,21 @@ class InterceptorConverter<T> extends InterceptorBase {
 
     if (response.statusCode != HttpStatus.ok) return handler.next(response);
 
-    return handler.next(Response(data: fromJson?.call(response.data) ?? response.data, requestOptions: response.requestOptions));
+    return handler.next(Response(
+        data: fromJson?.call(response.data) ?? response.data, requestOptions: response.requestOptions));
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     print('----------- DioError Converter - ${err.response?.statusCode} ----------------');
 
+    int? code = err.response?.statusCode ?? CodeConstant.UNKNOWN;
+    String? msg = err.response?.statusMessage ?? HttpConstant.UNKNOWN;
 
-    int? code = err.response?.data['code'] ?? err.response?.statusCode ?? CodeConstant.UNKNOWN;
-    String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? HttpConstant.UNKNOWN;
-
+    if (err.response?.data is Map<String, dynamic>) {
+      if (err.response?.data['code'] != null) code = err.response?.data['code'];
+      if (err.response?.data['message'] != null) msg = err.response?.data['message'];
+    }
 
     if (err.error is SocketException) {
       code = CodeConstant.CONNECT_ERROR;

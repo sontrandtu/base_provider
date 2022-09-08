@@ -73,7 +73,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginViewModel> {
                     const SizedBox(height: 32),
                     ElevatedButtonComp(
                       title: 'KeyLanguage.login.tr',
-                      widthValue: double.infinity,
+                      width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       borderRadius: 4,
                       onPressed: viewModel.login,

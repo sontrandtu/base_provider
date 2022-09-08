@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ElevatedButtonComp extends StatelessWidget {
-  final String? title;
-  final Widget? child;
+  final dynamic title;
   final Function()? onPressed;
   final EdgeInsetsGeometry? padding;
   final TextStyle? style;
   final double? borderRadius;
-  final double? widthValue;
-  final double? heightValue;
+  final double? width;
+  final double? height;
   final bool? isEnable;
   final ButtonStyle? buttonStyle;
   final Color? primaryColor;
@@ -17,7 +16,6 @@ class ElevatedButtonComp extends StatelessWidget {
   const ElevatedButtonComp({
     Key? key,
     this.title,
-    this.child,
     this.onPressed,
     this.isEnable = true,
     this.padding,
@@ -25,24 +23,23 @@ class ElevatedButtonComp extends StatelessWidget {
     this.borderRadius,
     this.buttonStyle,
     this.primaryColor,
-    this.widthValue,
-    this.heightValue,
+    this.width,
+    this.height,
     this.elevation,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widthValue,
-      height: heightValue,
+      width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: isEnable! ? onPressed : null,
-        child: child ??
-            Text(title ?? '',
-                style: style ?? Theme.of(context).textTheme.headline4?.apply(color: Colors.white)),
+        child: title is Widget ? title : Text(title ?? ''),
         style: buttonStyle ??
             ElevatedButton.styleFrom(
-              padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12), backgroundColor: (primaryColor ?? Colors.blue).withOpacity(!isEnable! ? 0.5 : 1),
+              padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              backgroundColor: (primaryColor ?? Colors.blue).withOpacity(!isEnable! ? 0.5 : 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 0),
               ),

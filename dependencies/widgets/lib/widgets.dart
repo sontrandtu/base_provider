@@ -22,7 +22,6 @@ export '/src/bottombar/painter_bottombar.dart';
 export '/src/bottom_sheet/cupertino_picker.dart';
 export '/src/bottom_sheet/multiple_selec_bottomsheet.dart';
 export '/src/bottom_sheet/pick_img_bottomsheet.dart';
-export '/src/button/button.dart';
 export '/src/button/cupertino_swtich_comp.dart';
 export '/src/button/elevated_button_comp.dart';
 export '/src/button/floating_action_button_comp.dart';

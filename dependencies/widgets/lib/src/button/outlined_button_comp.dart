@@ -35,15 +35,11 @@ class OutlinedButtonComp extends StatelessWidget {
       height: height,
       child: OutlinedButton(
         onPressed: isEnable! ? onPressed : null,
-        child: title is Widget
-            ? title
-            : Text(
-                title ?? '',
-                style: style ?? Theme.of(context).textTheme.headline4,
-              ),
+        child: title is Widget ? title : Text(title ?? ''),
         style: buttonStyle ??
             OutlinedButton.styleFrom(
-              foregroundColor: primaryColor, padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              foregroundColor: primaryColor,
+              padding: padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               side: BorderSide(color: colorBorder ?? Theme.of(context).primaryColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 4),

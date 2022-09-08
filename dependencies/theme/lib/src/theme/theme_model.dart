@@ -18,15 +18,15 @@ class ThemeModel {
 
   void init() {
     data = data?.copyWith(
-        primaryColor: color?.primary,
-        indicatorColor: color?.primary,
-        toggleableActiveColor: color?.primary,
-        splashColor: color?.colorSplash,
-        highlightColor: color?.colorHighLight,
-        dividerColor: color?.divider,
-        backgroundColor: color?.backgroundColor,
-        scaffoldBackgroundColor: color?.backgroundColor,
-        textTheme: data?.textTheme.apply(bodyColor: color?.textBody),
-);
+      primaryColor: color?.primary,
+      indicatorColor: color?.primary,
+      toggleableActiveColor: color?.primary,
+      splashColor: color?.colorSplash,
+      highlightColor: color?.colorHighLight,
+      dividerColor: color?.divider,
+      backgroundColor: color?.backgroundColor,
+      scaffoldBackgroundColor: color?.backgroundColor,
+      textTheme: data?.textTheme.apply(bodyColor: color?.textBody),
+    );
   }
 }

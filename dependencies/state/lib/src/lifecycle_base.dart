@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+
 class Lifecycle {
   static const String INIT = 'initState';
   static const String FRAME_CALL_BACK = 'addPostFrameCallback';
@@ -14,18 +15,17 @@ mixin LifecycleBase {
 
   TickerProvider? _vsync;
 
-  static RouteSettings? settings ;
+  static RouteSettings? settings;
 
   String flagLifecycle = Lifecycle.INIT;
-
-  TickerProvider get vsync => _vsync!;
-
-  bool get mustCancelRequest => flagLifecycle == Lifecycle.DISPOSE;
 
   void setMounted(bool mounted) => this.mounted = mounted;
 
   void setTickerProvider(TickerProvider? tp) => _vsync = tp;
 
+  TickerProvider get vsync => _vsync!;
+
+  bool get mustCancelRequest => flagLifecycle == Lifecycle.DISPOSE;
 
   /*
   * Route hiện tại

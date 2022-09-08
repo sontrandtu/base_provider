@@ -47,7 +47,6 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
   @override
   void deactivate() {
-    _viewModel?.setFlagLifecycle(Lifecycle.DEACTIVATE);
     _viewModel?.onDeActive();
 
     log('$VM deActive');

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:state/src/constants.dart';
 import 'package:state/src/status.dart';
@@ -20,8 +19,6 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   * Trạng thái của view
   * */
   Status get status => _status;
-
-
 
   /*
   * Hàm dùng để call api ngay sau khi [initialData] được
@@ -113,7 +110,6 @@ abstract class BaseViewModel extends ChangeNotifier with LifecycleBase {
   void setErrorMessage(dynamic msg) {
     appNavigator.dialog(CustomDialog(
       description: msg,
-
       onConfirm: _onConfirm,
     ));
     // ViewUtils.toast(msg, mode: mode);

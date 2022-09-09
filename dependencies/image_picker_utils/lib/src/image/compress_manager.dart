@@ -54,9 +54,16 @@ class CompressManager extends ImageCompressBase {
     dir ??= await getTemporaryDirectory();
 
     await Future.forEach(files, (File element) async {
-      File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path,
-          dir!.path + '/tmp_${DateTime.now().millisecondsSinceEpoch}_${element.path.split('/').last}',
-          minWidth: width, minHeight: height, quality: quality, rotate: 0);
+      String endPath =
+          dir!.path + '/tmp_${DateTime.now().millisecondsSinceEpoch}_${element.path.split('/').last}';
+      CompressFormat compressFormat = CompressFormat.jpeg;
+
+      if (endPath.endsWith('.png')) compressFormat = CompressFormat.png;
+      if (endPath.endsWith('.heic')) compressFormat = CompressFormat.heic;
+      if (endPath.endsWith('.webp')) compressFormat = CompressFormat.webp;
+
+      File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path, endPath,
+          format: compressFormat, minWidth: width, minHeight: height, quality: quality, rotate: 0);
       response.add(file);
     });
 

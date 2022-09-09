@@ -34,13 +34,15 @@ abstract class BaseState<T extends StatefulWidget, VM extends BaseViewModel> ext
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       log('$VM was installed ${DateTime.now()}');
-      _viewModel?.onViewCreated();
+
 
       _viewModel?.setMounted(mounted);
 
       _viewModel?.setFlagLifecycle(Lifecycle.INIT);
 
-      await _viewModel?.initialData();
+      _viewModel?.onViewCreated();
+
+      // await _viewModel?.initialData();
     });
     super.initState();
   }

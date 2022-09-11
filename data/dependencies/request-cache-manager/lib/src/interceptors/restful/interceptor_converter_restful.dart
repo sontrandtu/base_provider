@@ -12,6 +12,13 @@ import '../interceptor_base.dart';
 class InterceptorConverterRestful<T> extends InterceptorBase {
   final T Function(dynamic json)? fromJson;
   final Dio? dio;
+  int? _code;
+  String? _message;
+  dynamic _data;
+  String? _method;
+  Map<String, dynamic>? _requestHeader;
+  Map<String, dynamic>? _responseHeader;
+  dynamic _responseOrigin;
 
   InterceptorConverterRestful({this.dio, this.fromJson});
 
@@ -34,8 +41,20 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
     CacheModel? cache = RequestCacheManager().get(key);
 
     if (cache != null) {
+      _code = CodeConstant.OK;
+      _message = HttpConstant.SUCCESS;
+      _method = options.method;
+      _requestHeader = options.headers;
+      _data = fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data);
+      _responseOrigin = jsonDecode(cache.data);
       ApiModel api = ApiModel<T>(
-          code: CodeConstant.OK, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data));
+          code: _code,
+          data: _data,
+          method: _method,
+          message: _message,
+          requestHeader: _requestHeader,
+          responseHeader: _responseHeader,
+          responseOrigin: _responseOrigin);
 
       return handler.resolve(Response(requestOptions: options, data: api));
     }
@@ -46,20 +65,43 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
+    _code = CodeConstant.OK;
+    _message = HttpConstant.SUCCESS;
+    _method = response.requestOptions.method;
+    _requestHeader = response.requestOptions.headers;
 
     if (response.statusCode == HttpStatus.notModified) {
       String key = response.requestOptions.path;
       CacheModel? cache = RequestCacheManager().get(key);
       if (cache != null) {
+        _data = fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data);
+        _responseOrigin = jsonDecode(cache.data);
+
         ApiModel api = ApiModel<T>(
-            code: CodeConstant.OK, data: fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data));
+            code: _code,
+            data: _data,
+            method: _method,
+            message: _message,
+            requestHeader: _requestHeader,
+            responseHeader: _responseHeader,
+            responseOrigin: _responseOrigin);
         return handler.resolve(Response(requestOptions: response.requestOptions, data: api));
       }
     }
 
     if (response.statusCode != HttpStatus.ok) return handler.next(response);
 
-    ApiModel api = ApiModel<T>(code: CodeConstant.OK, data: fromJson?.call(response.data) ?? response.data);
+    _data = fromJson?.call(response.data) ?? response.data;
+    _responseOrigin = response.data;
+
+    ApiModel api = ApiModel<T>(
+        code: _code,
+        data: _data,
+        method: _method,
+        message: _message,
+        requestHeader: _requestHeader,
+        responseHeader: _responseHeader,
+        responseOrigin: _responseOrigin);
 
     return handler.next(Response<ApiModel?>(data: api, requestOptions: response.requestOptions));
   }
@@ -68,8 +110,15 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     print('----------- DioError Converter - ${err.response?.statusCode} ----------------');
 
-    int? code = err.response?.data['code'] ?? err.response?.statusCode ?? CodeConstant.UNKNOWN;
-    String? msg = err.response?.data['message'] ?? err.response?.statusMessage ?? HttpConstant.UNKNOWN;
+    int? code = err.response?.statusCode ?? CodeConstant.UNKNOWN;
+    String? msg = err.response?.statusMessage ?? HttpConstant.UNKNOWN;
+
+    if (err.response?.data is Map) {
+      var _code = err.response?.data['code'];
+      var _msg = err.response?.data['message'];
+      if (_code! is int) code = int.tryParse(_code.toString());
+      if (_msg! is String) msg = jsonEncode(_msg);
+    }
 
     if (err.error is SocketException) {
       code = CodeConstant.CONNECT_ERROR;
@@ -88,7 +137,19 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
       msg = HttpConstant.TIME_OUT;
     }
 
-    ApiModel api = ApiModel<T>(code: code, message: msg);
+    _code = code;
+    _message = msg;
+    _method = err.requestOptions.method;
+    _requestHeader = err.requestOptions.headers;
+
+    ApiModel api = ApiModel<T>(
+        code: _code,
+        data: _data,
+        method: _method,
+        message: _message,
+        requestHeader: _requestHeader,
+        responseHeader: _responseHeader,
+        responseOrigin: _responseOrigin);
 
     return handler.resolve(Response(requestOptions: err.requestOptions, data: api));
   }

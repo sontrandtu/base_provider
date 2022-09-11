@@ -29,6 +29,7 @@ class HttpConstant {
   static const String NOT_FOUND = 'Không tìm thấy nội dung yêu cầu. Vui lòng thử lại sau';
   static const String FORBIDDEN = 'Truy cập bị hạn chế. Vui lòng thử lại sau';
   static const String TOKEN_EXPIRED = 'Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại';
+  static const String SUCCESS = 'Thành công';
 
 }
 

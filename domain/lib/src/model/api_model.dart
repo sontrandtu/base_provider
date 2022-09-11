@@ -1,12 +1,22 @@
 import 'dart:convert';
 
-
 class ApiModel<T> {
   int? code;
   String? message;
+  String? method;
+  Map<String,dynamic>? requestHeader;
+  Map<String,dynamic>? responseHeader;
+  dynamic responseOrigin;
   T? data;
 
-  ApiModel({this.code, this.message,this.data});
+  ApiModel(
+      {this.code,
+      this.message,
+      this.data,
+      this.requestHeader,
+      this.method,
+      this.responseHeader,
+      this.responseOrigin});
 
   ApiModel.fromJson(Map<String, dynamic> json, [T Function(dynamic data)? cast]) {
     code = json['code'];
@@ -18,7 +28,7 @@ class ApiModel<T> {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['code'] = code;
     data['message'] = message;
-    data['data']= jsonEncode(data);
+    data['data'] = jsonEncode(data);
     return data;
   }
 
@@ -31,4 +41,3 @@ class ApiModel<T> {
     return map.toString();
   }
 }
-

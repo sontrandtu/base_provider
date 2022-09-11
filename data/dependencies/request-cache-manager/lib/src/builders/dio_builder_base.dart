@@ -10,7 +10,7 @@ abstract class DioBuilderBase {
 
   DioBuilderBase addBody(dynamic bodies);
 
-  DioBuilderBase addParameters(Map<String, dynamic>? params);
+  DioBuilderBase addParameters(dynamic params);
 
   DioBuilderBase addPaths(Map<String, dynamic>? paths);
 

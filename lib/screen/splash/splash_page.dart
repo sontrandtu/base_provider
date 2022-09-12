@@ -52,7 +52,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashViewModel> {
                   title: 'nexxt page',
                   onPressed: () async{
                    await Navigator.pushNamed(context, RoutePath.LOGIN, arguments: '1 texxt arrgs');
-                   showError(LifecycleBase.settings);
+                   showError(AppRouting.arguments);
                   }),
                const TextNomalTranslate(),
               Text(Translator().currentLocale?.languageCode == LanguageCode.EN

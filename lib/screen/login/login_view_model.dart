@@ -14,7 +14,7 @@ class LoginViewModel extends BaseViewModel {
 
   @override
   Future<void> init() async {
-    showError(LifecycleBase.settings);
+    showError(AppRouting.arguments);
   }
 
   @override
@@ -43,7 +43,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void register() {
-    showError(LifecycleBase.settings);
+    showError(AppRouting.arguments);
     // appNavigator.dialog(const CustomDialog(description: 'Cảm ơn bạn đã chọn đăng ký', title: 'Thông báo'));
   }
 

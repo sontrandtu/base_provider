@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:state/state.dart';
+import 'package:state/src/routing/routing.dart';
+
+import 'routing/app_routing.dart';
 
 class NavObs extends NavigatorObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    LifecycleBase.settings = route.settings;
+    AppRouting.setRouting(Routing(settings: route.settings));
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    LifecycleBase.settings = previousRoute?.settings;
+    AppRouting.setRouting(Routing(settings: previousRoute?.settings));
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
-    LifecycleBase.settings = newRoute?.settings;
+    AppRouting.setRouting(Routing(settings: newRoute?.settings));
   }
 }

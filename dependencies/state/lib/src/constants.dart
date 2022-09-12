@@ -12,10 +12,5 @@ class CodeConstant {
 
   static const int OK = 1;
   static const int ERROR = 0;
-  static const int INVALID_SIGN = -1;
-  static const int INVALID_DATETIME = -2;
-  static const int INVALID_TOKEN = -3;
-  static const int VALIDATE_ERROR = -4;
-  static const int ACCOUNT_INACTIVE = -5;
   static const int SERVER_ERROR = -99;
 }

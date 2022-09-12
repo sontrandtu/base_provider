@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    showError(LifecycleBase.settings);
+    showError(AppRouting.arguments);
   }
   @override
   Widget build(BuildContext context) {

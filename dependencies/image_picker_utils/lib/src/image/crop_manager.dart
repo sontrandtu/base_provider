@@ -8,6 +8,9 @@ import 'package:image_picker_utils/src/utils/utils.dart';
 
 class CropManager extends ImageCropBase {
   late ImageCropper _cropper;
+  int? _width;
+  int? _height;
+  File? _file;
 
   CropManager.builder() {
     _cropper = ImageCropper();
@@ -15,27 +18,27 @@ class CropManager extends ImageCropBase {
 
   @override
   ImageCropBase setMaxWidth(int width) {
-    this.width = width;
+    _width = width;
     return this;
   }
 
   @override
   ImageCropBase setMaxHeight(int height) {
-    this.height = height;
+    _height = height;
     return this;
   }
 
   @override
   ImageCropBase addFile(File file) {
-    this.file = file;
+    _file = file;
     return this;
   }
 
   @override
   Future<ImageEntity?> build() async {
     CroppedFile? croppedFile = await _cropper.cropImage(
-      sourcePath: this.file?.path ?? '',
-      aspectRatioPresets: height == width && height != null && width != null
+      sourcePath: _file?.path ?? '',
+      aspectRatioPresets: _height == _width && _height != null && _width != null
           ? [CropAspectRatioPreset.square]
           : [
               CropAspectRatioPreset.original,
@@ -44,11 +47,10 @@ class CropManager extends ImageCropBase {
               CropAspectRatioPreset.ratio4x3,
               CropAspectRatioPreset.ratio16x9
             ],
-      maxHeight: height,
-      maxWidth: width,
+      maxHeight: _height,
+      maxWidth: _width,
       uiSettings: [
-        AndroidUiSettings(
-            toolbarTitle: 'Cropper', toolbarColor: Colors.red, toolbarWidgetColor: Colors.white),
+        AndroidUiSettings(toolbarTitle: 'Cropper', toolbarColor: Colors.red, toolbarWidgetColor: Colors.white),
         IOSUiSettings(title: 'Cropper'),
       ],
     );

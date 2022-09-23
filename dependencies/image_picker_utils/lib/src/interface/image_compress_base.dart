@@ -3,11 +3,7 @@ import 'dart:io';
 import '../entities/image_entity.dart';
 
 abstract class ImageCompressBase {
-  int width = 720;
-  int height = 1280;
-  int quality = 70;
-  late List<File> files;
-  Directory? dir;
+
 
   void init();
 

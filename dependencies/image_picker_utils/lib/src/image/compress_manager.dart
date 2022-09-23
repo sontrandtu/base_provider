@@ -7,43 +7,50 @@ import 'package:image_picker_utils/src/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CompressManager extends ImageCompressBase {
+
+  int _width = 720;
+  int _height = 1280;
+  int _quality = 70;
+  late List<File> _files;
+  Directory? _dir;
+
   CompressManager.builder() {
     init();
   }
 
   @override
   void init() async {
-    files = [];
-    dir = await getTemporaryDirectory();
+    _files = [];
+    _dir = await getTemporaryDirectory();
   }
 
   @override
   ImageCompressBase setMinWidth(int width) {
-    this.width = width;
+    _width = width;
     return this;
   }
 
   @override
   ImageCompressBase setMinHeight(int height) {
-    this.height = height;
+    _height = height;
     return this;
   }
 
   @override
   ImageCompressBase setQuality(int quality) {
-    this.quality = quality;
+    _quality = quality;
     return this;
   }
 
   @override
   ImageCompressBase addFiles(List<File> files) {
-    this.files.addAll(files);
+    _files.addAll(files);
     return this;
   }
 
   @override
   ImageCompressBase addFile(File file) {
-    files.add(file);
+    _files.add(file);
     return this;
   }
 
@@ -51,11 +58,11 @@ class CompressManager extends ImageCompressBase {
   Future<List<ImageEntity>?> build() async {
     List<File?> response = [];
 
-    dir ??= await getTemporaryDirectory();
+    _dir ??= await getTemporaryDirectory();
 
-    await Future.forEach(files, (File element) async {
+    await Future.forEach(_files, (File element) async {
       String endPath =
-          dir!.path + '/tmp_${DateTime.now().millisecondsSinceEpoch}_${element.path.split('/').last}';
+          _dir!.path + '/tmp_${DateTime.now().millisecondsSinceEpoch}_${element.path.split('/').last}';
       CompressFormat compressFormat = CompressFormat.jpeg;
 
       if (endPath.endsWith('.png')) compressFormat = CompressFormat.png;
@@ -63,7 +70,7 @@ class CompressManager extends ImageCompressBase {
       if (endPath.endsWith('.webp')) compressFormat = CompressFormat.webp;
 
       File? file = await FlutterImageCompress.compressAndGetFile(element.absolute.path, endPath,
-          format: compressFormat, minWidth: width, minHeight: height, quality: quality, rotate: 0);
+          format: compressFormat, minWidth: _width, minHeight: _height, quality: _quality, rotate: 0);
       response.add(file);
     });
 

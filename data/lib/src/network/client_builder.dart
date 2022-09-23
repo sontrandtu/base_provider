@@ -15,13 +15,14 @@ class ClientBuilder extends HttpBuilder {
   final int _receiveTimeout = 10000;
   final int _sendTimeout = 10000;
 
+/*
+* Khi cần thay đổi base url hãy kế thừa class này và ghi đè lại base url
+* */
+  String get baseUrl => _baseUrl;
+
   ClientBuilder() {
     _logger ??= PrettyDioLogger(
-        requestHeader: _isDebugMode,
-        requestBody: _isDebugMode,
-        responseBody: _isDebugMode,
-        responseHeader: _isDebugMode,
-        error: _isDebugMode);
+        requestHeader: _isDebugMode, requestBody: _isDebugMode, responseBody: _isDebugMode, responseHeader: _isDebugMode, error: _isDebugMode);
 
     _basicInterceptor ??= BasicInterceptor();
 
@@ -216,35 +217,35 @@ class ClientBuilder extends HttpBuilder {
   }
 
   @override
-  Future<ApiModel<T?>> delete<T>() async{
+  Future<ApiModel<T?>> delete<T>() async {
     ApiModel<T?> response = await _dioBuilder!.delete<T>();
     _onDestroy();
     return response;
   }
 
   @override
-  Future<ApiModel<T?>> get<T>()async {
+  Future<ApiModel<T?>> get<T>() async {
     ApiModel<T?> response = await _dioBuilder!.get<T>();
     _onDestroy();
     return response;
   }
 
   @override
-  Future<ApiModel<T?>> patch<T>() async{
+  Future<ApiModel<T?>> patch<T>() async {
     ApiModel<T?> response = await _dioBuilder!.patch<T>();
     _onDestroy();
     return response;
   }
 
   @override
-  Future<ApiModel<T?>> post<T>() async{
+  Future<ApiModel<T?>> post<T>() async {
     ApiModel<T?> response = await _dioBuilder!.post<T>();
     _onDestroy();
     return response;
   }
 
   @override
-  Future<ApiModel<T?>> put<T>() async{
+  Future<ApiModel<T?>> put<T>() async {
     ApiModel<T?> response = await _dioBuilder!.put<T>();
     _onDestroy();
     return response;

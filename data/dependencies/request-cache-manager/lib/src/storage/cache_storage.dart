@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 // import 'package:path_provider/path_provider.dart';
 
 class CacheStorage {
@@ -12,14 +12,15 @@ class CacheStorage {
   static CollectionBox? collectionBox;
 
   static Future<void> ensureInitialized() async {
-    // Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
+    Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
     // Directory? dir = await getApplicationDocumentsDirectory();
-    // Hive.init(dir.path);
-    await Hive.initFlutter();
+    Hive.init(dir.path);
+    // await Hive.initFlutter();
     await Hive.openBox(boxName);
   }
 
   static Future<void> put(String key, dynamic value, {bool isEncode = false}) async {
+    if(!box.isOpen) return;
     switch (value) {
       case String:
       case double:
@@ -34,6 +35,7 @@ class CacheStorage {
   }
 
   static dynamic get<T>(String key, [dynamic defaultValue]) {
+    if(!box.isOpen) return;
     if (!isExist(key)) return defaultValue;
 
     switch (T) {

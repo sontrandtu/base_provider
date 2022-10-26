@@ -9,8 +9,10 @@ import '../../managers/request_cache_manager.dart';
 import '../../models/cache_model.dart';
 import '../interceptor_base.dart';
 
-class InterceptorConverterRestful<T> extends InterceptorBase {
-  final T Function(dynamic json)? fromJson;
+typedef JsonConverter = T Function<T>(dynamic json);
+
+class InterceptorConverterRestful extends InterceptorBase {
+  JsonConverter? fromJson;
   final Dio? dio;
   int? _code;
   String? _message;
@@ -19,6 +21,8 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
   Map<String, dynamic>? _requestHeader;
   Map<String, dynamic>? _responseHeader;
   dynamic _responseOrigin;
+
+  void setJsonConverter(JsonConverter? converter) => fromJson = converter;
 
   InterceptorConverterRestful({this.dio, this.fromJson});
 
@@ -47,7 +51,7 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
       _requestHeader = options.headers;
       _data = fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data);
       _responseOrigin = jsonDecode(cache.data);
-      ApiModel api = ApiModel<T>(
+      ApiModel api = ApiModel(
           code: _code,
           data: _data,
           method: _method,
@@ -65,8 +69,8 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('----------- Response Converter ----------------');
-    _code = CodeConstant.OK;
-    _message = HttpConstant.SUCCESS;
+    _code = response.data['code'] ?? CodeConstant.OK;
+    _message = response.data['message'] ?? HttpConstant.SUCCESS;
     _method = response.requestOptions.method;
     _requestHeader = response.requestOptions.headers;
 
@@ -77,7 +81,7 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
         _data = fromJson?.call(jsonDecode(cache.data)) ?? jsonDecode(cache.data);
         _responseOrigin = jsonDecode(cache.data);
 
-        ApiModel api = ApiModel<T>(
+        ApiModel api = ApiModel(
             code: _code,
             data: _data,
             method: _method,
@@ -94,7 +98,7 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
     _data = fromJson?.call(response.data) ?? response.data;
     _responseOrigin = response.data;
 
-    ApiModel api = ApiModel<T>(
+    ApiModel api = ApiModel(
         code: _code,
         data: _data,
         method: _method,
@@ -142,7 +146,7 @@ class InterceptorConverterRestful<T> extends InterceptorBase {
     _method = err.requestOptions.method;
     _requestHeader = err.requestOptions.headers;
 
-    ApiModel api = ApiModel<T>(
+    ApiModel api = ApiModel(
         code: _code,
         data: _data,
         method: _method,

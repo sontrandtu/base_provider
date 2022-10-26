@@ -37,11 +37,3 @@ class ExtraKey {
   static const String PATHS = 'Paths';
   static const String KEYS = 'Keys';
 }
-
-class MethodText {
-  static const String GET = 'GET';
-  static const String POST = 'POST';
-  static const String PUT = 'PUT';
-  static const String PATCH = 'PATCH';
-  static const String DELETE = 'DELETE';
-}

@@ -12,8 +12,6 @@ export 'src/interceptors/restful/interceptor_converter_restful.dart';
 export 'src/managers/request_cache_manager.dart';
 export 'src/storage/cache_storage.dart';
 export 'src/common/constants.dart';
-export 'src/builders/http_builder.dart';
-export 'src/builders/dio_builder_base.dart';
 export 'src/common/data_type.dart';
 
 export 'package:dio/dio.dart';

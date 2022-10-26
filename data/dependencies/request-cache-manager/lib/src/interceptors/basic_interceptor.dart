@@ -15,7 +15,7 @@ class BasicInterceptor extends InterceptorBase {
     options.queryParameters.removeWhere((key, value) => value.toString().isEmpty);
 
     if (options.data is FormData) {
-      options.data.fields.removeWhere((element) => element.value.isEmpty);
+      options.data.fields.removeWhere((element) => element.value.toString().isEmpty);
     }
 
     final Map<String, dynamic>? paths = options.extra[ExtraKey.PATHS];
@@ -31,13 +31,13 @@ class BasicInterceptor extends InterceptorBase {
     await Future.forEach(keys, _clearCaches);
 
     final String key = options.path;
-    switch (options.method) {
-      case MethodText.POST:
-      case MethodText.PUT:
-      case MethodText.PATCH:
-      case MethodText.DELETE:
-        RequestCacheManager().remove(key);
-    }
+    // switch (options.method) {
+    //   case Method.POST.name:
+    //   case MethodText.PUT:
+    //   case MethodText.PATCH:
+    //   case MethodText.DELETE:
+    //     RequestCacheManager().remove(key);
+    // }
 
     return handler.next(options);
   }

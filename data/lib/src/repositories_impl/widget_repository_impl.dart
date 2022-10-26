@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:data/src/common/dio_extensiton.dart';
+import 'package:data/src/common/extensions.dart';
 import 'package:data/src/config/api_paths.dart';
-import 'package:data/src/network/client_builder.dart';
+import 'package:data/src/network/client.dart';
 import 'package:domain/domain.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
@@ -22,7 +22,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
       'file': [File('./ic_search.png')]
     };
 
-    return await ClientBuilder()
+    return await Client()
         .addCacheMemory()
         .withConverter(fromJson: (json) => ApiModel.fromJson(json, (json) => UserDetailModel.fromJson(json)))
         .setPath('/v1/login')
@@ -42,7 +42,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
 
     _queryParameters.removeWhere((key, value) => value == null);
 
-    return await ClientBuilder()
+    return await Client()
         .addBaseUrl('https://app.weuptech.vn')
         .addCacheDisk()
         .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
@@ -57,7 +57,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
       'images': ['123', '123'],
       'content': 'Bài học hay'
     };
-    return await ClientBuilder()
+    return await Client()
         .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
         .setPath(ApiPaths.ADD_FEELING)
         .setMethod(Method.POST)
@@ -70,7 +70,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
   @override
   Future<ApiModel<List<FeelingModel>?>> getAllFeeling() async {
     final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
-    return await ClientBuilder()
+    return await Client()
         .addCacheMemory()
         .withConverter<ApiModel<List<FeelingModel>>>(
             fromJson: (json) => ApiModel.fromJson(
@@ -83,11 +83,11 @@ class WidgetRepositoryImpl implements WidgetRepository {
 
   @override
   Future<ApiModel<List<PostModel>?>> getAllPost() async {
-    return await ClientBuilder()
+    return await Client()
         // .addBaseUrl('https://jsonplaceholder.typicode.com')
         .addCacheMemory()
-        .withConverterRestful<List<PostModel>>(
-            fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
+        // .withConverterRestful<List<PostModel>>(
+        //     fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
         .setPath('/{id}/books/{bookId}/posts')
         .removeCacheByKeys([])
         .addPaths({'id': '123123', 'bookId': '123'})

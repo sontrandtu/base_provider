@@ -31,7 +31,7 @@ class InterceptorDisk extends InterceptorBase {
     String? maxAge = cacheControl?.singleWhereOrNull((element) => element.split('=').firstOrNull == 'max-age');
     int? maxAgeValue = int.tryParse(maxAge?.split('=').lastOrNull ?? '');
 
-    CacheManagerFactory(RequestCacheDiskManager()).put(CacheModel(
+    CacheManagerFactory.disk().put(CacheModel(
         key, maxAgeSecond ?? DateTime.now().add(Duration(seconds: maxAgeValue ?? 60)).millisecondsSinceEpoch ~/ 1000, jsonEncode(response.data)));
 
     return handler.next(response);

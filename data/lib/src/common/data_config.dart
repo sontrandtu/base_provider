@@ -1,3 +1,4 @@
+import 'package:data/data.dart';
 import 'package:request_cache_manager/request_cache_manager.dart';
 
 class DataConfig {
@@ -13,4 +14,11 @@ class DataConfig {
   void setIsReleaseMode(bool b) => _isReleaseMode = b;
 
   Future<void> initializedDB({String? path}) => CacheStorage().ensureInitialized(path);
+
+  Future<void> removeAll() async {
+    HeaderConfig().removeAll();
+    await CacheStorage().clearData();
+    CacheManagerFactory.memory().clearAll();
+    await CacheManagerFactory.disk().clearAll();
+  }
 }

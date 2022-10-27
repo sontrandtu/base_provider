@@ -7,5 +7,5 @@ abstract class IRequestCache {
 
   Future<void> remove(String key);
 
-  void clearAll();
+  Future<void> clearAll();
 }

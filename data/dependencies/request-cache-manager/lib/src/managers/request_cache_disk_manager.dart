@@ -38,7 +38,7 @@ class RequestCacheDiskManager implements IRequestCache {
   int get now => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
   @override
-  void clearAll() {
-    CacheStorage().clearData();
+  Future<void> clearAll() async{
+    await CacheStorage().clearData();
   }
 }

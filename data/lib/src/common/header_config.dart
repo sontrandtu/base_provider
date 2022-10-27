@@ -1,18 +1,23 @@
+import 'package:request_cache_manager/request_cache_manager.dart';
+
 class HeaderConfig {
   HeaderConfig._internal();
 
   static final HeaderConfig _config = HeaderConfig._internal();
 
   factory HeaderConfig() => _config;
-  Map<String, dynamic> _defaultHeaders = {
-     // 'token':
-     //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjA5NDM1NzQ1NTYifQ.LrOc2ZA-vE_vuQm-J8bjxPMQF7C8AkLyqnhVZiPEXuE',
-     // 'id': '1660546372487t40li80k3'
-  };
+  Map<String, dynamic> _defaultHeaders = {};
 
-  void setDefaultHeader(Map<String, dynamic> headers) => _defaultHeaders = headers;
+  Future<void> setDefaultHeader(Map<String, dynamic> headers) async {
+    _defaultHeaders = headers;
+    await CacheStorage().put(StorageKey.HEADER, headers);
+  }
 
-  Map<String, dynamic> getHeaders() => _defaultHeaders;
+  Map<String, dynamic> getHeaders() {
+    return _defaultHeaders = CacheStorage().get<Map<String, dynamic>>(StorageKey.HEADER) ?? {};
+  }
 
   void addHeaders(Map<String, dynamic> headers) => _defaultHeaders.addAll(headers);
+
+  Future<void> removeAll() => CacheStorage().delete(StorageKey.HEADER);
 }

@@ -2,40 +2,40 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hive/hive.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-// import 'package:path_provider/path_provider.dart';
 
 class CacheStorage {
-  static const String boxName = 'local.cache';
+  CacheStorage._();
 
-  static Box box = Hive.box(boxName);
-  static CollectionBox? collectionBox;
+  static final CacheStorage _storage = CacheStorage._();
 
-  static Future<void> ensureInitialized() async {
-    Directory? dir = Directory.fromUri(Uri.parse('./storage/'));
-    // Directory? dir = await getApplicationDocumentsDirectory();
+  factory CacheStorage() => _storage;
+
+  final String _boxName = 'local.cache';
+
+  late Box? _box;
+
+  Future<void> ensureInitialized(String? path) async {
+    Directory? dir = Directory.fromUri(Uri.parse('$path'));
     Hive.init(dir.path);
-    // await Hive.initFlutter();
-    await Hive.openBox(boxName);
+    await Hive.openBox(_boxName);
+    _box = Hive.box(_boxName);
   }
 
-  static Future<void> put(String key, dynamic value, {bool isEncode = false}) async {
-    if(!box.isOpen) return;
+  Future<void> put(String key, dynamic value) async {
     switch (value) {
       case String:
       case double:
       case bool:
       case int:
-        await box.put(key, value);
+        await _box?.put(key, value);
         break;
       default:
-        await box.put(key, jsonEncode(value));
+        await _box?.put(key, jsonEncode(value));
         break;
     }
   }
 
-  static dynamic get<T>(String key, [dynamic defaultValue]) {
-    if(!box.isOpen) return;
+  dynamic get<T>(String key, [dynamic defaultValue]) {
     if (!isExist(key)) return defaultValue;
 
     switch (T) {
@@ -43,30 +43,26 @@ class CacheStorage {
       case double:
       case bool:
       case int:
-        return box.get(key, defaultValue: defaultValue);
+        return _box?.get(key, defaultValue: defaultValue);
       default:
-        return jsonDecode(box.get(key));
+        return jsonDecode(_box?.get(key));
     }
   }
 
-  static bool isExist(String key) {
-    return box.containsKey(key);
+  bool isExist(String key) {
+    return _box?.containsKey(key) ?? false;
   }
 
-  static Future<void> delete(String key) async {
-    await box.delete(key);
+  Future<void> delete(String key) async {
+    await _box?.delete(key);
   }
 
-  static Future<void> show() async {
-    print(box.keys);
-    print(box.values);
-  }
-
-  static Future<void> clearData() async {
-    box.clear();
+  Future<void> clearData() async {
+    _box?.clear();
   }
 }
 
 class StorageKey {
   static const String DATA = 'data';
+  static const String HEADER = 'headers';
 }

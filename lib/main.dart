@@ -11,7 +11,7 @@ import 'package:translator/translator.dart';
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await LocalStorage.ensureInitialized();
-  await DataConfig.ensureInitialized();
+  await DataConfig().initializedDB(path: '/storage/');
   Translator().initialize();
   ThemeManager().init();
 
@@ -23,8 +23,7 @@ Future<void> main() async {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
 

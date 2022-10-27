@@ -10,7 +10,7 @@ class Client extends HttpBuilder {
   DioBuilder? _dioBuilder;
   PrettyDioLogger? _logger;
   BasicInterceptor? _basicInterceptor;
-  InterceptorConverterRestful? _interceptorConverterRestful;
+  InterceptorConverter? _interceptorConverter;
   final bool _isDebugMode = true;
   final String _baseUrl = 'https://erp.weuptech.vn/api/v1';
   final int _connectTimeout = 10000;
@@ -27,14 +27,14 @@ class Client extends HttpBuilder {
         requestHeader: _isDebugMode, requestBody: _isDebugMode, responseBody: _isDebugMode, responseHeader: _isDebugMode, error: _isDebugMode);
 
     _basicInterceptor ??= BasicInterceptor();
-    _interceptorConverterRestful ??= InterceptorConverterRestful(dio: _dio);
+    _interceptorConverter ??= InterceptorConverter(dio: _dio);
     _dio = Dio(BaseOptions(
         baseUrl: _baseUrl,
         headers: HeaderConfig().getHeaders(),
         connectTimeout: _connectTimeout,
         receiveTimeout: _receiveTimeout,
         sendTimeout: _sendTimeout))
-      ..interceptors.addAll([_logger!, _basicInterceptor!, _interceptorConverterRestful!]);
+      ..interceptors.addAll([_logger!, _basicInterceptor!,_interceptorConverter!]);
 
     _dioBuilder = DioBuilder(_dio!);
   }
@@ -131,15 +131,17 @@ class Client extends HttpBuilder {
   *  Luôn gọi đến converter để parse json sang object hoặc lấy từ cache, hoặc lấy json thuần
   * */
   @override
-  HttpBuilder withConverter<T>({T Function(dynamic json)? fromJson}) {
-    _dio?.interceptors.add(InterceptorConverter<T>(fromJson: fromJson, dio: _dio));
-
+  HttpBuilder withConverter<T>(JsonConverter<T>? fromJson) {
+    _dio?.interceptors.remove(_interceptorConverter);
+    _interceptorConverter = InterceptorConverter<T>(dio: _dio);
+    _interceptorConverter?.setJsonConverter(fromJson);
+    _dio?.interceptors.add(_interceptorConverter!);
     return this;
   }
 
   @override
   HttpBuilder withConverterRestful({JsonConverter? fromJson}) {
-    _interceptorConverterRestful?.setJsonConverter(fromJson);
+    // _interceptorConverter?.setJsonConverter(fromJson);
     return this;
   }
 
@@ -155,6 +157,19 @@ class Client extends HttpBuilder {
   HttpBuilder addBody(bodies) {
     _dioBuilder?.addBody(bodies);
     setDataType(DataType.JSON);
+    return this;
+  }
+  @override
+  HttpBuilder addJsonBody(bodies) {
+    _dioBuilder?.addBody(bodies);
+    setDataType(DataType.JSON);
+    return this;
+  }
+
+  @override
+  HttpBuilder addTextBody(bodies) {
+    _dioBuilder?.addBody(bodies);
+    setDataType(DataType.TEXT);
     return this;
   }
 
@@ -224,6 +239,9 @@ class Client extends HttpBuilder {
   void _onDestroy() {
     _dioBuilder = null;
     _dio = null;
+    _logger = null;
+    _interceptorConverter = null;
+    _basicInterceptor = null;
   }
 
   @override
@@ -260,4 +278,6 @@ class Client extends HttpBuilder {
     _onDestroy();
     return response;
   }
+
+
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:domain/domain.dart';
 import 'package:http_parser/http_parser.dart';
 import 'dart:io';
@@ -13,9 +15,14 @@ extension FileIOExtension on File? {
 
 extension DioExtension<T> on Future<Response<ApiModel<T?>>> {
   Future<ApiModel<T?>> wrap() async {
-    Response<ApiModel<T?>> httpResponse = await this;
+    try {
+      Response<ApiModel<T?>> httpResponse = await this;
 
-    return httpResponse.data as ApiModel<T?>;
+      return httpResponse.data as ApiModel<T?>;
+  } catch (e) {
+      log('Dio Extension Error: ', error: e);
+      return ApiModel(code: 99,message: 'Đã có lỗi xảy ra');
+    }
   }
 }
 

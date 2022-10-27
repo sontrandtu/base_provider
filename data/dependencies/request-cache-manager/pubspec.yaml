@@ -10,14 +10,10 @@ environment:
 dependencies:
   dio: ^4.0.6
   hive_flutter: ^1.1.0
-  path_provider: ^2.0.11
   pretty_dio_logger: ^1.1.1
   connectivity_plus: ^2.3.6+1
-
-
   domain:
     path: ../../../domain
-
 
 dev_dependencies:
   lints: ^1.0.0

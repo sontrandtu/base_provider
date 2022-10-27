@@ -22,7 +22,7 @@ abstract class HttpBuilder {
 
   HttpBuilder addCacheDisk({int? ageSeconds, bool? forceReplace});
 
-  HttpBuilder withConverter<T>({T Function(dynamic json)? fromJson});
+  HttpBuilder withConverter<T>(JsonConverter<T>? fromJson);
 
   HttpBuilder withConverterRestful({JsonConverter? fromJson});
 
@@ -35,6 +35,10 @@ abstract class HttpBuilder {
   HttpBuilder addBody(dynamic bodies);
 
   HttpBuilder addPart(dynamic bodies);
+
+  HttpBuilder addJsonBody(dynamic bodies);
+
+  HttpBuilder addTextBody(dynamic bodies);
 
   HttpBuilder addParameters(Map<String, dynamic>? params);
 

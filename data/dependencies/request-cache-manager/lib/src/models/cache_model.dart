@@ -7,6 +7,7 @@ class CacheModel extends BaseModel{
   CacheModel(this.key, this.age, this.data, {this.userId});
 
   CacheModel.fromJson(Map<String, dynamic> json) {
+
     key = json['key'] ?? '';
     userId = json['userId'] ?? '';
     age = json['age'] ?? 0;

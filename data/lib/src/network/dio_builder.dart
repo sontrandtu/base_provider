@@ -50,6 +50,9 @@ class DioBuilder extends DioBuilderBase {
         _body = _body.urlEncode;
         // _contentType = 'application/x-www-form-urlencoded';
         break;
+      case DataType.TEXT:
+        _body = _body.toString();
+        break;
       case DataType.JSON:
       default:
     }

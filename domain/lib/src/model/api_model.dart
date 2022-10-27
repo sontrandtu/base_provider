@@ -4,24 +4,16 @@ class ApiModel<T> {
   int? code;
   String? message;
   String? method;
-  Map<String,dynamic>? requestHeader;
-  Map<String,dynamic>? responseHeader;
+  Map<String, dynamic>? requestHeader;
+  Map<String, dynamic>? responseHeader;
   dynamic responseOrigin;
   T? data;
 
-  ApiModel(
-      {this.code,
-      this.message,
-      this.data,
-      this.requestHeader,
-      this.method,
-      this.responseHeader,
-      this.responseOrigin});
+  ApiModel({this.code, this.message, this.data, this.requestHeader, this.method, this.responseHeader, this.responseOrigin});
 
-  ApiModel.fromJson(Map<String, dynamic> json, [T Function(dynamic data)? cast]) {
+  ApiModel.fromCache(Map<String, dynamic> json, {this.data, this.method, this.requestHeader, this.responseHeader, this.responseOrigin}) {
     code = json['code'];
     message = json['message'];
-    if (json['data'] != null) data = cast?.call(json['data']) ?? json['data'];
   }
 
   Map<String, dynamic> toJson() {

@@ -9,7 +9,7 @@ import '../../managers/request_cache_manager.dart';
 import '../../models/cache_model.dart';
 import '../interceptor_base.dart';
 
-typedef JsonConverter = T Function<T>(dynamic json);
+typedef JsonConverter<T> = T Function(dynamic json);
 
 class InterceptorConverterRestful extends InterceptorBase {
   JsonConverter? fromJson;

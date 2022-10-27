@@ -28,15 +28,13 @@ class RequestCacheManager implements IRequestCache {
   @override
   Future<void> remove(String key) async {
     caches.removeWhere((element) => key.contains(element.key));
-    await RequestCacheDiskManager().remove(key);
   }
 
   @override
   CacheModel? get(String key) {
     CacheModel? model = caches.singleWhereOrNull((element) => element.key == key);
-    if (model == null) return RequestCacheDiskManager().get(key);
 
-    if (model.age > now) return model;
+    if ((model?.age ?? 0) > now) return model;
     remove(key);
     return null;
   }
@@ -46,6 +44,5 @@ class RequestCacheManager implements IRequestCache {
   @override
   void clearAll() {
     caches.clear();
-    RequestCacheManager().clearAll();
   }
 }

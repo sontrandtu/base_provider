@@ -24,7 +24,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
 
     return await Client()
         .addCacheMemory()
-        .withConverter(fromJson: (json) => ApiModel.fromJson(json, (json) => UserDetailModel.fromJson(json)))
+
         .setPath('/v1/login')
         .setDataType(DataType.FORM_DATA)
         .addParameters(_queryParameters)
@@ -45,7 +45,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
     return await Client()
         .addBaseUrl('https://app.weuptech.vn')
         .addCacheDisk()
-        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
+
         .build()
         .post('/api/media', queryParameters: _queryParameters, data: _data);
   }
@@ -58,7 +58,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
       'content': 'Bài học hay'
     };
     return await Client()
-        .withConverter<ApiModel>(fromJson: (json) => ApiModel.fromJson(json))
+
         .setPath(ApiPaths.ADD_FEELING)
         .setMethod(Method.POST)
         .addPaths(paths)
@@ -72,10 +72,7 @@ class WidgetRepositoryImpl implements WidgetRepository {
     final paths = {'lessonId': '1654649615pa1g8zjyf79v'};
     return await Client()
         .addCacheMemory()
-        .withConverter<ApiModel<List<FeelingModel>>>(
-            fromJson: (json) => ApiModel.fromJson(
-                json, (data) => data.map<FeelingModel>((element) => FeelingModel.fromJson(element)).toList()))
-        .setPath(ApiPaths.FEELINGS)
+               .setPath(ApiPaths.FEELINGS)
         .addPaths(paths)
         .request<ApiModel<List<FeelingModel>>>()
         .wrap();
@@ -89,15 +86,12 @@ class WidgetRepositoryImpl implements WidgetRepository {
         // .withConverterRestful<List<PostModel>>(
         //     fromJson: (json) => json.map<PostModel>((element) => PostModel.fromJson(element)).toList())
         .setPath('/{id}/books/{bookId}/posts')
-        .removeCacheByKeys([])
-        .addPaths({'id': '123123', 'bookId': '123'})
-        .addBody({'file': []})
-        .get<List<PostModel>>();
+        .removeCacheByKeys([]).addPaths({'id': '123123', 'bookId': '123'}).addBody({'file': []}).get<List<PostModel>>();
   }
 }
 
 main() async {
-  await CacheStorage.ensureInitialized();
+  await CacheStorage().ensureInitialized('path');
   ApiModel<List<PostModel>?> response = await WidgetRepositoryImpl().getAllPost();
   print(response.data);
 }

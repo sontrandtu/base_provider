@@ -11,23 +11,23 @@ class RequestCacheDiskManager implements IRequestCache {
 
   @override
   Future<void> put(CacheModel cache, {bool? forceReplace = false}) async {
-    var data = CacheStorage.get<CacheModel>(cache.key);
-    if (data == null) return await CacheStorage.put(cache.key, cache);
-    if (forceReplace ?? false) return await CacheStorage.put(cache.key, cache);
+    var data = CacheStorage().get<CacheModel>(cache.key);
+    if (data == null) return await CacheStorage().put(cache.key, cache);
+    if (forceReplace ?? false) return await CacheStorage().put(cache.key, cache);
 
     int maxAge = data['age'];
     if (data != null && maxAge > now) return;
-    return await CacheStorage.put(cache.key, cache);
+    return await CacheStorage().put(cache.key, cache);
   }
 
   @override
   Future<void> remove(String key) async{
-    await CacheStorage.delete(key);
+    await CacheStorage().delete(key);
   }
 
   @override
   CacheModel? get(String key) {
-    var data = CacheStorage.get<CacheModel>(key);
+    var data = CacheStorage().get<CacheModel>(key);
     if (data == null) return null;
     CacheModel cacheModel = CacheModel.fromJson(data);
     if (cacheModel.age > now) return cacheModel;
@@ -39,6 +39,6 @@ class RequestCacheDiskManager implements IRequestCache {
 
   @override
   void clearAll() {
-    CacheStorage.clearData();
+    CacheStorage().clearData();
   }
 }
